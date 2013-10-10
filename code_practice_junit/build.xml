@@ -213,7 +213,9 @@
 
 	<target name="junit_full_clean" depends="clean_all,compileUT,junit"/>
 
-	<target name="junitreport" depends="junit_full_clean">
+	<target name="junitreport" 
+		description="Runs all JUnit tests and creates a report (clean_all 1st)"
+		depends="junit_full_clean">
 		<junitreport todir="${reportUT.dir}/xml">
 			<fileset dir="${reportUT.dir}/xml" includes="TEST-*.xml"/>
 			<report format="frames" styledir="${ant.home}/etc" todir="${reportUT.dir}/html"/>
@@ -231,18 +233,19 @@
 				<path refid="classpath"/>
 				<path refid="application"/>
 			</classpath>
-			<include name="${test}.java"/> 
+			<include name="${testClass}.java"/> 
 		</javac>
 	</target>
 	
-	<target name="ensure-test-name" unless="test">
-		<fail message="You must run this target with -Dtest=TestName"/>
+	<target name="ensure-test-name" unless="testClass">
+		<fail message="You must run this target with -DtestClass=TestClassName"/>
 	</target>
 
 	<target name="runtest" 
-		description="Runs the test you specify on the command line with -Dtest=" 
+		description="Runs the test you specify on the command line with -DtestClass=" 
 		depends="compileRT,ensure-test-name">
 		<junit printsummary="withOutAndErr" fork="yes">
+			<!--<sysproperty key="tests" value="${tests}"/>-->
 			<classpath>
 				<path refid="classpath"/>
 				<path location="${classes.dir}"/>
@@ -252,7 +255,7 @@
 			<formatter type="plain" usefile="false"/>
 			<batchtest>
 				<fileset dir="${srcUT.dir}">
-					<include name="${test}.java"/>
+					<include name="${testClass}.java"/>
 				</fileset>
 			</batchtest>
 		</junit>

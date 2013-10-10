@@ -1,18 +1,18 @@
 [Open Files]
 Active File Display Mode=1
 Active File Index=0
-Open File Line0=6777
+Open File Line0=5446
 Open File Line1=0
-Open File Line2=190
-Open File Pos0=7817
-Open File Pos1=361
-Open File Pos2=688
+Open File Line2=0
+Open File Pos0=6903
+Open File Pos1=389
+Open File Pos2=227
 Open File Window Pos0=0,1,-1,-1,-1,-1,3,26,1008,852
 Open File Window Pos1=0,1,-1,-1,-1,-1,3,26,1008,852
 Open File Window Pos2=0,1,-1,-1,-1,-1,3,26,1008,852
 Open File0=.\build.xml
 Open File1=.\src\test\java\MoneyTests.java
-Open File2=.\src\test\java\LogAnalyzerTests.java
+Open File2=H:\student\code_practice_junit\src\test\java\TestUtils.java
 Open File3=
 Remember Files=1
 
@@ -34,4 +34,6 @@ ch05_mocking_frameworks - test=1
 ch06_isolation_frameworks_deeper_in - test=1
 tdd=1
 tdd - ch01_money_example=1
-
+ant=1
+tdd - ch01_money_example - test=1
+ch02_a_first_unit_test=1
