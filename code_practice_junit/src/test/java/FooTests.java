@@ -19,7 +19,7 @@ import org.junit.runners.JUnit4;
 * @author user@example.com (John Doe)
 */
 @RunWith(JUnit4.class)
-public class FooTest {
+public class FooTests {
 
 	@Test
 	public void thisAlwaysPasses() {
