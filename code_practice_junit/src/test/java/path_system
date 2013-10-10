@@ -1,0 +1,18 @@
+NOTE: you must define JAVA_HOME in system variables for this to resolve properly.
+
+C:\Program Files (x86)\Microchip\mplabc18\v3.46\mpasm;
+C:\Program Files (x86)\Microchip\mplabc18\v3.46\bin;
+C:\Program Files (x86)\Microchip\xc8\v1.12\bin;
+C:\Program Files (x86)\Microchip\xc16\v1.11\bin;
+C:\Program Files (x86)\ActiveState Komodo IDE 8\;
+C:\bin;
+C:\Perl64\site\bin;
+C:\Perl64\bin;
+%JAVA_HOME%\bin;
+C:\Windows\system32;
+C:\Windows;
+C:\Windows\System32\Wbem;
+C:\Windows\System32\WindowsPowerShell\v1.0\;
+C:\Program Files\Dell\DW WLAN Card;
+C:\Program Files\TortoiseSVN\bin;
+C:\Program Files (x86)\HI-TECH Software\PICC\9.83\bin
