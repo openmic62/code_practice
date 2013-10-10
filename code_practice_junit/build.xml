@@ -220,6 +220,7 @@
 			<fileset dir="${reportUT.dir}/xml" includes="TEST-*.xml"/>
 			<report format="frames" styledir="${ant.home}/etc" todir="${reportUT.dir}/html"/>
 		</junitreport>
+		<echo>For your junitreport, see "index.html" in ${reportUT.dir}/html</echo>
 	</target>
 	<!-- <mlr 131009: end - Tutorial: Hello World with Apache Ant> -->
 

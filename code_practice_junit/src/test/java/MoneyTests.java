@@ -10,9 +10,13 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 class Dollar {
-	int amount=10;
-	Dollar(int amount){}
-	void times(int multiplier){}
+	int amount;
+	Dollar(int amount){
+		this.amount = amount;
+	}
+	void times(int multiplier){
+		amount *= multiplier;
+	}
 }
 
 @RunWith(JUnit4.class)
