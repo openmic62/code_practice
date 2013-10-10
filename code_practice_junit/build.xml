@@ -163,6 +163,7 @@ Descriptions: An Ant project that builds stuff
 				<path refid="application"/>
 			</classpath>
 			<exclude name="**/*_bad.java"/>
+			<exclude name="**/MoneyTest.java"/>
 			<exclude name="**/Reentrant*"/>
 		</javac>
 	</target>
@@ -206,7 +207,7 @@ Descriptions: An Ant project that builds stuff
 			<batchtest fork="yes" todir="${reportUT.dir}/xml">
 				<fileset dir="${srcUT.dir}" 
 					       includes="*Tests.java"
-					       excludes="Reentrant* FillInTheBlank* Template*"/>
+					       excludes="Reentrant* FillInTheBlank* Template* Money*"/>
 			</batchtest>			
 		</junit>
 	</target>
