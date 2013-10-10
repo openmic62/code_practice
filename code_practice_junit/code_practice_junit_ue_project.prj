@@ -126,3 +126,5 @@ Create Tagfile=0
 2=.\src\main\java\oata\
 3=.\src\main\config\
 4=build_131009_04_junitreport_gold.xml
+[Files - tdd - ch01_money_example - test]
+0=src\test\java\MoneyTest.java
