@@ -1,0 +1,145 @@
+<project name="ArtOfUnitTesting" basedir="." default="main">
+	<!-- <mlr 131009: begin - sandbox for getting up to speed.> -->
+	<description>
+Project Name: ${ant.project.name}
+Descriptions: An Ant project that builds stuff
+              I wrote while studying the book
+              The Art of Unit Testing.
+  </description>
+  
+  <!-- set global properties for this build -->
+  <property name="src1" location="src1"/>
+  <property name="src2" value="src2"/>
+  <property file="build.properties"/>
+  
+  <property name="web.dir" value="web_dir"/>
+  <property name="appserver.lib" value="appserver_lib"/>
+ 
+  <!-- Nice example at ...
+       http://stackoverflow.com/questions/722774/getting-ant-javac-to-recognise-a-classpath
+       -->
+	<path id="master-classpath">
+		<!--
+	  <fileset dir="${web.dir}/WEB-INF/lib">
+	    <include name="*.jar"/>
+	  </fileset>
+	  <fileset dir="${appserver.lib}">
+	    <include name="servlet*.jar"/>
+	  </fileset>
+	  -->
+	  <fileset dir="${lib.dir}">
+	    <include name="*.jar"/>
+	  </fileset>	
+	  <pathelement path="${build.dir}"/>
+	</path>
+	
+	<patternset id="non.test.sources">
+		<include name="src/main/java/**/*.java"/>
+	</patternset>
+	
+	<patternset id="unit.test.sources">
+		<include name="src/test/java/**/*.java"/>
+	</patternset>
+	
+	<patternset id="unit.test.objs">
+		<include name="target/test-classes/**/*.class"/>
+	</patternset>
+	
+	<target name="nop">
+		<echo>This is the "No-op" target.</echo>
+		<echo>&lt;property name="src1" location="src1"> = ${src1}</echo>
+		<echo>&lt;property name="src2" value="src2"> = ${src2}</echo>
+		<echo/>
+		<echo>build.properties-base.path: ${base.path}</echo>
+		<echo>build.properties-deploy.app: ${deploy.app}</echo>
+		<echo>build.properties-deploy.path: ${deploy.path}</echo>
+	</target>
+	
+	<target name="compileXXX">
+		<mkdir dir="${build.dir}"/>
+		<javac
+			classpath="xyz.jar"
+			compiler="javac1.7"
+			debug="false"
+			debuglevel="lines"
+			destdir="${build.dir}"
+			srcdir="src/main/java"
+			includeantruntime="false">
+			<classpath refid="master-classpath"/>
+			<exclude name="**/*_bad.java"/>
+			<compilerarg value="-Xlint:unchecked" />
+		</javac>
+	</target>
+	<!-- <mlr 131009: end - sandbox for getting up to speed.> -->
+	
+	
+	
+	<!-- URL: http://ant.apache.org/manual/tutorial-HelloWorldWithAnt.html -->
+	<!-- <mlr 131009: begin - Tutorial: Hello World with Apache Ant> -->
+
+	<!-- Set properties as shown in the Tutorial -->
+  <property name="src.dir" value="src/main/java"/>
+  <property name="build.dir" value="target"/>
+  <property name="classes.dir" value="${build.dir}/classes"/>
+  <property name="config.dir" value="src/main/config"/>
+	<property name="jar.dir" value="${build.dir}/jar"/>
+  <property name="lib.dir" value="lib"/>
+  <property name="main-class" value="ADayInTheLife"/>
+  
+  <!-- Make an Ant <path> for use as classpath to find the log4j-1.2.17.jar -->
+  <path id="classpath">
+  	<fileset dir="${lib.dir}" includes="*.jar"/>
+  </path>
+  
+  <!-- Make a patternset that selects the derived objects. -->
+	<patternset id="non.test.objs">
+		<include name="${classes.dir}/**/*.class"/>
+	</patternset>
+ 	<!-- The clean target in the Tutorial simply deletes the build dir.
+	     I want to keep my pre-defined directory structure and just delete
+	     the derived objects.
+	-->
+	<target name="clean">
+		<delete>
+			<fileset dir=".">
+				<patternset refid="non.test.objs"/>
+			</fileset>
+		</delete>
+		<delete file="${jar.dir}/${ant.project.name}.jar"/>
+	</target>
+	
+	<target name="compile">
+		<mkdir dir="${classes.dir}"/>
+		<javac classpathref="classpath"
+			     srcdir="${src.dir}"
+			     destdir="${classes.dir}"
+			     includeantruntime="true">
+		</javac>
+		<copy todir="${classes.dir}">
+			<fileset dir="${config.dir}" includes="*.properties"/>
+		</copy>
+	</target>
+	
+	<target name="jar" depends="compile">
+		<mkdir dir="${jar.dir}"/>
+		<jar destfile="${jar.dir}/${ant.project.name}.jar"
+			   basedir="${classes.dir}">
+			<manifest>
+				<attribute name="Main-Class" value="${main-class}"/>
+			</manifest>
+		</jar>
+	</target>
+	
+	<target name="run" depends="jar">
+		<java classname="${main-class}"
+			    fork="true">
+			<classpath>
+				<path refid="classpath"/>
+				<path location="${jar.dir}/${ant.project.name}.jar"/>
+			</classpath>
+		</java>
+	</target>
+	
+	<target name="main" depends="clean, run"/>
+	<!-- <mlr 131009: end - Tutorial: Hello World with Apache Ant> -->
+</project>

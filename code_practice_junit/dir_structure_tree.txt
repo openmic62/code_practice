@@ -1,0 +1,26 @@
+C:\Asus WebStorage\openmic62@gmail.com\MySyncFolder\student\maven_dir_template>tree ..\maven_dir_template /a > dir_structure_tree.txt
+
+Folder PATH listing for volume OS
+Volume serial number is A41E-AFD2
+C:\ASUS WEBSTORAGE\OPENMIC62@GMAIL.COM\MYSYNCFOLDER\STUDENT\MAVEN_DIR_TEMPLATE
++---src
+|   +---main
+|   |   +---assembly
+|   |   +---config
+|   |   +---filters
+|   |   +---java
+|   |   +---resources
+|   |   +---scripts
+|   |   \---webapp
+|   +---site
+|   \---test
+|       +---filters
+|       +---java
+|       \---resources
+\---target
+    +---classes
+    +---docs
+    +---generated-docs
+    +---iutest-classes
+    +---test-classes
+    \---test-reports

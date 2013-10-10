@@ -1,0 +1,29 @@
+[Open Files]
+Active File Display Mode=1
+Active File Index=0
+Open File Line0=0
+Open File Pos0=117
+Open File Window Pos0=0,1,-1,-1,-1,-1,3,26,1137,693
+Open File0=H:\student\code_practice_junit\src\test\java\MoneyTest.java
+Open File1=
+Remember Files=1
+
+[Project Information]
+Project Start=DD070A000200080008000600140000001A
+Working Time=2507
+
+[Folders]
+ant - .\src\main\config\=1
+ant - .\src\main\java\oata\=1
+ch02_a_first_unit_test - src=1
+ch02_a_first_unit_test - test=1
+ch03_stubs - src=1
+ch03_stubs - test=1
+ch04_mocks - src=1
+ch04_mocks - test=1
+ch05_mocking_frameworks - src_mr_happy=1
+ch05_mocking_frameworks - test=1
+ch06_isolation_frameworks_deeper_in - test=1
+tdd=1
+tdd - ch01_money_example=1
+

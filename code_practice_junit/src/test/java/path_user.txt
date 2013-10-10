@@ -1,0 +1,9 @@
+C:\Program Files (x86)\Microchip\mplabc18\v3.46\mpasm;
+C:\Program Files (x86)\Microchip\mplabc18\v3.46\bin;
+"C:\Program Files (x86)\Microchip\xc16\v1.11\bin";
+%ANT_HOME%\bin;
+%JAVA_HOME%\bin;
+%M2%;
+C:\dev\android-sdk\platform-tools;
+C:\Program Files (x86)\IDM Computer Solutions\UltraCompare\;
+C:\Program Files (x86)\IDM Computer Solutions\UltraEdit\

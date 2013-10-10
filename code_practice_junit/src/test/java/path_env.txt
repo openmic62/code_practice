@@ -1,0 +1,24 @@
+C:\Program Files (x86)\Microchip\mplabc18\v3.46\mpasm;
+C:\Program Files (x86)\Microchip\mplabc18\v3.46\bin;
+C:\Program Files (x86)\Microchip\xc8\v1.12\bin;
+C:\Program Files (x86)\Microchip\xc16\v1.11\bin;
+C:\Program Files (x86)\ActiveState Komodo IDE 8\;
+C:\bin;
+C:\Perl64\site\bin;
+C:\Perl64\bin;
+C:\Windows\system32;
+C:\Windows;
+C:\Windows\System32\Wbem;
+C:\Windows\System32\WindowsPowerShell\v1.0\;
+C:\Program Files\Dell\DW WLAN Card;
+C:\Program Files\TortoiseSVN\bin;
+C:\Program Files (x86)\HI-TECH Software\PICC\9.83\bin;
+C:\Program Files (x86)\Microchip\mplabc18\v3.46\mpasm;
+C:\Program Files (x86)\Microchip\mplabc18\v3.46\bin;
+"C:\Program Files (x86)\Microchip\xc16\v1.11\bin";
+C:\Program Files\Apache Software Foundation\apache-ant-1.9.0\bin;
+C:\Program Files\Java\jdk1.7.0_02\bin;
+C:\Program Files\Apache Software Foundation\apache-maven-3.0.4\bin;
+C:\dev\android-sdk\platform-tools;
+C:\Program Files (x86)\IDM Computer Solutions\UltraCompare\;
+C:\Program Files (x86)\IDM Computer Solutions\UltraEdit\ 
