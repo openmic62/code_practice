@@ -1,23 +1,27 @@
 [Open Files]
 Active File Display Mode=1
-Active File Index=3
-Open File Line0=4794
+Active File Index=0
+Open File Line0=5812
 Open File Line1=0
-Open File Line2=0
+Open File Line2=2598
 Open File Line3=0
-Open File Pos0=5297
+Open File Line4=2544
+Open File Pos0=5971
 Open File Pos1=0
-Open File Pos2=0
-Open File Pos3=0
-Open File Window Pos0=0,1,-1,-1,-1,-1,3,31,1366,601
-Open File Window Pos1=0,1,-1,-1,-1,-1,3,31,1366,601
-Open File Window Pos2=0,1,-1,-1,-1,-1,3,31,1366,601
-Open File Window Pos3=0,1,-1,-1,-1,-1,3,31,1366,601
+Open File Pos2=3221
+Open File Pos3=140
+Open File Pos4=2621
+Open File Window Pos0=0,1,-1,-1,-1,-1,3,31,1328,601
+Open File Window Pos1=0,1,-1,-1,-1,-1,3,31,1328,601
+Open File Window Pos2=0,1,-1,-1,-1,-1,3,31,1328,601
+Open File Window Pos3=0,1,-1,-1,-1,-1,3,31,1328,601
+Open File Window Pos4=0,1,-1,-1,-1,-1,3,31,1328,601
 Open File0=.\build.xml
 Open File1=.\build.properties
-Open File2=.\src\test\java\MoneyTest.java
-Open File3=.\src\test\java\ConfigurationManagerTests.java
-Open File4=
+Open File2=.\src\test\java\ConfigurationManagerTests.java
+Open File3=.\src\test\java\MoneyTests.java
+Open File4=.\src\test\java\StandardStringParserTests.java
+Open File5=
 Remember Files=1
 
 [Project Information]
@@ -33,8 +37,10 @@ ch05_mocking_frameworks - src=1
 ch05_mocking_frameworks - src_mr_happy=1
 ch05_mocking_frameworks - test=1
 ch06_isolation_frameworks_deeper_in - test=1
+ch07_hierarchies_and_organization=1
 ch07_hierarchies_and_organization - src=1
 ch07_hierarchies_and_organization - test=1
 tdd=1
 tdd - ch01_money_example=1
+tdd - ch01_money_example - test=1
 
