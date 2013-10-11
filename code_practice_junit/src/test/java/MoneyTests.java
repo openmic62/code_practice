@@ -25,19 +25,9 @@ public class MoneyTests {
 	}
 	
 	@Test
-	public void testDollarEquality(){
+	public void testEquality(){
 		assertTrue(Money.dollar(5).equals(Money.dollar(5)));
 		assertFalse(Money.dollar(5).equals(Money.dollar(6)));
-	}
-	
-	@Test
-	public void testFrancEquality(){
-		assertTrue(Money.franc(5).equals(Money.franc(5)));
-		assertFalse(Money.franc(5).equals(Money.franc(6)));
-	}
-	
-	@Test
-	public void testDollarFrancInequality(){
 		assertFalse(Money.dollar(5).equals(Money.franc(5)));
 		assertFalse(Money.franc(5).equals(Money.dollar(5)));
 	}
