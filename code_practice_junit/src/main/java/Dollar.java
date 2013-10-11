@@ -10,6 +10,8 @@ public class Dollar extends Money {
 		super(amount, currency);
 	}
 	Money times(int multiplier){
-		return Money.dollar(amount * multiplier);
+		return new Dollar(amount * multiplier, currency);
+		//return new Dollar(amount * multiplier, "USD");
+		///return Money.dollar(amount * multiplier);
 	}
 }
