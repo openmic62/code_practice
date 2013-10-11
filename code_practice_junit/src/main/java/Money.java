@@ -1,4 +1,5 @@
-public abstract class Money {
+//public abstract class Money {
+public class Money {
 	protected int amount;
 	protected String currency;
 
@@ -7,7 +8,10 @@ public abstract class Money {
 		this.currency = currency;
 	}
 
-	abstract Money times(int multiplier);
+	//abstract Money times(int multiplier);
+	Money times(int multiplier) {
+		return null;
+	}
 	
 	String currency() {
 		return currency;
@@ -25,5 +29,10 @@ public abstract class Money {
 	
 	static Money franc(int amount) {
 		return new Franc(amount, "CHF");
+	}
+	
+	@Override
+	public String toString() {
+		return amount + " " + currency;
 	}
 }
