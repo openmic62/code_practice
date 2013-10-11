@@ -23,11 +23,11 @@ public class MoneyTests {
 	
 	@Test
 	public void testFrancMultiplication() {
-		Franc five = new Franc(5);
-		assertEquals(five.times(2), new Franc(10));
-		assertEquals(five.times(3), new Franc(15));
-		///assertEquals(new Franc(10), five.times(2));
-		///assertEquals(new Franc(15), five.times(3));
+		Money five = Money.franc(5);
+		assertEquals(five.times(2), Money.franc(10));
+		assertEquals(five.times(3), Money.franc(15));
+		///assertEquals(Money.franc(10), five.times(2));
+		///assertEquals(Money.franc(15), five.times(3));
 	}
 	
 	@Test
@@ -38,13 +38,13 @@ public class MoneyTests {
 	
 	@Test
 	public void testFrancEquality(){
-		assertTrue(new Franc(5).equals(new Franc(5)));
-		assertFalse(new Franc(5).equals(new Franc(6)));
+		assertTrue(Money.franc(5).equals(Money.franc(5)));
+		assertFalse(Money.franc(5).equals(Money.franc(6)));
 	}
 	
 	@Test
 	public void testDollarFrancInequality(){
-		assertFalse(Money.dollar(5).equals(new Franc(5)));
-		assertFalse(new Franc(5).equals(Money.dollar(5)));
+		assertFalse(Money.dollar(5).equals(Money.franc(5)));
+		assertFalse(Money.franc(5).equals(Money.dollar(5)));
 	}
 }
