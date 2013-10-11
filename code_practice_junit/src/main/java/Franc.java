@@ -4,13 +4,16 @@ H:\student\code_practice_junit\src\test\java>java -cp ..\..\..\lib\junit-4.11.ja
 */
 
 public class Franc extends Money{
+	private String currency;
+	
 	Franc(int amount){
 		this.amount = amount;
+		this.currency = "CHF";
 	}
 	Money times(int multiplier){
 		return new Franc(amount * multiplier);
 	}
 	String currency() {
-		return "CHF";
+		return currency;
 	}
 }

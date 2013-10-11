@@ -4,13 +4,16 @@ H:\student\code_practice_junit\src\test\java>java -cp ..\..\..\lib\junit-4.11.ja
 */
 
 public class Dollar extends Money {
+	private String currency;
+	
 	Dollar(int amount){
 		this.amount = amount;
+		this.currency = "USD";
 	}
 	Money times(int multiplier){
 		return new Dollar(amount * multiplier);
 	}
 	String currency() {
-		return "USD";
+		return currency;
 	}
 }
