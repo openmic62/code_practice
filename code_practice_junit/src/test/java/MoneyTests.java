@@ -3,6 +3,8 @@ H:\student\code_practice_junit\src\test\java>javac -cp ..\..\..\lib\junit-4.11.j
 H:\student\code_practice_junit\src\test\java>java -cp ..\..\..\lib\junit-4.11.jar;..\..\..\lib\hamcrest-core-1.3.jar;..\..\..\target\classes org.junit.runner.JUnitCore MoneyTests
 */
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -17,6 +19,9 @@ class Dollar {
 	Dollar times(int multiplier){
 		return new Dollar(amount * multiplier);
 	}
+	public boolean equals(Object object) {
+		return true;
+	}
 }
 
 @RunWith(JUnit4.class)
@@ -29,5 +34,11 @@ public class MoneyTests {
 		assertEquals(10, product.amount);
 		product = five.times(3);
 		assertEquals(15, product.amount);
+	}
+	
+	@Test
+	public void testEquality(){
+		assertTrue(new Dollar(5).equals(new Dollar(5)));
+		assertFalse(new Dollar(5).equals(new Dollar(6)));
 	}
 }
