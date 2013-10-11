@@ -1,4 +1,4 @@
-//public abstract class Money {
+//public abstract class Money { 
 public class Money {
 	protected int amount;
 	protected String currency;
