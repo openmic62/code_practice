@@ -17,14 +17,17 @@ public class MoneyTests {
 	@Test
 	public void testDollarMultiplication() {
 		Dollar five = new Dollar(5);
-		assertEquals(new Dollar(10), five.times(2));
-		assertEquals(new Dollar(15), five.times(3));
+		assertEquals(five.times(2), new Dollar(10));
+		assertEquals(five.times(3), new Dollar(15));
+		///assertEquals(new Dollar(10), five.times(2));
+		///assertEquals(new Dollar(15), five.times(3));
 	}
 	
 	@Test
 	public void testFrancMultiplication() {
 		Franc five = new Franc(5);
 		assertEquals(five.times(2), new Franc(10));
+		assertEquals(five.times(3), new Franc(15));
 		///assertEquals(new Franc(10), five.times(2));
 		///assertEquals(new Franc(15), five.times(3));
 	}
