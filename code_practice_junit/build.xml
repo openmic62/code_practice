@@ -233,6 +233,7 @@
 			<classpath>
 				<path refid="classpath"/>
 				<path refid="application"/>
+				<path location="${classes.dir}"/>
 			</classpath>
 			<include name="${testClass}.java"/> 
 		</javac>

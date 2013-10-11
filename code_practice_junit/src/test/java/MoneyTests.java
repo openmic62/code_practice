@@ -11,20 +11,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-class Dollar {
-	private int amount;
-	Dollar(int amount){
-		this.amount = amount;
-	}
-	Dollar times(int multiplier){
-		return new Dollar(amount * multiplier);
-	}
-	public boolean equals(Object object) {
-		Dollar dollar = (Dollar) object;
-		return this.amount == dollar.amount;
-	}
-}
-
 @RunWith(JUnit4.class)
 public class MoneyTests {
 
