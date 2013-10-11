@@ -1,4 +1,3 @@
-//public abstract class Money { 
 public class Money {
 	protected int amount;
 	protected String currency;
@@ -8,10 +7,8 @@ public class Money {
 		this.currency = currency;
 	}
 
-	//abstract Money times(int multiplier);
 	Money times(int multiplier) {
 		return new Money(amount * multiplier, currency);
-		//return null;
 	}
 	
 	String currency() {
@@ -22,7 +19,6 @@ public class Money {
 		Money money = (Money) object;
 		return this.amount == money.amount
 			&& this.currency().equals(money.currency());
-			//&& this.getClass().equals(money.getClass());
 	}
 	
 	static Money dollar(int amount) {
