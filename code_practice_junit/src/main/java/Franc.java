@@ -4,7 +4,7 @@ H:\student\code_practice_junit\src\test\java>java -cp ..\..\..\lib\junit-4.11.ja
 */
 
 public class Franc extends Money{
-	private String currency;
+	//private String currency;
 	
 	Franc(int amount, String currency){
 		super(amount, currency);

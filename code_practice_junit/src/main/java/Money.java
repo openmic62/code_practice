@@ -10,7 +10,8 @@ public class Money {
 
 	//abstract Money times(int multiplier);
 	Money times(int multiplier) {
-		return null;
+		return new Money(amount * multiplier, currency);
+		//return null;
 	}
 	
 	String currency() {
