@@ -47,10 +47,4 @@ public class MoneyTests {
 		assertEquals("USD", Money.dollar(5).currency());
 		assertEquals("CHF", Money.franc(5).currency());
 	}
-	
-	// <mlr 131011: this test proves Liskov Substitution Principle works in my code>
-	@Test
-	public void testDifferentClassEquality() {
-		assertTrue(new Money(10, "CHF").equals(new Franc(10, "CHF")));
-	}
 }
