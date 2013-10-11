@@ -6,12 +6,12 @@ H:\student\code_practice_junit\src\test\java>java -cp ..\..\..\lib\junit-4.11.ja
 public class Dollar extends Money {
 	private String currency;
 	
-	Dollar(int amount){
+	Dollar(int amount, String currency){
 		this.amount = amount;
-		this.currency = "USD";
+		this.currency = currency;
 	}
 	Money times(int multiplier){
-		return new Dollar(amount * multiplier);
+		return Money.dollar(amount * multiplier);
 	}
 	String currency() {
 		return currency;
