@@ -128,3 +128,5 @@ Create Tagfile=0
 4=build_131009_04_junitreport_gold.xml
 [Files - tdd - ch01_money_example - test]
 0=src\test\java\MoneyTests.java
+[Files - tdd - ch01_money_example - src]
+0=src\main\java\Dollar.java
