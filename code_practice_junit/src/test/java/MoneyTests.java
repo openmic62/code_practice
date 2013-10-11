@@ -16,12 +16,9 @@ public class MoneyTests {
 
 	@Test
 	public void testDollarMultiplication() {
-		///Dollar five = new Dollar(5);
 		Money five = Money.dollar(5);
-		///assertEquals(five.times(2), new Dollar(10));
-		///assertEquals(five.times(3), new Dollar(15));
-		assertEquals(new Dollar(10), five.times(2));
-		assertEquals(new Dollar(15), five.times(3));
+		assertEquals(Money.dollar(10), five.times(2));
+		assertEquals(Money.dollar(15), five.times(3));
 	}
 	
 	@Test
@@ -35,8 +32,8 @@ public class MoneyTests {
 	
 	@Test
 	public void testDollarEquality(){
-		assertTrue(new Dollar(5).equals(new Dollar(5)));
-		assertFalse(new Dollar(5).equals(new Dollar(6)));
+		assertTrue(Money.dollar(5).equals(new Dollar(5)));
+		assertFalse(Money.dollar(5).equals(new Dollar(6)));
 	}
 	
 	@Test
@@ -47,7 +44,7 @@ public class MoneyTests {
 	
 	@Test
 	public void testDollarFrancInequality(){
-		assertFalse(new Dollar(5).equals(new Franc(5)));
-		assertFalse(new Franc(5).equals(new Dollar(5)));
+		assertFalse(Money.dollar(5).equals(new Franc(5)));
+		assertFalse(new Franc(5).equals(Money.dollar(5)));
 	}
 }
