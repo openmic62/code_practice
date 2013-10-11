@@ -38,9 +38,9 @@ Create Tagfile=0
 18=ch07_hierarchies_and_organization - test
 19=ant
 20=tdd
-21=tdd - ch01_money_example
-22=tdd - ch01_money_example - src
-23=tdd - ch01_money_example - test
+21=tdd - money_example
+22=tdd - money_example - src
+23=tdd - money_example - test
 [Files - ch02_a_first_unit_test - src]
 0=src\main\java\LogAnalyzer.java
 1=src\main\java\MemCalculator.java
@@ -126,7 +126,9 @@ Create Tagfile=0
 2=.\src\main\java\oata\
 3=.\src\main\config\
 4=build_131009_04_junitreport_gold.xml
-[Files - tdd - ch01_money_example - test]
-0=src\test\java\MoneyTests.java
-[Files - tdd - ch01_money_example - src]
+[Files - tdd - money_example - src]
 0=src\main\java\Dollar.java
+1=src\main\java\Franc.java
+2=src\main\java\Money.java
+[Files - tdd - money_example - test]
+0=src\test\java\MoneyTests.java
