@@ -11,6 +11,15 @@ import org.junit.runners.JUnit4;
 public class MoneyTests {
 
 	@Test
+	public void testPlusReturnsSum() {
+		Money five = Money.dollar(5);
+		Expression result = five.plus(five);
+		Sum sum = (Sum) result;
+		assertEquals(five, sum.augend);
+		assertEquals(five, sum.addend);
+	}
+
+	@Test
 	public void testSimpleAddition() {
 		Money five = Money.dollar(5);
 		Expression sum = five.plus(five);
