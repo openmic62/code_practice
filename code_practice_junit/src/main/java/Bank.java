@@ -1,8 +1,8 @@
 class Bank {
-	Money reduce(Expression sourceExp4Money, String to) {
-		if (sourceExp4Money instanceof Money) return (Money) sourceExp4Money;
-		Sum sum = (Sum) sourceExp4Money;
+	Money reduce(Expression source, String to) {
+		if (source instanceof Money) 
+			return (Money) source.reduce(to);
+		Sum sum = (Sum) source;
 		return sum.reduce(to);
-		//return Money.dollar(10);
 	}
 }
