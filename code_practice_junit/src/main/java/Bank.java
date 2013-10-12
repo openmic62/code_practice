@@ -1,6 +1,7 @@
 class Bank {
 	Money reduce(Expression source, String to) {
-		return source.reduce(to);
+		return source.reduce(this, to);
+		//return source.reduce(to);
 	}
 	
 	// <mlr 131012: TDD, p. 67b; had to add this to get the green bar mentioned in the book.>
