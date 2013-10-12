@@ -1,27 +1,23 @@
 [Open Files]
 Active File Display Mode=1
-Active File Index=3
+Active File Index=2
 Open File Line0=6420
 Open File Line1=0
-Open File Line2=0
+Open File Line2=308
 Open File Line3=0
-Open File Line4=0
 Open File Pos0=7379
 Open File Pos1=227
-Open File Pos2=0
+Open File Pos2=507
 Open File Pos3=174
-Open File Pos4=108
 Open File Window Pos0=0,1,-1,-1,-1,-1,3,26,1008,847
 Open File Window Pos1=0,1,-1,-1,-1,-1,3,26,1008,847
 Open File Window Pos2=0,1,-1,-1,-1,-1,3,26,1008,847
 Open File Window Pos3=0,1,-1,-1,-1,-1,3,26,1008,847
-Open File Window Pos4=0,1,-1,-1,-1,-1,3,26,1008,847
 Open File0=.\build.xml
 Open File1=H:\student\code_practice_junit\src\test\java\TestUtils.java
 Open File2=.\src\test\java\MoneyTests.java
 Open File3=.\src\main\java\Money.java
-Open File4=.\src\main\java\Franc.java
-Open File5=
+Open File4=
 Remember Files=1
 
 [Project Information]
@@ -29,10 +25,8 @@ Project Start=DD070A000200080008000600140000001A
 Working Time=2507
 
 [Folders]
-ant=1
 ant - .\src\main\config\=1
 ant - .\src\main\java\oata\=1
-ch02_a_first_unit_test=1
 ch02_a_first_unit_test - src=1
 ch02_a_first_unit_test - test=1
 ch03_stubs - src=1
@@ -44,8 +38,9 @@ ch05_mocking_frameworks - test=1
 ch06_isolation_frameworks_deeper_in - test=1
 tdd=1
 tdd - ch01_money_example=1
-tdd - ch01_money_example - src=1
+ant=1
 tdd - ch01_money_example - test=1
+ch02_a_first_unit_test=1
+tdd - ch01_money_example - src=1
 tdd - money_example=1
 tdd - money_example - src=1
-

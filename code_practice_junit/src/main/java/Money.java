@@ -6,9 +6,13 @@ public class Money {
 		this.amount = amount;
 		this.currency = currency;
 	}
-
+	
+	Money plus(Money addend) {
+		return new Money(this.amount + addend.amount, this.currency);
+	}
+	
 	Money times(int multiplier) {
-		return new Money(amount * multiplier, currency);
+		return new Money(this.amount * multiplier, this.currency);
 	}
 	
 	String currency() {
