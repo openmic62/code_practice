@@ -11,6 +11,14 @@ import org.junit.runners.JUnit4;
 public class MoneyTests {
 
 	@Test
+	public void testReduceSum() {
+		Expression sum = new Sum(Money.dollar(3), Money.dollar(4));
+		Bank bank = new Bank();
+		Money actual = bank.reduce(sum, "USD");
+		assertEquals(Money.dollar(7), actual);
+	}		
+
+	@Test
 	public void testPlusReturnsSum() {
 		Money five = Money.dollar(5);
 		Expression result = five.plus(five);

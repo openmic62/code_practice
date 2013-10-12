@@ -1,5 +1,8 @@
 class Bank {
-	Money reduce(Expression source, String to) {
-		return Money.dollar(10);
+	Money reduce(Expression sourceExp4Money, String targetCurrency) {
+		Sum sum = (Sum) sourceExp4Money;
+		int amount = sum.augend.amount + sum.addend.amount;
+		return new Money(amount, targetCurrency);
+		//return Money.dollar(10);
 	}
 }
