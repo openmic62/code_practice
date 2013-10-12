@@ -1,4 +1,9 @@
+import java.util.Hashtable;
+
 class Bank {
+	
+	private Hashtable<Pair, Integer> rates = new Hashtable<Pair, Integer>();
+	
 	Money reduce(Expression source, String to) {
 		return source.reduce(this, to);
 		//return source.reduce(to);
@@ -11,7 +16,10 @@ class Bank {
 	}
 
 	// <mlr 131012: TDD, p. 67b; had to add this to get the green bar mentioned in the book.>
-	void addRate(String currency1, String currency2, int exchangeRate) {}
+	// <mlr 131012: TDD, p. 70a; the book finally shows this method.
+	void addRate(String from, String to, int rate) {
+		rates.put(new Pair(from, to), new Integer(rate));
+	}
 	
 	private class Pair {
 		private String from;
