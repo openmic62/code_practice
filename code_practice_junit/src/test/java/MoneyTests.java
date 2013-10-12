@@ -11,6 +11,11 @@ import org.junit.runners.JUnit4;
 public class MoneyTests {
 
 	@Test
+	public void testArrayEquals() {
+		assertEquals(new Object[] {"abc"}, new Object[] {"abc"});
+	}
+
+	@Test
 	public void testReduceMoneyWithDifferentCurrencies() {
 		Money franc  = Money.franc(2);
 		Bank bank = new Bank();
