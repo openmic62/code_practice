@@ -9,8 +9,6 @@ public class Money implements Expression {
 	
 	public Expression plus(Expression addend) {
 		return new Sum(this, addend);
-		//return new Sum(this.amount + addend.amount, this.currency);
-		//return new Money(this.amount + addend.amount, this.currency);
 	}
 	
 	Expression times(int multiplier) {
