@@ -14,4 +14,8 @@ class Sum implements Expression {
 		//int amount = this.augend.amount + this.addend.amount;
 		return new Money(amount, targetCurrency);
 	}
+	
+	public Expression plus(Expression addend) {
+		return null;
+	}
 }

@@ -45,10 +45,11 @@ ch05_mocking_frameworks - src=1
 ch05_mocking_frameworks - src_mr_happy=1
 ch05_mocking_frameworks - test=1
 ch06_isolation_frameworks_deeper_in - test=1
-ch07_hierarchies_and_organization=1
 ch07_hierarchies_and_organization - src=1
 ch07_hierarchies_and_organization - test=1
-tdd=1
 tdd - ch01_money_example=1
 tdd - ch01_money_example - test=1
-
+tdd=1
+tdd - money_example=1
+tdd - money_example - src=1
+tdd - money_example - test=1
