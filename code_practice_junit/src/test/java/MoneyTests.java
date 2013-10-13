@@ -33,7 +33,7 @@ public class MoneyTests {
 
 	@Test
 	public void testReduceMoneyWithDifferentCurrencies() {
-		Money franc  = Money.franc(2);
+		Expression franc  = Money.franc(2);
 		Bank bank = new Bank();
 		bank.addRate("CHF", "USD", 2);
 		Money reduced = bank.reduce(franc, "USD");
@@ -42,7 +42,7 @@ public class MoneyTests {
 	
 	@Test
 	public void testReduceWithMoneyDollarArg() {
-		Money money = Money.dollar(1);
+		Expression money = Money.dollar(1);
 		Bank bank = new Bank();
 		Money reduced = bank.reduce(money, "USD");
 		assertEquals(Money.dollar(1), reduced);
@@ -58,7 +58,7 @@ public class MoneyTests {
 
 	@Test
 	public void testPlusReturnsSum() {
-		Money five = Money.dollar(5);
+		Expression five = Money.dollar(5);
 		Expression result = five.plus(five);
 		Sum sum = (Sum) result;
 		assertEquals(five, sum.augend);
@@ -67,7 +67,7 @@ public class MoneyTests {
 
 	@Test
 	public void testSimpleAddition() {
-		Money five = Money.dollar(5);
+		Expression five = Money.dollar(5);
 		Expression sum = five.plus(five);
 		Bank bank = new Bank();
 		Money reduced = bank.reduce(sum, "USD");
