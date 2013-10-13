@@ -11,6 +11,11 @@ import org.junit.runners.JUnit4;
 public class MoneyTests {
 
 	@Test
+	public void testIdentityRate() {
+		assertEquals(1, new Bank().rate("USD", "USD"));
+	}
+
+	@Test
 	public void testArrayEquals() {
 		assertEquals(new Object[] {"abc"}, new Object[] {"abc"});
 	}
