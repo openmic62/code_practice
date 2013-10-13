@@ -9,12 +9,23 @@ import org.junit.runners.JUnit4;
 
 @RunWith(JUnit4.class)
 public class MoneyTests {
+	
+	@Test
+	public void testMixedAddition() {
+		Expression fiveBucks = Money.dollar(5);
+		Expression tenFrancs  = Money.franc(10);
+		Bank bank = new Bank();
+		bank.addRate("CHF", "USD", 2);
+		Money result = bank.reduce(fiveBucks.plus(tenFrancs), "USD");
+		assertEquals(Money.dollar(10), result);
+	}
 
 	@Test
 	public void testIdentityRate() {
 		assertEquals(1, new Bank().rate("USD", "USD"));
 	}
 
+	// <mlr 131012: I dunno. I think the book says that this should fail. But, mine passes.>
 	@Test
 	public void testArrayEquals() {
 		assertEquals(new Object[] {"abc"}, new Object[] {"abc"});
