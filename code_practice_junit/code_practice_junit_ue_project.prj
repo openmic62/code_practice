@@ -41,6 +41,12 @@ Create Tagfile=0
 21=tdd - money_example
 22=tdd - money_example - src
 23=tdd - money_example - test
+24=Auction Sniper
+25=Auction Sniper - src
+26=Auction Sniper - test
+27=Auction Sniper - test - acceptance
+28=Auction Sniper - test - integration
+29=Auction Sniper - test - unit
 [Files - ch02_a_first_unit_test - src]
 0=src\main\java\LogAnalyzer.java
 1=src\main\java\MemCalculator.java
