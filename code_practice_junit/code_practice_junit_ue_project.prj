@@ -139,3 +139,8 @@ Create Tagfile=0
 3=src\main\java\Sum.java
 [Files - tdd - money_example - test]
 0=src\test\java\MoneyTests.java
+[Files - Auction Sniper - test - acceptance]
+0=src\test\java\AuctionSniperEndToEndTests.java
+[Files - Auction Sniper - src]
+0=src\main\java\ApplicationRunner.java
+1=src\main\java\FakeAuctionServer.java
