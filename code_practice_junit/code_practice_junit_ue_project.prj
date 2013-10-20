@@ -148,6 +148,7 @@ Create Tagfile=0
 1=src\main\java\FakeAuctionServer.java
 2=src\main\java\AuctionSniperDriver.java
 3=src\main\java\Main.java
+4=src\main\java\MainWindow.java
 [Files - Auction Sniper - WindowLicker]
 0=lib\windowlicker_svn\build.bat
 1=lib\windowlicker_svn\build.xml
