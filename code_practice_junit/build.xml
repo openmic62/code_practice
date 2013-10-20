@@ -68,6 +68,24 @@
 	</target>
 	<!-- <mlr 131009: end - sandbox for getting up to speed.> -->
 
+	<!-- <mlr 131020: begin - sandbox for learning macrodefs.> -->
+	<macrodef name="testing">
+		<attribute name="v" default="NOT SET"/>
+		<element name="some-tasks" optional="yes"/>
+		<sequential>
+			<echo>v is @{v}</echo>
+			<some-tasks/>
+		</sequential>
+	</macrodef>
+
+	<target name="testing">
+		<testing v="This is v">
+			<some-tasks>
+				<echo>this is a test</echo>
+			</some-tasks>
+		</testing>
+	</target>
+	<!-- <mlr 131020: end - sandbox for learning macrodefs.> -->
 
 
 	<!-- URL: http://ant.apache.org/manual/tutorial-HelloWorldWithAnt.html -->
@@ -206,14 +224,14 @@
 			<batchtest fork="yes" todir="${reportUT.dir}/xml">
 				<fileset dir="${srcUT.dir}"
 					includes="*Tests.java"
-				  excludes="Reentrant* FillInTheBlank* Template*"/>
+				excludes="Reentrant* FillInTheBlank* Template*"/>
 			</batchtest>
 		</junit>
 	</target>
 
 	<target name="junit_full_clean" depends="clean_all,compileUT,junit"/>
 
-	<target name="junitreport" 
+	<target name="junitreport"
 		description="Runs all JUnit tests and creates a report (clean_all 1st)"
 		depends="junit_full_clean">
 		<junitreport todir="${reportUT.dir}/xml">
@@ -235,16 +253,16 @@
 				<path refid="application"/>
 				<path location="${classes.dir}"/>
 			</classpath>
-			<include name="${testClass}.java"/> 
+			<include name="${testClass}.java"/>
 		</javac>
 	</target>
-	
+
 	<target name="ensure-test-name" unless="testClass">
 		<fail message="You must run this target with -DtestClass=TestClassName"/>
 	</target>
 
-	<target name="runtest" 
-		description="Runs the test you specify on the command line with -DtestClass=" 
+	<target name="runtest"
+		description="Runs the test you specify on the command line with -DtestClass="
 		depends="compileRT,ensure-test-name">
 		<junit printsummary="withOutAndErr" fork="yes">
 			<!--<sysproperty key="tests" value="${tests}"/>-->
