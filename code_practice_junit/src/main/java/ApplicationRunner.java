@@ -26,5 +26,8 @@ public class ApplicationRunner {
 	}
 	
 	public void stop() {
+		if (driver != null) {
+		 	driver.dispose();
+		}
 	}
 }
