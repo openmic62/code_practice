@@ -6,29 +6,36 @@ import org.jivesoftware.smack.MessageListener;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.packet.Message;
 
-public class FakeAuctionServer implements ChatManagerListener, MessageListener {
+public class FakeAuctionServer {
 	
-	private final String item;
+	public static final String ITEM_ID_AS_LOGIN = "auction-%s";
+	public static final String AUCTION_RESOURCE = "Auction";
+	public static final String XMPP_HOSTNAME = "localhost";
+	private static final String AUCTION_PASSWORD = "auction";
 	
-	private ChatManager chatManager;
-	private ConnectionConfiguration config;
+	private final String itemID;
 	private XMPPConnection connection;
+	private Chat currentChat;
 	
 	FakeAuctionServer(String item) {
-		this.item = item;
-		this.config = new ConnectionConfiguration("roco-3", 9090, "Southabee's");
-		this.connection = new XMPPConnection(config);
+		this.itemID = itemID;
+		this.connection = new XMPPConnection(XMPP_HOSTNAME);
 	}
-	
-	public void chatCreated(Chat chat, boolean createdLocally) {}
-	
-	public void processMessage(Chat chat, Message message) {}
 	
 	public void startSellingItem() {
 		connection.connect();
-		connection.login(item, "sniper");
-		chatManager = connection.getChatManager();
-		chatManager.addChatListener(this);
+		connection.login(String.format(ITEM_ID_AS_LOGIN, itemID),
+		                 AUCTION_PASSWORD, AUCTION_RESOURCE);
+		connection.getChatManager().addChatListener(
+			new ChatManagerListener() {
+				public void chatCreated(Chat chat, boolean createdLocally) {
+					currentChat = chat;
+				}
+			});
+	}
+	
+	public String getItemID() {
+		return this.itemID;
 	}
 	
 	public void hasReceivedJoinRequestFromSniper() {}
