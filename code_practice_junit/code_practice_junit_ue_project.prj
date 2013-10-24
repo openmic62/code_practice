@@ -103,6 +103,7 @@ Create Tagfile=0
 4=src\main\java\MoodEvent.java
 5=src\main\java\Mood.java
 6=src\main\java\ADayInTheLife.java
+7=src\main\java\Event_driven_system_description.txt
 [Files - ch06_isolation_frameworks_deeper_in - test]
 0=src\test\java\ReentrantMockTest.java
 [Files - ch07_hierarchies_and_organization - src]
@@ -149,6 +150,7 @@ Create Tagfile=0
 2=src\main\java\AuctionSniperDriver.java
 3=src\main\java\Main.java
 4=src\main\java\MainWindow.java
+5=src\main\java\Event_driven_system_description.txt
 [Files - Auction Sniper - WindowLicker]
 0=lib\windowlicker_svn\build.bat
 1=lib\windowlicker_svn\build.xml

@@ -1,0 +1,68 @@
+Event Driven System Description (Wednesday, 23 Oct 13, 8:58 pm)
+
+----------------------------------------
+- Event driven systems contain event sources, event objects, and event handlers.
+- Event sources, event objects, and event handlers stand as independent entities in the system.
+- An event occurrence is something of interest that happens within the system at a given time.
+
+----------------------------------------
+  Event Sources
+----------------------------------------
+- Event sources create event objects and notify interested event handlers. This sequence happens upon each event occurrence and is known as "firing an event".
+- Event sources can fire zero, one, or more than one kinds of events.
+- Event sources keep lists of event handlers. In any such list, each event handler contained therein holds a common interest in the same kind of event fired by the event source.
+- An event source can keep multiple numbers of such lists, one for each kind of event that that event source fires.
+- Event sources provide ways to add/remove interested event handlers to/from each list.
+
+----------------------------------------
+  Event Objects
+----------------------------------------
+- Event objects contain information relevant to an event occurrence.
+- Event objects transport information, relevant to event occurrences, from event sources to event handlers.
+  
+----------------------------------------
+  Event Handlers
+----------------------------------------
+- Event handlers receive event notifications sent by event sources.
+- Event handlers respond to the event notifications they receive by performing some action.
+- Event handlers perform actions relevant to the event occurrence for which they received notification. We call the act of performing such actions "handling events".
+- Event handlers "handle events" to fulfill their responsibility for accomplishing an effect needed by the system in response to an event occurrence.
+- Event handlers consume the event object, that accompanies an event notification, while "handling the event".
+
+----------------------------------------
+  Event Sources -> Event Handlers: wiring'em up
+----------------------------------------
+- A system creates a component, called ES, that will collaborate with other components to accomplish two distinct goals.
+- ES possesses the ability to "fire an event"; it is the event source.
+- ES starts with an empty list of handlers for its event. That is, no event handlers show interest in ES's event occurences.
+
+- The system creates a component, called EH, that will collaborate with ES to accomplish goal 1.
+- EH possesses the ability to "handle ES's event"; it is an event handler.
+- EH initially stands by itself. That is, it shows no interest in ES's event occurences.
+- The system adds EH to ES's list of interested event handlers. Now EH shows interest in ES's event occurences.
+
+NOTE: we say that EH is now "listening" for ES to fire events (to send event notifications).
+
+- The system creates a component, called EX, that will collaborate with ES to accomplish goal 2.
+- EX also possesses the ability to "handle ES's event; it is another event handler.
+- EX initially stands by itself. That is, it shows no interest in ES's event occurences.
+- The system also adds EX to ES's list of interested event handlers. Now EX also shows interest in ES's event occurences.
+
+NOTE: we say that both EH and EX are "listening" for ES to fire events (to send event notifications).
+
+- The system asks ES to accomplish the desired goals.
+- ES works to fulfill it's responsibilities for accomplishing the goals. ( 2 responsibilites :-( for one component?! )
+- To accomplish the goals, ES also needs separate effects in the system for which it holds no responsibility for fulfilling; EH and EX hold those separate responibilities.
+- ES fires its event.
+  - ES creates an event object for this event.
+  - ES looks at its list of interested event handlers.
+  - ES notifies each interested event handler, in turn, providing it with the same event object.
+- ES continues fulfilling its responsibilites for accomplishing the two goals.
+
+- EH, in turn, "hears" ES's event notification and receives the event object.
+- EH works independently of ES (and EX) to fulfill its responsibility for accomplishing goal 1.
+
+- EX, in turn, "hears" ES's event notification and receives the same event object EH received.
+- EX works independently of ES (and EH) to fulfill its responsibility for accomplishing goal 2.
+
+- The system sits happy after everyone finishes fulfilling their responsibility for accomplishing the desired goals.
