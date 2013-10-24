@@ -13,6 +13,8 @@ public class FakeAuctionServer {
 	public static final String XMPP_HOSTNAME = "localhost";
 	private static final String AUCTION_PASSWORD = "auction";
 	
+	public static final String BUYER_ID = "Sniper";
+
 	private final String itemID;
 	private XMPPConnection connection;
 	private Chat currentChat;
@@ -38,7 +40,14 @@ public class FakeAuctionServer {
 		return this.itemID;
 	}
 	
-	public void hasReceivedJoinRequestFromSniper() {}
+	public boolean hasReceivedJoinRequestFromSniper() {
+		connection.getChatManager().createChat(BUYER_ID, 
+			new MessageListener() {
+				public void processMessage(Chat currentChat, Message message) {}
+			}
+		);
+		return true;
+	}
 	
 	public void announceClosed() {}
 	
