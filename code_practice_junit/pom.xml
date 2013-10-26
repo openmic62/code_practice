@@ -2,9 +2,9 @@
 	<modelVersion>4.0.0</modelVersion>
 
   <!-- The Basics -->
-	<groupId>pl.pragmatist</groupId>
-	<artifactId>JUnitParams</artifactId>
-	<version>1.0.3-SNAPSHOT</version>
+	<groupId>com.roco</groupId>
+	<artifactId>CodePractice</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<dependencies>
 		<dependency>
@@ -13,6 +13,8 @@
 			<version>4.11</version>
 		</dependency>
 	</dependencies>
+	<!-- This parent object looks to me like it's needed to deploy to Sonatype OSS Maven Repository,
+	     which pl.pragmatists did with JUnitParams -->
  	<parent>
 		<artifactId>oss-parent</artifactId>
 		<groupId>org.sonatype.oss</groupId>
@@ -114,8 +116,13 @@
 	  <tag>HEAD</tag>
   </scm>
   <prerequisites/>
-  <repositories/>
-  <pluginRepositories/>
+  <!-- For the reason why the next to tags stand commented, see
+       https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide#SonatypeOSSMavenRepositoryUsageGuide-6.CentralSyncRequirement -->
+  <!--
+  AVOID RELEASE REPOSITORY/PLUGINREPOSITORY:
+  <repositories></repositories>
+  <pluginRepositories></pluginRepositories>
+  -->
   <distributionManagement/>
   <profiles/>
 </project>
