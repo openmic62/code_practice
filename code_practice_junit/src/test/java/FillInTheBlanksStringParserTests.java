@@ -3,9 +3,9 @@
 * How to build a test API for my application - Example
 * <u>The Art of Unit Testing</u>
 * Section 7.6.1 Using test class inheritance patterns
-* ABSTRACT ‘FILL IN THE BLANKS’ TEST DRIVER CLASS PATTERN
+* ABSTRACT 'FILL IN THE BLANKS' TEST DRIVER CLASS PATTERN
 * This implements "hooks" type template for testing
-* see Listing 7.7 A ‘Fill in The Blanks’ base test class
+* see Listing 7.7 A 'Fill in The Blanks' base test class
 * pdf-p. 162a
 
  -------------------------------------------------------------------------------
