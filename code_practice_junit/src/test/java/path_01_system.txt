@@ -1,8 +1,8 @@
 ---------------------------------------------------------------------------------
 Use this to find which java.exe the system is using.
 
-for %i in (java.exe) do @echo.   %~$PATH:i
-   C:\WINDOWS\system32\java.exe
+for %i in (java.exe) do @echo.   %~$PATH:i   (COMMAND)
+   C:\WINDOWS\system32\java.exe              (RESULT)
    
    Taken from "http://stackoverflow.com/questions/3454424/unix-which-java-equivalent-command-on-windows"
 ---------------------------------------------------------------------------------

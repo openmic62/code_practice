@@ -1,9 +1,13 @@
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.ChatManager;
 import org.jivesoftware.smack.ChatManagerListener;
 import org.jivesoftware.smack.ConnectionConfiguration;
 import org.jivesoftware.smack.MessageListener;
 import org.jivesoftware.smack.XMPPConnection;
+import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Message;
 
 public class FakeAuctionServer {
@@ -19,12 +23,15 @@ public class FakeAuctionServer {
 	private XMPPConnection connection;
 	private Chat currentChat;
 	
+	private boolean isConnectCommand;
+	
 	FakeAuctionServer(String item) {
-		this.itemID = itemID;
-		this.connection = new XMPPConnection(XMPP_HOSTNAME);
+		this.itemID = item;
+		this.connection = new XMPPConnection(
+			new ConnectionConfiguration(XMPP_HOSTNAME,5222,AUCTION_RESOURCE));
 	}
 	
-	public void startSellingItem() {
+	public void startSellingItem() throws XMPPException{
 		connection.connect();
 		connection.login(String.format(ITEM_ID_AS_LOGIN, itemID),
 		                 AUCTION_PASSWORD, AUCTION_RESOURCE);
@@ -41,14 +48,47 @@ public class FakeAuctionServer {
 	}
 	
 	public boolean hasReceivedJoinRequestFromSniper() {
+		isConnectCommand = true;
 		connection.getChatManager().createChat(BUYER_ID, 
 			new MessageListener() {
-				public void processMessage(Chat currentChat, Message message) {}
+				public void processMessage(Chat currentChat, Message message) {
+					String messageBody = message.getBody().toString();
+					String command = getSniperCommandFromMessage(messageBody);
+					isConnectCommand = command.equals("JOIN") ? true : false;
+				}
 			}
 		);
-		return true;
+		return isConnectCommand;
 	}
 	
+	String getSniperCommandFromMessage(String message) {
+		// example message-->SQLVersion: 1.1; Command: JOIN;<--
+		
+		final String ON_SEMICOLON_DELIMITER = ";";
+		String[] fields = message.split(ON_SEMICOLON_DELIMITER);
+
+		/* REGEX means: the text "Command: ", start remembering, followed by
+		                one of "JOIN" or "BID", stop remembering
+		 */
+		final String REGEX = "Command: (JOIN|BID)";
+		Pattern pattern =
+		Pattern.compile(REGEX);
+
+		String returnValue = null;
+		for(String field : fields) {
+			Matcher matcher =
+			pattern.matcher(field);
+			
+			if (field.contains("Command:")) {
+			 	matcher.find();
+			 	returnValue = matcher.group(1);
+			}
+			
+		}
+		return returnValue;
+		///return "Just a plain Jane string, dear.";
+	}
+
 	public void announceClosed() {}
 	
 	public void stop() {}

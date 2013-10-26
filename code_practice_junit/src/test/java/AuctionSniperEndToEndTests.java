@@ -17,10 +17,14 @@ public class AuctionSniperEndToEndTests {
 	@Test
 	public void sniperJoinsAuctionUntilAuctionCloses() throws Exception {        
 		auction.startSellingItem();                    // step 1
-		application.startBiddingIn(auction);           // step 2
+		//application.startBiddingIn(auction);           // step 2
+		boolean result = 
 		auction.hasReceivedJoinRequestFromSniper();    // step 3
+		//assertTrue(result);
+		assertTrue("auction.hasReceivedJoinRequestFromSniper() -> test failed", result);
+		
 		auction.announceClosed();                      // step 4
-		application.showsSniperHasLostAuction();       // step 5
+		//application.showsSniperHasLostAuction();       // step 5
 	}
 	
 	// clean up
