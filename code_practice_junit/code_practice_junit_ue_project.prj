@@ -17,6 +17,7 @@ Create Tagfile=0
 4=src\test\java\path_01_system.txt
 5=src\test\java\path_02_user.txt
 6=src\test\java\path_03_env.txt
+7=pom.xml
 [Group]
 0=ch02_a_first_unit_test
 1=ch02_a_first_unit_test - src

@@ -13,6 +13,32 @@ import org.junit.runner.RunWith;
 @RunWith(JUnitParamsRunner.class)
 public class FakeAuctionServerTests {
 	
+
+    @Test
+    @Parameters({ "1", "2" })
+    public void singleParam(int number) {
+        assertTrue(number > 0);
+    }
+
+    @Test
+    @Parameters({ "a \n b", "a(asdf)", "a \r a" })
+    public void specialCharsInParam(String a) throws Exception {
+    	assertEquals("a \n b", a);
+    }
+
+    @Test
+    @Parameters({ "1, false", "2, true" })
+    public void multipleParams(int number, boolean what) throws Exception {
+        assertEquals(what, number > 1);
+    }
+
+    @Test
+    @Parameters({ "1," })
+    public void emptyParam(int number, String empty) {
+        assertEquals(1, number);
+        assertEquals("", empty);
+    }
+
 	@Test
 	public void getSniperCommandFromMessage_withCmdJOIN_returnsJOIN() {
 		
@@ -40,12 +66,15 @@ public class FakeAuctionServerTests {
 		           "SQLVersion: 1.1; Command: BID;,BID"})
 	@Parameters({"AAA,1", "BBB,2"})
 	@Parameters({"AAA,1"})
+	@Parameters({ "AAA" })
 	public void getSniperCommandFromMessage_calledWithACmd_returnsThatCmd(String message, String expectedResult) {
+	public void getSniperCommandFromMessage_calledWithACmd_returnsThatCmd(String message) {
 	*/
 	@Test
-	@Parameters({ "AAA" })
-	public void getSniperCommandFromMessage_calledWithACmd_returnsThatCmd(String message) {
+	@Parameters({"SQLVersion: 1.1; Command: JOIN;,JOIN",
+		           "SQLVersion: 1.1; Command: BID;,BID"})
 
+	public void getSniperCommandFromMessage_calledWithACmd_returnsThatCmd(String message, String expectedResult) {
 		//FakeAuctionServer auction = new FakeAuctionServer("item-54321");
 		//assertNotNull(expectedResult);
 		assertNotNull(message);
