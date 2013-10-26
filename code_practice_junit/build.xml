@@ -1,4 +1,5 @@
-<project name="ArtOfUnitTesting" basedir="." default="main">
+<project name="ArtOfUnitTesting" basedir="." default="main"
+	       xmlns:artifact="antlib:org.apache.maven.artifact.ant">
 	<!-- <mlr 131009: begin - sandbox for getting up to speed.> -->
 	<description>
 		Project Name: ${ant.project.name}
@@ -192,9 +193,11 @@
 	<target name="run">
 		<java classname="${main-class}"
 			fork="true">
+			<arg value="-list_all"/>
 			<classpath>
 				<path refid="classpath"/>
 				<path refid="application"/>
+				<path location="${app.objs}"/>
 			</classpath>
 		</java>
 	</target>

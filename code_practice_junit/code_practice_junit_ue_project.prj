@@ -38,7 +38,7 @@ Create Tagfile=0
 16=ch07_hierarchies_and_organization
 17=ch07_hierarchies_and_organization - src
 18=ch07_hierarchies_and_organization - test
-19=ant
+19=ant_and_maven
 20=tdd
 21=tdd - money_example
 22=tdd - money_example - src
@@ -131,12 +131,6 @@ Create Tagfile=0
 9=src\test\java\StandardStringParserFBTests.java
 10=src\test\java\FillInTheBlanksStringParserTests.java
 11=src\test\java\GenericsStringParserTests.java
-[Files - ant]
-0=build.properties
-1=build.xml
-2=.\src\main\java\oata\
-3=.\src\main\config\
-4=build_131009_04_junitreport_gold.xml
 [Files - tdd - money_example - src]
 0=src\main\java\Money.java
 1=src\main\java\Expression.java
@@ -163,3 +157,11 @@ Create Tagfile=0
 1=src\test\java\FakeAuctionServerPTests.java
 2=C:\dev\hg_clones\junitparams\src\main\java\junitparams\internal\Utils.java
 3=C:\dev\hg_clones\junitparams\src\main\java\junitparams\internal\junitparams.patch
+[Files - ant_and_maven]
+0=build.properties
+1=build.xml
+2=.\src\main\java\oata\
+3=.\src\main\config\
+4=build_131009_04_junitreport_gold.xml
+5=src\main\java\PropertiesManager.java
+6=pom.xml
