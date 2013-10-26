@@ -21,14 +21,16 @@
 	<path id="master-classpath">
 		<!--
 		<fileset dir="${web.dir}/WEB-INF/lib">
-		<include name="*.jar"/>
+			<include name="*.jar"/>
 		</fileset>
 		<fileset dir="${appserver.lib}">
-		<include name="servlet*.jar"/>
+			<include name="servlet*.jar"/>
 		</fileset>
 		-->
+		<pathelement location="${lib.dir}/jmockit.jar"/>
 		<fileset dir="${lib.dir}">
 			<include name="*.jar"/>
+			<exclude name="jmockit.jar"/>
 		</fileset>
 		<pathelement path="${build.dir}"/>
 	</path>

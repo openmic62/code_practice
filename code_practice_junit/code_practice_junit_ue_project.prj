@@ -57,6 +57,7 @@ Create Tagfile=0
 1=src\test\java\LogAnalyzerParameterizedTests.java
 2=src\test\java\LogAnalyzerStateTests.java
 3=src\test\java\LogAnalyzerTests.java
+4=src\main\java\LoanDetails.java
 [Files - ch03_stubs - src]
 0=src\main\java\FileExtensionManagable.java
 1=src\main\java\LogAnalyzerCI.java
@@ -156,3 +157,8 @@ Create Tagfile=0
 1=lib\windowlicker_svn\build.xml
 2=lib\windowlicker_svn\src\swing\main\com\objogate\wl\swing\driver\ComponentDriver.java
 3=C:\Asus WebStorage\openmic62@gmail.com\MySyncFolder\student\1Z0-803\code_practice_b1\src\main\java\Exercise9_5.java
+[Files - Auction Sniper - test - unit]
+0=src\test\java\FakeAuctionServerTests.java
+1=src\test\java\FakeAuctionServerPTests.java
+2=C:\dev\hg_clones\junitparams\src\main\java\junitparams\internal\Utils.java
+3=C:\dev\hg_clones\junitparams\src\main\java\junitparams\internal\junitparams.patch
