@@ -1,0 +1,290 @@
+<project name="ArtOfUnitTesting" basedir="." default="main"
+	       xmlns:artifact="antlib:org.apache.maven.artifact.ant">
+	<!-- <mlr 131009: begin - sandbox for getting up to speed.> -->
+	<description>
+		Project Name: ${ant.project.name}
+		Descriptions: An Ant project that builds stuff
+		I wrote while studying the book
+		The Art of Unit Testing.
+	</description>
+
+	<!-- set global properties for this build -->
+	<property name="src1" location="src1"/>
+	<property name="src2" value="src2"/>
+	<property file="build.properties"/>
+
+	<property name="web.dir" value="web_dir"/>
+	<property name="appserver.lib" value="appserver_lib"/>
+
+	<!-- Nice example at ...
+	http://stackoverflow.com/questions/722774/getting-ant-javac-to-recognise-a-classpath
+	-->
+	<path id="master-classpath">
+		<!--
+		<fileset dir="${web.dir}/WEB-INF/lib">
+			<include name="*.jar"/>
+		</fileset>
+		<fileset dir="${appserver.lib}">
+			<include name="servlet*.jar"/>
+		</fileset>
+		-->
+		<pathelement location="${lib.dir}/jmockit.jar"/>
+		<fileset dir="${lib.dir}">
+			<include name="*.jar"/>
+			<exclude name="jmockit.jar"/>
+		</fileset>
+		<pathelement path="${build.dir}"/>
+	</path>
+
+	<patternset id="app.sources">
+		<include name="src/main/java/**/*.java"/>
+	</patternset>
+
+	<patternset id="unit.test.sources">
+		<include name="src/test/java/**/*.java"/>
+	</patternset>
+
+	<target name="nop">
+		<echo>This is the "No-op" target.</echo>
+		<echo>&lt;property name="src1" location="src1"> = ${src1}</echo>
+		<echo>&lt;property name="src2" value="src2"> = ${src2}</echo>
+		<echo/>
+		<echo>build.properties-base.path: ${base.path}</echo>
+		<echo>build.properties-deploy.app: ${deploy.app}</echo>
+		<echo>build.properties-deploy.path: ${deploy.path}</echo>
+	</target>
+
+	<target name="compileXXX">
+		<mkdir dir="${build.dir}"/>
+		<javac
+			classpath="xyz.jar"
+			compiler="javac1.7"
+			debug="false"
+			debuglevel="lines"
+			destdir="${build.dir}"
+			srcdir="src/main/java"
+			includeantruntime="false">
+			<classpath refid="master-classpath"/>
+			<exclude name="**/*_bad.java"/>
+			<compilerarg value="-Xlint:unchecked" />
+		</javac>
+	</target>
+	<!-- <mlr 131009: end - sandbox for getting up to speed.> -->
+
+	<!-- <mlr 131020: begin - sandbox for learning macrodefs.> -->
+	<macrodef name="testing">
+		<attribute name="v" default="NOT SET"/>
+		<element name="some-tasks" optional="yes"/>
+		<sequential>
+			<echo>v is @{v}</echo>
+			<some-tasks/>
+		</sequential>
+	</macrodef>
+
+	<target name="testing">
+		<testing v="This is v">
+			<some-tasks>
+				<echo>this is a test</echo>
+			</some-tasks>
+		</testing>
+	</target>
+	<!-- <mlr 131020: end - sandbox for learning macrodefs.> -->
+
+
+	<!-- URL: http://ant.apache.org/manual/tutorial-HelloWorldWithAnt.html -->
+	<!-- <mlr 131009: begin - Tutorial: Hello World with Apache Ant> -->
+
+	<!-- Set properties as shown in the Tutorial -->
+	<property name="src.dir" value="src/main/java"/>
+	<property name="srcUT.dir" value="src/test/java"/>
+	<property name="build.dir" value="target"/>
+	<property name="classes.dir" value="${build.dir}/classes"/>
+	<property name="classesUT.dir" value="${build.dir}/test-classes"/>
+	<property name="config.dir" value="src/main/config"/>
+	<property name="jar.dir" value="${build.dir}/jar"/>
+	<property name="lib.dir" value="lib"/>
+	<property name="report.dir"  value="${build.dir}/test-reports"/>
+	<property name="reportUT.dir"  value="${report.dir}/junitreport"/>
+
+	<property name="main-class" value="ADayInTheLife"/>
+	<property name="app.jar" value="${jar.dir}/${ant.project.name}.jar"/>
+
+	<!-- Make an Ant <path> for use as classpath to find the log4j-1.2.17.jar -->
+	<path id="classpath">
+		<fileset dir="${lib.dir}" includes="*.jar"/>
+	</path>
+
+	<!-- Make an Ant <path> that abstracts our app.jar; for use with junit -->
+	<path id="application" location="${app.jar}"/>
+
+	<!-- Make a patternset that selects the app. derived objects. -->
+	<patternset id="app.objs">
+		<include name="${classes.dir}/**/*.class"/>
+	</patternset>
+	<!-- The clean target in the Tutorial simply deletes the build dir.
+	I want to keep my pre-defined directory structure and just delete
+	the derived objects.
+
+	TODO: keep the pre-defined directory, but clean everything below
+	-->
+	<target name="clean">
+		<delete>
+			<fileset dir=".">
+				<patternset refid="app.objs"/>
+			</fileset>
+		</delete>
+		<delete file="${app.jar}"/>
+	</target>
+
+	<!-- Make a patternset that selects the test derived objects. -->
+	<patternset id="unit.test.objs">
+		<include name="${classesUT.dir}/**/*.class"/>
+	</patternset>
+
+	<target name="cleanUT">
+		<delete>
+			<fileset dir=".">
+				<patternset refid="unit.test.objs"/>
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="clean_all" depends="clean,cleanUT"/>
+
+	<target name="compile">
+		<mkdir dir="${classes.dir}"/>
+		<javac classpathref="classpath"
+			srcdir="${src.dir}"
+			destdir="${classes.dir}"
+			includeantruntime="true">
+			<compilerarg value="-Xlint:unchecked" />
+		</javac>
+		<copy todir="${classes.dir}">
+			<fileset dir="${config.dir}" includes="*.properties"/>
+		</copy>
+	</target>
+
+	<!--<target name="jar" depends="compile">-->
+	<target name="jar">
+		<mkdir dir="${jar.dir}"/>
+		<jar destfile="${app.jar}"
+			basedir="${classes.dir}">
+			<manifest>
+				<attribute name="Main-Class" value="${main-class}"/>
+			</manifest>
+		</jar>
+	</target>
+
+	<target name="compileUT" depends="compile,jar">
+		<mkdir dir="${classesUT.dir}"/>
+		<javac srcdir="${srcUT.dir}"
+			destdir="${classesUT.dir}"
+			includeantruntime="true">
+			<classpath>
+				<path refid="classpath"/>
+				<path refid="application"/>
+			</classpath>
+			<exclude name="**/*_bad.java"/>
+			<exclude name="**/Reentrant*"/>
+		</javac>
+	</target>
+
+	<!--<target name="run" depends="jar">-->
+	<target name="run">
+		<java classname="${main-class}"
+			fork="true">
+			<arg value="-list_all"/>
+			<classpath>
+				<path refid="classpath"/>
+				<path refid="application"/>
+				<path location="${app.objs}"/>
+			</classpath>
+		</java>
+	</target>
+
+	<target name="main" depends="clean,compile,jar,run"/>
+
+	<!--<target name="junit" depends="compile,jar">-->
+	<target name="junit">
+		<delete dir="${reportUT.dir}"/>
+		<mkdir dir="${reportUT.dir}"/>
+		<mkdir dir="${reportUT.dir}/xml"/>
+		<mkdir dir="${reportUT.dir}/html"/>
+		<junit printsummary="yes"
+			haltonfailure="yes"
+			showoutput="yes"
+			tempdir="${reportUT.dir}">
+			<!--<test name="${ant.project.name}"  todir="${reportUT.dir}" />-->
+			<classpath>
+				<path refid="classpath"/>
+				<path location="${classes.dir}"/>
+				<path location="${classesUT.dir}"/>
+				<!--<path refid="application"/>-->
+			</classpath>
+
+			<!-- TODO: get this output to go where I want it to -->
+			<!--<formatter type="plain"/>-->
+			<!--<formatter type="xml"/>-->
+			<formatter type="xml"/>
+
+			<batchtest fork="yes" todir="${reportUT.dir}/xml">
+				<fileset dir="${srcUT.dir}"
+					includes="*Tests.java"
+				excludes="Reentrant* FillInTheBlank* Template*"/>
+			</batchtest>
+		</junit>
+	</target>
+
+	<target name="junit_full_clean" depends="clean_all,compileUT,junit"/>
+
+	<target name="junitreport"
+		description="Runs all JUnit tests and creates a report (clean_all 1st)"
+		depends="junit_full_clean">
+		<junitreport todir="${reportUT.dir}/xml">
+			<fileset dir="${reportUT.dir}/xml" includes="TEST-*.xml"/>
+			<report format="frames" styledir="${ant.home}/etc" todir="${reportUT.dir}/html"/>
+		</junitreport>
+		<echo>For your junitreport, see "index.html" in ${reportUT.dir}/html</echo>
+	</target>
+	<!-- <mlr 131009: end - Tutorial: Hello World with Apache Ant> -->
+
+	<!-- <mlr 131010: begin - add capability to run specific tests during development -->
+	<target name="compileRT">
+		<mkdir dir="${classesUT.dir}"/>
+		<javac srcdir="${srcUT.dir}"
+			destdir="${classesUT.dir}"
+			includeantruntime="true">
+			<classpath>
+				<path refid="classpath"/>
+				<path refid="application"/>
+				<path location="${classes.dir}"/>
+			</classpath>
+			<include name="${testClass}.java"/>
+		</javac>
+	</target>
+
+	<target name="ensure-test-name" unless="testClass">
+		<fail message="You must run this target with -DtestClass=TestClassName"/>
+	</target>
+
+	<target name="runtest"
+		description="Runs the test you specify on the command line with -DtestClass="
+		depends="compileRT,ensure-test-name">
+		<junit printsummary="withOutAndErr" fork="yes">
+			<!--<sysproperty key="tests" value="${tests}"/>-->
+			<classpath>
+				<path refid="classpath"/>
+				<path location="${classes.dir}"/>
+				<path location="${classesUT.dir}"/>
+				<!--<path refid="application"/>-->
+			</classpath>
+			<formatter type="plain" usefile="false"/>
+			<batchtest>
+				<fileset dir="${srcUT.dir}">
+					<include name="${testClass}.java"/>
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+	<!-- <mlr 131010: end - add capability to run specific tests during development -->
+</project>
