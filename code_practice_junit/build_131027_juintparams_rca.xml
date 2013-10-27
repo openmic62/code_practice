@@ -185,7 +185,7 @@
 				<path refid="application"/>
 			</classpath>
 			<exclude name="**/*_bad.java"/>
-			<exclude name="**/Reentrant*"/>
+			<exclude name="**/ReentrantMockTest*"/>
 		</javac>
 	</target>
 
@@ -205,13 +205,13 @@
 	<target name="main" depends="clean,compile,jar,run"/>
 
 	<!--<target name="junit" depends="compile,jar">-->
-	<target name="junit">
+	<target name="test">
 		<delete dir="${reportUT.dir}"/>
 		<mkdir dir="${reportUT.dir}"/>
 		<mkdir dir="${reportUT.dir}/xml"/>
 		<mkdir dir="${reportUT.dir}/html"/>
 		<junit printsummary="yes"
-			haltonfailure="yes"
+			haltonfailure="no"
 			showoutput="yes"
 			tempdir="${reportUT.dir}">
 			<!--<test name="${ant.project.name}"  todir="${reportUT.dir}" />-->
@@ -229,17 +229,17 @@
 
 			<batchtest fork="yes" todir="${reportUT.dir}/xml">
 				<fileset dir="${srcUT.dir}"
-					includes="*Tests.java"
-				excludes="Reentrant* FillInTheBlank* Template*"/>
+					includes="FakeAuctionServerTests.java **/junitparams/**/*Test.java"
+					excludes="Reentrant* FillInTheBlank* Template*"/>
 			</batchtest>
 		</junit>
 	</target>
 
-	<target name="junit_full_clean" depends="clean_all,compileUT,junit"/>
+	<target name="test_full_clean" depends="clean_all,compileUT,test"/>
 
 	<target name="junitreport"
 		description="Runs all JUnit tests and creates a report (clean_all 1st)"
-		depends="junit_full_clean">
+		depends="test_full_clean">
 		<junitreport todir="${reportUT.dir}/xml">
 			<fileset dir="${reportUT.dir}/xml" includes="TEST-*.xml"/>
 			<report format="frames" styledir="${ant.home}/etc" todir="${reportUT.dir}/html"/>
@@ -281,7 +281,7 @@
 			<formatter type="plain" usefile="false"/>
 			<batchtest>
 				<fileset dir="${srcUT.dir}">
-					<include name="${testClass}.java"/>
+					<include name="**/${testClass}.java"/>
 				</fileset>
 			</batchtest>
 		</junit>

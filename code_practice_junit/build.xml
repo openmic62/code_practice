@@ -281,7 +281,7 @@
 			<formatter type="plain" usefile="false"/>
 			<batchtest>
 				<fileset dir="${srcUT.dir}">
-					<include name="${testClass}.java"/>
+					<include name="**/${testClass}.java"/>
 				</fileset>
 			</batchtest>
 		</junit>
