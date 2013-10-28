@@ -107,7 +107,9 @@
 				<version>2.13</version>
 				<configuration>
 					<includes>
-						<include>**/*Tests.java</include>
+						<include>**/junitparams/**/*Test.java</include>
+						<include>**/SuperclassTest.java</include>
+						<include>**/FakeAuctionServerTests.java</include>
 					</includes>
 					<excludes>
 						<exclude>**/ReentrantMockTest.java</exclude>
