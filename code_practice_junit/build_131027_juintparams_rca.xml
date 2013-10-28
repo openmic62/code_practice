@@ -229,8 +229,8 @@
 
 			<batchtest fork="yes" todir="${reportUT.dir}/xml">
 				<fileset dir="${srcUT.dir}"
-					includes="FakeAuctionServerTests.java **/junitparams/**/*Test.java"
-					excludes="Reentrant* FillInTheBlank* Template*"/>
+					excludes="FillInTheBlank* Template*"
+					includes="FakeAuctionServerTests.java **/junitparams/**/*Test.java"/>
 			</batchtest>
 		</junit>
 	</target>

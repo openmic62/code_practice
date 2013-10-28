@@ -16,7 +16,6 @@ Create Tagfile=0
 3=src\test\java\path_01_system.txt
 4=src\test\java\path_02_user.txt
 5=src\test\java\path_03_env.txt
-6=build_131027_juintparams_rca.xml
 [Group]
 0=ch02_a_first_unit_test
 1=ch02_a_first_unit_test - src
@@ -165,6 +164,7 @@ Create Tagfile=0
 4=build_131009_04_junitreport_gold.xml
 5=src\main\java\PropertiesManager.java
 6=pom.xml
+7=build_131027_juintparams_rca.xml
 [Files - ant_and_maven]
 0=build.properties
 1=build.xml
