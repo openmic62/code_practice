@@ -165,6 +165,7 @@ Create Tagfile=0
 5=src\main\java\PropertiesManager.java
 6=pom.xml
 7=build_131027_juintparams_rca.xml
+8=pom_131027_junitparams_rca.xml
 [Files - ant_and_maven]
 0=build.properties
 1=build.xml
