@@ -23,7 +23,7 @@ public class FakeAuctionServer {
 	private XMPPConnection connection;
 	private Chat currentChat;
 	
-	private boolean isConnectCommand;
+	private boolean isJoinCommand;
 	
 	FakeAuctionServer(String item) {
 		this.itemID = item;
@@ -48,17 +48,17 @@ public class FakeAuctionServer {
 	}
 	
 	public boolean hasReceivedJoinRequestFromSniper() {
-		isConnectCommand = true;
+		isJoinCommand = false;
 		connection.getChatManager().createChat(BUYER_ID, 
 			new MessageListener() {
 				public void processMessage(Chat currentChat, Message message) {
 					String messageBody = message.getBody().toString();
 					String command = getSniperCommandFromMessage(messageBody);
-					isConnectCommand = command.equals("JOIN") ? true : false;
+					isJoinCommand = command.equals("JOIN") ? true : false;
 				}
 			}
 		);
-		return isConnectCommand;
+		return isJoinCommand;
 	}
 	
 	String getSniperCommandFromMessage(String message) {
@@ -89,7 +89,11 @@ public class FakeAuctionServer {
 		///return "Just a plain Jane string, dear.";
 	}
 
-	public void announceClosed() {}
+	public void announceClosed() throws XMPPException {
+		currentChat.sendMessage("Auction closed");
+	}
 	
-	public void stop() {}
+	public void stop() {
+		connection.disconnect();
+	}
 }
