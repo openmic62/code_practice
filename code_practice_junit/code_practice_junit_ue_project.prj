@@ -48,6 +48,7 @@ Create Tagfile=0
 28=Auction Sniper - test - integration
 29=Auction Sniper - test - unit
 30=Auction Sniper - WindowLicker
+31=Auction Sniper - xmpp
 [Files - ch02_a_first_unit_test - src]
 0=src\main\java\LogAnalyzer.java
 1=src\main\java\MemCalculator.java
@@ -153,8 +154,6 @@ Create Tagfile=0
 [Files - Auction Sniper - test - unit]
 0=src\test\java\FakeAuctionServerTests.java
 1=src\test\java\FakeAuctionServerPTests.java
-2=C:\dev\hg_clones\junitparams\src\main\java\junitparams\internal\Utils.java
-3=C:\dev\hg_clones\junitparams\src\main\java\junitparams\internal\junitparams.patch
 <<<<<<< .mine
 [Files - ant_and_maven]
 0=build.properties
@@ -175,3 +174,5 @@ Create Tagfile=0
 5=src\main\java\PropertiesManager.java
 6=pom.xml
 >>>>>>> .r79
+[Files - Auction Sniper - xmpp]
+0=src\main\java\XmppManager.java
