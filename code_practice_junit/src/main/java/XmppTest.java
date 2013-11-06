@@ -93,7 +93,6 @@ public class XmppTest {
 			message   = "Please give me an auction command...";
 		}
 
-		///XmppManager xmppManager = new XmppManager("myserver", 5222);
 		XmppManager xmppManager = new XmppManager("roco-3", 5222);
 
 		xmppManager.init();
