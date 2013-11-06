@@ -50,13 +50,18 @@
  ***** build the template example production source files
  H:\>cd student\code_practice_junit\src\main\java
  H:\student\code_practice_junit\src\main\java>l
+ H:\student\code_practice_junit\src\main\java>set CLASSPATH=..\..\..\lib\smack.jar;..\..\..\lib\smackx-debug.jar;..\..\..\lib\smackx.jar;..\..\..\target\classes
  H:\student\code_practice_junit\src\main\java>echo %CLASSPATH%
  H:\student\code_practice_junit\src\main\java>set XMPP_FILES=XmppManager.java XmppTest.java
  H:\student\code_practice_junit\src\main\java>echo %XMPP_FILES%
- H:\student\code_practice_junit\src\main\java>javac -cp ..\..\..\lib\smack.jar;..\..\..\target\classes -d ..\..\..\target\classes %XMPP_FILES%
+ H:\student\code_practice_junit\src\main\java>javac -cp %CLASSPATH% -d ..\..\..\target\classes %XMPP_FILES%
 
  ***** run the XmppTest application
- H:\student\code_practice_junit\src\test\java>java -cp ..\..\..\lib\smack.jar;..\..\..\lib\smackx.jar;..\..\..\target\classes  XmppTest
+ WITHOUT DEBUG
+ H:\student\code_practice_junit\src\test\java>java -cp %CLASSPATH% XmppTest auction
+ 
+ WITH DEBUG
+ H:\student\code_practice_junit\src\test\java>java -cp %CLASSPATH% -Dsmack.debugEnabled=true XmppTest auction
  */ 
 
 public class XmppTest {
@@ -86,8 +91,15 @@ public class XmppTest {
 		xmppManager.performLogin(username, password);
 		xmppManager.setStatus(true, "Hello everyone");
 
-		String buddyJID = "testuser2";
-		String buddyName = "testuser2";
+		String buddyJID;
+		String buddyName;
+		if (isDefaultChat) {
+			buddyJID = "testuser2";
+			buddyName = "testuser2";
+		} else {
+			buddyJID = "sniper";
+			buddyName = "Sniper Bitch";
+		}
 		xmppManager.createEntry(buddyJID, buddyName);
 
 		if (isDefaultChat) {
