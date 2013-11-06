@@ -73,15 +73,24 @@ public class XmppTest {
 		 	isDefaultChat = false;
 		}
 		
+		String buddyJID;
+		String buddyName;
+		String message;
 		String username;
 		String password;
 		
 		if (isDefaultChat) {
-			username = "testuser1";
-			password = "testuser1pass";	
+			username  = "testuser1";
+			password  = "testuser1pass";	
+			buddyJID  = "testuser2@roco-3";
+			buddyName = "testuser2";
+			message   = "Hello, mate.";
 		} else {
-			username = "auction-item-54321";
-			password = "auction";
+			username  = "auction-item-54321";
+			password  = "auction";
+			buddyJID  = "sniper@roco-3";
+			buddyName = "Sniper Bitch";
+			message   = "Please give me an auction command...";
 		}
 
 		///XmppManager xmppManager = new XmppManager("myserver", 5222);
@@ -91,23 +100,10 @@ public class XmppTest {
 		xmppManager.performLogin(username, password);
 		xmppManager.setStatus(true, "Hello everyone");
 
-		String buddyJID;
-		String buddyName;
-		if (isDefaultChat) {
-			buddyJID = "testuser2";
-			buddyName = "testuser2";
-		} else {
-			buddyJID = "sniper";
-			buddyName = "Sniper Bitch";
-		}
 		xmppManager.createEntry(buddyJID, buddyName);
 
-		if (isDefaultChat) {
-			///xmppManager.sendMessage("Hello mate", "testuser2@myserver");
-			xmppManager.sendMessage("Hello mate", "testuser2@roco-3");
-		} else {
-			xmppManager.sendMessage("Hello mate", "sniper@roco-3");
-		}
+		xmppManager.sendMessage(message, buddyJID);
+
 		boolean isRunning = true;
 
 		while (isRunning) {
