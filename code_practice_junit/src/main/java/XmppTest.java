@@ -63,10 +63,24 @@ public class XmppTest {
 
 	public static void main(String[] args) throws Exception {
 
-		String username = "testuser1";
-		String password = "testuser1pass";
+		boolean isDefaultChat = true;
+		if (args.length == 1) {
+		 	isDefaultChat = false;
+		}
+		
+		String username;
+		String password;
+		
+		if (isDefaultChat) {
+			username = "testuser1";
+			password = "testuser1pass";	
+		} else {
+			username = "auction-item-54321";
+			password = "auction";
+		}
 
-		XmppManager xmppManager = new XmppManager("myserver", 5222);
+		///XmppManager xmppManager = new XmppManager("myserver", 5222);
+		XmppManager xmppManager = new XmppManager("roco-3", 5222);
 
 		xmppManager.init();
 		xmppManager.performLogin(username, password);
@@ -76,8 +90,12 @@ public class XmppTest {
 		String buddyName = "testuser2";
 		xmppManager.createEntry(buddyJID, buddyName);
 
-		xmppManager.sendMessage("Hello mate", "testuser2@myserver");
-
+		if (isDefaultChat) {
+			///xmppManager.sendMessage("Hello mate", "testuser2@myserver");
+			xmppManager.sendMessage("Hello mate", "testuser2@roco-3");
+		} else {
+			xmppManager.sendMessage("Hello mate", "sniper@roco-3");
+		}
 		boolean isRunning = true;
 
 		while (isRunning) {
