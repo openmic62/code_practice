@@ -75,25 +75,27 @@ public class XmppTest {
 		
 		String buddyJID;
 		String buddyName;
+		String hostname;
 		String message;
 		String username;
 		String password;
 		
+		hostname = java.net.InetAddress.getLocalHost().getHostName();
 		if (isDefaultChat) {
 			username  = "testuser1";
 			password  = "testuser1pass";	
-			buddyJID  = "testuser2@roco-3";
-			buddyName = "testuser2";
+			buddyJID  = "testuser2@" + hostname;
+			buddyName = "Test User 2";
 			message   = "Hello, mate.";
 		} else {
 			username  = "auction-item-54321";
 			password  = "auction";
-			buddyJID  = "sniper@roco-3";
+			buddyJID  = "sniper@" + hostname;
 			buddyName = "Sniper Bitch";
 			message   = "Please give me an auction command...";
 		}
-
-		XmppManager xmppManager = new XmppManager("roco-3", 5222);
+		
+		XmppManager xmppManager = new XmppManager(hostname, 5222);
 
 		xmppManager.init();
 		xmppManager.performLogin(username, password);

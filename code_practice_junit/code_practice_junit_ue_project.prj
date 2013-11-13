@@ -176,3 +176,4 @@ Create Tagfile=0
 >>>>>>> .r79
 [Files - Auction Sniper - xmpp]
 0=src\main\java\XmppManager.java
+1=src\main\java\XmppTest.java
