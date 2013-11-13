@@ -1,26 +1,26 @@
 [Open Files]
 Active File Display Mode=1
-Active File Index=4
+Active File Index=3
 Open File Line0=188
 Open File Line1=2418
 Open File Line2=521
-Open File Line3=2619
-Open File Line4=2152
+Open File Line3=2144
+Open File Line4=3390
 Open File Pos0=135
 Open File Pos1=2464
 Open File Pos2=1826
-Open File Pos3=162
-Open File Pos4=3275
-Open File Window Pos0=0,1,-1,-1,-1,-1,3,60,1166,724
-Open File Window Pos1=0,1,-1,-1,-1,-1,3,60,1166,724
-Open File Window Pos2=0,1,-1,-1,-1,-1,3,60,1166,724
-Open File Window Pos3=0,1,-1,-1,-1,-1,3,60,1166,724
-Open File Window Pos4=0,1,-1,-1,-1,-1,3,60,1166,724
+Open File Pos3=2327
+Open File Pos4=3051
+Open File Window Pos0=0,1,-1,-1,-1,-1,3,31,1327,724
+Open File Window Pos1=0,1,-1,-1,-1,-1,3,31,1327,724
+Open File Window Pos2=0,1,-1,-1,-1,-1,3,31,1327,724
+Open File Window Pos3=0,1,-1,-1,-1,-1,3,31,1327,724
+Open File Window Pos4=0,1,-1,-1,-1,-1,3,31,1327,724
 Open File0=.\src\test\java\AuctionSniperEndToEndTests.java
 Open File1=.\src\main\java\FakeAuctionServer.java
 Open File2=.\src\test\java\FakeAuctionServerTests.java
 Open File3=.\src\main\java\XmppManager.java
-Open File4=H:\student\code_practice_junit\src\main\java\XmppTest.java
+Open File4=.\src\main\java\XmppTest.java
 Open File5=
 Remember Files=1
 
