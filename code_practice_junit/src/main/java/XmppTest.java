@@ -2,8 +2,8 @@
  * http://www.javacodegeeks.com/2010/09/xmpp-im-with-smack-for-java.html
  *
  * How to build a test API for my application - Example
- * <u>Growing Object-Oriented Software, Guided by Tests<br>
- *    Part III: A Worked Example<br></u>
+ * <u>Growing Object-Oriented Software, Guided by Tests</u><br>
+ *    Part III: A Worked Example<br>
  * 		Ch. 11 Passing the First Test<br>
  *    The Fake Auction<br>
  *    p. 93b - 94a

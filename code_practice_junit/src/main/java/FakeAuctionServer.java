@@ -6,6 +6,7 @@ import org.jivesoftware.smack.ChatManager;
 import org.jivesoftware.smack.ChatManagerListener;
 import org.jivesoftware.smack.ConnectionConfiguration;
 import org.jivesoftware.smack.MessageListener;
+import org.jivesoftware.smack.SmackConfiguration;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Message;
@@ -17,18 +18,34 @@ public class FakeAuctionServer {
 	public static final String XMPP_HOSTNAME = "localhost";
 	private static final String AUCTION_PASSWORD = "auction";
 	
-	public static final String BUYER_ID = "Sniper";
+	public static final String BUYER_ID = "sniper@roco-3";
 
 	private final String itemID;
 	private XMPPConnection connection;
 	private Chat currentChat;
 	
+	private final SingleMessageListener messageListener = new SingleMessageListener();
+	
+	public class SingleMessageListener implements MessageListener {
+		@Override
+    public void processMessage(Chat currentChat, Message message) {
+    	/*
+      String messageBody = message.getBody().toString();
+      String command = getSniperCommandFromMessage(messageBody);
+      isJoinCommand = command.equals("JOIN") ? true : false;
+      */
+    }
+    
+    public void receivesAMessage() {}
+  }
+  	
 	private boolean isJoinCommand;
 	
 	FakeAuctionServer(String item) {
 		this.itemID = item;
 		this.connection = new XMPPConnection(
 			new ConnectionConfiguration(XMPP_HOSTNAME,5222,AUCTION_RESOURCE));
+		SmackConfiguration.setLocalSocks5ProxyEnabled(false);
 	}
 	
 	public void startSellingItem() throws XMPPException{
@@ -39,6 +56,7 @@ public class FakeAuctionServer {
 			new ChatManagerListener() {
 				public void chatCreated(Chat chat, boolean createdLocally) {
 					currentChat = chat;
+					chat.addMessageListener(messageListener);
 				}
 			});
 	}
@@ -47,18 +65,8 @@ public class FakeAuctionServer {
 		return this.itemID;
 	}
 	
-	public boolean hasReceivedJoinRequestFromSniper() {
-		isJoinCommand = false;
-		connection.getChatManager().createChat(BUYER_ID, 
-			new MessageListener() {
-				public void processMessage(Chat currentChat, Message message) {
-					String messageBody = message.getBody().toString();
-					String command = getSniperCommandFromMessage(messageBody);
-					isJoinCommand = command.equals("JOIN") ? true : false;
-				}
-			}
-		);
-		return isJoinCommand;
+	public void hasReceivedJoinRequestFromSniper() {
+		messageListener.receivesAMessage();
 	}
 	
 	String getSniperCommandFromMessage(String message) {
@@ -91,6 +99,7 @@ public class FakeAuctionServer {
 
 	public void announceClosed() throws XMPPException {
 		currentChat.sendMessage("Auction closed");
+		//currentChat.sendMessage(new Message());
 	}
 	
 	public void stop() {
