@@ -1,20 +1,22 @@
 /**
-
-* Part III - A Worked Example
-* <u>Growing Object Oriented Software, Guided by Tests</u>
-* Chapter 11: Passing the First Test
-*
-* FakeAuctionServer is a substitute server that allows this test [AuctionSniperEndToEndTests]
-* to check how the Auction Sniper [the app we are developing for our customer]
-* interacts with an auction using XMPP messages. FakeAuctionServer has three responsibilities:
-* 1) it must connect to the XMPP broker [Openfire] and accept a request to
-*    join the chat from the Sniper;
-* 2) it must receive chat messages from the Sniper or fail if no message
-*    arrives within some timeout;
-* 3) it must allow the test to send messages back to the Sniper as specified by
-*    Southabee's On-Line.
-* 
-* p. 92a
+ *
+ * How to build a test API for my application - Example
+ * <u>Growing Object-Oriented Software, Guided by Tests</u><br>
+ *    Part III: A Worked Example<br>
+ * 		Ch. 11 Passing the First Test<br>
+ *    The Fake Auction<br>
+ *    p. 92a
+ *
+ * FakeAuctionServer is a substitute server that allows this test [AuctionSniperEndToEndTests]
+ * to check how the Auction Sniper [the app we are developing for our customer]
+ * interacts with an auction using XMPP messages. FakeAuctionServer has three responsibilities:
+ * 1) it must connect to the XMPP broker [Openfire] and accept a request to
+ *    join the chat from the Sniper;
+ * 2) it must receive chat messages from the Sniper or fail if no message
+ *    arrives within some timeout;
+ * 3) it must allow the test to send messages back to the Sniper as specified by
+ *    Southabee's On-Line.
+ * 
 
  -------------------------------------------------------------------------------
 
