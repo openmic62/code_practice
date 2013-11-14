@@ -11,9 +11,6 @@ public class Main {
 			SwingUtilities.invokeAndWait(new Runnable() {
 				public void run() {
 					MainWindow mw = new MainWindow();
-					mw.setGui();
-					mw.pack();
-					mw.setVisible(true);
 				}
 			});
 		} catch (Exception e) {
