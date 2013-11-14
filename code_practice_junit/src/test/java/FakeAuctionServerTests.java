@@ -40,7 +40,7 @@
  ***** Abstract the ENV
  H:\> copy and paste the following lines straight onto the command line
  
- set CLASSPATH=lib\Smack.jar;lib\Smackx.jar;lib\Smackx-debug.jar;lib\junit-4.11.jar;lib\hamcrest-core-1.3.jar;lib\JUnitParams-1.0.3-SNAPSHOT.jar
+ set CLASSPATH=lib\Smack.jar;lib\Smackx.jar;lib\Smackx-debug.jar;lib\junit-4.11.jar;lib\hamcrest-all-1.3.jar;lib\JUnitParams-1.0.3-SNAPSHOT.jar
  set SC=target\classes
  set TC=target\test-classes
  set SD=src\main\java
@@ -54,18 +54,18 @@
  H:\student\code_practice_junit>echo %FAS_FILES%
  H:\student\code_practice_junit>javac -cp %CLASSPATH%;%SC% -d %SC% %SD%\%FAS_FILES%
 
- ***** build the Tests AuctionSniperEndToEndTests
- H:\student\code_practice_junit>javac -cp %CLASSPATH%;%SC%;%TC% -d %TC% %TD%\AuctionSniperEndToEndTests.java
+ ***** build the Tests FakeAuctionServerTests
+ H:\student\code_practice_junit>javac -cp %CLASSPATH%;%SC%;%TC% -d %TC% %TD%\FakeAuctionServerTests.java
  
  ***** run the Tests (command line Java)
- H:\student\code_practice_junit>java  -cp %CLASSPATH%;%SC%;%TC% org.junit.runner.JUnitCore AuctionSniperEndToEndTests
+ H:\student\code_practice_junit>java  -cp %CLASSPATH%;%SC%;%TC% org.junit.runner.JUnitCore FakeAuctionServerTests
  
  ***** run the Tests (command line Ant)
  H:\student\code_practice_junit>ant clean_all
- H:\student\code_practice_junit>ant compile runtest -DtestClass=AuctionSniperEndToEndTests
+ H:\student\code_practice_junit>ant compile runtest -DtestClass=FakeAuctionServerTests
 
  ***** run the Tests (command line Maven)
- H:\student\code_practice_junit>mvn test -Dtest=AuctionSniperEndToEndTests
+ H:\student\code_practice_junit>mvn test -Dtest=FakeAuctionServerTests
  */ 
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;

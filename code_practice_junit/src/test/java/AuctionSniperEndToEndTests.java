@@ -38,7 +38,7 @@
  ***** Abstract the ENV
  H:\> copy and paste the following lines straight onto the command line
  
- set CLASSPATH=lib\Smack.jar;lib\Smackx.jar;lib\Smackx-debug.jar;lib\junit-4.11.jar;lib\hamcrest-core-1.3.jar
+ set CLASSPATH=lib\Smack.jar;lib\Smackx.jar;lib\Smackx-debug.jar;lib\junit-4.11.jar;lib\hamcrest-all-1.3.jar
  set SC=target\classes
  set TC=target\test-classes
  set SD=src\main\java
@@ -86,7 +86,7 @@ public class AuctionSniperEndToEndTests {
 		auction.startSellingItem();                    // step 1
 		//application.startBiddingIn(auction);           // step 2
 		boolean result = true;
-		//auction.hasReceivedJoinRequestFromSniper();    // step 3
+		auction.hasReceivedJoinRequestFromSniper();    // step 3
 		//assertTrue(result);
 		assertTrue("auction.hasReceivedJoinRequestFromSniper() -> test failed", result);
 		
