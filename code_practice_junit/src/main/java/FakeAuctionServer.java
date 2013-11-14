@@ -1,5 +1,10 @@
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.ChatManager;
@@ -21,25 +26,12 @@ public class FakeAuctionServer {
 	public static final String BUYER_ID = "sniper@roco-3";
 
 	private final String itemID;
-	private XMPPConnection connection;
+	private final XMPPConnection connection;
 	private Chat currentChat;
 	
 	private final SingleMessageListener messageListener = new SingleMessageListener();
-	
-	public class SingleMessageListener implements MessageListener {
-		@Override
-    public void processMessage(Chat currentChat, Message message) {
-    	/*
-      String messageBody = message.getBody().toString();
-      String command = getSniperCommandFromMessage(messageBody);
-      isJoinCommand = command.equals("JOIN") ? true : false;
-      */
-    }
-    
-    public void receivesAMessage() {}
-  }
   	
-	private boolean isJoinCommand;
+	private boolean isJoinCommand; // this is mine, not the book's
 	
 	FakeAuctionServer(String item) {
 		this.itemID = item;
@@ -54,6 +46,7 @@ public class FakeAuctionServer {
 		                 AUCTION_PASSWORD, AUCTION_RESOURCE);
 		connection.getChatManager().addChatListener(
 			new ChatManagerListener() {
+				@Override
 				public void chatCreated(Chat chat, boolean createdLocally) {
 					currentChat = chat;
 					chat.addMessageListener(messageListener);
@@ -65,11 +58,39 @@ public class FakeAuctionServer {
 		return this.itemID;
 	}
 	
-	public void hasReceivedJoinRequestFromSniper() {
+	public void hasReceivedJoinRequestFromSniper() throws InterruptedException {
 		messageListener.receivesAMessage();
 	}
 	
-	String getSniperCommandFromMessage(String message) {
+	public void announceClosed() throws XMPPException {
+		currentChat.sendMessage(new Message());
+	}
+	
+	public void stop() {
+		connection.disconnect();
+	}
+	
+	public class SingleMessageListener implements MessageListener {
+		private final ArrayBlockingQueue<Message> messages =
+			        new ArrayBlockingQueue<Message>(1);
+		
+		@Override
+    public void processMessage(Chat currentChat, Message message) {
+    	messages.add(message);
+    	/* <mlr 131113: begin - this is my stuff, not the book's> *
+      String messageBody = message.getBody().toString();
+      String command = getSniperCommandFromMessage(messageBody);
+      isJoinCommand = command.equals("JOIN") ? true : false;
+      *<mlr 131113: end - this is my stuff, not the book's> */
+    }
+    
+    public void receivesAMessage() throws InterruptedException {
+    	assertThat("Message", messages.poll(5, TimeUnit.SECONDS), is(notNullValue()));
+    }
+  }
+  
+  /* <mlr 131113: begin - this is my stuff, not the book's> */
+  String getSniperCommandFromMessage(String message) {
 		// example message-->SQLVersion: 1.1; Command: JOIN;<--
 		
 		final String ON_SEMICOLON_DELIMITER = ";";
@@ -96,13 +117,6 @@ public class FakeAuctionServer {
 		return returnValue;
 		///return "Just a plain Jane string, dear.";
 	}
+  /* <mlr 131113: end - this is my stuff, not the book's> */
 
-	public void announceClosed() throws XMPPException {
-		currentChat.sendMessage("Auction closed");
-		//currentChat.sendMessage(new Message());
-	}
-	
-	public void stop() {
-		connection.disconnect();
-	}
 }
