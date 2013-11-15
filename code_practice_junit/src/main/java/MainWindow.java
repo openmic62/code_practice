@@ -1,19 +1,22 @@
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
+import javax.swing.border.LineBorder;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class MainWindow extends JFrame {
 	
 	public static final String MAIN_WINDOW_NAME = "Auction Sniper Main";
+	private final JLabel sniperStatus = createLabel(Main.SNIPER_STATUS_NAME, Main.STATUS_JOINING);
 	
 	MainWindow() {
 		super(MAIN_WINDOW_NAME);
 		setName(MAIN_WINDOW_NAME);
-		this.configGui();
-		this.addLabel(Main.SNIPER_STATUS_NAME, Main.STATUS_JOINING);
-		this.pack();
-		this.setVisible(true);
+		configGui();
+		add(sniperStatus);
+		pack();
+		setVisible(true);
 	}
 	
  	void configGui() {
@@ -26,10 +29,11 @@ public class MainWindow extends JFrame {
  		}
  	}
  	
- 	void addLabel(String labelName, String labelText) {
+ 	private JLabel createLabel(String labelName, String labelText) {
  		Container cp = getContentPane();
  		JLabel label = new JLabel(labelText);
  		label.setName(labelName);
- 		cp.add(label);
+ 		label.setBorder(new LineBorder(Color.BLACK));
+ 		return label;
  	}
 }
