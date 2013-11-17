@@ -290,16 +290,16 @@
 	<!-- <mlr 131010: end - add capability to run specific tests during development -->
 	
 	<!-- <mlr 131117: begin - add capability to run Perl script that starts Openfire -->
-	<!-- Usage: ant run_perl_openfirectl
-	            ant run_perl_openfirectl -DperlVerbose=""
-	            ant run_perl_openfirectl -Dcommand=kill
-	            ant run_perl_openfirectl -DperlDebug=args_kill
-	            ant run_perl_openfirectl -DperlDebug=args_kill -Dcommand=kill
+	<!-- Usage: ant run-perl-openfirectl
+	            ant run-perl-openfirectl -DperlVerbose=""
+	            ant run-perl-openfirectl -Dcommand=kill
+	            ant run-perl-openfirectl -DperlDebug=args_kill
+	            ant run-perl-openfirectl -DperlDebug=args_kill -Dcommand=kill
 	-->
 	<property name="command" value="start"/>
 	<property name="perlDebug" value=""/>
 	<property name="perlVerbose" value="-v"/>
-	<target name="run_perl_openfirectl"
+	<target name="run-perl-openfirectl"
 		description="Runs the Perl script openfirectl.pl that starts the Openfire server">
 		<exec executable="perl" dir="${basedir}">
 			<arg value="${scriptsTest.dir}/openfirectl.pl"/>
