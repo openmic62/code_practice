@@ -33,12 +33,15 @@
  PATH = (system) PATH + (user) PATH - in that specific order
  
  -------------------------------------------------------------------------------
-   
+ 
  C:\Users\michaelr>h:
  ***** Abstract the ENV
  H:\> copy and paste the following lines straight onto the command line
+      NOTE: 131117 - SIH is short for SYSINTERNALS_HOME 
+                     (usually =C:\Users\Mike\Downloads\SysinternalsSuite in system ENV)
  
  set CLASSPATH=lib\Smack.jar;lib\Smackx.jar;lib\Smackx-debug.jar;lib\junit-4.11.jar;lib\hamcrest-all-1.3.jar
+ set SIH=src\test\scripts\SysinternalsSuite_131101
  set SC=target\classes
  set TC=target\test-classes
  set SD=src\main\java
