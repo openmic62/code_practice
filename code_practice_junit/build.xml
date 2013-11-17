@@ -1,5 +1,7 @@
 <project name="ArtOfUnitTesting" basedir="." default="main"
-	       xmlns:artifact="antlib:org.apache.maven.artifact.ant">
+	       xmlns:artifact="antlib:org.apache.maven.artifact.ant"
+	       xmlns:if="ant:if"
+	       xmlns:unless="ant:unless">
 	<!-- <mlr 131009: begin - sandbox for getting up to speed.> -->
 	<description>
 		Project Name: ${ant.project.name}
@@ -7,6 +9,12 @@
 		I wrote while studying the book
 		The Art of Unit Testing.
 	</description>
+
+	<!-- <mlr 131117: begin - add capability to run Perl script that starts Openfire -->
+	<!-- <mlr 131117: begin - add this for ant-contrib tasks> -->
+	<taskdef resource="net/sf/antcontrib/antlib.xml"/>
+	<!-- <mlr 131117: end - add this for ant-contrib tasks> -->
+	<!-- <mlr 131117: end - add capability to run Perl script that starts Openfire -->
 
 	<!-- set global properties for this build -->
 	<property name="src1" location="src1"/>
@@ -271,6 +279,19 @@
 	<target name="runtest"
 		description="Runs the test you specify on the command line with -DtestClass="
 		depends="compileRT,ensure-test-name">
+		<!-- <mlr 131117: begin - add capability to run Perl script that starts Openfire -->
+		<if>
+			<contains string="${testClass}" substring="EndToEndTests"/>
+			<then>
+				<antcall target="run-perl-openfirectl"/>
+				<sleep seconds="4"/>
+			</then>
+			<else>
+				<echo>Unit/Integration Test: ${testClass}</echo>
+			</else>
+		</if>
+		<!-- <mlr 131117: end - add capability to run Perl script that starts Openfire -->
+			           
 		<junit printsummary="withOutAndErr" fork="yes">
 			<!--<sysproperty key="tests" value="${tests}"/>-->
 			<classpath>
