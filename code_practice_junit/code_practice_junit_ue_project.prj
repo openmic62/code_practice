@@ -16,6 +16,7 @@ Create Tagfile=0
 3=src\test\java\path_01_system.txt
 4=src\test\java\path_02_user.txt
 5=src\test\java\path_03_env.txt
+6=src\test\scripts\openfirectl.pl
 [Group]
 0=ch02_a_first_unit_test
 1=ch02_a_first_unit_test - src
@@ -49,6 +50,7 @@ Create Tagfile=0
 29=Auction Sniper - test - unit
 30=Auction Sniper - WindowLicker
 31=Auction Sniper - xmpp
+32=Auction Sniper - test - scripts
 [Files - ch02_a_first_unit_test - src]
 0=src\main\java\LogAnalyzer.java
 1=src\main\java\MemCalculator.java
@@ -179,3 +181,6 @@ Create Tagfile=0
 [Files - Auction Sniper - xmpp]
 0=src\main\java\XmppManager.java
 1=src\main\java\XmppTest.java
+[Files - Auction Sniper - test - scripts]
+0=src\test\scripts\openfirectl.pl
+1=src\test\scripts\keywords.pl
