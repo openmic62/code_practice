@@ -118,7 +118,7 @@ if ($PSLIST_RESULT ne "" && $PSLIST_RESULT =~ /process openfire was not found/) 
 
 	exec("$OFH\\openfire.exe");	
 } else {
-	print "Openfire is already runing\n" if $opt_v ; ## print if verbose flag set
+	print "Openfire is already running\n" if $opt_v ; ## print if verbose flag set
 	my @pids = parsePIDs($PSLIST_RESULT);
 	# print debug info
 	print Data::Dumper->Dump( [$PSLIST_RESULT], [qw(PSLIST_RESULT)] ) if $opt_d =~ /kill/;

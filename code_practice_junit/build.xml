@@ -105,6 +105,7 @@
 	<property name="lib.dir" value="lib"/>
 	<property name="report.dir"  value="${build.dir}/test-reports"/>
 	<property name="reportUT.dir"  value="${report.dir}/junitreport"/>
+	<property name="scriptsTest.dir" value="src/test/scripts"/>
 
 	<property name="main-class" value="ADayInTheLife"/>
 	<property name="app.jar" value="${jar.dir}/${ant.project.name}.jar"/>
@@ -287,4 +288,25 @@
 		</junit>
 	</target>
 	<!-- <mlr 131010: end - add capability to run specific tests during development -->
+	
+	<!-- <mlr 131117: begin - add capability to run Perl script that starts Openfire -->
+	<!-- Usage: ant run_perl_openfirectl
+	            ant run_perl_openfirectl -DperlVerbose=""
+	            ant run_perl_openfirectl -Dcommand=kill
+	            ant run_perl_openfirectl -DperlDebug=args_kill
+	            ant run_perl_openfirectl -DperlDebug=args_kill -Dcommand=kill
+	-->
+	<property name="command" value="start"/>
+	<property name="perlDebug" value=""/>
+	<property name="perlVerbose" value="-v"/>
+	<target name="run_perl_openfirectl"
+		description="Runs the Perl script openfirectl.pl that starts the Openfire server">
+		<exec executable="perl" dir="${basedir}">
+			<arg value="${scriptsTest.dir}/openfirectl.pl"/>
+			<arg value="${perlVerbose}"/>
+			<arg value="-d ${perlDebug}"/>
+			<arg value="command=${command}"/>
+		</exec>
+	</target>
+	<!-- <mlr 131117: end - add capability to run Perl script that starts Openfire -->
 </project>
