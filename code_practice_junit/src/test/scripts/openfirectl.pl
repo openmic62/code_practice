@@ -113,10 +113,11 @@ if (hostname eq "roco-3") {
 # check if openfire is running
 $PSLIST_RESULT = `$PSLIST_CMD`;
 if ($PSLIST_RESULT ne "" && $PSLIST_RESULT =~ /process openfire was not found/) {
-	print "Starting Openfire\n" if $opt_v; ## print if verbose flag set
 	die "Use command=kill only when Openfire is already running." if ($opt_v && $G{'command'} eq 'kill');
-
-	exec("$OFH\\openfire.exe");	
+	my $sleep_duration = 5;
+	print "Starting Openfire ... this will take about $sleep_duration seconds ...\n" if $opt_v; ## print if verbose flag set
+	system("start $OFH\\openfire.exe");
+	sleep $sleep_duration;
 } else {
 	print "Openfire is already running\n" if $opt_v ; ## print if verbose flag set
 	my @pids = parsePIDs($PSLIST_RESULT);
