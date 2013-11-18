@@ -284,7 +284,6 @@
 			<contains string="${testClass}" substring="EndToEndTests"/>
 			<then>
 				<antcall target="run-perl-openfirectl"/>
-				<sleep seconds="4"/>
 			</then>
 			<else>
 				<echo>Unit/Integration Test: ${testClass}</echo>
