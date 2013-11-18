@@ -62,6 +62,29 @@
 	<!-- Build Settings -->
 	<build>
 		<plugins>
+			<!-- <mlr 131117: begin - add capability to run Perl script that starts Openfire -->
+			<!-- http://stackoverflow.com/questions/3970753/how-to-run-an-ant-target-from-maven2 
+			     mvn antrun:run
+			     mvn antrun:run -Dcommand=kill
+			-->
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+						<id>default-cli</id>
+						<configuration>
+							<tasks>
+								<ant target="run-perl-openfirectl"  inheritRefs="true"/>
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- <mlr 131117: end - add capability to run Perl script that starts Openfire -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>

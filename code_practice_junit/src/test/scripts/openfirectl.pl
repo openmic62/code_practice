@@ -64,9 +64,6 @@ usage: $0 -h | [-d <debug_flag>] <field_name=field_value> [<field_name1=field_va
          To get this help page:
            ./openfirectl.pl -h
 
-         To make a connection to a database \"test\" and a host \"127.0.0.1\"
-           ./openfirectl.pl -e xxxx db=test host=127.0.0.1
-           
          Valid field=value pairs
            command    = <for_openfire_control>       e.g. defaults to 'start'
                                                           'start' means invoke openfire.exe unless it's already running
