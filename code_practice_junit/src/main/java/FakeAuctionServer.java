@@ -63,7 +63,8 @@ public class FakeAuctionServer {
 	}
 	
 	public void announceClosed() throws XMPPException {
-		currentChat.sendMessage(new Message());
+		//currentChat.sendMessage(new Message());
+		currentChat.sendMessage("Hello, bitches!");
 	}
 	
 	public void stop() {

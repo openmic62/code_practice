@@ -22,19 +22,21 @@ public class Main {
 	private ConnectionConfiguration config;
 	private XMPPConnection connection;
 
-	public Main() throws XMPPException, Exception {
+	public Main(String[] args) throws XMPPException, Exception {
+		String username = args[0];
+		String password = args[1];
 		hostname = java.net.InetAddress.getLocalHost().getHostName();
 		startUserInterface();
 		config = createConnectionConfiguration(hostname, port);
 		connection = createConnection(config);
 		connection.connect();
-		performLogin("sniper", "sniper");
+		performLogin(username, password);
 		chatManager = connection.getChatManager();
 		sendMessage("JOIN", "auction-item-54321@" + hostname, new SniperMessageListener());
 	}
 
 	public static void main(String[] args) throws XMPPException, Exception {
-		Main main = new Main();
+		Main main = new Main(args);
 	}
 
 	private void startUserInterface() {
@@ -74,6 +76,7 @@ public class Main {
 	class SniperMessageListener implements MessageListener {
 		@Override
 		public void processMessage(Chat chat, Message message) {
+			ui.setSniperStatusText(STATUS_LOST);
 		}
 	}
 }
