@@ -66,7 +66,7 @@
  H:\student\code_practice_junit>ant compile runtest -DtestClass=AuctionSniperEndToEndTests
 
  ***** run the Tests (command line Maven)
- H:\student\code_practice_junit>mvn test -Dtest=AuctionSniperEndToEndTests
+ H:\student\code_practice_junit>mvn antrun:run test -Dtest=AuctionSniperEndToEndTests
  */ 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

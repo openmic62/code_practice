@@ -52,6 +52,8 @@ public class Main {
 		  		});
 		  	}
 		  });
+		this.notToBeGCd = chat;  
+		
 		chat.sendMessage(new Message());
 	}
 	
@@ -66,7 +68,7 @@ public class Main {
 		return connection;
 	}
 	
-	private static String auctionId(String itemId, XMPPConnection connection) {
+	private String auctionId(String itemId, XMPPConnection connection) {
 		return String.format(AUCTION_ID_FORMAT, itemId,
 		                     connection.getServiceName());
 	}
