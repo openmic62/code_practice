@@ -7,7 +7,7 @@ public class ApplicationRunner {
 	public void startBiddingIn(FakeAuctionServer auction) {
 		Thread thread = new Thread("Test Application") {
 			@Override public void run() {
-				final String[] mainArgs = {SNIPER_ID, SNIPER_PASSWORD};
+				final String[] mainArgs = {"localhost", SNIPER_ID, SNIPER_PASSWORD, "item-54321"};
 				try {
 					Main.main(mainArgs);
 				} catch (Exception e) {
