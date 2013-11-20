@@ -54,7 +54,8 @@
  H:\student\code_practice_junit>set FAS_FILES=FakeAuctionServer.java
  H:\student\code_practice_junit>echo %FAS_FILES%
  H:\student\code_practice_junit>javac -cp %CLASSPATH%;%SC% -d %SC% %SD%\%FAS_FILES%
-
+                                javac -cp %CLASSPATH%;%SC% -d %SC% %SD%\Main.java
+                                
  ***** build the Tests AuctionSniperEndToEndTests
  H:\student\code_practice_junit>javac -cp %CLASSPATH%;%SC%;%TC% -d %TC% %TD%\AuctionSniperEndToEndTests.java
  

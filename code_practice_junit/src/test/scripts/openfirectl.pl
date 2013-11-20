@@ -43,6 +43,7 @@ my $SIH = 'src\test\scripts\SysinternalsSuite_131101';
 # avoids install location problems between work ("vi-1057") and home ("roco-3") laptops
 # The main problem is the hostname Openfire uses differs from one to other laptop.
 my $OFH;
+my $SLEEP_DURATION = 5; # This script sleeps to give the Openfire server time to initialize
 
 
 # create some Sysinternals commands
@@ -104,17 +105,18 @@ print Data::Dumper->Dump( [\%G], [qw(command_line_args)] ) if $opt_d =~ /args/;
 # set the Openfire server executable location base on the host
 if (hostname eq "roco-3") {
 	$OFH = 'lib\openfire_3_8_2\bin';
+	$SLEEP_DURATION *= 1;
 } else {
 	$OFH = 'c:\dev\openfire_3_8_2\bin';
+	$SLEEP_DURATION *= 2;
 }
 # check if openfire is running
 $PSLIST_RESULT = `$PSLIST_CMD`;
 if ($PSLIST_RESULT ne "" && $PSLIST_RESULT =~ /process openfire was not found/) {
 	die "Use command=kill only when Openfire is already running." if ($opt_v && $G{'command'} eq 'kill');
-	my $sleep_duration = 5;
-	print "Starting Openfire ... this will take about $sleep_duration seconds ...\n" if $opt_v; ## print if verbose flag set
+	print "Starting Openfire ... this will take about $SLEEP_DURATION seconds ...\n" if $opt_v; ## print if verbose flag set
 	system("start $OFH\\openfire.exe");
-	sleep $sleep_duration;
+	sleep $SLEEP_DURATION;
 } else {
 	print "Openfire is already running\n" if $opt_v ; ## print if verbose flag set
 	my @pids = parsePIDs($PSLIST_RESULT);
