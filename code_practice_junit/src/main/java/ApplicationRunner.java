@@ -21,6 +21,9 @@ public class ApplicationRunner {
 		driver.showSniperStatus(Main.STATUS_JOINING);
 	}
 	
+	public void receivesPrice() {}
+	public void sendsHigherBid() {}
+	
 	public void showsSniperHasLostAuction() {
 		driver.showSniperStatus(Main.STATUS_LOST);
 	}
