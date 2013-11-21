@@ -74,6 +74,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -82,8 +83,8 @@ import org.junit.runners.JUnit4;
 @RunWith(JUnit4.class)
 public class AuctionSniperEndToEndTests {
 	
-	private final FakeAuctionServer auction = new FakeAuctionServer("item-54321");
-	private final ApplicationRunner application = new ApplicationRunner();
+	private  FakeAuctionServer auction;
+	private  ApplicationRunner application;
 	
 	@Test
 	public void sniperJoinsAuctionUntilAuctionCloses() throws Exception {        
@@ -92,6 +93,22 @@ public class AuctionSniperEndToEndTests {
 		auction.hasReceivedJoinRequestFromSniper();    // step 3
 		auction.announceClosed();                      // step 4
 		application.showsSniperHasLostAuction();       // step 5
+	}
+	
+	@Test
+	public void sniperJoinsAuctionBidsThenLoses() throws Exception {
+		auction.startSellingItem();
+		application.receivesPrice();
+		application.sendsHigherBid();
+		auction.announceClosed();
+		application.showsSniperHasLostAuction();
+	}
+
+	// test setup
+	@Before
+	public void createFixture() {
+		auction = new FakeAuctionServer("item-54321");
+		application = new ApplicationRunner();
 	}
 	
 	// clean up
