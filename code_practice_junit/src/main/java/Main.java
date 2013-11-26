@@ -22,6 +22,7 @@ public class Main {
 	public static final String AUCTION_ID_FORMAT = ITEM_ID_AS_LOGIN + "@%S/" + AUCTION_RESOURCE;
 
 	public static final String SNIPER_STATUS_NAME = "status";
+	public static final String STATUS_BIDDING = "Bidding in auction";
 	public static final String STATUS_JOINING = "Joining auction";
 	public static final String STATUS_LOST = "Lost auction";
 	
@@ -44,6 +45,7 @@ public class Main {
 		  new MessageListener() {
 		  	@Override
 		  	public void processMessage(Chat aChat, Message message) {
+		  		System.out.println("Main: message received -->" + message.getBody() + "<--");
 		  		SwingUtilities.invokeLater(new Runnable() {
 		  			@Override
 		  			public void run() {

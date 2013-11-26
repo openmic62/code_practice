@@ -4,7 +4,9 @@ public class ApplicationRunner {
 	static final String SNIPER_PASSWORD = "sniper";
 	private AuctionSniperDriver driver;
 	
+	// <mlr 131126: begin - p. 105, single item: join, bid, and lose>
 	public static final String SNIPER_XMPP_ID = "xxx";
+	// <mlr 131126: end - p. 105, single item: join, bid, and lose>
 	
 	public void startBiddingIn(FakeAuctionServer auction) {
 		Thread thread = new Thread("Test Application") {
@@ -24,9 +26,9 @@ public class ApplicationRunner {
 	}
 	
 	// <mlr 131126: begin - p. 105, single item: join, bid, and lose>
-	// <mlr 131126: end - p. 105, single item: join, bid, and lose>
-	// <mlr 131126: begin - p. 105, single item: join, bid, and lose>
-	public void hasShownSniperIsBidding(){}
+	public void hasShownSniperIsBidding(){
+		driver.showSniperStatus(Main.STATUS_BIDDING);
+	}
 	// <mlr 131126: end - p. 105, single item: join, bid, and lose>
 	
 	public void showsSniperHasLostAuction() {
