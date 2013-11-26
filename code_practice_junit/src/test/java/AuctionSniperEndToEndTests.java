@@ -41,6 +41,8 @@
                      (usually =C:\Users\Mike\Downloads\SysinternalsSuite in system ENV)
  
  set CLASSPATH=lib\Smack.jar;lib\Smackx.jar;lib\Smackx-debug.jar;lib\junit-4.11.jar;lib\hamcrest-all-1.3.jar
+ set WL=lib\windowlicker-core-DEV.jar;lib\windowlicker-swing-DEV.jar
+ set CLASSPATH=%WL%;%CLASSPATH%
  set SIH=src\test\scripts\SysinternalsSuite_131101
  set SC=target\classes
  set TC=target\test-classes
@@ -83,8 +85,8 @@ import org.junit.runners.JUnit4;
 @RunWith(JUnit4.class)
 public class AuctionSniperEndToEndTests {
 	
-	private  FakeAuctionServer auction;
-	private  ApplicationRunner application;
+	private  FakeAuctionServer auction = new FakeAuctionServer("item-54321");
+	private  ApplicationRunner application = new ApplicationRunner();
 	
 	@Test
 	public void sniperJoinsAuctionUntilAuctionCloses() throws Exception {        
@@ -94,31 +96,52 @@ public class AuctionSniperEndToEndTests {
 		auction.announceClosed();                      // step 4
 		application.showsSniperHasLostAuction();       // step 5
 	}
-	
+
 	@Test
-	public void sniperJoinsAuctionBidsThenLoses() throws Exception {
+	public void sniperMakesHigherBidButLoses() throws Exception {
 		auction.startSellingItem();
-		application.receivesPrice();
-		application.sendsHigherBid();
+		application.startBiddingIn(auction);       
+		auction.hasReceivedJoinRequestFromSniper();
+		
+		// 1st features after walking skeleton
+		/* 1) Tell the auction to send a price to the Sniper
+		   2) Check the Sniper has received and responded to the price
+		   3) Check the auction has received an incremented bid from the Sniper
+		*/
+		auction.sendPriceToSniper(1000);
+		application.receivesPriceAndResponds();
+		auction.receivesBidFromSniper();
+		
 		auction.announceClosed();
 		application.showsSniperHasLostAuction();
 	}
 
-	// test setup
+	// setup test fixture
 	@Before
-	public void createFixture() {
-		auction = new FakeAuctionServer("item-54321");
-		application = new ApplicationRunner();
+	public void setUpFixture() {
+		//System.out.println("Setup fixture...");
 	}
-	
+
 	// clean up
 	@After
 	public void stopAuction() {
+		//System.out.println("Stop auction ...");
 		auction.stop();
 	}
 	
 	@After
 	public void stopApplication() {
+		//System.out.println("Stop Sniper ...");
 		application.stop();
 	}
+	
+	private void sleep(int sleepDuration) {
+		try {
+			Thread.sleep(sleepDuration * 1000);
+		} catch(InterruptedException ex) {
+			Thread.currentThread().interrupt();
+		}
+	}
+	
+
 }

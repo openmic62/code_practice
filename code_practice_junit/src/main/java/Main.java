@@ -32,8 +32,8 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		Main main = new Main();
 		main.joinAuction(
-		 main.connection(args[ARG_HOSTNAME], args[ARG_USERNAME], args[ARG_PASSWORD]),
-		 args[ARG_ITEM_ID]);
+		  main.connection(args[ARG_HOSTNAME], args[ARG_USERNAME], args[ARG_PASSWORD]),
+		  args[ARG_ITEM_ID]);
 	}
 	
 	private void joinAuction(XMPPConnection connection, String itemId) 
