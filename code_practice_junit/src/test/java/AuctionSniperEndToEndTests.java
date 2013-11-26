@@ -108,10 +108,10 @@ public class AuctionSniperEndToEndTests {
 		   2) Check the Sniper has received and responded to the price
 		   3) Check the auction has received an incremented bid from the Sniper
 		*/
-		// here's my code
+		/* here's my code
 		auction.sendPriceToSniper(1000);
 		application.receivesPriceAndResponds();
-		auction.receivesBidFromSniper();
+		auction.receivesBidFromSniper(); */
 		
 		// here's the book's code
 		auction.reportPrice(1000, 98, "other bidder");
