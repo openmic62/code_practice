@@ -62,6 +62,11 @@ public class FakeAuctionServer {
 		messageListener.receivesAMessage();
 	}
 	
+	// <mlr 131126: begin - p. 105, single item: join, bid, and lose>
+	public void reportPrice(int price, int bidIncrement, String currentWinner){}
+	public void hasReceivedBid(int bidAmound, String bidder){}
+	// <mlr 131126: end - p. 105, single item: join, bid, and lose>
+	
 	public void announceClosed() throws XMPPException {
 		//currentChat.sendMessage(new Message());
 		currentChat.sendMessage("Hello, bitches!");
