@@ -63,13 +63,17 @@ public class FakeAuctionServer {
 	}
 	
 	// <mlr 131126: begin - p. 105, single item: join, bid, and lose>
-	public void reportPrice(int price, int bidIncrement, String currentWinner){}
-	public void hasReceivedBid(int bidAmound, String bidder){}
+	public void reportPrice(int price, int bidIncrement, String currentWinner) throws XMPPException {
+		currentChat.sendMessage("SQLVersion: 1.1; Command: PRICE-" + price + "," + bidIncrement + ";");
+	}
+	public void hasReceivedBid(int bidAmound, String bidder) throws InterruptedException {
+		messageListener.receivesAMessage();	
+	}
 	// <mlr 131126: end - p. 105, single item: join, bid, and lose>
 	
 	public void announceClosed() throws XMPPException {
 		//currentChat.sendMessage(new Message());
-		currentChat.sendMessage("Hello, bitches!");
+		currentChat.sendMessage("SQLVersion: 1.1; Command: CLOSED;");
 	}
 	
 	public void stop() {
@@ -91,6 +95,7 @@ public class FakeAuctionServer {
     }
     
     public void receivesAMessage() throws InterruptedException {
+    	//System.out.println("FAS: message received -->" + message.getBody() + "<--");
     	assertThat("Message", messages.poll(5, TimeUnit.SECONDS), is(notNullValue()));
     }
   }
