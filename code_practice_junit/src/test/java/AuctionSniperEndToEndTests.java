@@ -48,6 +48,13 @@
  set TC=target\test-classes
  set SD=src\main\java
  set TD=src\test\java
+ g:
+ cd student\code_practice_junit
+ javac -cp %CLASSPATH%;%SC% -d %SC% %SD%\Main.java
+ javac -cp %CLASSPATH%;%SC%;%TC% -d %TC% %TD%\AuctionSniperEndToEndTests.java
+ ant run-perl-openfirectl
+ java  -cp %CLASSPATH%;%SC%;%TC% org.junit.runner.JUnitCore AuctionSniperEndToEndTests
+ ant compile runtest -DtestClass=AuctionSniperEndToEndTests
  
  ***** build the FakeAuctionServer source file
  H:\>cd student\code_practice_junit
