@@ -99,7 +99,8 @@ public class AuctionSniperEndToEndTests {
 	public void sniperJoinsAuctionUntilAuctionCloses() throws Exception {        
 		auction.startSellingItem();                    // step 1
 		application.startBiddingIn(auction);           // step 2
-		auction.hasReceivedJoinRequestFromSniper();    // step 3
+		///auction.hasReceivedJoinRequestFromSniper();    // step 3
+		auction.hasReceivedJoinRequestFromSniper(ApplicationRunner.SNIPER_XMPP_ID);    // step 3
 		auction.announceClosed();                      // step 4
 		application.showsSniperHasLostAuction();       // step 5
 	}
@@ -108,7 +109,8 @@ public class AuctionSniperEndToEndTests {
 	public void sniperMakesHigherBidButLoses() throws Exception {
 		auction.startSellingItem();
 		application.startBiddingIn(auction);       
-		auction.hasReceivedJoinRequestFromSniper();
+		///auction.hasReceivedJoinRequestFromSniper();
+		auction.hasReceivedJoinRequestFromSniper(ApplicationRunner.SNIPER_XMPP_ID);
 		
 		// 1st features after walking skeleton
 		/* 1) Tell the auction to send a price to the Sniper

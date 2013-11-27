@@ -26,6 +26,11 @@ public class Main {
 	public static final String STATUS_JOINING = "Joining auction";
 	public static final String STATUS_LOST = "Lost auction";
 	
+	public static final String JOIN_COMMAND_FORMAT = "SQLVersion: 1.1; Command: JOIN;";
+	public static final String REPORT_PRICE_COMMAND_FORMAT = "SQLVersion: 1.1; Event: PRICE; CurrentPrice: %d; Increment: %d; Bidder: %s;";
+	public static final String BID_COMMAND_FORMAT = "SQLVersion: 1.1; Command: BID; Price: %d;";
+	public static final String CLOSE_COMMAND_FORMAT = "SQLVersion: 1.1; Command: CLOSED;";
+	
 	public Main() {
 		startUserInterface();
 	}
@@ -56,7 +61,7 @@ public class Main {
 		  });
 		this.notToBeGCd = chat;  
 		
-		chat.sendMessage(new Message());
+		chat.sendMessage(new Message(JOIN_COMMAND_FORMAT));
 	}
 	
 	private XMPPConnection 
