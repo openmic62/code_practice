@@ -58,22 +58,15 @@ public class FakeAuctionServer {
 		return this.itemID;
 	}
 	
-	public void hasReceivedJoinRequestFromSniper() throws InterruptedException {
+	public void hasReceivedJoinRequestFromSniper(String sniperId) 
+		throws InterruptedException 
+	{
 		///messageListener.receivesAMessage();
-		messageListener.receivesAMessage(is(anything()));
+		///messageListener.receivesAMessage(is(anything()));
+		receivesAMessageMatching(sniperId, equalTo(Main.JOIN_COMMAND_FORMAT));
 	}
 	
 	// <mlr 131126: begin - p. 105, single item: join, bid, and lose>
-	///public void reportPrice(int price, int bidIncrement, String currentWinner) throws XMPPException {
-	public void reportPrice(int price, int increment, String bidder) 
-	  throws XMPPException 
-	{
-		///currentChat.sendMessage("SQLVersion: 1.1; Command: PRICE-" + price + "," + increment + ";");
-		currentChat.sendMessage(
-			String.format("SQLVersion: 1.1; Event: PRICE; " 
-			              + "CurrentPrice: %d; Increment: %d; Bidder: %s;", price, increment, bidder));
-	}
-	
 	/*
 	public void hasReceivedBid(int bid, String sniperId) throws InterruptedException {
 		messageListener.receivesAMessage();	
@@ -81,15 +74,33 @@ public class FakeAuctionServer {
 	public void hasReceivedBid(int bid, String sniperId) 
 		throws InterruptedException 
 	{
+		/*
 		messageListener.receivesAMessage(
 			equalTo(
-				String.format("SQLVersion: 1.1; Command: BID; Price: %d;", bid)));	
+				String.format(Main.BID_COMMAND_FORMAT, bid))); */
+		receivesAMessageMatching(sniperId, equalTo(String.format(Main.BID_COMMAND_FORMAT, bid)));
+	}
+	
+	///public void reportPrice(int price, int bidIncrement, String currentWinner) throws XMPPException {
+	public void reportPrice(int price, int increment, String bidder) 
+	  throws XMPPException 
+	{
+		///currentChat.sendMessage("SQLVersion: 1.1; Command: PRICE-" + price + "," + increment + ";");
+		currentChat.sendMessage(
+			String.format(Main.REPORT_PRICE_COMMAND_FORMAT, price, increment, bidder));
+	}
+	
+	private void receivesAMessageMatching(String sniperId, org.hamcrest.Matcher<? super String> messageMatcher)
+		throws InterruptedException 
+	{
+		messageListener.receivesAMessage(messageMatcher);
+		assertThat(currentChat.getParticipant(), equalTo(sniperId));
 	}
 	// <mlr 131126: end - p. 105, single item: join, bid, and lose>
 	
 	public void announceClosed() throws XMPPException {
 		//currentChat.sendMessage(new Message());
-		currentChat.sendMessage("SQLVersion: 1.1; Command: CLOSED;");
+		currentChat.sendMessage(Main.CLOSE_COMMAND_FORMAT);
 	}
 	
 	public void stop() {
@@ -120,7 +131,7 @@ public class FakeAuctionServer {
     	throws InterruptedException 
     {
     	final Message message = messages.poll(5, TimeUnit.SECONDS);
-    	//System.out.println("FAS: message received -->" + message.getBody() + "<--");
+    	System.out.println("FAS: message received -->" + message.getBody() + "<--");
     	assertThat("Message", message, is(notNullValue()));
     	assertThat(message.getBody(), messageMatcher);
     }
