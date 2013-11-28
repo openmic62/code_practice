@@ -62,8 +62,8 @@ public class FakeAuctionServer {
 		throws InterruptedException 
 	{
 		///messageListener.receivesAMessage();
-		///messageListener.receivesAMessage(is(anything()));
-		receivesAMessageMatching(sniperId, equalTo(Main.JOIN_COMMAND_FORMAT));
+		messageListener.receivesAMessage(is(anything()));
+		///receivesAMessageMatching(sniperId, equalTo(Main.JOIN_COMMAND_FORMAT));
 	}
 	
 	// <mlr 131126: begin - p. 105, single item: join, bid, and lose>
