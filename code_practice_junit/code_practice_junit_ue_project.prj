@@ -141,12 +141,9 @@ Create Tagfile=0
 [Files - tdd - money_example - test]
 0=src\test\java\MoneyTests.java
 [Files - Auction Sniper - src]
-0=src\main\java\ApplicationRunner.java
-1=src\main\java\FakeAuctionServer.java
-2=src\main\java\AuctionSniperDriver.java
-3=src\main\java\Event_driven_system_description.txt
-4=src\main\java\FSwing.java
-5=src\main\java\FConcurrent.java
+0=src\main\java\Event_driven_system_description.txt
+1=src\main\java\FSwing.java
+2=src\main\java\FConcurrent.java
 [Files - Auction Sniper - WindowLicker]
 0=lib\windowlicker_svn\build.bat
 1=lib\windowlicker_svn\build.xml
@@ -188,3 +185,6 @@ Create Tagfile=0
 2=src\main\java\auctionsniper\MainWindow.java
 [Files - Auction Sniper - test - acceptance]
 0=src\test\java\auctionsniper\tests\acceptance\AuctionSniperEndToEndTests.java
+1=src\test\java\auctionsniper\tests\acceptance\ApplicationRunner.java
+2=src\test\java\auctionsniper\tests\acceptance\AuctionSniperDriver.java
+3=src\test\java\auctionsniper\tests\acceptance\FakeAuctionServer.java
