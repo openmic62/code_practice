@@ -140,17 +140,13 @@ Create Tagfile=0
 3=src\main\java\Sum.java
 [Files - tdd - money_example - test]
 0=src\test\java\MoneyTests.java
-[Files - Auction Sniper - test - acceptance]
-0=src\test\java\AuctionSniperEndToEndTests.java
 [Files - Auction Sniper - src]
 0=src\main\java\ApplicationRunner.java
 1=src\main\java\FakeAuctionServer.java
 2=src\main\java\AuctionSniperDriver.java
-3=src\main\java\Main.java
-4=src\main\java\MainWindow.java
-5=src\main\java\Event_driven_system_description.txt
-6=src\main\java\FSwing.java
-7=src\main\java\FConcurrent.java
+3=src\main\java\Event_driven_system_description.txt
+4=src\main\java\FSwing.java
+5=src\main\java\FConcurrent.java
 [Files - Auction Sniper - WindowLicker]
 0=lib\windowlicker_svn\build.bat
 1=lib\windowlicker_svn\build.xml
@@ -159,7 +155,7 @@ Create Tagfile=0
 [Files - Auction Sniper - test - unit]
 0=src\test\java\FakeAuctionServerTests.java
 1=src\test\java\FakeAuctionServerPTests.java
-2=src\test\java\test\auctionsniper\AuctionMessageTranslatorTests.java
+2=src\test\java\auctionsniper\tests\unit\AuctionMessageTranslatorTests.java
 <<<<<<< .mine
 [Files - ant_and_maven]
 0=build.properties
@@ -188,3 +184,7 @@ Create Tagfile=0
 1=src\test\scripts\keywords.pl
 [Files - Auction Sniper - src - auctionsniper]
 0=src\main\java\auctionsniper\AuctionMessageTranslator.java
+1=src\main\java\auctionsniper\Main.java
+2=src\main\java\auctionsniper\MainWindow.java
+[Files - Auction Sniper - test - acceptance]
+0=src\test\java\auctionsniper\tests\acceptance\AuctionSniperEndToEndTests.java

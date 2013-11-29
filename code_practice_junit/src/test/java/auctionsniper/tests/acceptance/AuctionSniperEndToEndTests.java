@@ -1,6 +1,5 @@
 /**
  *
- * How to build a test API for my application - Example
  * <u>Growing Object-Oriented Software, Guided by Tests</u><br>
  *    Part III: A Worked Example<br>
  * 		Ch. 11 Passing the First Test<br>
@@ -50,11 +49,11 @@
  set TD=src\test\java
  g:
  cd student\code_practice_junit
- javac -cp %CLASSPATH%;%SC% -d %SC% %SD%\Main.java
- javac -cp %CLASSPATH%;%SC%;%TC% -d %TC% %TD%\AuctionSniperEndToEndTests.java
+ javac -cp %CLASSPATH%;%SC% -d %SC% %SD%\auctionsniper\Main.java
+ javac -cp %CLASSPATH%;%SC%;%TC% -d %TC% %TD%\auctionsniper\tests\acceptance\AuctionSniperEndToEndTests.java
  ant run-perl-openfirectl
- java  -cp %CLASSPATH%;%SC%;%TC% org.junit.runner.JUnitCore AuctionSniperEndToEndTests
- ant compile runtest -DtestClass=AuctionSniperEndToEndTests
+ java  -cp %CLASSPATH%;%SC%;%TC% org.junit.runner.JUnitCore auctionsniper.tests.acceptance.AuctionSniperEndToEndTests
+ ant compile runtest -DtestClass=auctionsniper.tests.acceptance.AuctionSniperEndToEndTests
  
  ***** build the FakeAuctionServer source file
  H:\>cd student\code_practice_junit
@@ -62,22 +61,24 @@
  H:\student\code_practice_junit>echo %CLASSPATH%
  H:\student\code_practice_junit>set FAS_FILES=FakeAuctionServer.java
  H:\student\code_practice_junit>echo %FAS_FILES%
- H:\student\code_practice_junit>javac -cp %CLASSPATH%;%SC% -d %SC% %SD%\%FAS_FILES%
-                                javac -cp %CLASSPATH%;%SC% -d %SC% %SD%\Main.java
+ H:\student\code_practice_junit>javac -cp %CLASSPATH%;%SC% -d %SC% %SD%\auctionsniper\%FAS_FILES%
+                                javac -cp %CLASSPATH%;%SC% -d %SC% %SD%\auctionsniper\Main.java
                                 
  ***** build the Tests AuctionSniperEndToEndTests
- H:\student\code_practice_junit>javac -cp %CLASSPATH%;%SC%;%TC% -d %TC% %TD%\AuctionSniperEndToEndTests.java
+ H:\student\code_practice_junit>javac -cp %CLASSPATH%;%SC%;%TC% -d %TC% %TD%\auctionsniper\tests\acceptance\AuctionSniperEndToEndTests.java
  
  ***** run the Tests (command line Java)
- H:\student\code_practice_junit>java  -cp %CLASSPATH%;%SC%;%TC% org.junit.runner.JUnitCore AuctionSniperEndToEndTests
+ H:\student\code_practice_junit>java  -cp %CLASSPATH%;%SC%;%TC% org.junit.runner.JUnitCore auctionsniper.tests.acceptance.AuctionSniperEndToEndTests
  
  ***** run the Tests (command line Ant)
  H:\student\code_practice_junit>ant clean_all
- H:\student\code_practice_junit>ant compile runtest -DtestClass=AuctionSniperEndToEndTests
+ H:\student\code_practice_junit>ant compile runtest -DtestClass=auctionsniper.tests.acceptance.AuctionSniperEndToEndTests
 
  ***** run the Tests (command line Maven)
- H:\student\code_practice_junit>mvn antrun:run test -Dtest=AuctionSniperEndToEndTests
+ H:\student\code_practice_junit>mvn antrun:run test -Dtest=auctionsniper.tests.acceptance.AuctionSniperEndToEndTests
  */ 
+package auctionsniper.tests.acceptance;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

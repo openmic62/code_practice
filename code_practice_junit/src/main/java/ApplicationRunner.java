@@ -1,3 +1,5 @@
+import auctionsniper.Main;
+
 public class ApplicationRunner {
 	
 	static final String SNIPER_ID = "sniper";

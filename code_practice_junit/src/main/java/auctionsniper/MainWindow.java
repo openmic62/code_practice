@@ -1,3 +1,5 @@
+package auctionsniper;
+
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
