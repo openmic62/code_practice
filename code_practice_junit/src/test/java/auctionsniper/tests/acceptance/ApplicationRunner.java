@@ -1,3 +1,5 @@
+package auctionsniper.tests.acceptance;
+
 import auctionsniper.Main;
 
 public class ApplicationRunner {
