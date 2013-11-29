@@ -51,6 +51,7 @@ Create Tagfile=0
 30=Auction Sniper - WindowLicker
 31=Auction Sniper - xmpp
 32=Auction Sniper - test - scripts
+33=Auction Sniper - src - auctionsniper
 [Files - ch02_a_first_unit_test - src]
 0=src\main\java\LogAnalyzer.java
 1=src\main\java\MemCalculator.java
@@ -158,6 +159,7 @@ Create Tagfile=0
 [Files - Auction Sniper - test - unit]
 0=src\test\java\FakeAuctionServerTests.java
 1=src\test\java\FakeAuctionServerPTests.java
+2=src\test\java\test\auctionsniper\AuctionMessageTranslatorTests.java
 <<<<<<< .mine
 [Files - ant_and_maven]
 0=build.properties
@@ -184,3 +186,5 @@ Create Tagfile=0
 [Files - Auction Sniper - test - scripts]
 0=src\test\scripts\openfirectl.pl
 1=src\test\scripts\keywords.pl
+[Files - Auction Sniper - src - auctionsniper]
+0=src\main\java\auctionsniper\AuctionMessageTranslator.java
