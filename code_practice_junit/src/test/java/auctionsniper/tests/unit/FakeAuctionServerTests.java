@@ -67,6 +67,10 @@
  ***** run the Tests (command line Maven)
  H:\student\code_practice_junit>mvn test -Dtest=FakeAuctionServerTests
  */ 
+package auctionsniper.tests.unit;
+
+import auctionsniper.tests.acceptance.FakeAuctionServer;
+
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 
