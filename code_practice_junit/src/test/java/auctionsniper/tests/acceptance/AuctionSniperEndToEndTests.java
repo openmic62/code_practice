@@ -53,7 +53,7 @@
  javac -cp %CLASSPATH%;%SC%;%TC% -d %TC% %TD%\auctionsniper\tests\acceptance\AuctionSniperEndToEndTests.java
  ant run-perl-openfirectl
  java  -cp %CLASSPATH%;%SC%;%TC% org.junit.runner.JUnitCore auctionsniper.tests.acceptance.AuctionSniperEndToEndTests
- ant compile runtest -DtestClass=auctionsniper.tests.acceptance.AuctionSniperEndToEndTests
+ ant compile runtest -DtestClass=AuctionSniperEndToEndTests
  
  ***** build the FakeAuctionServer source file
  H:\>cd student\code_practice_junit
@@ -72,10 +72,10 @@
  
  ***** run the Tests (command line Ant)
  H:\student\code_practice_junit>ant clean_all
- H:\student\code_practice_junit>ant compile runtest -DtestClass=auctionsniper.tests.acceptance.AuctionSniperEndToEndTests
+ H:\student\code_practice_junit>ant compile runtest -DtestClass=AuctionSniperEndToEndTests
 
  ***** run the Tests (command line Maven)
- H:\student\code_practice_junit>mvn antrun:run test -Dtest=auctionsniper.tests.acceptance.AuctionSniperEndToEndTests
+ H:\student\code_practice_junit>mvn antrun:run test -Dtest=AuctionSniperEndToEndTests
  */ 
 package auctionsniper.tests.acceptance;
 

@@ -150,9 +150,9 @@ Create Tagfile=0
 2=lib\windowlicker_svn\src\swing\main\com\objogate\wl\swing\driver\ComponentDriver.java
 3=C:\Asus WebStorage\openmic62@gmail.com\MySyncFolder\student\1Z0-803\code_practice_b1\src\main\java\Exercise9_5.java
 [Files - Auction Sniper - test - unit]
-0=src\test\java\FakeAuctionServerTests.java
-1=src\test\java\FakeAuctionServerPTests.java
-2=src\test\java\auctionsniper\tests\unit\AuctionMessageTranslatorTests.java
+0=src\test\java\auctionsniper\tests\unit\AuctionMessageTranslatorTests.java
+1=src\test\java\auctionsniper\tests\unit\FakeAuctionServerPTests.java
+2=src\test\java\auctionsniper\tests\unit\FakeAuctionServerTests.java
 <<<<<<< .mine
 [Files - ant_and_maven]
 0=build.properties

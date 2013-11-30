@@ -53,7 +53,7 @@
  javac -cp %CLASSPATH%;%SC%;%TC% -d %TC% %TD%\auctionsniper\tests\\unit\AuctionMessageTranslatorTests.java
  ant run-perl-openfirectl
  java  -cp %CLASSPATH%;%SC%;%TC% org.junit.runner.JUnitCore auctionsniper.tests.unit.AuctionMessageTranslatorTests
- ant compile runtest -DtestClass=auctionsniper.tests.unit.AuctionMessageTranslatorTests
+ ant compile runtest -DtestClass=AuctionMessageTranslatorTests
  
  ***** build the AuctionMessageTranslator source file
  H:\>cd student\code_practice_junit
@@ -72,10 +72,10 @@
  
  ***** run the Tests (command line Ant)
  H:\student\code_practice_junit>ant clean_all
- H:\student\code_practice_junit>ant compile runtest -DtestClass=auctionsniper.tests.unit.AuctionMessageTranslatorTests
+ H:\student\code_practice_junit>ant compile runtest -DtestClass=AuctionMessageTranslatorTests
 
  ***** run the Tests (command line Maven)
- H:\student\code_practice_junit>mvn antrun:run test -Dtest=auctionsniper.tests.unit.AuctionMessageTranslatorTests
+ H:\student\code_practice_junit>mvn antrun:run test -Dtest=AuctionMessageTranslatorTests
  */ 
 package auctionsniper.tests.unit;
 

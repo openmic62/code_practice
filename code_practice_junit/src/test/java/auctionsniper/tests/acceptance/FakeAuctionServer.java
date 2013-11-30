@@ -37,7 +37,7 @@ public class FakeAuctionServer {
   	
 	private boolean isJoinCommand; // this is mine, not the book's
 	
-	FakeAuctionServer(String item) {
+	public FakeAuctionServer(String item) {
 		this.itemID = item;
 		this.connection = new XMPPConnection(
 			new ConnectionConfiguration(XMPP_HOSTNAME,5222,AUCTION_RESOURCE));
@@ -142,7 +142,7 @@ public class FakeAuctionServer {
   }
   
   /* <mlr 131113: begin - this is my stuff, not the book's> */
-  String getSniperCommandFromMessage(String message) {
+  public String getSniperCommandFromMessage(String message) {
 		// example message-->SQLVersion: 1.1; Command: JOIN;<--
 		
 		final String ON_SEMICOLON_DELIMITER = ";";

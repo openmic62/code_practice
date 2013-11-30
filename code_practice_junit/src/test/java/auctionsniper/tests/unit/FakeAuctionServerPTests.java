@@ -1,3 +1,7 @@
+package auctionsniper.tests.unit;
+
+import auctionsniper.tests.acceptance.FakeAuctionServer;
+
 import java.util.Arrays;
 import java.util.Collection;
 
