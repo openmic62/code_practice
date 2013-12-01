@@ -42,6 +42,8 @@
  set CLASSPATH=lib\Smack.jar;lib\Smackx.jar;lib\Smackx-debug.jar;lib\junit-4.11.jar;lib\hamcrest-all-1.3.jar
  set WL=lib\windowlicker-core-DEV.jar;lib\windowlicker-swing-DEV.jar
  set CLASSPATH=%WL%;%CLASSPATH%
+ set JM=lib\jmock-2.6.0.jar;lib\jmock-junit4-2.6.0.jar
+ set CLASSPATH=%JM%;%CLASSPATH%
  set SIH=src\test\scripts\SysinternalsSuite_131101
  set SC=target\classes
  set TC=target\test-classes
@@ -79,19 +81,33 @@
  */ 
 package auctionsniper.tests.unit;
 
+import auctionsniper.AuctionEventListener;
 import auctionsniper.AuctionMessageTranslator;
 
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.packet.Message;
 
+import org.jmock.Expectations;
+import org.jmock.integration.junit4.JMock;
+import org.jmock.Mockery;
+import org.junit.runner.RunWith;
 import org.junit.Test;
 
+@RunWith(JMock.class)
 public class AuctionMessageTranslatorTests {
 	public static final Chat UNUSED_CHAT = null;
 	private final AuctionMessageTranslator translator = new AuctionMessageTranslator();
 	
-	@Test
-	public void notifiesAuctionClosedWhenCloseMessageReceived() {
+	///private final Mockery context = new JUnit4Mockery();
+	private final Mockery context = new Mockery();
+	private final AuctionEventListener listener = context.mock(AuctionEventListener.class);
+	
+	@Test public void 
+	notifiesAuctionClosedWhenCloseMessageReceived() {
+		context.checking(new Expectations() {{
+			oneOf(listener).auctionClosed();
+		}});
+		
 		Message message = new Message();
 		message.setBody("SQLVersion: 1.1; Event: CLOSE");
 		
