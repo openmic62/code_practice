@@ -11,7 +11,7 @@ import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Message;
 
-public class Main {
+public class Main implements AuctionEventListener {
 	@SuppressWarnings("unused") private Chat notToBeGCd;
 	
 	private MainWindow ui;
@@ -52,18 +52,8 @@ public class Main {
 		disconnectWhenUICloses(connection);
 		Chat chat = connection.getChatManager().createChat(
 		  auctionId(itemId, connection),
-		  new MessageListener() {
-		  	@Override
-		  	public void processMessage(Chat aChat, Message message) {
-		  		System.out.println("Main: message received -->" + message.getBody() + "<--");
-		  		SwingUtilities.invokeLater(new Runnable() {
-		  			@Override
-		  			public void run() {
-		  				ui.showStatus(STATUS_LOST);
-		  			}
-		  		});
-		  	}
-		  });
+		  new AuctionMessageTranslator(this)
+		  );
 		this.notToBeGCd = chat;  
 		
 		chat.sendMessage(new Message(JOIN_COMMAND_FORMAT));
@@ -107,4 +97,13 @@ public class Main {
 			e.printStackTrace();
 		}
 	}
+	
+	public void auctionClosed() {
+  	SwingUtilities.invokeLater(new Runnable() {
+  		@Override
+  		public void run() {
+  			ui.showStatus(STATUS_LOST);
+  		}
+  	});
+ 	}
 }
