@@ -89,10 +89,8 @@ import org.jivesoftware.smack.packet.Message;
 
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JUnitRuleMockery;
-import org.jmock.Mockery;
 
 import org.junit.Rule;
-import org.junit.runner.RunWith;
 import org.junit.Test;
 
 public class AuctionMessageTranslatorTests {
@@ -111,6 +109,17 @@ public class AuctionMessageTranslatorTests {
 		
 		Message message = new Message();
 		message.setBody("SQLVersion: 1.1; Event: CLOSE");
+		
+		translator.processMessage(UNUSED_CHAT, message);
+	}
+	
+	@Test public void
+	notifiesBidDetailsWhenPriceMessageReceived() {
+		context.checking(new Expectations() {{
+			oneOf(listener).currentPrice(192, 7);
+		}});
+		Message message = new Message();
+		message.setBody("SQLVersion: 1.1; Event: PRICE; CurrentPrice: 192; Increment: 7; Bidder: Someone else;");
 		
 		translator.processMessage(UNUSED_CHAT, message);
 	}
