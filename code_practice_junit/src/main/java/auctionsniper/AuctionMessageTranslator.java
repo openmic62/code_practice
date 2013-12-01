@@ -14,6 +14,7 @@ public class AuctionMessageTranslator implements MessageListener {
 	
 	@Override
 	public void processMessage(Chat chat, Message message) {
+		System.out.println("Main: message received -->" + message.getBody() + "<--");
 		auctionEventListener.auctionClosed();
 	}
 }
