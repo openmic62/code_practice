@@ -98,6 +98,7 @@ public class Main implements AuctionEventListener {
 		}
 	}
 	
+	// Implement the AuctionEventListener interface
 	public void auctionClosed() {
   	SwingUtilities.invokeLater(new Runnable() {
   		@Override
@@ -106,4 +107,6 @@ public class Main implements AuctionEventListener {
   		}
   	});
  	}
+ 	
+ 	public void currentPrice(int price, int increment) {}
 }
