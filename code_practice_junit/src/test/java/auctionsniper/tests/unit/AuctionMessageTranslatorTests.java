@@ -82,6 +82,7 @@ package auctionsniper.tests.unit;
 import auctionsniper.AuctionMessageTranslator;
 
 import org.jivesoftware.smack.Chat;
+import org.jivesoftware.smack.packet.Message;
 
 import org.junit.Test;
 
@@ -91,5 +92,9 @@ public class AuctionMessageTranslatorTests {
 	
 	@Test
 	public void notifiesAuctionClosedWhenCloseMessageReceived() {
+		Message message = new Message();
+		message.setBody("SQLVersion: 1.1; Event: CLOSE");
+		
+		translator.processMessage(UNUSED_CHAT, message);
 	}
 }
