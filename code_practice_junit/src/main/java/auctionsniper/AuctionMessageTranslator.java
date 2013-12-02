@@ -1,5 +1,7 @@
 package auctionsniper;
 
+import java.util.HashMap;
+
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.MessageListener;
 import org.jivesoftware.smack.packet.Message;
@@ -14,7 +16,28 @@ public class AuctionMessageTranslator implements MessageListener {
 	
 	@Override
 	public void processMessage(Chat chat, Message message) {
-		System.out.println("Main: message received -->" + message.getBody() + "<--");
-		auctionEventListener.auctionClosed();
+		///System.out.println("Main: message received -->" + message.getBody() + "<--");
+		HashMap<String, String> event = unpackEvent(message);
+		String type = event.get("Event");
+		if ("CLOSE".equals(type)) {
+			auctionEventListener.auctionClosed();
+		} else if ("PRICE".equals(type)) {
+		 	auctionEventListener.currentPrice(
+		 		Integer.parseInt(event.get("CurrentPrice")),
+		 		Integer.parseInt(event.get("Increment"))
+		 	);
+		}
+	}
+	
+	private HashMap<String, String> unpackEvent(Message message) {
+		String messageBody = message.getBody().toString(); 
+		final String ON_SEMICOLON_DELIMITER = ";";
+		String[] elements = messageBody.split(ON_SEMICOLON_DELIMITER);
+		HashMap<String, String> event = new HashMap<String, String>();
+		for(String element : elements) {
+			String[] pair = element.split(":");
+			event.put(pair[0].trim(), pair[1].trim());
+		}
+		return event;
 	}
 }
