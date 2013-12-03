@@ -6,16 +6,8 @@
  *    The First Unit Test<br>
  *    p. 114a
  *
- * AuctionMessageTranslator is a substitute server that allows this test [AuctionMessageTranslatorTests]
- * to check how the Auction Sniper [the app we are developing for our customer]
- * interacts with an auction using XMPP messages. AuctionMessageTranslator has three responsibilities:
- * 1) it must connect to the XMPP broker [Openfire] and accept a request to
- *    join the chat from the Sniper;
- * 2) it must receive chat messages from the Sniper or fail if no message
- *    arrives within some timeout;
- * 3) it must allow the test to send messages back to the Sniper as specified by
- *    Southabee's On-Line.
- * 
+ * AuctionMessageTranslator holds the responsibility for parsing messages from the
+ * Southabee's auction into a Sniper event on which this application can act.
 
  -------------------------------------------------------------------------------
 

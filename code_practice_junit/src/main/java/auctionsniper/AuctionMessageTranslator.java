@@ -34,8 +34,9 @@ public class AuctionMessageTranslator implements MessageListener {
 		final String ON_SEMICOLON_DELIMITER = ";";
 		String[] elements = messageBody.split(ON_SEMICOLON_DELIMITER);
 		HashMap<String, String> event = new HashMap<String, String>();
+		final String ON_COLON_NAME_VALUE_DELIMITER = ":";
 		for(String element : elements) {
-			String[] pair = element.split(":");
+			String[] pair = element.split(ON_COLON_NAME_VALUE_DELIMITER);
 			event.put(pair[0].trim(), pair[1].trim());
 		}
 		return event;

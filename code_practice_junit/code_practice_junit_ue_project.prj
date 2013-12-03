@@ -153,6 +153,7 @@ Create Tagfile=0
 0=src\test\java\auctionsniper\tests\unit\AuctionMessageTranslatorTests.java
 1=src\test\java\auctionsniper\tests\unit\FakeAuctionServerPTests.java
 2=src\test\java\auctionsniper\tests\unit\FakeAuctionServerTests.java
+3=src\test\java\auctionsniper\tests\unit\AuctionSniperTests.java
 <<<<<<< .mine
 [Files - ant_and_maven]
 0=build.properties
@@ -183,6 +184,9 @@ Create Tagfile=0
 0=src\main\java\auctionsniper\AuctionMessageTranslator.java
 1=src\main\java\auctionsniper\Main.java
 2=src\main\java\auctionsniper\MainWindow.java
+3=src\main\java\auctionsniper\AuctionSniper.java
+4=src\main\java\auctionsniper\AuctionEventListener.java
+5=src\main\java\auctionsniper\SniperListener.java
 [Files - Auction Sniper - test - acceptance]
 0=src\test\java\auctionsniper\tests\acceptance\AuctionSniperEndToEndTests.java
 1=src\test\java\auctionsniper\tests\acceptance\ApplicationRunner.java
