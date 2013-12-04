@@ -187,6 +187,7 @@ Create Tagfile=0
 3=src\main\java\auctionsniper\AuctionSniper.java
 4=src\main\java\auctionsniper\AuctionEventListener.java
 5=src\main\java\auctionsniper\SniperListener.java
+6=src\main\java\auctionsniper\Auction.java
 [Files - Auction Sniper - test - acceptance]
 0=src\test\java\auctionsniper\tests\acceptance\AuctionSniperEndToEndTests.java
 1=src\test\java\auctionsniper\tests\acceptance\ApplicationRunner.java
