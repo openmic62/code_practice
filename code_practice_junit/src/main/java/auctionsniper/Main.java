@@ -98,7 +98,16 @@ public class Main implements SniperListener {
 		}
 	}
 	
-	// Implement the AuctionEventListener interface
+	// Implement the SniperListener interface
+	public void sniperBidding() {
+  	SwingUtilities.invokeLater(new Runnable() {
+  		@Override
+  		public void run() {
+  			ui.showStatus(STATUS_BIDDING);
+  		}
+  	});
+  }
+ 	
 	public void sniperLost() {
   	SwingUtilities.invokeLater(new Runnable() {
   		@Override

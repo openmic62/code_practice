@@ -8,10 +8,21 @@
  *
  * AuctionSniper is a component at the heart of this application. For now, it
  * will take over stuff we did in Main. Specifically, we'll start out with 2
- * requirements. When we call the method currentPrice(), AuctionSniper will
+ * requirements. When we call the method currentPrice() (by whoever implements our
+ * interface MessageListener - which is AuctionMessageTranslator), AuctionSniper will
  * 1) send a higher bid to the auction
- * 2) update the status in the user interface
+ * 2) update the status in the user interface (the book does this part first)
  * 
+ * 
+ * Originally we have,
+ *   chat ->| AuctionMessageTranslatr ->| Main  (see p. 118a)
+ *          |                           |
+ *    MessageListener           AuctionEventListener
+ * 
+ * After doing the 2nd reqwuirement we have,
+ *   chat ->| AuctionMessageTranslatr ->| AuctionSniper ->| Main   (see p. 125b)
+ *          |                           |                 |
+ *    MessageListener           AuctionEventListener   SniperListener
 
  -------------------------------------------------------------------------------
 
@@ -76,6 +87,7 @@
  */ 
 package auctionsniper.tests.unit;
 
+import auctionsniper.Auction;
 import auctionsniper.AuctionSniper;
 import auctionsniper.SniperListener;
 
@@ -95,8 +107,9 @@ public class AuctionSniperTests {
 	
 	@Rule public final JUnitRuleMockery context = new JUnitRuleMockery();
 	private final SniperListener sniperListener = context.mock(SniperListener.class);
+	private final Auction auction = context.mock(Auction.class);
 	
-	private final AuctionSniper sniper = new AuctionSniper(sniperListener);
+	private final AuctionSniper sniper = new AuctionSniper(auction, sniperListener);
 	
 	@Test public void 
 	reportLostWhenAuctionCloses() {
@@ -105,5 +118,17 @@ public class AuctionSniperTests {
 		}});
 		
 		sniper.auctionClosed();
+	}
+	
+	@Test public void
+	bidsHigherAndReportsBiddingWhenNewPriceArrives() {
+		final int price = 1001;
+		final int increment = 25;
+		context.checking(new Expectations() {{
+			oneOf(auction).bid(price + increment);
+			atLeast(1).of(sniperListener).sniperBidding();
+		}});
+		
+		sniper.currentPrice(price, increment);
 	}
 }
