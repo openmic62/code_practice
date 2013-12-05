@@ -1,6 +1,7 @@
 package auctionsniper.tests.acceptance;
 
 import auctionsniper.Main;
+import java.net.UnknownHostException;
 
 public class ApplicationRunner {
 	
@@ -9,7 +10,18 @@ public class ApplicationRunner {
 	private AuctionSniperDriver driver;
 	
 	// <mlr 131126: begin - p. 105, single item: join, bid, and lose>
-	public static final String SNIPER_XMPP_ID = "xxx";
+	///public static final String SNIPER_XMPP_ID = "xxx";
+	///public static final String SNIPER_XMPP_ID = "sniper@roco-3/Auction";
+	public static final String SNIPER_XMPP_ID = String.format("sniper@%s/Auction", myGetHostName());
+	private static String myGetHostName() {
+		String hostName = null;
+		try {
+			hostName = java.net.InetAddress.getLocalHost().getHostName();
+		} catch (UnknownHostException uhe) {
+			 uhe.printStackTrace();
+		}
+		return hostName;
+	}
 	// <mlr 131126: end - p. 105, single item: join, bid, and lose>
 	
 	public void startBiddingIn(FakeAuctionServer auction) {
