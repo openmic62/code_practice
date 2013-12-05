@@ -13,6 +13,8 @@ public class ApplicationRunner {
 	///public static final String SNIPER_XMPP_ID = "xxx";
 	///public static final String SNIPER_XMPP_ID = "sniper@roco-3/Auction";
 	public static final String SNIPER_XMPP_ID = String.format("sniper@%s/Auction", myGetHostName());
+	
+	// <mlr 131205: begin - I added this to get around testing on Openfire running on home ("roco-3") and work ("vi-1057") laptops>
 	private static String myGetHostName() {
 		String hostName = null;
 		try {
@@ -22,6 +24,8 @@ public class ApplicationRunner {
 		}
 		return hostName;
 	}
+	// <mlr 131205: begin - I added this to get around testing on Openfire running on home ("roco-3") and work ("vi-1057") laptops>
+
 	// <mlr 131126: end - p. 105, single item: join, bid, and lose>
 	
 	public void startBiddingIn(FakeAuctionServer auction) {

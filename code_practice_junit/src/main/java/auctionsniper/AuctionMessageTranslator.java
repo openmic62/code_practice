@@ -16,7 +16,7 @@ public class AuctionMessageTranslator implements MessageListener {
 	
 	@Override
 	public void processMessage(Chat chat, Message message) {
-		///System.out.println("Main: message received -->" + message.getBody() + "<--");
+		System.out.println("AMT: message received -->" + message.getBody() + "<--");
 		HashMap<String, String> event = unpackEvent(message);
 		String type = event.get("Event");
 		if ("CLOSE".equals(type)) {

@@ -49,7 +49,6 @@
  set TC=target\test-classes
  set SD=src\main\java
  set TD=src\test\java
- g:
  cd student\code_practice_junit
  javac -cp %CLASSPATH%;%SC% -d %SC% %SD%\auctionsniper\Main.java
  javac -cp %CLASSPATH%;%SC%;%TC% -d %TC% %TD%\auctionsniper\tests\acceptance\AuctionSniperEndToEndTests.java
