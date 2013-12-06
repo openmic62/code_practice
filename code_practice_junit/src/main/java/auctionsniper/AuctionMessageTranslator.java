@@ -2,11 +2,15 @@ package auctionsniper;
 
 import java.util.HashMap;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.MessageListener;
 import org.jivesoftware.smack.packet.Message;
 
 public class AuctionMessageTranslator implements MessageListener {
+	static Logger logger = LogManager.getLogger(AuctionMessageTranslator.class.getName());	
 	
 	private AuctionEventListener auctionEventListener;
 	
@@ -16,7 +20,8 @@ public class AuctionMessageTranslator implements MessageListener {
 	
 	@Override
 	public void processMessage(Chat chat, Message message) {
-		System.out.println("AMT: message received -->" + message.getBody() + "<--");
+		///System.out.println("AMT: message received -->" + message.getBody() + "<--");
+		logger.debug("message received -->" + message.getBody() + "<--");
 		HashMap<String, String> event = unpackEvent(message);
 		String type = event.get("Event");
 		if ("CLOSE".equals(type)) {

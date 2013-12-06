@@ -7,6 +7,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
@@ -21,7 +24,8 @@ import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Message;
 
 public class FakeAuctionServer {
-	
+	static Logger logger = LogManager.getLogger(FakeAuctionServer.class.getName());	
+		
 	public static final String ITEM_ID_AS_LOGIN = "auction-%s";
 	public static final String AUCTION_RESOURCE = "Auction";
 	public static final String XMPP_HOSTNAME = "localhost";
@@ -135,7 +139,8 @@ public class FakeAuctionServer {
     	throws InterruptedException 
     {
     	final Message message = messages.poll(5, TimeUnit.SECONDS);
-    	System.out.println("FAS: message received -->" + message.getBody() + "<--");
+    	///System.out.println("FAS: message received -->" + message.getBody() + "<--");
+    	logger.debug("message received -->" + message.getBody() + "<--");
     	assertThat("Message", message, is(notNullValue()));
     	assertThat(message.getBody(), messageMatcher);
     }
