@@ -20,30 +20,56 @@ public class AuctionMessageTranslator implements MessageListener {
 	
 	@Override
 	public void processMessage(Chat chat, Message message) {
-		///System.out.println("AMT: message received -->" + message.getBody() + "<--");
 		logger.debug("message received -->" + message.getBody() + "<--");
-		HashMap<String, String> event = unpackEvent(message);
-		String type = event.get("Event");
-		if ("CLOSE".equals(type)) {
+		
+		AuctionEvent auctionEvent = AuctionEvent.find(message.getBody());
+		
+		String eventType = auctionEvent.getEventType();
+		if ("CLOSE".equals(eventType)) {
 			auctionEventListener.auctionClosed();
-		} else if ("PRICE".equals(type)) {
+		} else if ("PRICE".equals(eventType)) {
 		 	auctionEventListener.currentPrice(
-		 		Integer.parseInt(event.get("CurrentPrice")),
-		 		Integer.parseInt(event.get("Increment"))
+		 		auctionEvent.getCurrentPrice(),
+		 		auctionEvent.getIncrement()
 		 	);
 		}
 	}
 	
-	private HashMap<String, String> unpackEvent(Message message) {
-		String messageBody = message.getBody().toString(); 
-		final String ON_SEMICOLON_DELIMITER = ";";
-		String[] elements = messageBody.split(ON_SEMICOLON_DELIMITER);
-		HashMap<String, String> event = new HashMap<String, String>();
-		final String ON_COLON_NAME_VALUE_DELIMITER = ":";
-		for(String element : elements) {
-			String[] pair = element.split(ON_COLON_NAME_VALUE_DELIMITER);
-			event.put(pair[0].trim(), pair[1].trim());
+	// See http://stackoverflow.com/questions/70324/java-inner-class-and-static-nested-class
+	// See http://docs.oracle.com/javase/tutorial/java/javaOO/whentouse.html ...
+	//     ... "When to Use Nested Classes, Local Classes, Anonymous Classes, and Lambda Expressions "
+	private static class AuctionEvent {
+		
+		private static final AuctionEvent auctionEvent = new AuctionEvent();
+		
+		private HashMap<String, String> auctionEventFields = new HashMap<String, String>();
+		
+		static AuctionEvent find(String messageBody) {
+			auctionEvent.unpackEvents(messageBody);
+			return auctionEvent;
 		}
-		return event;
+		
+		private void unpackEvents(String messageBody) {
+			final String ON_SEMICOLON_DELIMITER = ";";
+			String[] elements = messageBody.split(ON_SEMICOLON_DELIMITER);
+
+			final String ON_COLON_NAME_VALUE_DELIMITER = ":";
+			for(String element : elements) {
+				String[] pair = element.split(ON_COLON_NAME_VALUE_DELIMITER);
+				auctionEventFields.put(pair[0].trim(), pair[1].trim());
+			}
+		}
+		
+		String getEventType() {
+			return auctionEventFields.get("Event");
+		}
+		
+		int getCurrentPrice() {
+			return Integer.parseInt(auctionEventFields.get("CurrentPrice"));
+		}
+		
+		int getIncrement() {
+			return Integer.parseInt(auctionEventFields.get("Increment"));
+		}
 	}
 }
