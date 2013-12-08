@@ -11,7 +11,7 @@ import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Message;
 
-public class Main implements SniperListener {
+public class Main {
 	@SuppressWarnings("unused") private Chat notToBeGCd;
 	
 	private MainWindow ui;
@@ -61,7 +61,7 @@ public class Main implements SniperListener {
 		
 		Auction auction = new XMPPAuction(chat);
 		chat.addMessageListener(
-			new AuctionMessageTranslator(new AuctionSniper(auction, this)));
+			new AuctionMessageTranslator(new AuctionSniper(auction, new SniperStateDisplayer(ui))));
 		auction.join();
 	}
 	
@@ -103,23 +103,4 @@ public class Main implements SniperListener {
 			e.printStackTrace();
 		}
 	}
-	
-	// Implement the SniperListener interface
-	public void sniperBidding() {
-  	SwingUtilities.invokeLater(new Runnable() {
-  		@Override
-  		public void run() {
-  			ui.showStatus(STATUS_BIDDING);
-  		}
-  	});
-  }
- 	
-	public void sniperLost() {
-  	SwingUtilities.invokeLater(new Runnable() {
-  		@Override
-  		public void run() {
-  			ui.showStatus(STATUS_LOST);
-  		}
-  	});
- 	}
  }
