@@ -9,6 +9,10 @@ Project Wordfile=
 Project TpFile=
 Filter=
 Create Tagfile=0
+Compilable=0
+Using VCS=1
+Save Account=0
+CTags Legacy Support=0
 [Files]
 0=..\..\..\..\..\..\bin\cpj.bat
 1=..\..\..\..\..\..\bin\cpj2.bat
@@ -165,7 +169,7 @@ Create Tagfile=0
 6=pom.xml
 7=build_131027_juintparams_rca.xml
 8=pom_131027_junitparams_rca.xml
-9=lib\log4j2.xml
+9=lib\log4j2-test.xml
 [Files - ant_and_maven]
 0=build.properties
 1=build.xml
@@ -194,3 +198,12 @@ Create Tagfile=0
 1=src\test\java\auctionsniper\tests\acceptance\ApplicationRunner.java
 2=src\test\java\auctionsniper\tests\acceptance\AuctionSniperDriver.java
 3=src\test\java\auctionsniper\tests\acceptance\FakeAuctionServer.java
+[uemakeXp]
+Compiler=Configs\Java Compiler\Console Application
+ReleaseMode=0
+[Debug Settings]
+Program Arguments=
+Symbol Paths=
+Working Directory=
+Selected Debugger=0
+Source Paths=
