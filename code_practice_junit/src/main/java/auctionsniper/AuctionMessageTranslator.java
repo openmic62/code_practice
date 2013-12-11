@@ -1,6 +1,7 @@
 package auctionsniper;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,13 +25,13 @@ public class AuctionMessageTranslator implements MessageListener {
 		
 		AuctionEvent auctionEvent = AuctionEvent.find(message.getBody());
 		
-		String eventType = auctionEvent.getEventType();
+		String eventType = auctionEvent.eventType();
 		if ("CLOSE".equals(eventType)) {
 			auctionEventListener.auctionClosed();
 		} else if ("PRICE".equals(eventType)) {
 		 	auctionEventListener.currentPrice(
-		 		auctionEvent.getCurrentPrice(),
-		 		auctionEvent.getIncrement()
+		 		auctionEvent.currentPrice(),
+		 		auctionEvent.increment()
 		 	);
 		}
 	}
@@ -40,36 +41,44 @@ public class AuctionMessageTranslator implements MessageListener {
 	//     ... "When to Use Nested Classes, Local Classes, Anonymous Classes, and Lambda Expressions "
 	private static class AuctionEvent {
 		
-		private static final AuctionEvent auctionEvent = new AuctionEvent();
+		private Map<String, String> auctionEventFields = new HashMap<String, String>();
 		
-		private HashMap<String, String> auctionEventFields = new HashMap<String, String>();
+		String eventType() {
+			return get("Event");
+		}
+		int currentPrice() {
+			return getInt("CurrentPrice");
+		}
+		int increment() {
+			return getInt("Increment");
+		}
+		
+		private int getInt(String fieldName) { return Integer.parseInt(get(fieldName)); }
+		private String get(String fieldName) { return auctionEventFields.get(fieldName); }
 		
 		static AuctionEvent find(String messageBody) {
-			auctionEvent.unpackEvents(messageBody);
+			AuctionEvent auctionEvent = new AuctionEvent();
+			auctionEvent.parseFields(messageBody);
 			return auctionEvent;
 		}
 		
-		private void unpackEvents(String messageBody) {
-			final String ON_SEMICOLON_DELIMITER = ";";
-			String[] elements = messageBody.split(ON_SEMICOLON_DELIMITER);
+		private void parseFields(String messageBody) {
+			
+			String[] fields = fields(messageBody);
 
-			final String ON_COLON_NAME_VALUE_DELIMITER = ":";
-			for(String element : elements) {
-				String[] pair = element.split(ON_COLON_NAME_VALUE_DELIMITER);
-				auctionEventFields.put(pair[0].trim(), pair[1].trim());
+			for(String field : fields) {
+				addField(field);
 			}
 		}
 		
-		String getEventType() {
-			return auctionEventFields.get("Event");
-		}
+		private void addField(String fieldValuePair) {
+			String[] pair = fieldValuePair.split(":");
+			auctionEventFields.put(pair[0].trim(), pair[1].trim());
+		}			
 		
-		int getCurrentPrice() {
-			return Integer.parseInt(auctionEventFields.get("CurrentPrice"));
-		}
-		
-		int getIncrement() {
-			return Integer.parseInt(auctionEventFields.get("Increment"));
+		private static String[] fields(String messageBody) {
+			String[] fields = messageBody.split(";");
+			return fields;
 		}
 	}
 }
