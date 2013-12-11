@@ -47,7 +47,6 @@
  cd student\code_practice_junit
  javac -cp %CLASSPATH%;%SC% -d %SC% %SD%\auctionsniper\AuctionMessageTranslator.java
  javac -cp %CLASSPATH%;%SC%;%TC% -d %TC% %TD%\auctionsniper\tests\\unit\AuctionMessageTranslatorTests.java
- ant run-perl-openfirectl
  java  -cp %CLASSPATH%;%SC%;%TC% org.junit.runner.JUnitCore auctionsniper.tests.unit.AuctionMessageTranslatorTests
  ant compile runtest -DtestClass=AuctionMessageTranslatorTests
  
