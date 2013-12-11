@@ -82,6 +82,9 @@
  */ 
 package auctionsniper.tests.acceptance;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -95,7 +98,8 @@ import org.junit.runners.JUnit4;
 
 @RunWith(JUnit4.class)
 public class AuctionSniperEndToEndTests {
-	
+	static Logger logger = LogManager.getLogger(AuctionSniperEndToEndTests.class.getName());	
+		
 	private  FakeAuctionServer auction = new FakeAuctionServer("item-54321");
 	private  ApplicationRunner application = new ApplicationRunner();
 	
@@ -135,22 +139,25 @@ public class AuctionSniperEndToEndTests {
 		application.showsSniperHasLostAuction();
 	}
 
+	@Test
+	public void sniperWinsAnAuctionByBiddingHigher() throws Exception {}
+
 	// setup test fixture
 	@Before
 	public void setUpFixture() {
-		//System.out.println("Setup fixture...");
+		logger.info("Setup fixture...");
 	}
 
 	// clean up
 	@After
 	public void stopAuction() {
-		//System.out.println("Stop auction ...");
+		logger.info("Stop auction ...");
 		auction.stop();
 	}
 	
 	@After
 	public void stopApplication() {
-		//System.out.println("Stop Sniper ...");
+		logger.info("Stop Sniper ...");
 		application.stop();
 	}
 	
