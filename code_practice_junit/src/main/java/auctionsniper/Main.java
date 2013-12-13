@@ -29,6 +29,7 @@ public class Main {
 	public static final String STATUS_BIDDING = "Bidding in auction";
 	public static final String STATUS_JOINING = "Joining auction";
 	public static final String STATUS_WINNING = "Winning auction";
+	public static final String STATUS_WON = "Won auction!!! Bitches!";
 	public static final String STATUS_LOST = "Lost auction";
 	
 	public static final String JOIN_COMMAND_FORMAT = "SQLVersion: 1.1; Command: JOIN;";
