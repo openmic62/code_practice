@@ -56,7 +56,7 @@
  javac -cp %CLASSPATH%;%SC%;%TC% -d %TC% %TD%\auctionsniper\tests\acceptance\AuctionSniperEndToEndTests.java
  ant run-perl-openfirectl
  java  -cp %CLASSPATH%;%SC%;%TC% org.junit.runner.JUnitCore auctionsniper.tests.acceptance.AuctionSniperEndToEndTests
- ant compile runtest -DtestClass=AuctionSniperEndToEndTests
+ ant runtest -DtestClass=AuctionSniperEndToEndTests
  
  ***** build the FakeAuctionServer source file
  H:\>cd student\code_practice_junit
@@ -128,7 +128,7 @@ public class AuctionSniperEndToEndTests {
 		/* here's my code
 		auction.sendPriceToSniper(1000);
 		application.receivesPriceAndResponds();
-		auction.receivesBidFromSniper(); */
+		auction.receivesBidFromSniper(); */ 
 		
 		// here's the book's code
 		auction.reportPrice(1000, 98, "other bidder");
