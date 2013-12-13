@@ -38,8 +38,6 @@ public class FakeAuctionServer {
 	private Chat currentChat;
 	
 	private final SingleMessageListener messageListener = new SingleMessageListener();
-  	
-	private boolean isJoinCommand; // this is mine, not the book's
 	
 	public FakeAuctionServer(String item) {
 		this.itemID = item;
@@ -69,33 +67,27 @@ public class FakeAuctionServer {
 	public void hasReceivedJoinRequestFromSniper(String sniperId) 
 		throws InterruptedException 
 	{
-		///messageListener.receivesAMessage();
 		messageListener.receivesAMessage(is(anything()));
-		///receivesAMessageMatching(sniperId, equalTo(Main.JOIN_COMMAND_FORMAT));
 	}
-	
-	// <mlr 131126: begin - p. 105, single item: join, bid, and lose>
-	/*
-	public void hasReceivedBid(int bid, String sniperId) throws InterruptedException {
-		messageListener.receivesAMessage();	
-	} */
+
 	public void hasReceivedBid(int bid, String sniperId) 
 		throws InterruptedException 
 	{
-		/*
-		messageListener.receivesAMessage(
-			equalTo(
-				String.format(Main.BID_COMMAND_FORMAT, bid))); */
 		receivesAMessageMatching(sniperId, equalTo(String.format(Main.BID_COMMAND_FORMAT, bid)));
 	}
 	
-	///public void reportPrice(int price, int bidIncrement, String currentWinner) throws XMPPException {
 	public void reportPrice(int price, int increment, String bidder) 
 	  throws XMPPException 
 	{
-		///currentChat.sendMessage("SQLVersion: 1.1; Command: PRICE-" + price + "," + increment + ";");
 		currentChat.sendMessage(
 			String.format(Main.REPORT_PRICE_COMMAND_FORMAT, price, increment, bidder));
+	}
+	
+	public void reportWinningBid(int winningBid, String bidder) 
+	  throws XMPPException 
+	{
+		currentChat.sendMessage(
+			String.format(Main.WINNER_COMMAND_FORMAT, winningBid, bidder));
 	}
 	
 	private void receivesAMessageMatching(String sniperId, org.hamcrest.Matcher<? super String> messageMatcher)
@@ -104,10 +96,8 @@ public class FakeAuctionServer {
 		messageListener.receivesAMessage(messageMatcher);
 		assertThat(currentChat.getParticipant(), equalTo(sniperId));
 	}
-	// <mlr 131126: end - p. 105, single item: join, bid, and lose>
 	
 	public void announceClosed() throws XMPPException {
-		//currentChat.sendMessage(new Message());
 		currentChat.sendMessage(Main.CLOSE_COMMAND_FORMAT);
 	}
 	
@@ -122,58 +112,17 @@ public class FakeAuctionServer {
 		@Override
     public void processMessage(Chat currentChat, Message message) {
     	messages.add(message);
-    	/* <mlr 131113: begin - this is my stuff, not the book's> *
-      String messageBody = message.getBody().toString();
-      String command = getSniperCommandFromMessage(messageBody);
-      isJoinCommand = command.equals("JOIN") ? true : false;
-      *<mlr 131113: end - this is my stuff, not the book's> */
     }
-    
-    /*
-    public void receivesAMessage() throws InterruptedException {
-    	//System.out.println("FAS: message received -->" + message.getBody() + "<--");
-    	assertThat("Message", messages.poll(5, TimeUnit.SECONDS), is(notNullValue()));
-    }*/
+
     @SuppressWarnings("unchecked")
     public void receivesAMessage(org.hamcrest.Matcher<? super String> messageMatcher) 
     	throws InterruptedException 
     {
     	final Message message = messages.poll(5, TimeUnit.SECONDS);
-    	///System.out.println("FAS: message received -->" + message.getBody() + "<--");
+
     	logger.debug("message received -->" + message.getBody() + "<--");
     	assertThat("Message", message, is(notNullValue()));
     	assertThat(message.getBody(), messageMatcher);
     }
   }
-  
-  /* <mlr 131113: begin - this is my stuff, not the book's> */
-  public String getSniperCommandFromMessage(String message) {
-		// example message-->SQLVersion: 1.1; Command: JOIN;<--
-		
-		final String ON_SEMICOLON_DELIMITER = ";";
-		String[] fields = message.split(ON_SEMICOLON_DELIMITER);
-
-		/* REGEX means: the text "Command: ", start remembering, followed by
-		                one of "JOIN" or "BID", stop remembering
-		 */
-		final String REGEX = "Command: (JOIN|BID)";
-		Pattern pattern =
-		Pattern.compile(REGEX);
-
-		String returnValue = null;
-		for(String field : fields) {
-			Matcher matcher =
-			pattern.matcher(field);
-			
-			if (field.contains("Command:")) {
-			 	matcher.find();
-			 	returnValue = matcher.group(1);
-			}
-			
-		}
-		return returnValue;
-		///return "Just a plain Jane string, dear.";
-	}
-  /* <mlr 131113: end - this is my stuff, not the book's> */
-
 }
