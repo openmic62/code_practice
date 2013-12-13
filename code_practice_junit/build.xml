@@ -240,19 +240,67 @@
 	     #                                                                #
 	     ##################################################################
 	-->
-	<!-- PROPERTY - that determines the tests to include -->
-	<property name="UTSet" value="sniper"/>
-
 	<!-- PATTERNSET - that selects the unit tests -->
   <patternset id="unit.tests">
-  	<include name="*Tests.java" unless="UTSet"/>
-  	<include name="auctionsniper/tests/unit/*Tests.java" if="UTSet"/>
-  	<exclude name="**/*_bad.java"/>
+  	<include name="*Tests.java"                                if="RunLearningCurveUnitTests"/>
+  	<include name="auctionsniper/tests/unit/*Tests.java"       if="RunAuctionSniperUnitTests"/>
+   	<include name="auctionsniper/tests/acceptance/*Tests.java" if="RunAuctionSniperAcceptanceTests"/>
+	 	<exclude name="**/*_bad.java"/>
   	<exclude name="**/Reentrant*"/>
   </patternset>
   
+ 	<!-- PROPERTY - set the property that determines unit tests to run (CLI overridable) -->
+ <property name="UTSet" value="sniper"/>
+  
+	<!-- MACRODEF - that abstracts a task to determine a set of unit tests to execute -->
+	<macrodef name="configureTestSet">
+		<attribute name="mUTSet" default="sniper"/>
+		<attribute name="mSubstring" default="sniper"/>
+		<attribute name="mProperty" default="RunAuctionSniperUnitTests"/>
+		<sequential>
+			<if>
+				<contains string="@{mUTSet}" substring="@{mSubstring}"/>
+				<then>
+					<property name="@{mProperty}" value="true"/>
+				</then>
+			</if>
+		</sequential>
+	</macrodef>
+
+	<!-- MACRODEF - that abstracts a task to manage Openfire sever using a Perl script -->
+	<!-- TODO: 131213 - rethink the decision making; decide how to provide messaging -->
+	<macrodef name="runPerlScript">
+		<attribute name="mEnableLock" default="AuctionSniperEndToEndTests"/>
+		<attribute name="mEnableKey" default="EndToEndTests"/>
+		<attribute name="mMessage" default="put_a_message_here"/>
+		<attribute name="mScriptName" default="run-perl-openfirectl"/>
+		<sequential>
+			<if>
+				<contains string="@{mEnableLock}" substring="@{mEnableKey}"/>
+				<then>
+					<antcall target="@{mScriptName}"/>
+				</then>
+			</if>
+		</sequential>
+	</macrodef>
+
+	<!-- TARGET - that configures the unit tests to execute -->
+	<target name="configure-unit-tests">
+		<configureTestSet mUTSet="${UTSet}" mSubstring="sniper"           mProperty="RunAuctionSniperUnitTests"/>
+		<configureTestSet mUTSet="${UTSet}" mSubstring="sniperAcceptance" mProperty="RunAuctionSniperAcceptanceTests"/>
+		<configureTestSet mUTSet="${UTSet}" mSubstring="learningCurve"    mProperty="RunLearningCurveUnitTests"/>
+		<if>
+			<contains string="${UTSet}" substring="all"/>
+			<then>
+				<property name="RunAuctionSniperUnitTests" value="true"/>
+				<property name="RunLearningCurveUnitTests" value="true"/>
+			</then>
+		</if>
+		<echo>Running tests for: ${UTSet}</echo>
+	</target>
+
 	<!-- TARGET - that compiles the unit testing source files -->
-	<target name="compileUT">
+	<target name="compileUT" depends="configure-unit-tests">
 		<mkdir dir="${classesUT.dir}"/>
 		<javac srcdir="${srcUT.dir}"
 			destdir="${classesUT.dir}"
@@ -271,6 +319,10 @@
 		<mkdir dir="${reportUT.dir}"/>
 		<mkdir dir="${reportUT.dir}/xml"/>
 		<mkdir dir="${reportUT.dir}/html"/>
+
+		<!-- Make sure the Openfire server is running when performing end-to-end acceptance tests -->
+		<runPerlScript mEnableLock="${UTSet}" mEnableKey="sniperAcceptance" mScriptName="run-perl-openfirectl" mMessage=""/>
+
 		<junit printsummary="yes"
 			haltonfailure="yes"
 			showoutput="yes"
@@ -296,7 +348,7 @@
 
 	<!-- TARGET (CLI) - that one button builds and runs the unit tests -->
 	<target name="junit_full_clean" depends="clean_all,compile,jar,compileUT,junit"
-		description="Usage: ant junit_full_clean (clean_all,compile,jar,compileUT,junit)"/>
+		description="Usage: ant junit_full_clean [-DUTSet=sniperAcceptance] (clean_all,compile,jar,compileUT,junit)"/>
 		
 	<!-- TARGET (CLI) - that one button builds, runs, and creates a report for the unit tests -->
 	<target name="junitreport" depends="junit_full_clean,junitreport-generate"
@@ -347,17 +399,9 @@
 		
 	<!-- TARGET - that executes a single unit test -->
 	<target name="runtest-do-it">
-		<!-- <mlr 131117: begin - add capability to run Perl script that starts Openfire -->
-		<if>
-			<contains string="${testClass}" substring="EndToEndTests"/>
-			<then>
-				<antcall target="run-perl-openfirectl"/>
-			</then>
-			<else>
-				<echo>Unit/Integration Test: ${testClass}</echo>
-			</else>
-		</if>
-		<!-- <mlr 131117: end - add capability to run Perl script that starts Openfire -->
+
+		<!-- Make sure the Openfire server is running when performing end-to-end acceptance tests -->
+		<runPerlScript mEnableLock="${testClass}" mEnableKey="EndToEnd" mScriptName="run-perl-openfirectl" mMessage=""/>
 			           
 		<junit printsummary="withOutAndErr" fork="yes">
 			<!--<sysproperty key="tests" value="${tests}"/>-->

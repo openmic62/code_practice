@@ -67,7 +67,7 @@
  
  ***** run the Tests (command line Ant)
  H:\student\code_practice_junit>ant clean_all
- H:\student\code_practice_junit>ant compile runtest -DtestClass=AuctionMessageTranslatorTests
+ H:\student\code_practice_junit>ant runtest -DtestClass=AuctionMessageTranslatorTests
 
  ***** run the Tests (command line Maven)
  H:\student\code_practice_junit>mvn antrun:run test -Dtest=AuctionMessageTranslatorTests
