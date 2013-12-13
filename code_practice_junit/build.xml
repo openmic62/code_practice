@@ -27,7 +27,7 @@
 	<!-- Nice example at ...
 	http://stackoverflow.com/questions/722774/getting-ant-javac-to-recognise-a-classpath
 	-->
-	<path id="master-classpath">
+	<path id="master-classpathXXX">
 		<!--
 		<fileset dir="${web.dir}/WEB-INF/lib">
 			<include name="*.jar"/>
@@ -72,7 +72,7 @@
 			destdir="${build.dir}"
 			srcdir="src/main/java"
 			includeantruntime="false">
-			<classpath refid="master-classpath"/>
+			<classpath refid="master-classpathXXX"/>
 			<exclude name="**/*_bad.java"/>
 			<compilerarg value="-Xlint:unchecked" />
 		</javac>
@@ -99,10 +99,28 @@
 	<!-- <mlr 131020: end - sandbox for learning macrodefs.> -->
 
 
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	<!-- 
+	     ##################################################################
+	     #                                                                #
+	     #       Begin Production (non-sandbox) Build Configuration       #
+	     #                                                                #
+	     ##################################################################
+	-->
 	<!-- URL: http://ant.apache.org/manual/tutorial-HelloWorldWithAnt.html -->
 	<!-- <mlr 131009: begin - Tutorial: Hello World with Apache Ant> -->
-
-	<!-- Set properties as shown in the Tutorial -->
+	<!-- PROPERTIES - set properties for the project -->
 	<property name="src.dir" value="src/main/java"/>
 	<property name="srcUT.dir" value="src/test/java"/>
 	<property name="build.dir" value="target"/>
@@ -118,24 +136,32 @@
 	<property name="main-class" value="ADayInTheLife"/>
 	<property name="app.jar" value="${jar.dir}/${ant.project.name}.jar"/>
 
-	<!-- Make an Ant <path> for use as classpath to find the log4j-1.2.17.jar -->
-	<path id="classpath">
+	<!-- PATH - for use as classpath to find the jar files for the libraries we're using -->
+	<path id="master-classpath">
 		<fileset dir="${lib.dir}" includes="*.jar"/>
 	</path>
 
-	<!-- Make an Ant <path> that abstracts our app.jar; for use with junit -->
+	<!-- PATH - that abstracts our app.jar; for use with junit -->
 	<path id="application" location="${app.jar}"/>
 
-	<!-- Make a patternset that selects the app. derived objects. -->
+	<!-- PATTERNSET - that selects the app. derived objects. -->
 	<patternset id="app.objs">
 		<include name="${classes.dir}/**/*.class"/>
 	</patternset>
-	<!-- The clean target in the Tutorial simply deletes the build dir.
-	I want to keep my pre-defined directory structure and just delete
-	the derived objects.
 
-	TODO: keep the pre-defined directory, but clean everything below
+	<!-- PATTERNSET - that selects the test derived objects. -->
+	<patternset id="unit.test.objs">
+		<include name="${classesUT.dir}/**/*.class"/>
+	</patternset>
+
+	<!-- 
+	     ##################################################################
+	     #                                                                #
+	     #                         CLEAN TARGETS                          #
+	     #                                                                #
+	     ##################################################################
 	-->
+	<!-- TARGET - that cleans the production derived objects -->
 	<target name="clean">
 		<delete>
 			<fileset dir=".">
@@ -145,11 +171,7 @@
 		<delete file="${app.jar}"/>
 	</target>
 
-	<!-- Make a patternset that selects the test derived objects. -->
-	<patternset id="unit.test.objs">
-		<include name="${classesUT.dir}/**/*.class"/>
-	</patternset>
-
+	<!-- TARGET - that cleans the testing derived objects -->
 	<target name="cleanUT">
 		<delete>
 			<fileset dir=".">
@@ -158,11 +180,21 @@
 		</delete>
 	</target>
 
-	<target name="clean_all" depends="clean,cleanUT"/>
+	<!-- TARGET (CLI) - that one button cleans all the derived objects -->
+	<target name="clean_all" depends="clean,cleanUT"
+		description="Usage: ant clean_all (clean, cleanUT)"/>
 
+	<!-- 
+	     ##################################################################
+	     #                                                                #
+	     #                    APPLICATION TARGETS                         #
+	     #                                                                #
+	     ##################################################################
+	-->
+	<!-- TARGET - that compiles the production source files -->
 	<target name="compile">
 		<mkdir dir="${classes.dir}"/>
-		<javac classpathref="classpath"
+		<javac classpathref="master-classpath"
 			srcdir="${src.dir}"
 			destdir="${classes.dir}"
 			includeantruntime="true">
@@ -173,7 +205,7 @@
 		</copy>
 	</target>
 
-	<!--<target name="jar" depends="compile">-->
+	<!-- TARGET - that packages the production derived objects -->
 	<target name="jar">
 		<mkdir dir="${jar.dir}"/>
 		<jar destfile="${app.jar}"
@@ -184,36 +216,56 @@
 		</jar>
 	</target>
 
-	<target name="compileUT" depends="compile,jar">
-		<mkdir dir="${classesUT.dir}"/>
-		<javac srcdir="${srcUT.dir}"
-			destdir="${classesUT.dir}"
-			includeantruntime="true">
-			<classpath>
-				<path refid="classpath"/>
-				<path refid="application"/>
-			</classpath>
-			<exclude name="**/*_bad.java"/>
-			<exclude name="**/Reentrant*"/>
-		</javac>
-	</target>
-
-	<!--<target name="run" depends="jar">-->
+	<!-- TARGET - that executes the production application -->
 	<target name="run">
 		<java classname="${main-class}"
 			fork="true">
 			<arg value="-list_all"/>
 			<classpath>
-				<path refid="classpath"/>
+				<path refid="master-classpath"/>
 				<path refid="application"/>
 				<path location="${app.objs}"/>
 			</classpath>
 		</java>
 	</target>
 
-	<target name="main" depends="clean,compile,jar,run"/>
+	<!-- TARGET (CLI) - that one button builds and runs the application -->
+	<target name="main" depends="clean,compile,jar,run"
+		description="Usage: ant (clean, compile, jar, run - using Mr. Happy events example)"/>
 
-	<!--<target name="junit" depends="compile,jar">-->
+	<!-- 
+	     ##################################################################
+	     #                                                                #
+	     #                 UNIT TEST TARGETS (comprehensive)              #
+	     #                                                                #
+	     ##################################################################
+	-->
+	<!-- PROPERTY - that determines the tests to include -->
+	<property name="UTSet" value="sniper"/>
+
+	<!-- PATTERNSET - that selects the unit tests -->
+  <patternset id="unit.tests">
+  	<include name="*Tests.java" unless="UTSet"/>
+  	<include name="auctionsniper/tests/unit/*Tests.java" if="UTSet"/>
+  	<exclude name="**/*_bad.java"/>
+  	<exclude name="**/Reentrant*"/>
+  </patternset>
+  
+	<!-- TARGET - that compiles the unit testing source files -->
+	<target name="compileUT">
+		<mkdir dir="${classesUT.dir}"/>
+		<javac srcdir="${srcUT.dir}"
+			destdir="${classesUT.dir}"
+			includeantruntime="true">
+			<classpath>
+				<path refid="master-classpath"/>
+				<path refid="application"/>
+			</classpath>
+			<patternset refid="unit.tests"/>
+		</javac>
+	</target>
+
+	<!-- TARGET - that executes the unit testing suite -->
 	<target name="junit">
 		<delete dir="${reportUT.dir}"/>
 		<mkdir dir="${reportUT.dir}"/>
@@ -225,30 +277,33 @@
 			tempdir="${reportUT.dir}">
 			<!--<test name="${ant.project.name}"  todir="${reportUT.dir}" />-->
 			<classpath>
-				<path refid="classpath"/>
+				<path refid="master-classpath"/>
 				<path location="${classes.dir}"/>
 				<path location="${classesUT.dir}"/>
 				<!--<path refid="application"/>-->
 			</classpath>
 
-			<!-- TODO: get this output to go where I want it to -->
-			<!--<formatter type="plain"/>-->
-			<!--<formatter type="xml"/>-->
 			<formatter type="xml"/>
 
 			<batchtest fork="yes" todir="${reportUT.dir}/xml">
 				<fileset dir="${srcUT.dir}"
-					includes="*Tests.java"
-				excludes="Reentrant* FillInTheBlank* Template*"/>
+					excludes="FillInTheBlank* Template*">
+			    <patternset refid="unit.tests"/>
+				</fileset>
 			</batchtest>
 		</junit>
 	</target>
 
-	<target name="junit_full_clean" depends="clean_all,compileUT,junit"/>
+	<!-- TARGET (CLI) - that one button builds and runs the unit tests -->
+	<target name="junit_full_clean" depends="clean_all,compile,jar,compileUT,junit"
+		description="Usage: ant junit_full_clean (clean_all,compile,jar,compileUT,junit)"/>
+		
+	<!-- TARGET (CLI) - that one button builds, runs, and creates a report for the unit tests -->
+	<target name="junitreport" depends="junit_full_clean,junitreport-generate"
+		description="Usage: ant junitreport (junit_full_clean,junitreport-generate)"/>
 
-	<target name="junitreport"
-		description="Runs all JUnit tests and creates a report (clean_all 1st)"
-		depends="junit_full_clean">
+	<!-- TARGET - that executes the unit testing suite -->
+	<target name="junitreport-generate">
 		<junitreport todir="${reportUT.dir}/xml">
 			<fileset dir="${reportUT.dir}/xml" includes="TEST-*.xml"/>
 			<report format="frames" styledir="${ant.home}/etc" todir="${reportUT.dir}/html"/>
@@ -257,14 +312,22 @@
 	</target>
 	<!-- <mlr 131009: end - Tutorial: Hello World with Apache Ant> -->
 
+	<!-- 
+	     ##################################################################
+	     #                                                                #
+	     #       SINGLE UNIT TEST TARGETS (use during developement)       #
+	     #                                                                #
+	     ##################################################################
+	-->
 	<!-- <mlr 131010: begin - add capability to run specific tests during development -->
+	<!-- TARGET - that compiles a single unit testing source file -->
 	<target name="compileRT">
 		<mkdir dir="${classesUT.dir}"/>
 		<javac srcdir="${srcUT.dir}"
 			destdir="${classesUT.dir}"
 			includeantruntime="true">
 			<classpath>
-				<path refid="classpath"/>
+				<path refid="master-classpath"/>
 				<path refid="application"/>
 				<path location="${classes.dir}"/>
 			</classpath>
@@ -272,13 +335,18 @@
 		</javac>
 	</target>
 
+	<!-- TARGET - that enforces a correct command line to run a single unit test -->
 	<target name="ensure-test-name" unless="testClass">
 		<fail message="You must run this target with -DtestClass=TestClassName"/>
 	</target>
 
+	<!-- TARGET (CLI) - that one button builds and runs a single unit test -->
 	<target name="runtest"
-		description="Runs the test you specify on the command line with -DtestClass="
-		depends="compileRT,ensure-test-name">
+		depends="ensure-test-name,compile,compileRT,runtest-do-it"
+		description="Usage: ant runtest -DtestClass=AuctionSniperEndToEndTests"/>
+		
+	<!-- TARGET - that executes a single unit test -->
+	<target name="runtest-do-it">
 		<!-- <mlr 131117: begin - add capability to run Perl script that starts Openfire -->
 		<if>
 			<contains string="${testClass}" substring="EndToEndTests"/>
@@ -294,7 +362,7 @@
 		<junit printsummary="withOutAndErr" fork="yes">
 			<!--<sysproperty key="tests" value="${tests}"/>-->
 			<classpath>
-				<path refid="classpath"/>
+				<path refid="master-classpath"/>
 				<path location="${classes.dir}"/>
 				<path location="${classesUT.dir}"/>
 				<!--<path refid="application"/>-->
@@ -309,18 +377,28 @@
 	</target>
 	<!-- <mlr 131010: end - add capability to run specific tests during development -->
 	
+	<!-- 
+	     ##################################################################
+	     #                                                                #
+	     #                      SPECIAL PURPOSE TARGETS                   #
+	     #                                                                #
+	     ##################################################################
+	-->
 	<!-- <mlr 131117: begin - add capability to run Perl script that starts Openfire -->
 	<!-- Usage: ant run-perl-openfirectl
 	            ant run-perl-openfirectl -DperlVerbose=""
-	            ant run-perl-openfirectl -Dcommand=kill
+	            ant run-perl-openfirectl -Dcommand=kill;
 	            ant run-perl-openfirectl -DperlDebug=args_kill
 	            ant run-perl-openfirectl -DperlDebug=args_kill -Dcommand=kill
 	-->
+	<!-- PROPERTIES - set properties for the custome target -->
 	<property name="command" value="start"/>
 	<property name="perlDebug" value=""/>
 	<property name="perlVerbose" value="-v"/>
+	<!-- TARGET (CLI) - that one button runs a perl script for managing the Openfire server -->
 	<target name="run-perl-openfirectl"
-		description="Runs the Perl script openfirectl.pl that starts the Openfire server">
+		description="Usage: ant run-perl-openfirectl [-Dcommand=kill]">
+
 		<exec executable="perl" dir="${basedir}">
 			<arg value="${scriptsTest.dir}/openfirectl.pl"/>
 			<arg value="${perlVerbose}"/>
