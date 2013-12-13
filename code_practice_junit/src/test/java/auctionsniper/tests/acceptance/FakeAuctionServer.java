@@ -83,12 +83,14 @@ public class FakeAuctionServer {
 			String.format(Main.REPORT_PRICE_COMMAND_FORMAT, price, increment, bidder));
 	}
 	
+	/* <mlr 131213: begin - my domain logic reasonind differed from the book's>
 	public void reportWinningBid(int winningBid, String bidder) 
 	  throws XMPPException 
 	{
 		currentChat.sendMessage(
 			String.format(Main.WINNER_COMMAND_FORMAT, winningBid, bidder));
 	}
+	<mlr 131213: end - my domain logic reasonind differed from the book's> */
 	
 	private void receivesAMessageMatching(String sniperId, org.hamcrest.Matcher<? super String> messageMatcher)
 		throws InterruptedException 
