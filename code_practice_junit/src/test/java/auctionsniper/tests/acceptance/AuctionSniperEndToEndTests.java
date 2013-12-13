@@ -79,6 +79,14 @@
 
  ***** run the Tests (command line Maven)
  H:\student\code_practice_junit>mvn antrun:run test -Dtest=AuctionSniperEndToEndTests
+ 
+   http://stackoverflow.com/questions/6819888/how-to-run-all-tests-in-a-particular-package-with-maven
+   mvn test                                                 - all tests
+   mvn test -Dtest=auctionsniper.tests.unit.*Tests          - AuctionSniper all unit tests only
+   mvn antrun:run test -Dtest=AuctionMessageTranslatorTests - Auction Sniper only the specified unit test
+   mvn antrun:run test -Dtest=auctionsniper.tests.*.*Tests  - start Openfire server, AuctionSniper acceptance and unit tests
+   mvn antrun:run test -Dtest=AuctionSniperEndToEndTests    - start Openfire server, AuctionSniper acceptance tests only
+
  */ 
 package auctionsniper.tests.acceptance;
 

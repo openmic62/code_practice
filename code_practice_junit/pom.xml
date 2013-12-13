@@ -139,10 +139,21 @@
 						<docfilessubdirs>false</docfilessubdirs>
 					</configuration>
 				</plugin>
+				
+				<!-- <mlr 131213: begin - insert comments for CLI to test various combinations> -->
+				<!--
+				     http://stackoverflow.com/questions/6819888/how-to-run-all-tests-in-a-particular-package-with-maven
+				     mvn test                                                 - all tests
+				     mvn test -Dtest=auctionsniper.tests.unit.*Tests          - AuctionSniper all unit tests only
+			 	     mvn antrun:run test -Dtest=AuctionMessageTranslatorTests - Auction Sniper only the specified unit test
+				     mvn antrun:run test -Dtest=auctionsniper.tests.*.*Tests  - start Openfire server, AuctionSniper acceptance and unit tests
+				     mvn antrun:run test -Dtest=AuctionSniperEndToEndTests    - start Openfire server, AuctionSniper acceptance tests only
+				-->
+				<!-- <mlr 131213: end - insert comments for CLI to test various combinations> -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
-					<version>2.13</version>
+					<version>2.16</version>
 					<configuration>
 						<includes>
 							<include>**/*Tests.java</include>
@@ -152,6 +163,7 @@
 						</excludes>
 					</configuration>
 				</plugin>
+				
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-jar-plugin</artifactId>
