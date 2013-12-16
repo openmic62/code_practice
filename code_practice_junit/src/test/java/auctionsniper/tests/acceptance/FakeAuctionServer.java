@@ -127,4 +127,39 @@ public class FakeAuctionServer {
     	assertThat(message.getBody(), messageMatcher);
     }
   }
+  
+  
+  
+  
+  
+  /* <mlr 131113: begin - this is my stuff, not the book's> */
+  // <mlr 131213: keep this to support the JUnitParams tests
+  public String getSniperCommandFromMessage(String message) {
+		// example message-->SQLVersion: 1.1; Command: JOIN;<--
+		
+		final String ON_SEMICOLON_DELIMITER = ";";
+		String[] fields = message.split(ON_SEMICOLON_DELIMITER);
+
+		/* REGEX means: the text "Command: ", start remembering, followed by
+		                one of "JOIN" or "BID", stop remembering
+		 */
+		final String REGEX = "Command: (JOIN|BID)";
+		Pattern pattern =
+		Pattern.compile(REGEX);
+
+		String returnValue = null;
+		for(String field : fields) {
+			Matcher matcher =
+			pattern.matcher(field);
+			
+			if (field.contains("Command:")) {
+			 	matcher.find();
+			 	returnValue = matcher.group(1);
+			}
+			
+		}
+		return returnValue;
+		///return "Just a plain Jane string, dear.";
+	}
+  /* <mlr 131113: end - this is my stuff, not the book's> */
 }

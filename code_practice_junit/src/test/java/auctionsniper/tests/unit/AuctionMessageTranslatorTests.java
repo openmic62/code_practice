@@ -76,6 +76,7 @@ package auctionsniper.tests.unit;
 
 import auctionsniper.AuctionEventListener;
 import auctionsniper.AuctionMessageTranslator;
+import auctionsniper.tests.AuctionSniperTestUtilities;
 
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.packet.Message;
@@ -91,8 +92,9 @@ public class AuctionMessageTranslatorTests {
 	
 	@Rule public final JUnitRuleMockery context = new JUnitRuleMockery();
 	private final AuctionEventListener listener = context.mock(AuctionEventListener.class);
+	private final String SNIPER_XMPP_ID = String.format("sniper@%s/Auction", AuctionSniperTestUtilities.myGetHostName());
 	
-	private final AuctionMessageTranslator translator = new AuctionMessageTranslator(listener);
+	private final AuctionMessageTranslator translator = new AuctionMessageTranslator(SNIPER_XMPP_ID, listener);
 	
 	@Test public void 
 	notifiesAuctionClosedWhenCloseMessageReceived() {
@@ -107,12 +109,23 @@ public class AuctionMessageTranslatorTests {
 	}
 	
 	@Test public void
-	notifiesBidDetailsWhenPriceMessageReceived() {
+	notifiesBidDetailsWhenPriceMessageReceivedFromOtherBidder() {
 		context.checking(new Expectations() {{
-			oneOf(listener).currentPrice(192, 7);
+			oneOf(listener).currentPrice(192, 7, AuctionEventListener.PriceSource.FromOtherBidder);
 		}});
 		Message message = new Message();
 		message.setBody("SQLVersion: 1.1; Event: PRICE; CurrentPrice: 192; Increment: 7; Bidder: Someone else;");
+		
+		translator.processMessage(UNUSED_CHAT, message);
+	}
+	
+	@Test public void
+	notifiesBidDetailsWhenPriceMessageReceivedFromSniper() {
+		context.checking(new Expectations() {{
+			oneOf(listener).currentPrice(234, 5, AuctionEventListener.PriceSource.FromSniper);
+		}});
+		Message message = new Message();
+		message.setBody("SQLVersion: 1.1; Event: PRICE; CurrentPrice: 234; Increment: 5; Bidder: " + SNIPER_XMPP_ID + ";");
 		
 		translator.processMessage(UNUSED_CHAT, message);
 	}

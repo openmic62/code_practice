@@ -14,9 +14,11 @@ public class AuctionMessageTranslator implements MessageListener {
 	static Logger logger = LogManager.getLogger(AuctionMessageTranslator.class.getName());	
 	
 	private AuctionEventListener auctionEventListener;
+	private String sniperXmppID;
 	
-	public AuctionMessageTranslator(AuctionEventListener ael) {
+	public AuctionMessageTranslator(String sniperXmppID, AuctionEventListener ael) {
 		this.auctionEventListener = ael;
+		this.sniperXmppID = sniperXmppID;
 	}
 	
 	@Override
@@ -31,7 +33,8 @@ public class AuctionMessageTranslator implements MessageListener {
 		} else if ("PRICE".equals(eventType)) {
 		 	auctionEventListener.currentPrice(
 		 		auctionEvent.currentPrice(),
-		 		auctionEvent.increment()
+		 		auctionEvent.increment(),
+		 		auctionEvent.isFrom(sniperXmppID)
 		 	);
 		}
 	}
@@ -43,6 +46,9 @@ public class AuctionMessageTranslator implements MessageListener {
 		
 		private Map<String, String> auctionEventFields = new HashMap<String, String>();
 		
+		AuctionEventListener.PriceSource isFrom(String iD) {
+			return bidder().contains(iD) ? AuctionEventListener.PriceSource.FromSniper : AuctionEventListener.PriceSource.FromOtherBidder;
+		}
 		String eventType() {
 			return get("Event");
 		}
@@ -53,6 +59,7 @@ public class AuctionMessageTranslator implements MessageListener {
 			return getInt("Increment");
 		}
 		
+		private String bidder() { return get("Bidder"); }
 		private int getInt(String fieldName) { return Integer.parseInt(get(fieldName)); }
 		private String get(String fieldName) { return auctionEventFields.get(fieldName); }
 		
