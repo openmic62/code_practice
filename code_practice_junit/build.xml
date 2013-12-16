@@ -245,6 +245,7 @@
   	<include name="*Tests.java"                                if="RunLearningCurveUnitTests"/>
   	<include name="auctionsniper/tests/unit/*Tests.java"       if="RunAuctionSniperUnitTests"/>
    	<include name="auctionsniper/tests/acceptance/*Tests.java" if="RunAuctionSniperAcceptanceTests"/>
+   	<include name="auctionsniper/tests/AuctionSniperTestUtilities.java"/>
 	 	<exclude name="**/*_bad.java"/>
   	<exclude name="**/Reentrant*"/>
   </patternset>

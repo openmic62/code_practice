@@ -1,7 +1,7 @@
 package auctionsniper.tests.acceptance;
 
 import auctionsniper.Main;
-import java.net.UnknownHostException;
+import auctionsniper.tests.AuctionSniperTestUtilities;
 
 public class ApplicationRunner {
 	
@@ -12,20 +12,7 @@ public class ApplicationRunner {
 	// <mlr 131126: begin - p. 105, single item: join, bid, and lose>
 	///public static final String SNIPER_XMPP_ID = "xxx";
 	///public static final String SNIPER_XMPP_ID = "sniper@roco-3/Auction";
-	public static final String SNIPER_XMPP_ID = String.format("sniper@%s/Auction", myGetHostName());
-	
-	// <mlr 131205: begin - I added this to get around testing on Openfire running on home ("roco-3") and work ("vi-1057") laptops>
-	private static String myGetHostName() {
-		String hostName = null;
-		try {
-			hostName = java.net.InetAddress.getLocalHost().getHostName();
-		} catch (UnknownHostException uhe) {
-			 uhe.printStackTrace();
-		}
-		return hostName;
-	}
-	// <mlr 131205: begin - I added this to get around testing on Openfire running on home ("roco-3") and work ("vi-1057") laptops>
-
+	public static final String SNIPER_XMPP_ID = String.format("sniper@%s/Auction", AuctionSniperTestUtilities.myGetHostName());
 	// <mlr 131126: end - p. 105, single item: join, bid, and lose>
 	
 	public void startBiddingIn(FakeAuctionServer auction) {
