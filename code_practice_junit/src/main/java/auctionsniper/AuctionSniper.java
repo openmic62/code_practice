@@ -20,7 +20,11 @@ public class AuctionSniper implements AuctionEventListener {
 	}
 	
 	public void currentPrice(int price, int increment, PriceSource source){
-		auction.bid(price + increment);
-		sniperListener.sniperBidding();
+		if (source.equals(PriceSource.FromSniper)) {
+		 	sniperListener.sniperWinning();
+		} else {
+			auction.bid(price + increment);
+			sniperListener.sniperBidding();
+		}
 	}
 }

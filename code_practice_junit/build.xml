@@ -245,7 +245,6 @@
   	<include name="*Tests.java"                                if="RunLearningCurveUnitTests"/>
   	<include name="auctionsniper/tests/unit/*Tests.java"       if="RunAuctionSniperUnitTests"/>
    	<include name="auctionsniper/tests/acceptance/*Tests.java" if="RunAuctionSniperAcceptanceTests"/>
-   	<include name="auctionsniper/tests/AuctionSniperTestUtilities.java"/>
 	 	<exclude name="**/*_bad.java"/>
   	<exclude name="**/Reentrant*"/>
   </patternset>
@@ -311,6 +310,7 @@
 				<path refid="application"/>
 			</classpath>
 			<patternset refid="unit.tests"/>
+			<include name="auctionsniper/tests/AuctionSniperTestUtilities.java"/>
 		</javac>
 	</target>
 
@@ -341,6 +341,7 @@
 			<batchtest fork="yes" todir="${reportUT.dir}/xml">
 				<fileset dir="${srcUT.dir}"
 					excludes="FillInTheBlank* Template*">
+					<exclude name="auctionsniper/tests/AuctionSniperTestUtilities.java"/>
 			    <patternset refid="unit.tests"/>
 				</fileset>
 			</batchtest>

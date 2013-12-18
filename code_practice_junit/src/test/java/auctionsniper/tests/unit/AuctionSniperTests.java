@@ -89,9 +89,14 @@
  */ 
 package auctionsniper.tests.unit;
 
+import static auctionsniper.AuctionEventListener.PriceSource.FromOtherBidder;
+import static auctionsniper.AuctionEventListener.PriceSource.FromSniper;
+import auctionsniper.AuctionEventListener.PriceSource;
+
 import auctionsniper.Auction;
 import auctionsniper.AuctionSniper;
 import auctionsniper.SniperListener;
+import auctionsniper.tests.AuctionSniperTestUtilities;
 
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.XMPPException;
@@ -131,6 +136,15 @@ public class AuctionSniperTests {
 			atLeast(1).of(sniperListener).sniperBidding();
 		}});
 		
-		sniper.currentPrice(price, increment);
+		sniper.currentPrice(price, increment, PriceSource.FromOtherBidder);
+	}
+	
+	@Test public void
+	reportsWinningWhenNewCurrentPriceComesFromSniper() {
+		context.checking(new Expectations() {{
+			atLeast(1).of(sniperListener).sniperWinning();
+		}});
+		
+		sniper.currentPrice(123, 45, PriceSource.FromSniper);
 	}
 }
