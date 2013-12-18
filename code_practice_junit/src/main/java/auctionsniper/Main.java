@@ -4,6 +4,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.SwingUtilities;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.ChatManager;
 import org.jivesoftware.smack.MessageListener;
@@ -12,6 +15,8 @@ import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Message;
 
 public class Main {
+	static Logger logger = LogManager.getLogger(Main.class.getName());	
+	
 	@SuppressWarnings("unused") private Chat notToBeGCd;
 	
 	private MainWindow ui;
@@ -52,6 +57,8 @@ public class Main {
 	private void joinAuction(XMPPConnection connection, String itemId) 
 	  throws XMPPException 
 	{
+		logger.debug("connection.getUser() -->" + connection.getUser() + "<--");
+		
 		disconnectWhenUICloses(connection);
 		
 		final Chat chat = 
@@ -64,7 +71,8 @@ public class Main {
 		
 		Auction auction = new XMPPAuction(chat);
 		chat.addMessageListener(
-			new AuctionMessageTranslator(null, new AuctionSniper(auction, new SniperStateDisplayer(ui))));
+			///new AuctionMessageTranslator(null, new AuctionSniper(auction, new SniperStateDisplayer(ui))));
+			new AuctionMessageTranslator(connection.getUser(), new AuctionSniper(auction, new SniperStateDisplayer(ui))));
 		auction.join();
 	}
 	

@@ -2,7 +2,7 @@ package auctionsniper;
 
 public interface AuctionEventListener {
 	
-	enum PriceSource {
+	public enum PriceSource {
 		FromSniper, FromOtherBidder;
 	}
 	
