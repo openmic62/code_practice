@@ -92,7 +92,7 @@ public class AuctionMessageTranslatorTests {
 	
 	@Rule public final JUnitRuleMockery context = new JUnitRuleMockery();
 	private final AuctionEventListener listener = context.mock(AuctionEventListener.class);
-	private final String SNIPER_XMPP_ID = String.format("sniper@%s/Auction", AuctionSniperTestUtilities.myGetHostName());
+	private final String SNIPER_XMPP_ID = String.format("billyBob@%s/Auction", AuctionSniperTestUtilities.myGetHostName());
 	
 	private final AuctionMessageTranslator translator = new AuctionMessageTranslator(SNIPER_XMPP_ID, listener);
 	
