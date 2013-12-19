@@ -104,6 +104,7 @@ import org.jivesoftware.smack.packet.Message;
 
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JUnitRuleMockery;
+import org.jmock.States;
 
 import org.junit.Ignore;
 import org.junit.Rule;
@@ -115,15 +116,32 @@ public class AuctionSniperTests {
 	@Rule public final JUnitRuleMockery context = new JUnitRuleMockery();
 	private final SniperListener sniperListener = context.mock(SniperListener.class);
 	private final Auction auction = context.mock(Auction.class);
+	private final States sniperState = context.states("sniper");
 	
 	private final AuctionSniper sniper = new AuctionSniper(auction, sniperListener);
 	
 	@Test public void 
-	reportLostWhenAuctionCloses() {
+	///reportLostWhenAuctionCloses() {
+	reportLostIfAuctionClosesImmediately() {
 		context.checking(new Expectations() {{
 			oneOf(sniperListener).sniperLost();
 		}});
 		
+		sniper.auctionClosed();
+	}
+	
+	@Test public void 
+	reportLostIfAuctionClosesWhenBidding() {
+		context.checking(new Expectations() {{
+			ignoring(auction);
+			allowing(sniperListener).sniperBidding();
+			  then(sniperState.is("bidding"));
+			  
+			atLeast(1).of(sniperListener).sniperLost();
+			  when(sniperState.is("bidding"));
+		}});
+		
+		sniper.currentPrice(123, 45, PriceSource.FromOtherBidder);
 		sniper.auctionClosed();
 	}
 	
