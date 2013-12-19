@@ -26,6 +26,11 @@ public class SniperStateDisplayer implements SniperListener {
   	showStatus(Main.STATUS_WINNING);
  	}
  	
+	@Override
+	public void sniperWon() {
+  	//showStatus(Main.STATUS_WINNING);
+ 	}
+ 	
  	private void showStatus(final String status) {
   	SwingUtilities.invokeLater(new Runnable() {
   		@Override
