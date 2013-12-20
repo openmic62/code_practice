@@ -4,7 +4,8 @@ public class AuctionSniper implements AuctionEventListener {
 	
 	private Auction auction;
 	private SniperListener sniperListener;
-	private String sniperState = "JOINING";
+	// private String sniperState = "JOINING"; <mlr 131220: my code>
+	private boolean isWinning = false;
 	
 	public AuctionSniper(Auction a, SniperListener sl) {
 		this.auction = a;
@@ -17,6 +18,12 @@ public class AuctionSniper implements AuctionEventListener {
 	}*/
 	
 	public void auctionClosed(){
+		if (isWinning) {
+		 	sniperListener.sniperWon();
+		} else {
+			sniperListener.sniperLost();
+		}
+		/* <mlr 131220: begin - my code>
 		if ("WINNING".equals(sniperState)) {
 		 	sniperListener.sniperWon();
 		} else if ("BIDDING".equals(sniperState)) {
@@ -24,10 +31,19 @@ public class AuctionSniper implements AuctionEventListener {
 		} else if ("JOINING".equals(sniperState)) {
 		 	sniperListener.sniperLost();
 		}
+		<mlr 131220: end - my code> */
 		///sniperListener.sniperLost();
 	}
 	
 	public void currentPrice(int price, int increment, PriceSource source){
+		isWinning = source == PriceSource.FromSniper;
+		if (isWinning) {
+		 	sniperListener.sniperWinning();
+		} else {
+			auction.bid(price + increment);
+		 	sniperListener.sniperBidding();
+		}			
+		/* <mlr 131220: begin - my code>
 		switch (source) {
 			case FromSniper: 
 				sniperState = "WINNING";
@@ -39,5 +55,6 @@ public class AuctionSniper implements AuctionEventListener {
 		 	  sniperListener.sniperBidding();
 				break;
 		}
+		<mlr 131220: end - my code> */
 	}
 }
