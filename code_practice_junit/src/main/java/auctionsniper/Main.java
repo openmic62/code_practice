@@ -64,14 +64,12 @@ public class Main {
 		final Chat chat = 
 			connection.getChatManager().createChat(
 		  auctionId(itemId, connection),
-		  ///new AuctionMessageTranslator(new AuctionSniper(nullAuction, this))
 		  null
 		  );
 		this.notToBeGCd = chat;  
 		
 		Auction auction = new XMPPAuction(chat);
 		chat.addMessageListener(
-			///new AuctionMessageTranslator(null, new AuctionSniper(auction, new SniperStateDisplayer(ui))));
 			new AuctionMessageTranslator(connection.getUser(), new AuctionSniper(auction, new SniperStateDisplayer(ui))));
 		auction.join();
 	}

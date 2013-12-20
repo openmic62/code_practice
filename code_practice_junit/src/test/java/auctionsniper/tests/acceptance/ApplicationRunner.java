@@ -32,11 +32,9 @@ public class ApplicationRunner {
 		driver.showSniperStatus(Main.STATUS_JOINING);
 	}
 	
-	// <mlr 131126: begin - p. 105, single item: join, bid, and lose>
 	public void hasShownSniperIsBidding(){
 		driver.showSniperStatus(Main.STATUS_BIDDING);
 	}
-	// <mlr 131126: end - p. 105, single item: join, bid, and lose>
 	
 	public void showsSniperHasLostAuction() {
 		driver.showSniperStatus(Main.STATUS_LOST);
