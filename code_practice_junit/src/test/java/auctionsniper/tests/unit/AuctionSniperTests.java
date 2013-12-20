@@ -121,7 +121,6 @@ public class AuctionSniperTests {
 	private final AuctionSniper sniper = new AuctionSniper(auction, sniperListener);
 	
 	@Test public void 
-	///reportLostWhenAuctionCloses() {
 	reportLostIfAuctionClosesImmediately() {
 		context.checking(new Expectations() {{
 			oneOf(sniperListener).sniperLost();
@@ -149,7 +148,6 @@ public class AuctionSniperTests {
 	reportWonIfAuctionClosesWhenWinning() {
 		context.checking(new Expectations() {{
 			ignoring(auction);
-			///atLeast(1).of(sniperListener).sniperBidding();
 			allowing(sniperListener).sniperWinning();
 			  then(sniperState.is("winning"));
 			  

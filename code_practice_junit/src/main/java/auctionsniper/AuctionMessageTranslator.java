@@ -1,15 +1,5 @@
 package auctionsniper;
 
-/* <mlr 131214: I had to add this to get the nested enum PriceSource and its values to compile.
-                The book uses the names unqualified, but it doesn't show these imports. I thought
-                about adding these imports myself, but, at the same time, it seemed to contradict
-                SOC; especially since the book added in the AuctionEventListener to the constructor
-                for this class. 
-                
-                I found example code for GOOS online at https://github.com/sf105/goos-code.git.
-                That code contains these imports. So it confirmed my thinking on how to eliminate
-                the compiler errors. However, it leaves unresolved the question about SOC.
-*/
 import static auctionsniper.AuctionEventListener.PriceSource.FromOtherBidder;
 import static auctionsniper.AuctionEventListener.PriceSource.FromSniper;
 import auctionsniper.AuctionEventListener.PriceSource;
@@ -52,10 +42,7 @@ public class AuctionMessageTranslator implements MessageListener {
 		 	);
 		}
 	}
-	
-	// See http://stackoverflow.com/questions/70324/java-inner-class-and-static-nested-class
-	// See http://docs.oracle.com/javase/tutorial/java/javaOO/whentouse.html ...
-	//     ... "When to Use Nested Classes, Local Classes, Anonymous Classes, and Lambda Expressions "
+
 	private static class AuctionEvent {
 		
 		private Map<String, String> auctionEventFields = new HashMap<String, String>();
