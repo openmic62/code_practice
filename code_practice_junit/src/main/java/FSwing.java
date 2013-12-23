@@ -7,7 +7,7 @@ public class FSwing extends JFrame {
  		try {
  			setLocation(0, 100);
  			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
- 			Container cp = getContentPane();
+ 			//Container cp = getContentPane();
  		} catch (Exception e) {
  			e.printStackTrace();
  		}
