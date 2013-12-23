@@ -6,9 +6,11 @@ import auctionsniper.MainWindow;
 import com.objogate.wl.swing.AWTEventQueueProber;
 import com.objogate.wl.swing.driver.JFrameDriver;
 import com.objogate.wl.swing.driver.JLabelDriver;
+import com.objogate.wl.swing.driver.JTableDriver;
 import com.objogate.wl.swing.gesture.GesturePerformer;
 
 import static org.hamcrest.Matchers.*;
+import static com.objogate.wl.swing.matcher.JLabelTextMatcher.*;
 
 public class AuctionSniperDriver extends JFrameDriver {
 	public AuctionSniperDriver() {
@@ -23,8 +25,9 @@ public class AuctionSniperDriver extends JFrameDriver {
 		      new AWTEventQueueProber(timeoutMillis, 100));
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void showSniperStatus(String statusText) {
-		new JLabelDriver(
-			this, named(Main.SNIPER_STATUS_NAME)).hasText(equalTo(statusText));
+		///new JLabelDriver(this, named(Main.SNIPER_STATUS_NAME)).hasText(equalTo(statusText));
+		new JTableDriver(this).hasCell(withLabelText(equalTo(statusText)));
 	}
 }

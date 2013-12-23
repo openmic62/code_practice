@@ -19,6 +19,7 @@ CTags Legacy Support=0
 2=src\test\java\path_01_system.txt
 3=src\test\java\path_02_user.txt
 4=src\test\java\path_03_env.txt
+5=src\main\java\components\TableDialogEditDemo.java
 [Group]
 0=ch02_a_first_unit_test
 1=ch02_a_first_unit_test - src
@@ -56,6 +57,7 @@ CTags Legacy Support=0
 33=Auction Sniper - src - auctionsniper
 34=00_learning_curve_src_files
 35=00_learning_curve_src_files - enum
+36=00_learning_curve_src_files - swing
 [Files - ch02_a_first_unit_test - src]
 0=src\main\java\LogAnalyzer.java
 1=src\main\java\MemCalculator.java
@@ -207,11 +209,21 @@ Source Paths=
 [Files - 00_learning_curve_src_files]
 0=src\main\java\PropertiesManager.java
 1=src\main\java\Event_driven_system_description.txt
-2=src\main\java\FConcurrent.java
-3=src\main\java\FSwing.java
-4=..\jmockit-1.3\samples\tutorial\src\jmockit\tutorial\domain\MyBusinessService.java
+2=..\jmockit-1.3\samples\tutorial\src\jmockit\tutorial\domain\MyBusinessService.java
 [Files - Auction Sniper - test]
 0=src\test\scripts\openfirectl.pl
 [Files - 00_learning_curve_src_files - enum]
 0=src\main\java\DrinkEnumExample.java
 1=src\main\java\EnumDemo.java
+[Files - 00_learning_curve_src_files - swing]
+0=src\main\java\FConcurrent.java
+1=src\main\java\FSwing.java
+2=src\main\java\components\TableRenderDemo.java
+3=src\main\java\components\SimpleTableDemo.java
+4=src\main\java\components\TableSelectionDemo.java
+5=src\main\java\components\TableDemo.java
+6=src\main\java\components\TableDialogEditDemo.java
+7=src\main\java\FSwingBase.java
+8=src\main\java\components\TableToolTipsDemo.java
+9=src\main\java\components\TableSorterDemo.java
+10=src\main\java\components\TableFTFEditDemo.java
