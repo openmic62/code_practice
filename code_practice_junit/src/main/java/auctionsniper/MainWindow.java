@@ -45,7 +45,8 @@ public class MainWindow extends JFrame {
  	}
  	
  	public void showStatus(String statusText) {
- 		sniperStatus.setText(statusText);
+ 		///sniperStatus.setText(statusText);
+ 		snipers.setStatusText(statusText);
  	}
  	
  	private JTable createTable(String tableName) {
@@ -57,8 +58,7 @@ public class MainWindow extends JFrame {
  	}
  	
  	private class SnipersTableModel extends AbstractTableModel {
- 		private String[] columnNames = { "A" };
- 		private Object[][] data = { {Main.STATUS_JOINING} };
+ 		private String statusText = Main.STATUS_JOINING;
  		
  		SnipersTableModel() { super(); }
  		
@@ -67,8 +67,13 @@ public class MainWindow extends JFrame {
  		@Override
     public int getColumnCount() { return 1; }
  		@Override
-    public Object getValueAt(int row, int column) { return data[0][0]; }
+    public Object getValueAt(int row, int column) { return statusText; }
  		@Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {}
+    
+    public void setStatusText(String statusText) {
+    	this.statusText = statusText;
+    	fireTableRowsUpdated(0, 0);
+    }
   }
 }

@@ -83,6 +83,8 @@
  ***** run the Tests (command line Ant)
  H:\student\code_practice_junit>ant clean_all
  H:\student\code_practice_junit>ant runtest -DtestClass=AuctionSniperTests
+ 
+ >>>>>>>>>>>>>>>>>>>>> JUNITPARAMS DRIVEN TESTS FAIL IN ANT <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
  ***** run the Tests (command line Maven)
  H:\student\code_practice_junit>mvn antrun:run test -Dtest=AuctionSniperTests
