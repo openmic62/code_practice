@@ -242,11 +242,12 @@
 	-->
 	<!-- PATTERNSET - that selects the unit tests -->
   <patternset id="unit.tests">
-  	<include name="*Tests.java"                                if="RunLearningCurveUnitTests"/>
-  	<include name="auctionsniper/tests/unit/*Tests.java"       if="RunAuctionSniperUnitTests"/>
-   	<include name="auctionsniper/tests/acceptance/*Tests.java" if="RunAuctionSniperAcceptanceTests"/>
+  	<include name="*Tests.java"                                      if="RunLearningCurveUnitTests"/>
+  	<include name="auctionsniper/tests/unit/*Tests.java"             if="RunAuctionSniperUnitTests"/>
+   	<include name="auctionsniper/tests/acceptance/*Tests.java"       if="RunAuctionSniperAcceptanceTests"/>
 	 	<exclude name="**/*_bad.java"/>
   	<exclude name="**/Reentrant*"/>
+  	<exclude name="auctionsniper/tests/unit/FakeAuctionServerTests.java" if="RunAuctionSniperUnitTests"/>
   </patternset>
   
  	<!-- PROPERTY - set the property that determines unit tests to run (CLI overridable) -->

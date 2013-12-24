@@ -55,10 +55,10 @@
  H:\student\code_practice_junit>javac -cp %CLASSPATH%;%SC% -d %SC% %SD%\%FAS_FILES%
 
  ***** build the Tests FakeAuctionServerTests
- H:\student\code_practice_junit>javac -cp %CLASSPATH%;%SC%;%TC% -d %TC% %TD%\FakeAuctionServerTests.java
+ H:\student\code_practice_junit>javac -cp %CLASSPATH%;%SC%;%TC% -d %TC% %TD%\auctionsniper\tests\\unit\FakeAuctionServerTests.java
  
  ***** run the Tests (command line Java)
- H:\student\code_practice_junit>java  -cp %CLASSPATH%;%SC%;%TC% org.junit.runner.JUnitCore FakeAuctionServerTests
+ H:\student\code_practice_junit>java  -cp %CLASSPATH%;%SC%;%TC% org.junit.runner.JUnitCore auctionsniper.tests.unit.FakeAuctionServerTests
  
  ***** run the Tests (command line Ant)
  H:\student\code_practice_junit>ant clean_all
