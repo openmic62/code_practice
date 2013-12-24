@@ -30,6 +30,7 @@ public class Main {
 	public static final String ITEM_ID_AS_LOGIN = "auction-%s";
 	public static final String AUCTION_ID_FORMAT = ITEM_ID_AS_LOGIN + "@%S/" + AUCTION_RESOURCE;
 
+	public static final String SNIPERS_TABLE_NAME = "snipers table";
 	public static final String SNIPER_STATUS_NAME = "status";
 	public static final String STATUS_BIDDING = "Bidding in auction";
 	public static final String STATUS_JOINING = "Joining auction";
