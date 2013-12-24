@@ -1,11 +1,9 @@
 package auctionsniper;
 
-import java.awt.Color;
+import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
-import javax.swing.border.LineBorder;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
@@ -13,55 +11,44 @@ import javax.swing.table.AbstractTableModel;
 public class MainWindow extends JFrame {
 	
 	public static final String MAIN_WINDOW_NAME = "Auction Sniper Main";
-	private final JLabel sniperStatus = createLabel(Main.SNIPER_STATUS_NAME, Main.STATUS_JOINING);
 	private final SnipersTableModel snipers = new SnipersTableModel();
 	
 	MainWindow() {
 		super(MAIN_WINDOW_NAME);
 		setName(MAIN_WINDOW_NAME);
 		configGui();
-		//add(sniperStatus);
-		add(new JScrollPane(createTable(Main.SNIPER_STATUS_NAME))); // train wrecked here
+		fillContentPane(makeSnipersTable());
 		pack();
 		setVisible(true);
 	}
 	
  	void configGui() {
- 		try {
- 			setLocation(50, 100);
- 			setMinimumSize(new Dimension(250, 100));
- 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
- 		} catch (Exception e) {
- 			e.printStackTrace();
- 		}
+ 	  setLocation(50, 100);
+ 	  setMinimumSize(new Dimension(250, 100));
+ 	  setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
  	}
  	
- 	private JLabel createLabel(String labelName, String labelText) {
- 		Container cp = getContentPane();
- 		JLabel label = new JLabel(labelText);
- 		label.setName(labelName);
- 		label.setBorder(new LineBorder(Color.BLACK));
- 		return label;
+ 	private void fillContentPane(JTable snipersTable) {
+ 		final Container contentPane = getContentPane();
+ 		contentPane.setLayout(new BorderLayout());
+ 		
+ 		contentPane.add(new JScrollPane(snipersTable), BorderLayout.CENTER);
  	}
  	
- 	public void showStatus(String statusText) {
- 		///sniperStatus.setText(statusText);
- 		snipers.setStatusText(statusText);
- 	}
- 	
- 	private JTable createTable(String tableName) {
+ 	private JTable makeSnipersTable() {
  		JTable table = new JTable(snipers);
  		table.setPreferredScrollableViewportSize(new Dimension(250, 150));
  		table.setFillsViewportHeight(true);
- 		table.setName(tableName);
+ 		table.setName(Main.SNIPERS_TABLE_NAME);
  		return table;
  	}
  	
- 	// I used private. The book used public.
- 	private class SnipersTableModel extends AbstractTableModel {
+ 	public void showStatus(String statusText) {
+ 		snipers.setStatusText(statusText);
+ 	}
+ 	
+ 	public class SnipersTableModel extends AbstractTableModel {
  		private String statusText = Main.STATUS_JOINING;
- 		
- 		SnipersTableModel() { super(); }
  		
  		@Override
     public int getRowCount() { return 1; }
@@ -69,15 +56,9 @@ public class MainWindow extends JFrame {
     public int getColumnCount() { return 1; }
  		@Override
     public Object getValueAt(int row, int column) { return statusText; }
- 		@Override
-    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-    	this.statusText = (String) aValue;
-    }
     
-    // Each of public, package-private, and private work here
-    private void setStatusText(String statusText) {
-    	//this.statusText = statusText;
-    	setValueAt(statusText, 0, 0);
+    public void setStatusText(String statusText) {
+    	this.statusText = statusText;
     	fireTableRowsUpdated(0, 0);
     }
   }
