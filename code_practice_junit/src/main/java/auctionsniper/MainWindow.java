@@ -21,15 +21,15 @@ public class MainWindow extends JFrame {
 		setName(MAIN_WINDOW_NAME);
 		configGui();
 		//add(sniperStatus);
-		add(new JScrollPane(createTable(Main.SNIPER_STATUS_NAME)));
+		add(new JScrollPane(createTable(Main.SNIPER_STATUS_NAME))); // train wrecked here
 		pack();
 		setVisible(true);
 	}
 	
  	void configGui() {
  		try {
- 			setLocation(0, 100);
- 			setMinimumSize(new Dimension(350, 150));
+ 			setLocation(50, 100);
+ 			setMinimumSize(new Dimension(250, 100));
  			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
  		} catch (Exception e) {
  			e.printStackTrace();
@@ -51,12 +51,13 @@ public class MainWindow extends JFrame {
  	
  	private JTable createTable(String tableName) {
  		JTable table = new JTable(snipers);
- 		table.setPreferredScrollableViewportSize(new Dimension(350, 150));
+ 		table.setPreferredScrollableViewportSize(new Dimension(250, 150));
  		table.setFillsViewportHeight(true);
  		table.setName(tableName);
  		return table;
  	}
  	
+ 	// I used private. The book used public.
  	private class SnipersTableModel extends AbstractTableModel {
  		private String statusText = Main.STATUS_JOINING;
  		
@@ -69,10 +70,14 @@ public class MainWindow extends JFrame {
  		@Override
     public Object getValueAt(int row, int column) { return statusText; }
  		@Override
-    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {}
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+    	this.statusText = (String) aValue;
+    }
     
-    public void setStatusText(String statusText) {
-    	this.statusText = statusText;
+    // Each of public, package-private, and private work here
+    private void setStatusText(String statusText) {
+    	//this.statusText = statusText;
+    	setValueAt(statusText, 0, 0);
     	fireTableRowsUpdated(0, 0);
     }
   }
