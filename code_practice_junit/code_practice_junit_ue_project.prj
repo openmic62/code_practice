@@ -227,3 +227,4 @@ Source Paths=
 8=src\main\java\components\TableToolTipsDemo.java
 9=src\main\java\components\TableSorterDemo.java
 10=src\main\java\components\TableFTFEditDemo.java
+11=lib\windowlicker_svn\src\swing\tests\com\objogate\wl\swing\driver\tests\JTableDriverTest.java
