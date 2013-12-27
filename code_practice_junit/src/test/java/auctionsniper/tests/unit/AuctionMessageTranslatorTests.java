@@ -50,7 +50,7 @@
  javac -cp %CLASSPATH%;%SC% -d %SC% %SD%\auctionsniper\AuctionMessageTranslator.java
  javac -cp %CLASSPATH%;%SC%;%TC% -d %TC% %TD%\auctionsniper\tests\\unit\AuctionMessageTranslatorTests.java
  java  -cp %CLASSPATH%;%SC%;%TC% org.junit.runner.JUnitCore auctionsniper.tests.unit.AuctionMessageTranslatorTests
- ant compile runtest -DtestClass=AuctionMessageTranslatorTests
+ ant runtest -DtestClass=AuctionMessageTranslatorTests
  
  ***** build the AuctionMessageTranslator source file
  H:\>cd student\code_practice_junit

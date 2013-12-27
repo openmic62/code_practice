@@ -62,7 +62,7 @@
  
  ***** run the Tests (command line Ant)
  H:\student\code_practice_junit>ant clean_all
- H:\student\code_practice_junit>ant compile runtest -DtestClass=FakeAuctionServerTests
+ H:\student\code_practice_junit>ant runtest -DtestClass=FakeAuctionServerTests
 
  ***** run the Tests (command line Maven)
  H:\student\code_practice_junit>mvn test -Dtest=FakeAuctionServerTests

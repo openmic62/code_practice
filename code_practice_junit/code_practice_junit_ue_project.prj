@@ -192,6 +192,7 @@ CTags Legacy Support=0
 7=src\main\java\auctionsniper\XMPPAuction.java
 8=src\main\java\auctionsniper\SniperStateDisplayer.java
 9=src\main\java\auctionsniper\SniperState.java
+10=src\main\java\auctionsniper\Column.java
 [Files - Auction Sniper - test - acceptance]
 0=src\test\java\auctionsniper\tests\acceptance\AuctionSniperEndToEndTests.java
 1=src\test\java\auctionsniper\tests\acceptance\ApplicationRunner.java

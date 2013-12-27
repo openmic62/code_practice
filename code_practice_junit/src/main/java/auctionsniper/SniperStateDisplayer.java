@@ -12,10 +12,14 @@ public class SniperStateDisplayer implements SniperListener {
 	
 	// Implement the SniperListener interface
 	@Override
-	// <mlr 131225: ITEM_ID - changed per GOOS, p. 155a>
-	//public void sniperBidding() {
-	public void sniperBidding(SniperState sniperState) {
-  	showStatus(Main.STATUS_BIDDING);
+	public void sniperBidding(final SniperState sniperState) {
+  	//showStatus(Main.STATUS_BIDDING);
+  	SwingUtilities.invokeLater(new Runnable() {
+  		@Override
+  		public void run() {
+  			ui.sniperStatusChanged(sniperState, Main.STATUS_BIDDING);
+  		}
+  	});
   }
  	
 	@Override
