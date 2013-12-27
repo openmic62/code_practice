@@ -65,7 +65,7 @@
  javac -cp %CLASSPATH%;%SC%;%TC% -d %TC% %TD%\auctionsniper\tests\\unit\AuctionSniperTests.java
  ant run-perl-openfirectl
  java  -cp %CLASSPATH%;%SC%;%TC% org.junit.runner.JUnitCore auctionsniper.tests.unit.AuctionSniperTests
- ant compile runtest -DtestClass=AuctionSniperTests
+ ant runtest -DtestClass=AuctionSniperTests
  
  ***** build the AuctionSniper source file
  H:\>cd student\code_practice_junit
