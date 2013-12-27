@@ -10,6 +10,8 @@ http://www.avajava.com/tutorials/lessons/how-do-i-use-the-enum-type-with-a-const
  set CLASSPATH=%JM%;%CLASSPATH%
  set L4J2=lib\log4j-api-2.0-beta9.jar;lib\log4j-core-2.0-beta9.jar
  set CLASSPATH=%L4J2%;%CLASSPATH%
+ set ACL3=lib\commons-lang3-3.1.jar
+ set CLASSPATH=%ACL3%;%CLASSPATH%
  set SIH=src\test\scripts\SysinternalsSuite_131101
  set SC=target\classes
  set TC=target\test-classes

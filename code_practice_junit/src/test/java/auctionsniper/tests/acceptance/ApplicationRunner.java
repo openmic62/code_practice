@@ -8,6 +8,7 @@ public class ApplicationRunner {
 	static final String SNIPER_ID = "sniper";
 	static final String SNIPER_PASSWORD = "sniper";
 	private AuctionSniperDriver driver;
+	// <mlr 131225: itemId - added per GOOS, p. 153a>
 	private String itemId;
 		
 	// <mlr 131126: begin - p. 105, single item: join, bid, and lose>
@@ -21,7 +22,9 @@ public class ApplicationRunner {
 		
 		Thread thread = new Thread("Test Application") {
 			@Override public void run() {
-				final String[] mainArgs = {"localhost", SNIPER_ID, SNIPER_PASSWORD, "item-54321"};
+				// <mlr 131225: ITEM_ID - added per GOOS, p. 155a>
+				//final String[] mainArgs = {"localhost", SNIPER_ID, SNIPER_PASSWORD, "item-54321"};
+				final String[] mainArgs = {"localhost", SNIPER_ID, SNIPER_PASSWORD, AuctionSniperTestUtilities.ITEM_ID};
 				try {
 					Main.main(mainArgs);
 				} catch (Exception e) {

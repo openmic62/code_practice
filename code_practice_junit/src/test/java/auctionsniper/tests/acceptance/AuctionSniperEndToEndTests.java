@@ -46,6 +46,8 @@
  set CLASSPATH=%JM%;%CLASSPATH%
  set L4J2=lib\log4j-api-2.0-beta9.jar;lib\log4j-core-2.0-beta9.jar
  set CLASSPATH=%L4J2%;%CLASSPATH%
+ set ACL3=lib\commons-lang3-3.1.jar
+ set CLASSPATH=%ACL3%;%CLASSPATH%
  set SIH=src\test\scripts\SysinternalsSuite_131101
  set SC=target\classes
  set TC=target\test-classes
@@ -90,6 +92,9 @@
  */ 
 package auctionsniper.tests.acceptance;
 
+// <mlr 131225: ITEM_ID - added per GOOS, p. 155a>
+import auctionsniper.tests.AuctionSniperTestUtilities;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -108,7 +113,8 @@ import org.junit.runners.JUnit4;
 public class AuctionSniperEndToEndTests {
 	static Logger logger = LogManager.getLogger(AuctionSniperEndToEndTests.class.getName());	
 		
-	private  FakeAuctionServer auction = new FakeAuctionServer("item-54321");
+	//private  FakeAuctionServer auction = new FakeAuctionServer("item-54321");
+	private  FakeAuctionServer auction = new FakeAuctionServer(AuctionSniperTestUtilities.ITEM_ID);
 	private  ApplicationRunner application = new ApplicationRunner();
 	
 	@Test
