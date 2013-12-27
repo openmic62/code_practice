@@ -19,7 +19,6 @@ CTags Legacy Support=0
 2=src\test\java\path_01_system.txt
 3=src\test\java\path_02_user.txt
 4=src\test\java\path_03_env.txt
-5=src\main\java\components\TableDialogEditDemo.java
 [Group]
 0=ch02_a_first_unit_test
 1=ch02_a_first_unit_test - src
@@ -192,6 +191,7 @@ CTags Legacy Support=0
 6=src\main\java\auctionsniper\Auction.java
 7=src\main\java\auctionsniper\XMPPAuction.java
 8=src\main\java\auctionsniper\SniperStateDisplayer.java
+9=src\main\java\auctionsniper\SniperState.java
 [Files - Auction Sniper - test - acceptance]
 0=src\test\java\auctionsniper\tests\acceptance\AuctionSniperEndToEndTests.java
 1=src\test\java\auctionsniper\tests\acceptance\ApplicationRunner.java
@@ -212,6 +212,7 @@ Source Paths=
 2=..\jmockit-1.3\samples\tutorial\src\jmockit\tutorial\domain\MyBusinessService.java
 [Files - Auction Sniper - test]
 0=src\test\scripts\openfirectl.pl
+1=src\test\java\auctionsniper\tests\AuctionSniperTestUtilities.java
 [Files - 00_learning_curve_src_files - enum]
 0=src\main\java\DrinkEnumExample.java
 1=src\main\java\EnumDemo.java

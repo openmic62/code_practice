@@ -53,6 +53,8 @@
  set CLASSPATH=%JM%;%CLASSPATH%
  set L4J2=lib\log4j-api-2.0-beta9.jar;lib\log4j-core-2.0-beta9.jar
  set CLASSPATH=%L4J2%;%CLASSPATH%
+ set ACL3=lib\commons-lang3-3.1.jar
+ set CLASSPATH=%ACL3%;%CLASSPATH%
  set SIH=src\test\scripts\SysinternalsSuite_131101
  set SC=target\classes
  set TC=target\test-classes
@@ -98,6 +100,8 @@ import auctionsniper.AuctionEventListener.PriceSource;
 import auctionsniper.Auction;
 import auctionsniper.AuctionSniper;
 import auctionsniper.SniperListener;
+import auctionsniper.SniperState;
+// <mlr 131225: ITEM_ID - added per GOOS, p. 155a>
 import auctionsniper.tests.AuctionSniperTestUtilities;
 
 import org.jivesoftware.smack.Chat;
@@ -120,7 +124,8 @@ public class AuctionSniperTests {
 	private final Auction auction = context.mock(Auction.class);
 	private final States sniperState = context.states("sniper");
 	
-	private final AuctionSniper sniper = new AuctionSniper(auction, sniperListener);
+	//private final AuctionSniper sniper = new AuctionSniper(auction, sniperListener);
+	private final AuctionSniper sniper = new AuctionSniper(AuctionSniperTestUtilities.ITEM_ID, auction, sniperListener);
 	
 	@Test public void 
 	reportLostIfAuctionClosesImmediately() {
@@ -135,7 +140,10 @@ public class AuctionSniperTests {
 	reportLostIfAuctionClosesWhenBidding() {
 		context.checking(new Expectations() {{
 			ignoring(auction);
-			allowing(sniperListener).sniperBidding();
+			// <mlr 131225: ITEM_ID - changed per GOOS, p. 155a>
+			//allowing(sniperListener).sniperBidding();
+			//allowing(sniperListener).sniperBidding(null); // gets past the compiler
+			allowing(sniperListener).sniperBidding(with(any(SniperState.class)));
 			  then(sniperState.is("bidding"));
 			  
 			atLeast(1).of(sniperListener).sniperLost();
@@ -165,9 +173,13 @@ public class AuctionSniperTests {
 	bidsHigherAndReportsBiddingWhenNewPriceArrives() {
 		final int price = 1001;
 		final int increment = 25;
+		final int bid = price + increment;
 		context.checking(new Expectations() {{
-			oneOf(auction).bid(price + increment);
-			atLeast(1).of(sniperListener).sniperBidding();
+			oneOf(auction).bid(bid);
+      // <mlr 131225: ITEM_ID - changed per GOOS, p. 155a>
+			//oneOf(auction).bid(price + increment);
+			///atLeast(1).of(sniperListener).sniperBidding();
+			atLeast(1).of(sniperListener).sniperBidding(new SniperState(AuctionSniperTestUtilities.ITEM_ID, price, bid));
 		}});
 		
 		sniper.currentPrice(price, increment, PriceSource.FromOtherBidder);
@@ -181,4 +193,5 @@ public class AuctionSniperTests {
 		
 		sniper.currentPrice(123, 45, PriceSource.FromSniper);
 	}
+	
 }
