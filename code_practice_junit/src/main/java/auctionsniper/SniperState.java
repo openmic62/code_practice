@@ -6,15 +6,19 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class SniperState {
 	
-	private final String itemID;
-	private final int lastPrce;
+	private final String itemId;
+	private final int lastPrice;
 	private final int bidPrice;
 
-	public SniperState(String itemID, int lastPrce, int bidPrice) {
-		this.itemID = itemID;
-		this.lastPrce = lastPrce;
+	public SniperState(String itemId, int lastPrice, int bidPrice) {
+		this.itemId = itemId;
+		this.lastPrice = lastPrice;
 		this.bidPrice = bidPrice;
 	}
+	
+	public String getItemId() { return this.itemId; }
+	public int getLastPrice() { return this.lastPrice; }
+	public int getBidPrice() { return this.bidPrice; }
 	
 	@Override
   public boolean equals(Object obj) {

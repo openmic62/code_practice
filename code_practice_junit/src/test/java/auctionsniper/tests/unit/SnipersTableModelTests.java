@@ -49,6 +49,7 @@
  set SD=src\main\java
  set TD=src\test\java
  cd student\code_practice_junit
+ 
  javac -cp %CLASSPATH%;%SC% -d %SC% %SD%\auctionsniper\MainWindow.java
  javac -cp %CLASSPATH%;%SC%;%TC% -d %TC% %TD%\auctionsniper\tests\\unit\SnipersTableModelTests.java
 
@@ -100,6 +101,7 @@ import org.jmock.integration.junit4.JUnitRuleMockery;
 //import org.jmock.States;
 
 import static org.junit.Assert.assertEquals;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
@@ -110,6 +112,12 @@ public class SnipersTableModelTests {
 	private final TableModelListener listener = context.mock(TableModelListener.class);
 	
 	private final SnipersTableModel model = new SnipersTableModel();
+	
+	@Before public void
+	//stubOutAListenerForTheTableModel() {
+	attachModelListener() {
+		model.addTableModelListener(listener);
+	}
 	
 	@Test public void 
 	hasEnoughColumns() {

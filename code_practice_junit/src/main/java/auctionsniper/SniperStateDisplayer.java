@@ -18,6 +18,7 @@ public class SniperStateDisplayer implements SniperListener {
   		@Override
   		public void run() {
   			ui.sniperStatusChanged(sniperState, Main.STATUS_BIDDING);
+  			sleep(forThisLong); /*>>>REMOVE<<<*/
   		}
   	});
   }
@@ -42,7 +43,19 @@ public class SniperStateDisplayer implements SniperListener {
   		@Override
   		public void run() {
   			ui.showStatus(status);
+  			sleep(forThisLong); /*>>>REMOVE<<<*/
   		}
   	});
- 	} 		
+ 	}
+ 	
+ 	/*>>>REMOVE-BEGIN<<<*/
+ 	private int forThisLong = 2;
+	private void sleep(int sleepDuration) {
+		try {
+			Thread.sleep(sleepDuration * 1000);
+		} catch(InterruptedException ex) {
+			Thread.currentThread().interrupt();
+		}
+	}
+	/*>>>REMOVE-END<<<*/
 }	
