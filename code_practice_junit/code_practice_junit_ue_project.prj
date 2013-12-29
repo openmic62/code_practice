@@ -195,6 +195,7 @@ CTags Legacy Support=0
 9=src\main\java\auctionsniper\Column.java
 10=src\main\java\auctionsniper\SniperSnapshot.java
 11=src\main\java\auctionsniper\SnipersTableModel.java
+12=src\main\java\auctionsniper\SniperState.java
 [Files - Auction Sniper - test - acceptance]
 0=src\test\java\auctionsniper\tests\acceptance\AuctionSniperEndToEndTests.java
 1=src\test\java\auctionsniper\tests\acceptance\ApplicationRunner.java

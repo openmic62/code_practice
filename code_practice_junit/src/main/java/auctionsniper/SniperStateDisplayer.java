@@ -17,7 +17,8 @@ public class SniperStateDisplayer implements SniperListener {
   	SwingUtilities.invokeLater(new Runnable() {
   		@Override
   		public void run() {
-  			ui.sniperStatusChanged(sniperSnapshot, Main.STATUS_BIDDING);
+  			//ui.sniperStatusChanged(sniperSnapshot, Main.STATUS_BIDDING);
+  			ui.sniperStateChanged(sniperSnapshot);
   			sleep(forThisLong); /*>>>REMOVE<<<*/
   		}
   	});
