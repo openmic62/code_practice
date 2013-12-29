@@ -83,7 +83,7 @@
 package auctionsniper.tests.unit;
 
 import auctionsniper.Column;
-import auctionsniper.SniperState;
+import auctionsniper.SniperSnapshot;
 import auctionsniper.SnipersTableModel;
 // <mlr 131225: ITEM_ID - added per GOOS, p. 155a>
 import auctionsniper.tests.AuctionSniperTestUtilities;
@@ -131,7 +131,7 @@ public class SnipersTableModelTests {
 			oneOf(listener).tableChanged(with(aRowChangedEvent()));
 		}});
 		
-		model.sniperStatusChanged(new SniperState("item id", 555, 666), "Sniper status text");
+		model.sniperStatusChanged(new SniperSnapshot("item id", 555, 666), "Sniper status text");
 		
 		/* <mlr 131227: begin - MV; far less readable than the BV>
 		assertEquals("item id", model.getValueAt(0, 0));
@@ -142,7 +142,7 @@ public class SnipersTableModelTests {
 		assertColumnEquals(Column.ITEM_IDENTIFIER, "item id");
 		assertColumnEquals(Column.LAST_PRICE, 555);
 		assertColumnEquals(Column.LAST_BID, 666);
-		assertColumnEquals(Column.SNIPER_STATUS, "Sniper status text");
+		assertColumnEquals(Column.SNIPER_STATE, "Sniper status text");
 	}
   private void assertColumnEquals(Column colEnum, Object expected) {
   	final int row = 0;

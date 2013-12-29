@@ -12,12 +12,12 @@ public class SniperStateDisplayer implements SniperListener {
 	
 	// Implement the SniperListener interface
 	@Override
-	public void sniperBidding(final SniperState sniperState) {
+	public void sniperBidding(final SniperSnapshot sniperSnapshot) {
   	//showStatus(Main.STATUS_BIDDING);
   	SwingUtilities.invokeLater(new Runnable() {
   		@Override
   		public void run() {
-  			ui.sniperStatusChanged(sniperState, Main.STATUS_BIDDING);
+  			ui.sniperStatusChanged(sniperSnapshot, Main.STATUS_BIDDING);
   			sleep(forThisLong); /*>>>REMOVE<<<*/
   		}
   	});
