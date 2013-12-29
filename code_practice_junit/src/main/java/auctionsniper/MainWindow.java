@@ -36,7 +36,7 @@ public class MainWindow extends JFrame {
  	
  	private JTable makeSnipersTable() {
  		JTable table = new JTable(snipers);
- 		table.setPreferredScrollableViewportSize(new Dimension(250, 150));
+ 		table.setPreferredScrollableViewportSize(new Dimension(450, 150));
  		table.setFillsViewportHeight(true);
  		table.setName(Main.SNIPERS_TABLE_NAME);
  		return table;

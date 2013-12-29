@@ -155,6 +155,7 @@ CTags Legacy Support=0
 1=src\test\java\auctionsniper\tests\unit\FakeAuctionServerPTests.java
 2=src\test\java\auctionsniper\tests\unit\FakeAuctionServerTests.java
 3=src\test\java\auctionsniper\tests\unit\AuctionSniperTests.java
+4=src\test\java\auctionsniper\tests\unit\SnipersTableModelTests.java
 <<<<<<< .mine
 [Files - ant_and_maven]
 0=build.properties

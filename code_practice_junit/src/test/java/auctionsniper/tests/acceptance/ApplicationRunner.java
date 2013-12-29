@@ -50,12 +50,14 @@ public class ApplicationRunner {
 		driver.showSniperStatus(Main.STATUS_LOST);
 	}
 
-	public void showsSniperIsWinning(int bidWinning) {
-		driver.showSniperStatus(Main.STATUS_WINNING);
+	public void showsSniperIsWinning(int winningBid) {
+		//driver.showSniperStatus(Main.STATUS_WINNING);
+		driver.showSniperStatus(itemId, winningBid, winningBid, Main.STATUS_BIDDING);
 	}
 
-	public void showsSniperHasWonAuction(int bidWon) {
-		driver.showSniperStatus(Main.STATUS_WON);
+	public void showsSniperHasWonAuction(int lastPrice) {
+		//driver.showSniperStatus(Main.STATUS_WINNING);
+		driver.showSniperStatus(itemId, lastPrice, lastPrice, Main.STATUS_BIDDING);
 	}
 		
 	public void stop() {
