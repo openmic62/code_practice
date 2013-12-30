@@ -33,7 +33,8 @@ public class AuctionSniper implements AuctionEventListener {
 		 	//sniperListener.sniperBidding();
 		 	//sniperListener.sniperBidding(null);
 		 	//sniperListener.sniperBidding(new SniperSnapshot(itemId, price, bid));
-		 	sniperListener.sniperBidding(new SniperSnapshot(itemId, price, bid, SniperState.BIDDING));
+		 	//sniperListener.sniperBidding(new SniperSnapshot(itemId, price, bid, SniperState.BIDDING));
+		 	sniperListener.sniperStateChanged(new SniperSnapshot(itemId, price, bid, SniperState.BIDDING));
 		}			
 	}
 }

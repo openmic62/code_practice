@@ -144,7 +144,8 @@ public class AuctionSniperTests {
 			// <mlr 131225: ITEM_ID - changed per GOOS, p. 155a>
 			//allowing(sniperListener).sniperBidding();
 			//allowing(sniperListener).sniperBidding(null); // gets past the compiler
-			allowing(sniperListener).sniperBidding(with(any(SniperSnapshot.class)));
+			//allowing(sniperListener).sniperBidding(with(any(SniperSnapshot.class)));
+			allowing(sniperListener).sniperStateChanged(with(any(SniperSnapshot.class)));
 			  then(sniperState.is("bidding"));
 			  
 			atLeast(1).of(sniperListener).sniperLost();
@@ -180,7 +181,8 @@ public class AuctionSniperTests {
       // <mlr 131225: ITEM_ID - changed per GOOS, p. 155a>
 			//oneOf(auction).bid(price + increment);
 			///atLeast(1).of(sniperListener).sniperBidding();
-			atLeast(1).of(sniperListener).sniperBidding(new SniperSnapshot(AuctionSniperTestUtilities.ITEM_ID, price, bid, SniperState.BIDDING));
+			//atLeast(1).of(sniperListener).sniperBidding(new SniperSnapshot(AuctionSniperTestUtilities.ITEM_ID, price, bid, SniperState.BIDDING));
+			atLeast(1).of(sniperListener).sniperStateChanged(new SniperSnapshot(AuctionSniperTestUtilities.ITEM_ID, price, bid, SniperState.BIDDING));
 		}});
 		
 		sniper.currentPrice(price, increment, PriceSource.FromOtherBidder);
