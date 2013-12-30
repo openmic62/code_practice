@@ -32,7 +32,7 @@ public class MainWindow extends JFrame {
 	
  	void configGui() {
  	  setLocation(50, 100);
- 	  setMinimumSize(new Dimension(250, 100));
+ 	  setMinimumSize(new Dimension(300, 100));
  	  setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
  	}
  	
