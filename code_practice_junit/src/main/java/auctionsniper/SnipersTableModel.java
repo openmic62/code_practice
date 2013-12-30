@@ -30,7 +30,8 @@ public class SnipersTableModel extends AbstractTableModel {
     		return snapshot.getBidPrice();
     	case SNIPER_STATE: 
     		//return statusText;
-    		return snapshot.getSniperState();
+    		//return snapshot.getSniperState();
+    		return this.state;
       default:
         throw new IllegalArgumentException("No column at " + column);
     }

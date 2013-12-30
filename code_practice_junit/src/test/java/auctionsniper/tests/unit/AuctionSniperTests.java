@@ -206,11 +206,24 @@ public class AuctionSniperTests {
 	
 	@Test public void
 	reportsWinningWhenNewCurrentPriceComesFromSniper() {
+		final int lastBidFromOther = 123;
+		int increment = 45;
+		final int myBid = lastBidFromOther + increment;
 		context.checking(new Expectations() {{
-			atLeast(1).of(sniperListener).sniperWinning();
+			//oneOf(auction).bid(myBid);
+			ignoring(auction);
+			//atLeast(1).of(sniperListener).sniperWinning();
+			//atLeast(1).of(sniperListener).sniperStateChanged(new SniperSnapshot(AuctionSniperTestUtilities.ITEM_ID, lastBidFromOther, myBid, SniperState.BIDDING));
+			allowing(sniperListener).sniperStateChanged(with(aSniperThatIs(SniperState.BIDDING)));
+				then(sniperState.is("bidding"));
+			atLeast(1).of(sniperListener).sniperStateChanged(new SniperSnapshot(AuctionSniperTestUtilities.ITEM_ID, 168, 168, SniperState.BIDDING));
+			  when(sniperState.is("bidding"));
 		}});
 		
-		sniper.currentPrice(123, 45, PriceSource.FromSniper);
+		//sniper.currentPrice(lastBidFromOther, increment, PriceSource.FromOtherBidder);
+		//sniper.currentPrice(myBid, 35, PriceSource.FromSniper);
+		sniper.currentPrice(123, 12, PriceSource.FromOtherBidder);
+		sniper.currentPrice(135, 45, PriceSource.FromSniper);
 	}
 	
 }

@@ -2,6 +2,7 @@ package auctionsniper.tests.acceptance;
 
 import auctionsniper.Main;
 import auctionsniper.MainWindow;
+import auctionsniper.SniperState;
 import auctionsniper.tests.AuctionSniperTestUtilities;
 
 public class ApplicationRunner {
@@ -36,7 +37,8 @@ public class ApplicationRunner {
 		thread.setDaemon(true);
 		thread.start();
 		driver = new AuctionSniperDriver(1000);
-		driver.showSniperStatus(MainWindow.STATUS_JOINING);
+		//driver.showSniperStatus(MainWindow.STATUS_JOINING);
+		driver.showSniperStatus("", 0, 0, MainWindow.STATUS_JOINING);
 	}
 	
 	public void hasShownSniperIsBidding(){
