@@ -3,10 +3,14 @@ package auctionsniper;
 import javax.swing.table.AbstractTableModel;
 
 public class SnipersTableModel extends AbstractTableModel {
-	private String statusText = Main.STATUS_JOINING;
 	//private final SniperSnapshot STARTING_STATE = new SniperSnapshot("", 0, 0);
 	private final SniperSnapshot STARTING_STATE = new SniperSnapshot("", 0, 0, SniperState.JOINING);
-	private SniperSnapshot sniperSnapshot = STARTING_STATE;
+	private String[] STATUS_TEXT = {MainWindow.STATUS_JOINING,
+		                              MainWindow.STATUS_BIDDING};
+
+	//private String statusText = MainWindow.STATUS_JOINING;
+	private String state = MainWindow.STATUS_JOINING;
+	private SniperSnapshot snapshot = STARTING_STATE;
 	
 	// override AbstractTableModel methods
 	@Override
@@ -19,28 +23,31 @@ public class SnipersTableModel extends AbstractTableModel {
 	public Object getValueAt(int row, int column) { 
     switch (Column.at(column)) {
     	case ITEM_IDENTIFIER: 
-    		return sniperSnapshot.getItemId();
+    		return snapshot.getItemId();
     	case LAST_PRICE: 
-    		return sniperSnapshot.getLastPrice();
+    		return snapshot.getLastPrice();
     	case LAST_BID: 
-    		return sniperSnapshot.getBidPrice();
+    		return snapshot.getBidPrice();
     	case SNIPER_STATE: 
     		//return statusText;
-    		return sniperSnapshot.getSniperState();
+    		return snapshot.getSniperState();
       default:
         throw new IllegalArgumentException("No column at " + column);
     }
 	}
 
 	public void setStatusText(String newStatusText) {
-		this.statusText = newStatusText;
+		//this.statusText = newStatusText;
+		this.state = newStatusText;
 		fireTableRowsUpdated(0, 0);
 	}
 
-	//public void sniperStatusChanged(SniperSnapshot newSniperSnapshot, String newStatusText) {
-	public void sniperStateChanged(SniperSnapshot newSniperSnapshot) {
-		this.sniperSnapshot = newSniperSnapshot;
+	//public void sniperStatusChanged(SniperSnapshot newSnapshot, String newStatusText) {
+	public void sniperStateChanged(SniperSnapshot newSnapshot) {
+		this.snapshot = newSnapshot;
 		//this.statusText = newStatusText;
+		//this.state = newStatusText;
+		this.state = STATUS_TEXT[newSnapshot.getSniperState().ordinal()];
 		fireTableRowsUpdated(0, 0);
 	}
 }
