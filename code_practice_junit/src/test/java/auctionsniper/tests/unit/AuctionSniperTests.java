@@ -109,6 +109,10 @@ import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Message;
 
+import org.hamcrest.FeatureMatcher;
+import org.hamcrest.Matcher;
+import static org.hamcrest.Matchers.equalTo;
+
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.jmock.States;
@@ -144,8 +148,9 @@ public class AuctionSniperTests {
 			// <mlr 131225: ITEM_ID - changed per GOOS, p. 155a>
 			//allowing(sniperListener).sniperBidding();
 			//allowing(sniperListener).sniperBidding(null); // gets past the compiler
+			//allowing(sniperListener).sniperBidding(with(any(SniperState.class)));
 			//allowing(sniperListener).sniperBidding(with(any(SniperSnapshot.class)));
-			allowing(sniperListener).sniperStateChanged(with(any(SniperSnapshot.class)));
+			allowing(sniperListener).sniperStateChanged(with(aSniperThatIs(SniperState.BIDDING)));
 			  then(sniperState.is("bidding"));
 			  
 			atLeast(1).of(sniperListener).sniperLost();
@@ -154,6 +159,17 @@ public class AuctionSniperTests {
 		
 		sniper.currentPrice(123, 45, PriceSource.FromOtherBidder);
 		sniper.auctionClosed();
+	}
+	
+	private Matcher<SniperSnapshot> aSniperThatIs(SniperState state) {
+		return new FeatureMatcher<SniperSnapshot, SniperState> (
+               equalTo(state), "sniper that is ", "was")
+    {
+    	@Override
+    	protected SniperState featureValueOf(SniperSnapshot actual) {
+    		return actual.getSniperState();
+    	}
+    };
 	}
 	
 	@Test public void 
