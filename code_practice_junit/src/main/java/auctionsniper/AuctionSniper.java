@@ -6,12 +6,15 @@ public class AuctionSniper implements AuctionEventListener {
 	private SniperListener sniperListener;
 	private boolean isWinning = false;
 	private String itemId;
+	private SniperSnapshot snapShot;
 	
 	//public AuctionSniper(Auction a, SniperListener sl) {
 	public AuctionSniper(String itemId, Auction a, SniperListener sl) {
 		this.itemId = itemId;
 		this.auction = a;
 		this.sniperListener = sl;
+		
+		this.snapShot = SniperSnapshot.joining(itemId);
 	}
 
 	public void auctionClosed(){
@@ -23,8 +26,10 @@ public class AuctionSniper implements AuctionEventListener {
 	
 	public void currentPrice(int price, int increment, PriceSource source){
 		isWinning = source == PriceSource.FromSniper;
+		SniperSnapshot newSnapshot;
 		if (isWinning) {
-		 	sniperListener.sniperWinning();
+		 	//sniperListener.sniperWinning();
+		 	newSnapshot = snapShot.winning(price);
 		} else {
 			int bid = price + increment;
 			//auction.bid(price + increment);
@@ -34,7 +39,9 @@ public class AuctionSniper implements AuctionEventListener {
 		 	//sniperListener.sniperBidding(null);
 		 	//sniperListener.sniperBidding(new SniperSnapshot(itemId, price, bid));
 		 	//sniperListener.sniperBidding(new SniperSnapshot(itemId, price, bid, SniperState.BIDDING));
-		 	sniperListener.sniperStateChanged(new SniperSnapshot(itemId, price, bid, SniperState.BIDDING));
+		 	//sniperListener.sniperStateChanged(new SniperSnapshot(itemId, price, bid, SniperState.BIDDING));
+      newSnapshot = snapShot.bidding(price, bid);
 		}			
+		sniperListener.sniperStateChanged(newSnapshot);
 	}
 }
