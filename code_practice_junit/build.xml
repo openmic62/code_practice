@@ -351,7 +351,7 @@
 
 	<!-- TARGET (CLI) - that one button builds and runs the unit tests -->
 	<target name="junit_full_clean" depends="clean_all,compile,jar,compileUT,junit"
-		description="Usage: ant junit_full_clean [-DUTSet=sniperAcceptance] (clean_all,compile,jar,compileUT,junit)"/>
+		description="Usage: ant junit_full_clean -DUTSet=sniperAcceptance (clean_all,compile,jar,compileUT,junit)"/>
 		
 	<!-- TARGET (CLI) - that one button builds, runs, and creates a report for the unit tests -->
 	<target name="junitreport" depends="junit_full_clean,junitreport-generate"
@@ -444,7 +444,7 @@
 	<property name="perlVerbose" value="-v"/>
 	<!-- TARGET (CLI) - that one button runs a perl script for managing the Openfire server -->
 	<target name="run-perl-openfirectl"
-		description="Usage: ant run-perl-openfirectl [-Dcommand=kill]">
+		description="Usage: ant run-perl-openfirectl -Dcommand=kill">
 
 		<exec executable="perl" dir="${basedir}">
 			<arg value="${scriptsTest.dir}/openfirectl.pl"/>
