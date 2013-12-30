@@ -161,6 +161,7 @@ public class AuctionSniperTests {
 		sniper.auctionClosed();
 	}
 	
+	// DSL helper method - p. 162a "Lightweight Extensions to jMock
 	private Matcher<SniperSnapshot> aSniperThatIs(SniperState state) {
 		return new FeatureMatcher<SniperSnapshot, SniperState> (
                equalTo(state), "sniper that is ", "was")
@@ -176,7 +177,8 @@ public class AuctionSniperTests {
 	reportWonIfAuctionClosesWhenWinning() {
 		context.checking(new Expectations() {{
 			ignoring(auction);
-			allowing(sniperListener).sniperWinning();
+			//allowing(sniperListener).sniperWinning();
+			allowing(sniperListener).sniperStateChanged(with(aSniperThatIs(SniperState.WINNING)));
 			  then(sniperState.is("winning"));
 			  
 			atLeast(1).of(sniperListener).sniperWon();
@@ -216,7 +218,7 @@ public class AuctionSniperTests {
 			//atLeast(1).of(sniperListener).sniperStateChanged(new SniperSnapshot(AuctionSniperTestUtilities.ITEM_ID, lastBidFromOther, myBid, SniperState.BIDDING));
 			allowing(sniperListener).sniperStateChanged(with(aSniperThatIs(SniperState.BIDDING)));
 				then(sniperState.is("bidding"));
-			atLeast(1).of(sniperListener).sniperStateChanged(new SniperSnapshot(AuctionSniperTestUtilities.ITEM_ID, 168, 168, SniperState.BIDDING));
+			atLeast(1).of(sniperListener).sniperStateChanged(new SniperSnapshot(AuctionSniperTestUtilities.ITEM_ID, 135, 135, SniperState.WINNING));
 			  when(sniperState.is("bidding"));
 		}});
 		

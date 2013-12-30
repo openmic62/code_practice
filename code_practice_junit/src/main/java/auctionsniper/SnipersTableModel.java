@@ -27,7 +27,7 @@ public class SnipersTableModel extends AbstractTableModel {
     	case LAST_PRICE: 
     		return snapshot.getLastPrice();
     	case LAST_BID: 
-    		return snapshot.getBidPrice();
+    		return snapshot.getLastBid();
     	case SNIPER_STATE: 
     		//return statusText;
     		//return snapshot.getSniperState();
