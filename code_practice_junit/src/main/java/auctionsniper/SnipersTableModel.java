@@ -5,8 +5,10 @@ import javax.swing.table.AbstractTableModel;
 public class SnipersTableModel extends AbstractTableModel {
 	//private final SniperSnapshot STARTING_STATE = new SniperSnapshot("", 0, 0);
 	private final SniperSnapshot STARTING_STATE = new SniperSnapshot("", 0, 0, SniperState.JOINING);
-	private String[] STATUS_TEXT = {MainWindow.STATUS_JOINING,
-		                              MainWindow.STATUS_BIDDING};
+	//private String[] STATUS_TEXT = {MainWindow.STATUS_JOINING,
+	   public String[] STATUS_TEXT = {MainWindow.STATUS_JOINING,
+		                                MainWindow.STATUS_BIDDING,
+		                                MainWindow.STATUS_WINNING};
 
 	//private String statusText = MainWindow.STATUS_JOINING;
 	private String state = MainWindow.STATUS_JOINING;

@@ -30,10 +30,12 @@ public class SniperStateDisplayer implements SniperListener {
   	showStatus(MainWindow.STATUS_LOST);
  	}
  	
+ 	/*
 	@Override
 	public void sniperWinning() {
   	showStatus(MainWindow.STATUS_WINNING);
  	}
+ 	*/
  	
 	@Override
 	public void sniperWon() {
