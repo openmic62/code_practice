@@ -9,7 +9,16 @@ import javax.swing.JTable;
 
 public class MainWindow extends JFrame {
 	
+	public static final String STATUS_JOINING = "Joining auction";
+	public static final String STATUS_BIDDING = "Bidding in auction";
+	public static final String STATUS_WINNING = "Winning auction";
+	public static final String STATUS_LOST = "Lost auction";
+	public static final String STATUS_WON = "Won auction!!! Bitches!";
+
 	public static final String MAIN_WINDOW_NAME = "Auction Sniper Main";
+	public static final String SNIPERS_TABLE_NAME = "snipers table";
+	public static final String SNIPER_STATUS_NAME = "status";
+		
 	private final SnipersTableModel snipers = new SnipersTableModel();
 	
 	MainWindow() {
@@ -38,7 +47,7 @@ public class MainWindow extends JFrame {
  		JTable table = new JTable(snipers);
  		table.setPreferredScrollableViewportSize(new Dimension(450, 150));
  		table.setFillsViewportHeight(true);
- 		table.setName(Main.SNIPERS_TABLE_NAME);
+ 		table.setName(SNIPERS_TABLE_NAME);
  		return table;
  	}
  	

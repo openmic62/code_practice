@@ -30,14 +30,6 @@ public class Main {
 	public static final String ITEM_ID_AS_LOGIN = "auction-%s";
 	public static final String AUCTION_ID_FORMAT = ITEM_ID_AS_LOGIN + "@%S/" + AUCTION_RESOURCE;
 
-	public static final String SNIPERS_TABLE_NAME = "snipers table";
-	public static final String SNIPER_STATUS_NAME = "status";
-	public static final String STATUS_BIDDING = "Bidding in auction";
-	public static final String STATUS_JOINING = "Joining auction";
-	public static final String STATUS_WINNING = "Winning auction";
-	public static final String STATUS_WON = "Won auction!!! Bitches!";
-	public static final String STATUS_LOST = "Lost auction";
-	
 	public static final String JOIN_COMMAND_FORMAT = "SQLVersion: 1.1; Command: JOIN;";
 	public static final String REPORT_PRICE_COMMAND_FORMAT = "SQLVersion: 1.1; Event: PRICE; CurrentPrice: %d; Increment: %d; Bidder: %s;";
 	public static final String BID_COMMAND_FORMAT = "SQLVersion: 1.1; Command: BID; Price: %d;";
