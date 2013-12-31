@@ -106,6 +106,7 @@ import org.jmock.integration.junit4.JUnitRuleMockery;
 
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
+import org.junit.After;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
@@ -115,12 +116,40 @@ public class ColumnTests {
 	@Rule public final JUnitRuleMockery context = new JUnitRuleMockery();
 	//private final SniperSnapshot snapshot = context.mock(SniperSnapshot.class);
 	private SniperSnapshot snapshot;
-		
+
+	//----------------------------------------------------------------------------		
 	@Before public void
 	createAFreshSnapshot() {
-		snapshot = new SniperSnapshot("test item", 123, 456, SniperState.JOINING);
+		snapshot = new SniperSnapshot("test item id", 123, 456, SniperState.JOINING);
 	}
 	
+	@After public void
+	removeExistingSnapshot() {
+		snapshot = null;
+	}
+	
+	//----------------------------------------------------------------------------		
+	@Test public void 
+	valueInMethod_forItemIdConstant_returnsIdString() {
+		assertEquals("test item id", Column.ITEM_IDENTIFIER.valueIn(snapshot));
+	}
+	
+	@Test public void 
+	valueInMethod_forItemPriceConstant_returnsPriceInt() {
+		assertEquals(123, Column.LAST_PRICE.valueIn(snapshot));
+	}
+	
+	@Test public void 
+	valueInMethod_forItemBidConstant_returnsBidInt() {
+		assertEquals(456, Column.LAST_BID.valueIn(snapshot));
+	}
+	
+	@Test public void 
+	valueInMethod_forItemStateConstant_returnsStateObject() {
+		assertEquals(SniperState.JOINING, Column.SNIPER_STATE.valueIn(snapshot));
+	}
+	
+	//----------------------------------------------------------------------------		
 	@Test public void 
 	columnOneNamesItemId() {
 		assertEquals("ITEM_IDENTIFIER", Column.values()[0].name());
@@ -141,6 +170,7 @@ public class ColumnTests {
 		assertEquals("SNIPER_STATE", Column.values()[3].name());
 	}
 	
+	//----------------------------------------------------------------------------		
 	@Test public void 
 	columnAt_whenOffset0_returnsID() {
 		assertEquals(Column.ITEM_IDENTIFIER, Column.at(0));
