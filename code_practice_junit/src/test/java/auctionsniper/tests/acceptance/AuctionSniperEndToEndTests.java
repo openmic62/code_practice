@@ -125,7 +125,8 @@ public class AuctionSniperEndToEndTests {
 		application.startBiddingIn(auction);           // step 2
 		auction.hasReceivedJoinRequestFromSniper(ApplicationRunner.SNIPER_XMPP_ID);    // step 3
 		auction.announceClosed();                      // step 4
-		application.showsSniperHasLostAuction();       // step 5
+		//application.showsSniperHasLostAuction();     // step 5
+		application.showsSniperHasLostAuction(0, 0);   // step 5
 		sleep(forThisLong);
 	}
 
@@ -151,7 +152,8 @@ public class AuctionSniperEndToEndTests {
 		auction.hasReceivedBid(948, ApplicationRunner.SNIPER_XMPP_ID);
 		
 		auction.announceClosed();
-		application.showsSniperHasLostAuction();
+		//application.showsSniperHasLostAuction();
+		application.showsSniperHasLostAuction(900, 948);
 		sleep(forThisLong);
 	}
 

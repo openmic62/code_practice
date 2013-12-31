@@ -50,9 +50,11 @@ public class ApplicationRunner {
 		driver.showSniperStatus(itemId, lastPrice, lastBid, SnipersTableModel.textFor(SniperState.BIDDING));
 	}
 	
-	public void showsSniperHasLostAuction() {
+	//public void showsSniperHasLostAuction() {
+	public void showsSniperHasLostAuction(int lastPrice, int lastBid) {
 		//driver.showSniperStatus(MainWindow.STATUS_LOST);
-		driver.showSniperStatus(SnipersTableModel.textFor(SniperState.LOST));
+		//driver.showSniperStatus(SnipersTableModel.textFor(SniperState.LOST));
+		driver.showSniperStatus(itemId, lastPrice, lastBid, SnipersTableModel.textFor(SniperState.LOST));
 	}
 
 	public void showsSniperIsWinning(int winningBid) {
