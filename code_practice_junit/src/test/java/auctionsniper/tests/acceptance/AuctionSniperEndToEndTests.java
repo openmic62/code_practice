@@ -145,7 +145,7 @@ public class AuctionSniperEndToEndTests {
 		
 		// here's the book's code
 		auction.reportPrice(900, 48, "other bidder");
-		application.hasShownSniperIsBidding();
+		application.hasShownSniperIsBidding(900, 948);
 		auction.hasReceivedBid(948, ApplicationRunner.SNIPER_XMPP_ID);
 		
 		auction.announceClosed();
@@ -191,7 +191,7 @@ public class AuctionSniperEndToEndTests {
 		application.stop();
 	}
 	
- 	private int forThisLong = 2;
+ 	private int forThisLong = 0;
 	private void sleep(int sleepDuration) {
 		try {
 			Thread.sleep(sleepDuration * 1000);

@@ -41,11 +41,8 @@ public class ApplicationRunner {
 		driver.showSniperStatus("", 0, 0, MainWindow.STATUS_JOINING);
 	}
 	
-	public void hasShownSniperIsBidding(){
-		driver.showSniperStatus(MainWindow.STATUS_BIDDING);
-	}
-	
 	public void hasShownSniperIsBidding(int lastPrice, int lastBid){
+		//driver.showSniperStatus(MainWindow.STATUS_BIDDING);
 		driver.showSniperStatus(itemId, lastPrice, lastBid, MainWindow.STATUS_BIDDING);
 	}
 	
