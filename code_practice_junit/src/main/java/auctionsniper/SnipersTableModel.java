@@ -8,7 +8,9 @@ public class SnipersTableModel extends AbstractTableModel {
 	//private String[] STATUS_TEXT = {MainWindow.STATUS_JOINING,
 	   public String[] STATUS_TEXT = {MainWindow.STATUS_JOINING,
 		                                MainWindow.STATUS_BIDDING,
-		                                MainWindow.STATUS_WINNING};
+		                                MainWindow.STATUS_WINNING,
+		                                MainWindow.STATUS_LOST,
+		                                MainWindow.STATUS_WON};
 
 	//private String statusText = MainWindow.STATUS_JOINING;
 	private String state = MainWindow.STATUS_JOINING;

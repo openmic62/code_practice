@@ -135,7 +135,8 @@ public class AuctionSniperTests {
 	@Test public void 
 	reportLostIfAuctionClosesImmediately() {
 		context.checking(new Expectations() {{
-			oneOf(sniperListener).sniperLost();
+			//oneOf(sniperListener).sniperLost();
+			atLeast(1).of(sniperListener).sniperStateChanged(with(aSniperThatIs(SniperState.LOST)));
 		}});
 		
 		sniper.auctionClosed();
@@ -153,7 +154,8 @@ public class AuctionSniperTests {
 			allowing(sniperListener).sniperStateChanged(with(aSniperThatIs(SniperState.BIDDING)));
 			  then(sniperState.is("bidding"));
 			  
-			atLeast(1).of(sniperListener).sniperLost();
+			//atLeast(1).of(sniperListener).sniperLost();
+			atLeast(1).of(sniperListener).sniperStateChanged(with(aSniperThatIs(SniperState.LOST)));
 			  when(sniperState.is("bidding"));
 		}});
 		
@@ -181,7 +183,8 @@ public class AuctionSniperTests {
 			allowing(sniperListener).sniperStateChanged(with(aSniperThatIs(SniperState.WINNING)));
 			  then(sniperState.is("winning"));
 			  
-			atLeast(1).of(sniperListener).sniperWon();
+			//atLeast(1).of(sniperListener).sniperWon();
+			atLeast(1).of(sniperListener).sniperStateChanged(with(aSniperThatIs(SniperState.WON)));
 			  when(sniperState.is("winning"));
 		}});
 		
