@@ -36,6 +36,7 @@ public class Ch4Primitives {
 
 	// I attempted to learn Generics. Tried here, but failed miserably on my first try
 	///public static <T> String primitiveToBinaryString(T pPrim) {
+	@SuppressWarnings("unchecked")
 	public static <T extends Number> String primitiveToBinaryString(T pPrim) {
 		boolean debug = false;  // use this flag to control debugging console output
 		int primLength = 16;    // set a default value for the primitive length

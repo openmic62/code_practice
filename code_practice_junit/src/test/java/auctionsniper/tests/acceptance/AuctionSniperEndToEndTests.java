@@ -69,6 +69,8 @@
  H:\student\code_practice_junit>javac -cp %CLASSPATH%;%SC% -d %SC% %SD%\auctionsniper\%FAS_FILES%
                                 javac -cp %CLASSPATH%;%SC% -d %SC% %SD%\auctionsniper\Main.java
                                 
+                                logger.debug("message received -->" + message.getBody() + "<--");
+                                                               
  ***** build the Tests AuctionSniperEndToEndTests
  H:\student\code_practice_junit>javac -cp %CLASSPATH%;%SC%;%TC% -d %TC% %TD%\auctionsniper\tests\acceptance\AuctionSniperEndToEndTests.java
  

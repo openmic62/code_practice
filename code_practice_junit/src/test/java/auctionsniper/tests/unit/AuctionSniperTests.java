@@ -170,7 +170,7 @@ public class AuctionSniperTests {
     {
     	@Override
     	protected SniperState featureValueOf(SniperSnapshot actual) {
-    		return actual.getSniperState();
+    		return actual.getState();
     	}
     };
 	}

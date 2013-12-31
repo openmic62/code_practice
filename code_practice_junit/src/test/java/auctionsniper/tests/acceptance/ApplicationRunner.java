@@ -2,7 +2,9 @@ package auctionsniper.tests.acceptance;
 
 import auctionsniper.Main;
 import auctionsniper.MainWindow;
+import auctionsniper.SniperSnapshot;
 import auctionsniper.SniperState;
+import auctionsniper.SnipersTableModel;
 import auctionsniper.tests.AuctionSniperTestUtilities;
 
 public class ApplicationRunner {
@@ -38,26 +40,31 @@ public class ApplicationRunner {
 		thread.start();
 		driver = new AuctionSniperDriver(1000);
 		//driver.showSniperStatus(MainWindow.STATUS_JOINING);
-		driver.showSniperStatus("", 0, 0, MainWindow.STATUS_JOINING);
+		//driver.showSniperStatus("", 0, 0, MainWindow.STATUS_JOINING);
+		driver.showSniperStatus("", 0, 0, SnipersTableModel.textFor(SniperState.JOINING));
 	}
 	
 	public void hasShownSniperIsBidding(int lastPrice, int lastBid){
 		//driver.showSniperStatus(MainWindow.STATUS_BIDDING);
-		driver.showSniperStatus(itemId, lastPrice, lastBid, MainWindow.STATUS_BIDDING);
+		//driver.showSniperStatus(itemId, lastPrice, lastBid, MainWindow.STATUS_BIDDING);
+		driver.showSniperStatus(itemId, lastPrice, lastBid, SnipersTableModel.textFor(SniperState.BIDDING));
 	}
 	
 	public void showsSniperHasLostAuction() {
-		driver.showSniperStatus(MainWindow.STATUS_LOST);
+		//driver.showSniperStatus(MainWindow.STATUS_LOST);
+		driver.showSniperStatus(SnipersTableModel.textFor(SniperState.LOST));
 	}
 
 	public void showsSniperIsWinning(int winningBid) {
 		//driver.showSniperStatus(MainWindow.STATUS_WINNING);
-		driver.showSniperStatus(itemId, winningBid, winningBid, MainWindow.STATUS_WINNING);
+		//driver.showSniperStatus(itemId, winningBid, winningBid, MainWindow.STATUS_WINNING);
+		driver.showSniperStatus(itemId, winningBid, winningBid, SnipersTableModel.textFor(SniperState.WINNING));
 	}
 
 	public void showsSniperHasWonAuction(int lastPrice) {
 		//driver.showSniperStatus(MainWindow.STATUS_WINNING);
-		driver.showSniperStatus(itemId, lastPrice, lastPrice, MainWindow.STATUS_WON);
+		//driver.showSniperStatus(itemId, lastPrice, lastPrice, MainWindow.STATUS_WON);
+		driver.showSniperStatus(itemId, lastPrice, lastPrice, SnipersTableModel.textFor(SniperState.WON));
 	}
 		
 	public void stop() {
