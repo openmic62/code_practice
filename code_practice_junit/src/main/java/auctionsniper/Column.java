@@ -22,7 +22,8 @@ public enum Column {
 	
 	SNIPER_STATE {
 		@Override public Object valueIn(SniperSnapshot snapshot) {
-			return snapshot.getState();
+			//return snapshot.getState();
+			return SnipersTableModel.textFor(snapshot.getState());
 		}
 	};
 	

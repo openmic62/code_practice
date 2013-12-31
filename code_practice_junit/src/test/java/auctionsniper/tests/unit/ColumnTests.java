@@ -94,6 +94,7 @@ package auctionsniper.tests.unit;
 
 import auctionsniper.Column;
 import auctionsniper.SniperSnapshot;
+import auctionsniper.SnipersTableModel;
 import auctionsniper.SniperState;
 
 import org.hamcrest.Matcher;
@@ -116,11 +117,12 @@ public class ColumnTests {
 	@Rule public final JUnitRuleMockery context = new JUnitRuleMockery();
 	//private final SniperSnapshot snapshot = context.mock(SniperSnapshot.class);
 	private SniperSnapshot snapshot;
+	private final SniperState snapshotState = SniperState.JOINING;
 
 	//----------------------------------------------------------------------------		
 	@Before public void
 	createAFreshSnapshot() {
-		snapshot = new SniperSnapshot("test item id", 123, 456, SniperState.JOINING);
+		snapshot = new SniperSnapshot("test item id", 123, 456, snapshotState);
 	}
 	
 	@After public void
@@ -146,7 +148,8 @@ public class ColumnTests {
 	
 	@Test public void 
 	valueInMethod_forItemStateConstant_returnsStateObject() {
-		assertEquals(SniperState.JOINING, Column.SNIPER_STATE.valueIn(snapshot));
+		//assertEquals(SniperState.JOINING, Column.SNIPER_STATE.valueIn(snapshot));
+		assertEquals(SnipersTableModel.textFor(snapshotState), Column.SNIPER_STATE.valueIn(snapshot));
 	}
 	
 	//----------------------------------------------------------------------------		
