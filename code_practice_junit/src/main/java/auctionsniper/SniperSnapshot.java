@@ -4,7 +4,11 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class SniperSnapshot {
+	static Logger logger = LogManager.getLogger(SniperSnapshot.class.getName());	
 	
 	private final String itemId;
 	private final int lastPrice;
@@ -29,12 +33,28 @@ public class SniperSnapshot {
 		return new SniperSnapshot(itemId, 0, 0, SniperState.JOINING);
 	}
 	
+	public SniperSnapshot closed() {
+		return sniperState.name().contains("WINNING") ? won() : lost();
+	}
+	
 	public SniperSnapshot bidding(int newLastPrice, int newLastBid) {
 		return new SniperSnapshot(this.itemId, newLastPrice, newLastBid, SniperState.BIDDING);
 	}
 	
 	public SniperSnapshot winning(int newLastPrice) {
 		return new SniperSnapshot(this.itemId, newLastPrice, newLastPrice, SniperState.WINNING);
+	}
+	
+	public SniperSnapshot lost() {
+		return aSnapshot(SniperState.LOST);
+	}
+			
+	public SniperSnapshot won() {
+		return aSnapshot(SniperState.WON);
+	}
+		
+	private SniperSnapshot aSnapshot(SniperState state) {
+		return new SniperSnapshot(this.itemId, this.lastPrice, this.lastBid, state);
 	}
 	
 	@Override
