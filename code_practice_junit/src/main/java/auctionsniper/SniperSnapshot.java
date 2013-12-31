@@ -10,17 +10,17 @@ import org.apache.logging.log4j.Logger;
 public class SniperSnapshot {
 	static Logger logger = LogManager.getLogger(SniperSnapshot.class.getName());	
 	
-	private final String itemId;
-	private final int lastPrice;
-	private final int lastBid;
+	private final String      itemId;
+	private final int         lastPrice;
+	private final int         lastBid;
 	private final SniperState sniperState;
 
 	
 	//public SniperSnapshot(String itemId, int lastPrice, int lastBid) {
 	public SniperSnapshot(String itemId, int lastPrice, int lastBid, SniperState state) {
-		this.itemId = itemId;
-		this.lastPrice = lastPrice;
-		this.lastBid = lastBid;
+		this.itemId      = itemId;
+		this.lastPrice   = lastPrice;
+		this.lastBid     = lastBid;
 		this.sniperState = state;
 	}
 	
@@ -32,11 +32,7 @@ public class SniperSnapshot {
 	public static SniperSnapshot joining(String itemId) {
 		return new SniperSnapshot(itemId, 0, 0, SniperState.JOINING);
 	}
-	
-	public SniperSnapshot closed() {
-		return sniperState.name().contains("WINNING") ? won() : lost();
-	}
-	
+
 	public SniperSnapshot bidding(int newLastPrice, int newLastBid) {
 		return new SniperSnapshot(this.itemId, newLastPrice, newLastBid, SniperState.BIDDING);
 	}
@@ -45,12 +41,16 @@ public class SniperSnapshot {
 		return new SniperSnapshot(this.itemId, newLastPrice, newLastPrice, SniperState.WINNING);
 	}
 	
-	public SniperSnapshot lost() {
-		return aSnapshot(SniperState.LOST);
+	public SniperSnapshot closed() {
+		return sniperState.name().contains("WINNING") ? won() : lost();
 	}
 			
-	public SniperSnapshot won() {
+	private SniperSnapshot won() {
 		return aSnapshot(SniperState.WON);
+	}
+	
+	private SniperSnapshot lost() {
+		return aSnapshot(SniperState.LOST);
 	}
 		
 	private SniperSnapshot aSnapshot(SniperState state) {
