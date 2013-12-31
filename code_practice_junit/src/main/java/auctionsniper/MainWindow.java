@@ -8,12 +8,13 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 public class MainWindow extends JFrame {
-	
+	/* <mlr 131231: begin - GOOS, p. 166a moves these to SnipersTableModel>
 	public static final String STATUS_JOINING = "Joining auction";
 	public static final String STATUS_BIDDING = "Bidding in auction";
 	public static final String STATUS_WINNING = "Winning auction";
 	public static final String STATUS_LOST = "Lost auction";
 	public static final String STATUS_WON = "Won auction!!! Bitches!";
+	   <mlr 131231: begin - GOOS, p. 166a moves these to SnipersTableModel> */
 
 	public static final String MAIN_WINDOW_NAME = "Auction Sniper Main";
 	public static final String SNIPERS_TABLE_NAME = "snipers table";

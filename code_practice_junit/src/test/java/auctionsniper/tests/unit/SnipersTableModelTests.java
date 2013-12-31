@@ -144,7 +144,8 @@ public class SnipersTableModelTests {
 		assertColumnEquals(Column.LAST_PRICE, 555);
 		assertColumnEquals(Column.LAST_BID, 666);
 		//assertColumnEquals(Column.SNIPER_STATE, SniperState.BIDDING); // 2nd regression caught !!!!
-		assertColumnEquals(Column.SNIPER_STATE, model.STATUS_TEXT[SniperState.BIDDING.ordinal()]);
+		//assertColumnEquals(Column.SNIPER_STATE, model.STATUS_TEXT[SniperState.BIDDING.ordinal()]);
+		assertColumnEquals(Column.SNIPER_STATE, SnipersTableModel.textFor(SniperState.BIDDING));
 	}
   private void assertColumnEquals(Column colEnum, Object expected) {
   	final int row = 0;

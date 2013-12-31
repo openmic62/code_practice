@@ -13,7 +13,7 @@ public class SniperSnapshot {
 	private final String      itemId;
 	private final int         lastPrice;
 	private final int         lastBid;
-	private final SniperState sniperState;
+	private final SniperState state;
 
 	
 	//public SniperSnapshot(String itemId, int lastPrice, int lastBid) {
@@ -21,13 +21,13 @@ public class SniperSnapshot {
 		this.itemId      = itemId;
 		this.lastPrice   = lastPrice;
 		this.lastBid     = lastBid;
-		this.sniperState = state;
+		this.state       = state;
 	}
 	
 	public String getItemId() { return this.itemId; }
 	public int getLastPrice() { return this.lastPrice; }
 	public int getLastBid() { return this.lastBid; }
-	public SniperState getSniperState() { return this.sniperState; }
+	public SniperState getState() { return this.state; }
 	
 	public static SniperSnapshot joining(String itemId) {
 		return new SniperSnapshot(itemId, 0, 0, SniperState.JOINING);
@@ -42,9 +42,9 @@ public class SniperSnapshot {
 	}
 	
 	public SniperSnapshot closed() {
-		return sniperState.name().contains("WINNING") ? won() : lost();
+		return state.name().contains("WINNING") ? won() : lost();
 	}
-			
+
 	private SniperSnapshot won() {
 		return aSnapshot(SniperState.WON);
 	}
@@ -55,6 +55,7 @@ public class SniperSnapshot {
 		
 	private SniperSnapshot aSnapshot(SniperState state) {
 		return new SniperSnapshot(this.itemId, this.lastPrice, this.lastBid, state);
+		//return new SniperSnapshot(this.itemId, this.lastPrice, this.lastBid, state.whenAuctionClosed());
 	}
 	
 	@Override
