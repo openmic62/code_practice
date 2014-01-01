@@ -2,7 +2,7 @@ package auctionsniper;
 
 import javax.swing.SwingUtilities;
 
-public class SniperStateDisplayer implements SniperListener {
+public class SwingThreadSniperListener implements SniperListener {
 
 	/*
 	private MainWindow ui;
@@ -14,7 +14,7 @@ public class SniperStateDisplayer implements SniperListener {
 	
 	private SniperListener snipers;
 	
-	SniperStateDisplayer(SniperListener snipers) {
+	SwingThreadSniperListener(SniperListener snipers) {
 		this.snipers = snipers;
 	}
 	

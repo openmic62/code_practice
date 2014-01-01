@@ -19,6 +19,7 @@ public class Main {
 	
 	@SuppressWarnings("unused") private Chat notToBeGCd;
 	
+	private final SnipersTableModel snipers = new SnipersTableModel();
 	private MainWindow ui;
 	
 	private static final int ARG_HOSTNAME = 0;
@@ -63,7 +64,11 @@ public class Main {
 		
 		Auction auction = new XMPPAuction(chat);
 		chat.addMessageListener(
-			new AuctionMessageTranslator(connection.getUser(), new AuctionSniper(itemId, auction, new SniperStateDisplayer(ui))));
+			new AuctionMessageTranslator(
+			      connection.getUser(), 
+			      //new AuctionSniper(itemId, auction, new SniperStateDisplayer(ui))));
+			      //new AuctionSniper(itemId, auction, new SniperStateDisplayer(snipers))));
+			      new AuctionSniper(itemId, auction, new SwingThreadSniperListener(snipers))));
 		auction.join();
 	}
 	
@@ -98,7 +103,8 @@ public class Main {
 		try {
 			SwingUtilities.invokeAndWait(new Runnable() {
 				public void run() {
-					ui = new MainWindow();
+					//ui = new MainWindow();
+					ui = new MainWindow(snipers);
 				}
 			});
 		} catch (Exception e) {
