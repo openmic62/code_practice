@@ -8,8 +8,11 @@ import com.objogate.wl.swing.AWTEventQueueProber;
 import com.objogate.wl.swing.driver.JFrameDriver;
 import com.objogate.wl.swing.driver.JLabelDriver;
 import com.objogate.wl.swing.driver.JTableDriver;
+import com.objogate.wl.swing.driver.JTableHeaderDriver;
 import com.objogate.wl.swing.gesture.GesturePerformer;
 import com.objogate.wl.swing.matcher.IterableComponentsMatcher;
+
+import javax.swing.table.JTableHeader;
 
 import static org.hamcrest.Matchers.*;
 import static com.objogate.wl.swing.matcher.JLabelTextMatcher.*;
@@ -40,6 +43,15 @@ public class AuctionSniperDriver extends JFrameDriver {
 		tableDriver.hasRow(IterableComponentsMatcher.matching(
 		  withLabelText(itemId), withLabelText(Integer.valueOf(lastPrice).toString()), 
 		  withLabelText(Integer.valueOf(lastBid).toString()), withLabelText(statusText)
+		));
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void hasColumnTitles() {
+		JTableHeaderDriver header = new JTableHeaderDriver(this, JTableHeader.class);
+		header.hasHeaders(IterableComponentsMatcher.matching(
+		  withLabelText("Item"), withLabelText("Last Price"), 
+		  withLabelText("Last Bid"), withLabelText("State")
 		));
 	}
 }
