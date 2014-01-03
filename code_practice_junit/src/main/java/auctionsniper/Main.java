@@ -44,6 +44,18 @@ public class Main {
 	public Main() {
 		startUserInterface();
 	}
+	
+	private void startUserInterface() {
+		try {
+			SwingUtilities.invokeAndWait(new Runnable() {
+				public void run() {
+					ui = new MainWindow(snipers);
+				}
+			});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	public static void main(String[] args) throws Exception {
 		//     Main - args[]-->[localhost, sniper, sniper, item-54321, item-65432]<--
@@ -56,10 +68,11 @@ public class Main {
 		  main.connection(args[ARG_HOSTNAME], args[ARG_USERNAME], args[ARG_PASSWORD]);
 		for (int i=3; i<args.length; i++) {
 			main.joinAuction(connection, args[i]);
-			//if(args[i].contains("65432")) { sleep(10); }
 		}
-		sleep(0);
+		sleep(0); /*>>>REMOVE<<<*/
 	}
+	
+ 	/*>>>REMOVE-BEGIN<<<*/
 	private static void sleep(final double sleepDuration) {
 		try {
   		SwingUtilities.invokeAndWait(new Runnable() {
@@ -75,11 +88,14 @@ public class Main {
       Thread.currentThread().interrupt();
     }
 	}
+ 	/*>>>REMOVE-END<<<*/
 	
 	private void joinAuction(XMPPConnection connection, String itemId) 
-	  throws XMPPException 
+	  throws XMPPException, Exception
 	{
 		logger.debug("connection.getUser() -->" + connection.getUser() + "<--; buying -->" + itemId + "<--");
+		
+		safelyAddItemToModel(itemId);
 		
 		disconnectWhenUICloses(connection);
 		
@@ -98,6 +114,14 @@ public class Main {
 			      new AuctionSniper(itemId, auction, new SwingThreadSniperListener(snipers))));
 		auction.join();
 	}
+	
+	private void safelyAddItemToModel(final String itemId) throws Exception {
+	  SwingUtilities.invokeAndWait(new Runnable() {
+	  	public void run() {
+	  		snipers.addSniper(SniperSnapshot.joining(itemId));
+	  	}
+	  });
+	}		
 	
 	private void disconnectWhenUICloses(final XMPPConnection connection) {
 		ui.addWindowListener(new WindowAdapter()
@@ -126,15 +150,4 @@ public class Main {
 		                     connection.getServiceName());
 	}
 	
-	private void startUserInterface() {
-		try {
-			SwingUtilities.invokeAndWait(new Runnable() {
-				public void run() {
-					ui = new MainWindow(snipers);
-				}
-			});
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
  }
