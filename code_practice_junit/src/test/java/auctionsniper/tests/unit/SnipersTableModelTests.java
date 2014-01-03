@@ -50,7 +50,7 @@
  set TD=src\test\java
  cd student\code_practice_junit
  
- javac -cp %CLASSPATH%;%SC% -d %SC% %SD%\auctionsniper\MainWindow.java
+ javac -cp %CLASSPATH%;%SC% -d %SC% %SD%\auctionsniper\SnipersTableModel.java
  javac -cp %CLASSPATH%;%SC%;%TC% -d %TC% %TD%\auctionsniper\tests\\unit\SnipersTableModelTests.java
 
  java  -cp %CLASSPATH%;%SC%;%TC% org.junit.runner.JUnitCore auctionsniper.tests.unit.SnipersTableModelTests
@@ -119,6 +119,37 @@ public class SnipersTableModelTests {
 	attachModelListener() {
 		model.addTableModelListener(listener);
 	}
+		
+	@Test public void 
+	rowCountIncreasesByOneWhenAddingASniper() {
+		int expectedRowCountDifference = 1;
+		int rowCountBeforeAdd = model.getRowCount();
+		context.checking(new Expectations() {{
+			allowing(listener).tableChanged(with(aRowInsertedEvent()));
+		}});
+		
+		model.addSniper(new SniperSnapshot("item id", 0, 0, SniperState.JOINING));
+		
+		int rowCountAfterAdd = model.getRowCount();
+		int actualRowCountDifference = rowCountAfterAdd - rowCountBeforeAdd;
+		
+		assertEquals(expectedRowCountDifference, actualRowCountDifference);
+	}
+	
+	@Test public void 
+	notifiesListenerWhenAddingASniper() {
+		context.checking(new Expectations() {{
+			oneOf(listener).tableChanged(with(aRowInsertedEvent()));
+		}});
+		
+		model.addSniper(new SniperSnapshot("anudda id", 0, 0, SniperState.JOINING));
+	}
+  private Matcher<TableModelEvent> aRowInsertedEvent() {
+  	int lastRow = 0;
+  	return samePropertyValuesAs(new TableModelEvent(model, lastRow, lastRow, 
+  	                            TableModelEvent.ALL_COLUMNS, 
+  	                            TableModelEvent.INSERT));
+  }
 	
 	@Test public void 
 	setsUpColumnHeadings() {
@@ -135,31 +166,28 @@ public class SnipersTableModelTests {
 	@Test public void 
 	setsSniperValuesInColumns() {
 		context.checking(new Expectations() {{
-			//oneOf(listener).tableChanged(with(any(TableModelEvent.class)));
-			oneOf(listener).tableChanged(with(aRowChangedEvent()));
+			allowing(listener).tableChanged(with(aRowInsertedEvent()));
+			//oneOf(listener).tableChanged(with(aRowChangedEvent()));
+			oneOf(listener).tableChanged(with(aChangeInRow(0)));
 		}});
 		
+		model.addSniper(SniperSnapshot.joining("item id"));
 		model.sniperStateChanged(new SniperSnapshot("item id", 555, 666, SniperState.BIDDING));
 		
-		/* <mlr 131227: begin - MV; far less readable than the BV>
-		assertEquals("item id", model.getValueAt(0, 0));
-		assertEquals(555, model.getValueAt(0, 1));
-		assertEquals(666, model.getValueAt(0, 2));
-		assertEquals("Sniper status text", model.getValueAt(0, 3));
-		<mlr 131227: end - MV; far less readable than the BV> */
 		assertColumnEquals(Column.ITEM_IDENTIFIER, "item id");
 		assertColumnEquals(Column.LAST_PRICE, 555);
 		assertColumnEquals(Column.LAST_BID, 666);
-		//assertColumnEquals(Column.SNIPER_STATE, SniperState.BIDDING); // 2nd regression caught !!!!
-		//assertColumnEquals(Column.SNIPER_STATE, model.STATUS_TEXT[SniperState.BIDDING.ordinal()]);
 		assertColumnEquals(Column.SNIPER_STATE, SnipersTableModel.textFor(SniperState.BIDDING));
 	}
+	
   private void assertColumnEquals(Column colEnum, Object expected) {
   	final int row = 0;
   	final int col = colEnum.ordinal();
   	assertEquals(expected, model.getValueAt(row, col));
   }
-  
+  private Matcher<TableModelEvent> aChangeInRow(int rowIndex) {
+  	return samePropertyValuesAs(new TableModelEvent(model, rowIndex));
+  }
   private Matcher<TableModelEvent> aRowChangedEvent() {
   	return samePropertyValuesAs(new TableModelEvent(model, 0));
   }
