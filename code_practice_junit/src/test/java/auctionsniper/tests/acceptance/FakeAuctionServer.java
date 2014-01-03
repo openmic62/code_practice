@@ -50,6 +50,7 @@ public class FakeAuctionServer {
 		connection.connect();
 		connection.login(String.format(ITEM_ID_AS_LOGIN, itemID),
 		                 AUCTION_PASSWORD, AUCTION_RESOURCE);
+		logger.debug("startSellingItem: connection.getUser() -->" + connection.getUser() + "<--");
 		connection.getChatManager().addChatListener(
 			new ChatManagerListener() {
 				@Override
@@ -76,27 +77,19 @@ public class FakeAuctionServer {
 		receivesAMessageMatching(sniperId, equalTo(String.format(Main.BID_COMMAND_FORMAT, bid)));
 	}
 	
-	public void reportPrice(int price, int increment, String bidder) 
-	  throws XMPPException 
-	{
-		currentChat.sendMessage(
-			String.format(Main.REPORT_PRICE_COMMAND_FORMAT, price, increment, bidder));
-	}
-	
-	/* <mlr 131213: begin - my domain logic reasonind differed from the book's>
-	public void reportWinningBid(int winningBid, String bidder) 
-	  throws XMPPException 
-	{
-		currentChat.sendMessage(
-			String.format(Main.WINNER_COMMAND_FORMAT, winningBid, bidder));
-	}
-	<mlr 131213: end - my domain logic reasonind differed from the book's> */
-	
+	// helper method
 	private void receivesAMessageMatching(String sniperId, org.hamcrest.Matcher<? super String> messageMatcher)
 		throws InterruptedException 
 	{
 		messageListener.receivesAMessage(messageMatcher);
 		assertThat(currentChat.getParticipant(), equalTo(sniperId));
+	}
+	
+	public void reportPrice(int price, int increment, String bidder) 
+	  throws XMPPException 
+	{
+		currentChat.sendMessage(
+			String.format(Main.REPORT_PRICE_COMMAND_FORMAT, price, increment, bidder));
 	}
 	
 	public void announceClosed() throws XMPPException {
@@ -107,6 +100,7 @@ public class FakeAuctionServer {
 		connection.disconnect();
 	}
 	
+	/* implement the MessageListener interface */
 	public class SingleMessageListener implements MessageListener {
 		private final ArrayBlockingQueue<Message> messages =
 			        new ArrayBlockingQueue<Message>(1);
@@ -121,13 +115,19 @@ public class FakeAuctionServer {
     	throws InterruptedException 
     {
     	final Message message = messages.poll(5, TimeUnit.SECONDS);
-
-    	logger.debug("message received -->" + message.getBody() + "<--");
+    	logger.debug(connection.getUser() + " received -->" + message.getBody() + "<--; \n\t\t\tfrom -->" 
+    	                                   + currentChat.getParticipant() + "<--");
     	assertThat("Message", message, is(notNullValue()));
-    	assertThat(message.getBody(), messageMatcher);
+    	//assertThat("Message", message, is(nullValue()));
+    	assertThat(message, hasProperty("body", messageMatcher));
     }
   }
-  
+
+
+
+
+
+
   
   
   

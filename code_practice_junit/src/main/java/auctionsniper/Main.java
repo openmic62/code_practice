@@ -2,6 +2,8 @@ package auctionsniper;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.SwingUtilities;
 
 import org.apache.logging.log4j.LogManager;
@@ -9,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.ChatManager;
+import org.jivesoftware.smack.Connection;
 import org.jivesoftware.smack.MessageListener;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
@@ -17,7 +20,8 @@ import org.jivesoftware.smack.packet.Message;
 public class Main {
 	static Logger logger = LogManager.getLogger(Main.class.getName());	
 	
-	@SuppressWarnings("unused") private Chat notToBeGCd;
+	//@SuppressWarnings("unused") private Chat notToBeGCd;
+	@SuppressWarnings("unused") private ArrayList<Chat> notToBeGCd = new ArrayList<Chat>();
 	
 	private final SnipersTableModel snipers = new SnipersTableModel();
 	private MainWindow ui;
@@ -42,16 +46,40 @@ public class Main {
 	}
 
 	public static void main(String[] args) throws Exception {
+		//     Main - args[]-->[localhost, sniper, sniper, item-54321, item-65432]<--
+		logger.debug("args[]-->" + Arrays.toString(args) + "<--");
+		
 		Main main = new Main();
-		main.joinAuction(
-		  main.connection(args[ARG_HOSTNAME], args[ARG_USERNAME], args[ARG_PASSWORD]),
-		  args[ARG_ITEM_ID]);
+		
+		Connection.DEBUG_ENABLED = false;
+		XMPPConnection connection = 
+		  main.connection(args[ARG_HOSTNAME], args[ARG_USERNAME], args[ARG_PASSWORD]);
+		for (int i=3; i<args.length; i++) {
+			main.joinAuction(connection, args[i]);
+			//if(args[i].contains("65432")) { sleep(10); }
+		}
+		sleep(0);
+	}
+	private static void sleep(final double sleepDuration) {
+		try {
+  		SwingUtilities.invokeAndWait(new Runnable() {
+  			public void run() {
+         	try {
+         		Thread.sleep((int)(sleepDuration * 1000));
+         	} catch(InterruptedException ex) {
+         		Thread.currentThread().interrupt();
+         	}
+         }
+  		});
+  	}  catch(Exception ex) {
+      Thread.currentThread().interrupt();
+    }
 	}
 	
 	private void joinAuction(XMPPConnection connection, String itemId) 
 	  throws XMPPException 
 	{
-		logger.debug("connection.getUser() -->" + connection.getUser() + "<--");
+		logger.debug("connection.getUser() -->" + connection.getUser() + "<--; buying -->" + itemId + "<--");
 		
 		disconnectWhenUICloses(connection);
 		
@@ -60,14 +88,13 @@ public class Main {
 		  auctionId(itemId, connection),
 		  null
 		  );
-		this.notToBeGCd = chat;  
+		//this.notToBeGCd = chat;  
+		this.notToBeGCd.add(chat);  
 		
 		Auction auction = new XMPPAuction(chat);
 		chat.addMessageListener(
 			new AuctionMessageTranslator(
 			      connection.getUser(), 
-			      //new AuctionSniper(itemId, auction, new SniperStateDisplayer(ui))));
-			      //new AuctionSniper(itemId, auction, new SniperStateDisplayer(snipers))));
 			      new AuctionSniper(itemId, auction, new SwingThreadSniperListener(snipers))));
 		auction.join();
 	}
@@ -103,7 +130,6 @@ public class Main {
 		try {
 			SwingUtilities.invokeAndWait(new Runnable() {
 				public void run() {
-					//ui = new MainWindow();
 					ui = new MainWindow(snipers);
 				}
 			});

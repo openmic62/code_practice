@@ -32,10 +32,11 @@ public class SwingThreadSniperListener implements SniperListener {
   }
 
  	/*>>>REMOVE-BEGIN<<<*/
- 	private int forThisLong = 0;
-	private void sleep(int sleepDuration) {
+ 	//private double forThisLong = 3.5;
+ 	private double forThisLong = 0.0;
+	private void sleep(double sleepDuration) {
 		try {
-			Thread.sleep(sleepDuration * 1000);
+			Thread.sleep((int)(sleepDuration * 1000));
 		} catch(InterruptedException ex) {
 			Thread.currentThread().interrupt();
 		}
