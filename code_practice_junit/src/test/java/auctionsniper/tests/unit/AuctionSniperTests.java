@@ -130,7 +130,7 @@ public class AuctionSniperTests {
 	private final States sniperState = context.states("sniper");
 	
 	//private final AuctionSniper sniper = new AuctionSniper(auction, sniperListener);
-	private final AuctionSniper sniper = new AuctionSniper(AuctionSniperTestUtilities.ITEM_ID, auction, sniperListener);
+	private final AuctionSniper sniper = new AuctionSniper(AuctionSniperTestUtilities.ITEM_ID1, auction, sniperListener);
 	
 	@Test public void 
 	reportLostIfAuctionClosesImmediately() {
@@ -203,7 +203,7 @@ public class AuctionSniperTests {
 			//oneOf(auction).bid(price + increment);
 			///atLeast(1).of(sniperListener).sniperBidding();
 			//atLeast(1).of(sniperListener).sniperBidding(new SniperSnapshot(AuctionSniperTestUtilities.ITEM_ID, price, bid, SniperState.BIDDING));
-			atLeast(1).of(sniperListener).sniperStateChanged(new SniperSnapshot(AuctionSniperTestUtilities.ITEM_ID, price, bid, SniperState.BIDDING));
+			atLeast(1).of(sniperListener).sniperStateChanged(new SniperSnapshot(AuctionSniperTestUtilities.ITEM_ID1, price, bid, SniperState.BIDDING));
 		}});
 		
 		sniper.currentPrice(price, increment, PriceSource.FromOtherBidder);
@@ -221,7 +221,7 @@ public class AuctionSniperTests {
 			//atLeast(1).of(sniperListener).sniperStateChanged(new SniperSnapshot(AuctionSniperTestUtilities.ITEM_ID, lastBidFromOther, myBid, SniperState.BIDDING));
 			allowing(sniperListener).sniperStateChanged(with(aSniperThatIs(SniperState.BIDDING)));
 				then(sniperState.is("bidding"));
-			atLeast(1).of(sniperListener).sniperStateChanged(new SniperSnapshot(AuctionSniperTestUtilities.ITEM_ID, 135, 135, SniperState.WINNING));
+			atLeast(1).of(sniperListener).sniperStateChanged(new SniperSnapshot(AuctionSniperTestUtilities.ITEM_ID1, 135, 135, SniperState.WINNING));
 			  when(sniperState.is("bidding"));
 		}});
 		

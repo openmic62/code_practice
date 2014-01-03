@@ -3,7 +3,9 @@ package auctionsniper;
 import javax.swing.table.AbstractTableModel;
 
 public class SnipersTableModel extends AbstractTableModel implements SniperListener {
-	private final SniperSnapshot STARTING_STATE = new SniperSnapshot("", 0, 0, SniperState.JOINING);
+	//private final SniperSnapshot STARTING_STATE = new SniperSnapshot("", 0, 0, SniperState.JOINING);
+	private final SniperSnapshot STARTING_STATE = new SniperSnapshot("item-54321", 0, 0, SniperState.JOINING);
+	//private final SniperSnapshot STARTING_STATE = new SniperSnapshot("item-65432", 0, 0, SniperState.JOINING);
 	private SniperSnapshot snapshot = STARTING_STATE;
   public static String[] STATUS_TEXT = {"Joining auction",
                                         "Bidding in auction",
@@ -27,6 +29,8 @@ public class SnipersTableModel extends AbstractTableModel implements SniperListe
 	public int getRowCount() { return 1; }
 	@Override
 	public int getColumnCount() { return Column.values().length; }
+	@Override
+	public String getColumnName(int column) { return Column.at(column).name; }
 	@Override
 	public Object getValueAt(int row, int column) { 
 		return Column.values()[column].valueIn(snapshot);

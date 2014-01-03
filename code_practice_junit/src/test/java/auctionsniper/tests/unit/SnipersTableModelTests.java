@@ -121,6 +121,13 @@ public class SnipersTableModelTests {
 	}
 	
 	@Test public void 
+	setsUpColumnHeadings() {
+		for ( Column column : Column.values() ) {
+		  assertEquals(column.name, model.getColumnName(column.ordinal()));
+		}
+	}
+	
+	@Test public void 
 	hasEnoughColumns() {
 		assertThat(model.getColumnCount(), equalTo(Column.values().length));
 	}
