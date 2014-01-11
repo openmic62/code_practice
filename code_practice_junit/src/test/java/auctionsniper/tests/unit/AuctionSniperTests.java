@@ -129,13 +129,11 @@ public class AuctionSniperTests {
 	private final Auction auction = context.mock(Auction.class);
 	private final States sniperState = context.states("sniper");
 	
-	//private final AuctionSniper sniper = new AuctionSniper(auction, sniperListener);
 	private final AuctionSniper sniper = new AuctionSniper(AuctionSniperTestUtilities.ITEM_ID1, auction, sniperListener);
 	
 	@Test public void 
 	reportLostIfAuctionClosesImmediately() {
 		context.checking(new Expectations() {{
-			//oneOf(sniperListener).sniperLost();
 			atLeast(1).of(sniperListener).sniperStateChanged(with(aSniperThatIs(SniperState.LOST)));
 		}});
 		
@@ -146,15 +144,9 @@ public class AuctionSniperTests {
 	reportLostIfAuctionClosesWhenBidding() {
 		context.checking(new Expectations() {{
 			ignoring(auction);
-			// <mlr 131225: ITEM_ID - changed per GOOS, p. 155a>
-			//allowing(sniperListener).sniperBidding();
-			//allowing(sniperListener).sniperBidding(null); // gets past the compiler
-			//allowing(sniperListener).sniperBidding(with(any(SniperState.class)));
-			//allowing(sniperListener).sniperBidding(with(any(SniperSnapshot.class)));
 			allowing(sniperListener).sniperStateChanged(with(aSniperThatIs(SniperState.BIDDING)));
 			  then(sniperState.is("bidding"));
 			  
-			//atLeast(1).of(sniperListener).sniperLost();
 			atLeast(1).of(sniperListener).sniperStateChanged(with(aSniperThatIs(SniperState.LOST)));
 			  when(sniperState.is("bidding"));
 		}});
@@ -179,11 +171,9 @@ public class AuctionSniperTests {
 	reportWonIfAuctionClosesWhenWinning() {
 		context.checking(new Expectations() {{
 			ignoring(auction);
-			//allowing(sniperListener).sniperWinning();
 			allowing(sniperListener).sniperStateChanged(with(aSniperThatIs(SniperState.WINNING)));
 			  then(sniperState.is("winning"));
 			  
-			//atLeast(1).of(sniperListener).sniperWon();
 			atLeast(1).of(sniperListener).sniperStateChanged(with(aSniperThatIs(SniperState.WON)));
 			  when(sniperState.is("winning"));
 		}});
@@ -199,10 +189,6 @@ public class AuctionSniperTests {
 		final int bid = price + increment;
 		context.checking(new Expectations() {{
 			oneOf(auction).bid(bid);
-      // <mlr 131225: ITEM_ID - changed per GOOS, p. 155a>
-			//oneOf(auction).bid(price + increment);
-			///atLeast(1).of(sniperListener).sniperBidding();
-			//atLeast(1).of(sniperListener).sniperBidding(new SniperSnapshot(AuctionSniperTestUtilities.ITEM_ID, price, bid, SniperState.BIDDING));
 			atLeast(1).of(sniperListener).sniperStateChanged(new SniperSnapshot(AuctionSniperTestUtilities.ITEM_ID1, price, bid, SniperState.BIDDING));
 		}});
 		
@@ -215,18 +201,13 @@ public class AuctionSniperTests {
 		int increment = 45;
 		final int myBid = lastBidFromOther + increment;
 		context.checking(new Expectations() {{
-			//oneOf(auction).bid(myBid);
 			ignoring(auction);
-			//atLeast(1).of(sniperListener).sniperWinning();
-			//atLeast(1).of(sniperListener).sniperStateChanged(new SniperSnapshot(AuctionSniperTestUtilities.ITEM_ID, lastBidFromOther, myBid, SniperState.BIDDING));
 			allowing(sniperListener).sniperStateChanged(with(aSniperThatIs(SniperState.BIDDING)));
 				then(sniperState.is("bidding"));
 			atLeast(1).of(sniperListener).sniperStateChanged(new SniperSnapshot(AuctionSniperTestUtilities.ITEM_ID1, 135, 135, SniperState.WINNING));
 			  when(sniperState.is("bidding"));
 		}});
 		
-		//sniper.currentPrice(lastBidFromOther, increment, PriceSource.FromOtherBidder);
-		//sniper.currentPrice(myBid, 35, PriceSource.FromSniper);
 		sniper.currentPrice(123, 12, PriceSource.FromOtherBidder);
 		sniper.currentPrice(135, 45, PriceSource.FromSniper);
 	}

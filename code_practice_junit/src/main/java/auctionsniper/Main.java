@@ -20,7 +20,6 @@ import org.jivesoftware.smack.packet.Message;
 public class Main {
 	static Logger logger = LogManager.getLogger(Main.class.getName());	
 	
-	//@SuppressWarnings("unused") private Chat notToBeGCd;
 	@SuppressWarnings("unused") private ArrayList<Chat> notToBeGCd = new ArrayList<Chat>();
 	
 	private final SnipersTableModel snipers = new SnipersTableModel();
@@ -104,7 +103,6 @@ public class Main {
 		  auctionId(itemId, connection),
 		  null
 		  );
-		//this.notToBeGCd = chat;  
 		this.notToBeGCd.add(chat);  
 		
 		Auction auction = new XMPPAuction(chat);

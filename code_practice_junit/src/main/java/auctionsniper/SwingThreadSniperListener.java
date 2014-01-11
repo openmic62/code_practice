@@ -3,14 +3,6 @@ package auctionsniper;
 import javax.swing.SwingUtilities;
 
 public class SwingThreadSniperListener implements SniperListener {
-
-	/*
-	private MainWindow ui;
-	
-	SniperStateDisplayer(MainWindow mainWindow) {
-		this.ui = mainWindow;
-	}
-	*/
 	
 	private SniperListener snipers;
 	
@@ -24,7 +16,6 @@ public class SwingThreadSniperListener implements SniperListener {
   	SwingUtilities.invokeLater(new Runnable() {
   		@Override
   		public void run() {
-  			//ui.sniperStateChanged(sniperSnapshot);
   			snipers.sniperStateChanged(sniperSnapshot);
   			sleep(forThisLong); /*>>>REMOVE<<<*/
   		}

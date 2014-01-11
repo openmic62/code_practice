@@ -103,7 +103,6 @@ import static org.hamcrest.beans.SamePropertyValuesAs.*;
 
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JUnitRuleMockery;
-//import org.jmock.States;
 
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
@@ -121,7 +120,6 @@ public class SnipersTableModelTests {
 	private final SnipersTableModel model = new SnipersTableModel();
 	
 	@Before public void
-	//stubOutAListenerForTheTableModel() {
 	attachModelListener() {
 		model.addTableModelListener(listener);
 	}
@@ -158,7 +156,6 @@ public class SnipersTableModelTests {
 			allowing(listener).tableChanged(with(aRowInsertedEvent(0)));
 		}});
 		
-		//model.addSniper(new SniperSnapshot("item id", 0, 0, SniperState.JOINING));
 		SniperSnapshot joining = SniperSnapshot.joining("item id");
 		model.addSniper(joining);
 		
@@ -255,7 +252,6 @@ public class SnipersTableModelTests {
 	setsSniperValuesInColumns() {
 		context.checking(new Expectations() {{
 			allowing(listener).tableChanged(with(aRowInsertedEvent(0)));
-			//oneOf(listener).tableChanged(with(aRowChangedEvent()));
 			oneOf(listener).tableChanged(with(aChangeInRow(0)));
 		}});
 		

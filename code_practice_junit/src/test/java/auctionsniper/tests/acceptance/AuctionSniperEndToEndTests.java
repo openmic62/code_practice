@@ -115,20 +115,17 @@ import org.junit.runners.JUnit4;
 public class AuctionSniperEndToEndTests {
 	static Logger logger = LogManager.getLogger(AuctionSniperEndToEndTests.class.getName());	
 		
-	//private  FakeAuctionServer auction = new FakeAuctionServer("item-54321");
 	private  FakeAuctionServer auction     = new FakeAuctionServer(AuctionSniperTestUtilities.ITEM_ID1);
 	private  FakeAuctionServer auction2    = new FakeAuctionServer(AuctionSniperTestUtilities.ITEM_ID2);
 	private  ApplicationRunner application = new ApplicationRunner();
 	
 	@Test
 	public void sniperJoinsAuctionUntilAuctionCloses() throws Exception {        
-		auction.startSellingItem();                    // step 1
-		application.startBiddingIn(auction);           // step 2
+		auction.startSellingItem();                                                    // step 1
+		application.startBiddingIn(auction);                                           // step 2
 		auction.hasReceivedJoinRequestFromSniper(ApplicationRunner.SNIPER_XMPP_ID);    // step 3
-		auction.announceClosed();                      // step 4
-		//application.showsSniperHasLostAuction();     // step 5
-		//application.showsSniperHasLostAuction(0, 0); // step 5
-		application.showsSniperHasLostAuction(auction, 0, 0);   // step 5
+		auction.announceClosed();                                                      // step 4
+		application.showsSniperHasLostAuction(auction, 0, 0);                          // step 5
 		sleep(forThisLong);
 	}
 
@@ -154,8 +151,6 @@ public class AuctionSniperEndToEndTests {
 		auction.hasReceivedBid(948, ApplicationRunner.SNIPER_XMPP_ID);
 		
 		auction.announceClosed();
-		//application.showsSniperHasLostAuction();
-		//application.showsSniperHasLostAuction(900, 948);
 		application.showsSniperHasLostAuction(auction, 900, 948);
 		sleep(forThisLong);
 	}
@@ -210,11 +205,9 @@ public class AuctionSniperEndToEndTests {
 		auction2.hasReceivedJoinRequestFromSniper(ApplicationRunner.SNIPER_XMPP_ID);
 		
 		auction.reportPrice(1000, 98, "other bidder");
-		//application.hasShownSniperIsBidding(auction, 1000, 1098);
 		auction.hasReceivedBid(1098, ApplicationRunner.SNIPER_XMPP_ID);
 		
 		auction2.reportPrice(500, 21, "other bidder");
-		//application.hasShownSniperIsBidding(auction, 500, 521);
 		auction2.hasReceivedBid(521, ApplicationRunner.SNIPER_XMPP_ID);
 		
 		auction.reportPrice(1098, 97, ApplicationRunner.SNIPER_XMPP_ID);
@@ -230,7 +223,6 @@ public class AuctionSniperEndToEndTests {
 		application.showsSniperHasWonAuction(auction2, 521);	
 			
 		sleep(forThisLong);
-		/**/
 	}
 
 	// setup test fixture
@@ -254,8 +246,8 @@ public class AuctionSniperEndToEndTests {
 		application.stop();
 	}
 	
- 	private double forThisLong = 1.75;
- 	//private double forThisLong = 0.0;
+ 	//private double forThisLong = 1.75;
+ 	private double forThisLong = 0.0;
 	private void sleep(double sleepDuration) {
 		try {
 			Thread.sleep((int)(sleepDuration * 1000));

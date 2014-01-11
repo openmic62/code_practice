@@ -16,7 +16,6 @@ public class SniperSnapshot {
 	private final SniperState state;
 
 	
-	//public SniperSnapshot(String itemId, int lastPrice, int lastBid) {
 	public SniperSnapshot(String itemId, int lastPrice, int lastBid, SniperState state) {
 		this.itemId      = itemId;
 		this.lastPrice   = lastPrice;
@@ -59,7 +58,6 @@ public class SniperSnapshot {
 		
 	private SniperSnapshot aSnapshot(SniperState state) {
 		return new SniperSnapshot(this.itemId, this.lastPrice, this.lastBid, state);
-		//return new SniperSnapshot(this.itemId, this.lastPrice, this.lastBid, state.whenAuctionClosed());
 	}
 	
 	@Override

@@ -44,9 +44,4 @@ public class MainWindow extends JFrame {
  		table.setName(SNIPERS_TABLE_NAME);
  		return table;
  	}
- 	
- 	public void sniperStateChanged(SniperSnapshot sniperSnapshot) {
- 		snipers.sniperStateChanged(sniperSnapshot);
- 	}
- 	
 }
