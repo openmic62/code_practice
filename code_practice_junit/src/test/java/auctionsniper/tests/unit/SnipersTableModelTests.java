@@ -83,6 +83,7 @@
 package auctionsniper.tests.unit;
 
 import auctionsniper.Column;
+import auctionsniper.Defect;
 import auctionsniper.SniperSnapshot;
 import auctionsniper.SnipersTableModel;
 import auctionsniper.SniperState;
@@ -108,6 +109,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Rule;
+import org.junit.rules.ExpectedException;
 import org.junit.Test;
 
 public class SnipersTableModelTests {
@@ -124,6 +126,30 @@ public class SnipersTableModelTests {
 		model.addTableModelListener(listener);
 	}
 		
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
+	@Test public void 
+	throwsDefectIfNoExistingSniperForAnUpdate () {
+		// JUnit4 set expectation for the desired exception
+		thrown.expect(Defect.class);
+		
+		// JMock2 expectations - to appease the god of mocking
+		context.checking(new Expectations() {{
+			allowing(listener).tableChanged(with(aRowInsertedEvent(0)));
+		}});
+		
+		// simulate a programming defect
+		SniperSnapshot defective = SniperSnapshot.joining("item-DEFECT");
+		defective = defective.bidding(69, 69);
+		
+		// act as normal
+		SniperSnapshot joining = SniperSnapshot.joining("item-98765");
+		model.addSniper(joining);
+		
+		// this should produce a Defect exception
+		model.sniperStateChanged(defective);
+	}
+
 	@Test public void 
 	rowCountIncreasesByOneWhenAddingASniper() {
 		int expectedRowCountDifference = 1;
