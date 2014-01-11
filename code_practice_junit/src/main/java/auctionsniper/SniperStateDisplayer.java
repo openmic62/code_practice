@@ -32,7 +32,8 @@ public class SniperStateDisplayer implements SniperListener {
   }
 
  	/*>>>REMOVE-BEGIN<<<*/
- 	private int forThisLong = 0;
+ 	//private int forThisLong = 0;
+ 	private int forThisLong = 2;
 	private void sleep(int sleepDuration) {
 		try {
 			Thread.sleep(sleepDuration * 1000);
