@@ -5,10 +5,6 @@ import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
 public class SnipersTableModel extends AbstractTableModel implements SniperListener {
-	//private final SniperSnapshot STARTING_STATE = new SniperSnapshot("", 0, 0, SniperState.JOINING);
-	private final SniperSnapshot STARTING_STATE = new SniperSnapshot("item-54321", 0, 0, SniperState.JOINING);
-	//private final SniperSnapshot STARTING_STATE = new SniperSnapshot("item-65432", 0, 0, SniperState.JOINING);
-	//private SniperSnapshot snapshot = STARTING_STATE;
   public static String[] STATUS_TEXT = {"Joining auction",
                                         "Bidding in auction",
                                         "Winning auction",
@@ -30,17 +26,12 @@ public class SnipersTableModel extends AbstractTableModel implements SniperListe
 	// Implement the SniperListener interface
 	@Override
 	public void sniperStateChanged(SniperSnapshot changedSnapshot) {
-		/*
-		//this.snapshot = changedSnapshot;
-		snapshots.set(0, changedSnapshot);
-		fireTableRowsUpdated(0, 0);
-		*/
-		int row = findRowForItemIn(changedSnapshot);
+		int row = rowMatching(changedSnapshot);
 		snapshots.set(row, changedSnapshot);
 		fireTableRowsUpdated(row, row);
 	}
 	
-	private int findRowForItemIn(SniperSnapshot changedSnapshot) {
+	private int rowMatching(SniperSnapshot changedSnapshot) {
 		for (int i=0; i<snapshots.size(); i++) {
 		 	if (changedSnapshot.isForSameItemAs(snapshots.get(i))) {
 		 	 	return i;
@@ -51,7 +42,6 @@ public class SnipersTableModel extends AbstractTableModel implements SniperListe
 	
 	// override AbstractTableModel methods
 	@Override
-	//public int getRowCount() { return 1; }
 	public int getRowCount() { return snapshots.size(); }
 	@Override
 	public int getColumnCount() { return Column.values().length; }

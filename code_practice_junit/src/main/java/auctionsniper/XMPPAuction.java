@@ -29,7 +29,6 @@ public class XMPPAuction implements Auction
 	public void join() {
 		try {
 			logger.debug("chat.getParticipant() -->" + chat.getParticipant() + "<--");
-			//chat.sendMessage(new Message(Main.JOIN_COMMAND_FORMAT));
 			chat.sendMessage(Main.JOIN_COMMAND_FORMAT);
 		} catch (XMPPException e) {
 			e.printStackTrace();
