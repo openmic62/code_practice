@@ -29,6 +29,10 @@ public class SniperSnapshot {
 	public int getLastBid() { return this.lastBid; }
 	public SniperState getState() { return this.state; }
 	
+	public boolean isForSameItemAs(SniperSnapshot anotherSnapshot) {
+		return this.getItemId().equals(anotherSnapshot.getItemId());
+	}
+	
 	public static SniperSnapshot joining(String itemId) {
 		return new SniperSnapshot(itemId, 0, 0, SniperState.JOINING);
 	}

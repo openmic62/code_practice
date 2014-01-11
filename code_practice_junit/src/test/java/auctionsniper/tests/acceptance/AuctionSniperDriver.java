@@ -14,10 +14,15 @@ import com.objogate.wl.swing.matcher.IterableComponentsMatcher;
 
 import javax.swing.table.JTableHeader;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import static org.hamcrest.Matchers.*;
 import static com.objogate.wl.swing.matcher.JLabelTextMatcher.*;
 
 public class AuctionSniperDriver extends JFrameDriver {
+	static Logger logger = LogManager.getLogger(AuctionSniperDriver.class.getName());	
+	
 	public AuctionSniperDriver() {
 		this(1000);
 	}
@@ -39,6 +44,9 @@ public class AuctionSniperDriver extends JFrameDriver {
 	
 	@SuppressWarnings("unchecked")
 	public void showSniperStatus(String itemId, int lastPrice, int lastBid, String statusText) {
+		logger.info("args(...)-->" + itemId + ", " + lastPrice + ", " + lastBid + ", " 
+		                            + statusText + "<--");
+		
 		JTableDriver tableDriver = new JTableDriver(this);
 		tableDriver.hasRow(IterableComponentsMatcher.matching(
 		  withLabelText(itemId), withLabelText(Integer.valueOf(lastPrice).toString()), 

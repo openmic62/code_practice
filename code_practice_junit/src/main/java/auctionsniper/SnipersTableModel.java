@@ -30,9 +30,23 @@ public class SnipersTableModel extends AbstractTableModel implements SniperListe
 	// Implement the SniperListener interface
 	@Override
 	public void sniperStateChanged(SniperSnapshot changedSnapshot) {
+		/*
 		//this.snapshot = changedSnapshot;
 		snapshots.set(0, changedSnapshot);
 		fireTableRowsUpdated(0, 0);
+		*/
+		int row = findRowForItemIn(changedSnapshot);
+		snapshots.set(row, changedSnapshot);
+		fireTableRowsUpdated(row, row);
+	}
+	
+	private int findRowForItemIn(SniperSnapshot changedSnapshot) {
+		for (int i=0; i<snapshots.size(); i++) {
+		 	if (changedSnapshot.isForSameItemAs(snapshots.get(i))) {
+		 	 	return i;
+		 	}
+		}
+		throw(new Defect());
 	}
 	
 	// override AbstractTableModel methods
@@ -45,6 +59,6 @@ public class SnipersTableModel extends AbstractTableModel implements SniperListe
 	public String getColumnName(int column) { return Column.at(column).name; }
 	@Override
 	public Object getValueAt(int row, int column) { 
-		return Column.values()[column].valueIn(snapshots.get(0));
+		return Column.values()[column].valueIn(snapshots.get(row));
 	}
 }

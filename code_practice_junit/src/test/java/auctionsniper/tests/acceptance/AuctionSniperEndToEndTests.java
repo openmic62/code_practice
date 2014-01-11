@@ -120,18 +120,19 @@ public class AuctionSniperEndToEndTests {
 	private  FakeAuctionServer auction2    = new FakeAuctionServer(AuctionSniperTestUtilities.ITEM_ID2);
 	private  ApplicationRunner application = new ApplicationRunner();
 	
-	@Ignore
+	@Test
 	public void sniperJoinsAuctionUntilAuctionCloses() throws Exception {        
 		auction.startSellingItem();                    // step 1
 		application.startBiddingIn(auction);           // step 2
 		auction.hasReceivedJoinRequestFromSniper(ApplicationRunner.SNIPER_XMPP_ID);    // step 3
 		auction.announceClosed();                      // step 4
 		//application.showsSniperHasLostAuction();     // step 5
-		application.showsSniperHasLostAuction(0, 0);   // step 5
+		//application.showsSniperHasLostAuction(0, 0); // step 5
+		application.showsSniperHasLostAuction(auction, 0, 0);   // step 5
 		sleep(forThisLong);
 	}
 
-	@Ignore
+	@Test
 	public void sniperMakesHigherBidButLoses() throws Exception {
 		auction.startSellingItem();
 		application.startBiddingIn(auction);       
@@ -154,11 +155,12 @@ public class AuctionSniperEndToEndTests {
 		
 		auction.announceClosed();
 		//application.showsSniperHasLostAuction();
-		application.showsSniperHasLostAuction(900, 948);
+		//application.showsSniperHasLostAuction(900, 948);
+		application.showsSniperHasLostAuction(auction, 900, 948);
 		sleep(forThisLong);
 	}
 
-	@Ignore
+	@Test
 	public void sniperWinsAnAuctionByBiddingHigher_onItem54321() throws Exception {
 		auction.startSellingItem();
 		application.startBiddingIn(auction);       
@@ -177,7 +179,7 @@ public class AuctionSniperEndToEndTests {
 		sleep(forThisLong);
 	}
 
-	@Ignore
+	@Test
 	public void sniperWinsAnAuctionByBiddingHigher_onItem65432() throws Exception {
 		auction2.startSellingItem();
 		application.startBiddingIn(auction2);       
@@ -185,7 +187,6 @@ public class AuctionSniperEndToEndTests {
 		
 		auction2.reportPrice(1000, 98, "other bidder");
 		application.hasShownSniperIsBidding(auction2, 1000, 1098);
-		/*
 		
 		auction2.hasReceivedBid(1098, ApplicationRunner.SNIPER_XMPP_ID);
 		
@@ -195,7 +196,7 @@ public class AuctionSniperEndToEndTests {
 		auction2.announceClosed();
 		application.showsSniperHasWonAuction(auction2, 1098);		
 		sleep(forThisLong);
-		*/
+
 	}
 
 	@Test
@@ -204,7 +205,7 @@ public class AuctionSniperEndToEndTests {
 		auction2.startSellingItem();
 		
 		application.startBiddingIn(auction, auction2);       
-		/*
+
 		auction.hasReceivedJoinRequestFromSniper(ApplicationRunner.SNIPER_XMPP_ID);
 		auction2.hasReceivedJoinRequestFromSniper(ApplicationRunner.SNIPER_XMPP_ID);
 		
@@ -229,7 +230,7 @@ public class AuctionSniperEndToEndTests {
 		application.showsSniperHasWonAuction(auction2, 521);	
 			
 		sleep(forThisLong);
-*/
+		/**/
 	}
 
 	// setup test fixture
@@ -253,8 +254,8 @@ public class AuctionSniperEndToEndTests {
 		application.stop();
 	}
 	
- 	//private double forThisLong = 0.75;
- 	private double forThisLong = 0.0;
+ 	private double forThisLong = 1.75;
+ 	//private double forThisLong = 0.0;
 	private void sleep(double sleepDuration) {
 		try {
 			Thread.sleep((int)(sleepDuration * 1000));

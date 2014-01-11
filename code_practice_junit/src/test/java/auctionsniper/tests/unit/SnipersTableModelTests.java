@@ -92,6 +92,9 @@ import auctionsniper.tests.AuctionSniperTestUtilities;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import org.hamcrest.Matcher;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -108,7 +111,8 @@ import org.junit.Rule;
 import org.junit.Test;
 
 public class SnipersTableModelTests {
-	
+	static Logger logger = LogManager.getLogger(SnipersTableModelTests.class.getName());	
+		
 	@Rule public final JUnitRuleMockery context = new JUnitRuleMockery();
 	private final TableModelListener listener = context.mock(TableModelListener.class);
 	
@@ -125,7 +129,7 @@ public class SnipersTableModelTests {
 		int expectedRowCountDifference = 1;
 		int rowCountBeforeAdd = model.getRowCount();
 		context.checking(new Expectations() {{
-			allowing(listener).tableChanged(with(aRowInsertedEvent()));
+			allowing(listener).tableChanged(with(aRowInsertedEvent(0)));
 		}});
 		
 		//model.addSniper(new SniperSnapshot("item id", 0, 0, SniperState.JOINING));
@@ -141,7 +145,7 @@ public class SnipersTableModelTests {
 	@Test public void
 	setsCorrectCellValuesWhenAddingASniper() {
 		context.checking(new Expectations() {{
-			oneOf(listener).tableChanged(with(aRowInsertedEvent()));
+			oneOf(listener).tableChanged(with(aRowInsertedEvent(0)));
 		}});
 		
 		SniperSnapshot joining = SniperSnapshot.joining("item id INSERT");
@@ -156,14 +160,14 @@ public class SnipersTableModelTests {
 	@Test public void 
 	notifiesListenerWhenAddingASniper() {
 		context.checking(new Expectations() {{
-			oneOf(listener).tableChanged(with(aRowInsertedEvent()));
+			oneOf(listener).tableChanged(with(aRowInsertedEvent(0)));
 		}});
 		
 		SniperSnapshot joining = SniperSnapshot.joining("anudda id");
 		model.addSniper(joining);
 	}
-  private Matcher<TableModelEvent> aRowInsertedEvent() {
-  	int lastRow = 0;
+  private Matcher<TableModelEvent> aRowInsertedEvent(int rowIndex) {
+  	int lastRow = rowIndex;
   	return samePropertyValuesAs(new TableModelEvent(model, lastRow, lastRow, 
   	                            TableModelEvent.ALL_COLUMNS, 
   	                            TableModelEvent.INSERT));
@@ -180,7 +184,34 @@ public class SnipersTableModelTests {
 		model.addSniper(joining1);
 		model.addSniper(joining2);
 		
+		assertOrderedRowHasAColumnOneValueOf(0, "item-1");		
+		assertOrderedRowHasAColumnOneValueOf(1, "item-2");		
   }
+  private void assertOrderedRowHasAColumnOneValueOf(int row, String expected) {
+  	int col = Column.ITEM_IDENTIFIER.ordinal();
+  	String actual = (String) model.getValueAt(row, col);
+  	assertEquals(expected, actual);
+  }
+	
+	@Test public void
+	updatesCorrectRowForSniper() {
+		context.checking(new Expectations() {{
+			allowing(listener).tableChanged(with(aRowInsertedEvent(0)));
+			allowing(listener).tableChanged(with(aRowInsertedEvent(1)));
+			allowing(listener).tableChanged(with(aRowInsertedEvent(2)));
+			oneOf(listener).tableChanged(with(aChangeInRow(1)));
+		}});
+		
+		SniperSnapshot joining1 = SniperSnapshot.joining("item-1a");
+		SniperSnapshot joining2 = SniperSnapshot.joining("item-2a");
+		SniperSnapshot joining3 = SniperSnapshot.joining("item-3a");
+		model.addSniper(joining1);
+		model.addSniper(joining2);		
+		model.addSniper(joining3);
+		
+		SniperSnapshot bidding2 = joining2.bidding(345, 678);
+		model.sniperStateChanged(bidding2);
+	}
 	
 	@Test public void 
 	setsUpColumnHeadings() {
@@ -197,7 +228,7 @@ public class SnipersTableModelTests {
 	@Test public void 
 	setsSniperValuesInColumns() {
 		context.checking(new Expectations() {{
-			allowing(listener).tableChanged(with(aRowInsertedEvent()));
+			allowing(listener).tableChanged(with(aRowInsertedEvent(0)));
 			//oneOf(listener).tableChanged(with(aRowChangedEvent()));
 			oneOf(listener).tableChanged(with(aChangeInRow(0)));
 		}});
