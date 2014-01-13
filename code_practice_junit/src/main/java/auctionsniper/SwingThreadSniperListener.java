@@ -23,7 +23,7 @@ public class SwingThreadSniperListener implements SniperListener {
   }
 
  	/*>>>REMOVE-BEGIN<<<*/
- 	//private double forThisLong = 3.5;
+ 	//private double forThisLong = 0.50;
  	private double forThisLong = 0.0;
 	private void sleep(double sleepDuration) {
 		try {

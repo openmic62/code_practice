@@ -246,7 +246,7 @@ public class AuctionSniperEndToEndTests {
 		application.stop();
 	}
 	
- 	//private double forThisLong = 1.75;
+ 	//private double forThisLong = 0.50;
  	private double forThisLong = 0.0;
 	private void sleep(double sleepDuration) {
 		try {
