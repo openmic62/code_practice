@@ -244,6 +244,7 @@
   <patternset id="unit.tests">
   	<include name="*Tests.java"                                      if="RunLearningCurveUnitTests"/>
   	<include name="auctionsniper/tests/unit/*Tests.java"             if="RunAuctionSniperUnitTests"/>
+   	<include name="auctionsniper/tests/integration/*Tests.java"      if="RunAuctionSniperIntegrationTests"/>
    	<include name="auctionsniper/tests/acceptance/*Tests.java"       if="RunAuctionSniperAcceptanceTests"/>
 	 	<exclude name="**/*_bad.java"/>
   	<exclude name="**/Reentrant*"/>
@@ -288,7 +289,8 @@
 	<!-- TARGET - that configures the unit tests to execute -->
 	<target name="configure-unit-tests">
 		<configureTestSet mUTSet="${UTSet}" mSubstring="sniper"           mProperty="RunAuctionSniperUnitTests"/>
-		<configureTestSet mUTSet="${UTSet}" mSubstring="sniperAcceptance" mProperty="RunAuctionSniperAcceptanceTests"/>
+		<configureTestSet mUTSet="${UTSet}" mSubstring="Int"              mProperty="RunAuctionSniperIntegrationTests"/>
+		<configureTestSet mUTSet="${UTSet}" mSubstring="Acceptance"       mProperty="RunAuctionSniperAcceptanceTests"/>
 		<configureTestSet mUTSet="${UTSet}" mSubstring="learningCurve"    mProperty="RunLearningCurveUnitTests"/>
 		<if>
 			<contains string="${UTSet}" substring="all"/>
@@ -323,7 +325,7 @@
 		<mkdir dir="${reportUT.dir}/html"/>
 
 		<!-- Make sure the Openfire server is running when performing end-to-end acceptance tests -->
-		<runPerlScript mEnableLock="${UTSet}" mEnableKey="sniperAcceptance" mScriptName="run-perl-openfirectl" mMessage=""/>
+		<runPerlScript mEnableLock="${UTSet}" mEnableKey="Acceptance" mScriptName="run-perl-openfirectl" mMessage=""/>
 
 		<junit printsummary="yes"
 			haltonfailure="yes"
@@ -351,7 +353,7 @@
 
 	<!-- TARGET (CLI) - that one button builds and runs the unit tests -->
 	<target name="junit_full_clean" depends="clean_all,compile,jar,compileUT,junit"
-		description="Usage: ant junit_full_clean -DUTSet=sniperAcceptance (clean_all,compile,jar,compileUT,junit)"/>
+		description="Usage: ant junit_full_clean -DUTSet=sniperIntAcceptance (clean_all,compile,jar,compileUT,junit)"/>
 		
 	<!-- TARGET (CLI) - that one button builds, runs, and creates a report for the unit tests -->
 	<target name="junitreport" depends="junit_full_clean,junitreport-generate"
