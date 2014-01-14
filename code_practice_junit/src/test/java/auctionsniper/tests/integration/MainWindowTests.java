@@ -78,23 +78,20 @@ package auctionsniper.tests.integration;
 
 import auctionsniper.MainWindow;
 import auctionsniper.SnipersTableModel;
+import auctionsniper.UserRequestListener;
 
 import auctionsniper.tests.AuctionSniperTestUtilities;
 import auctionsniper.tests.acceptance.AuctionSniperDriver;
 
-import org.jivesoftware.smack.Chat;
-import org.jivesoftware.smack.packet.Message;
-
-import org.jmock.Expectations;
-import org.jmock.integration.junit4.JUnitRuleMockery;
+import com.objogate.wl.swing.probe.ValueMatcherProbe;
 
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
+import static org.hamcrest.Matchers.*;
+
 public class MainWindowTests {
-	
-	@Rule public final JUnitRuleMockery context = new JUnitRuleMockery();
 	
 	private final SnipersTableModel tableModel = new SnipersTableModel();
 	private final MainWindow mainWindow = new MainWindow(tableModel);
@@ -102,5 +99,18 @@ public class MainWindowTests {
 	
 	@Test public void 
 	makesUserRequestWhenJoinButtonClicked() {
+		final ValueMatcherProbe<String> buttonProbe =
+		  new ValueMatcherProbe<String>(equalTo("an item-id"), "join request");
+		  
+		mainWindow.addUserRequestListener(
+		  new UserRequestListener() {
+		  	public void joinAuction(String itemId) {
+		  		buttonProbe.setReceivedValue(itemId);
+		  	}
+		  }
+		);
+		
+		driver.startBiddingFor("an item-id");
+		driver.check(buttonProbe);
 	}
 }

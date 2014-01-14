@@ -21,7 +21,7 @@ public class MainWindow extends JFrame {
 		
 	private final SnipersTableModel snipers;
 	
-	//MainWindow(SnipersTableModel snipers) {
+	//MainWindow(SnipersTableModel snipers) { // >>>>>>>> I don't like make this public; have to for testing
 	public MainWindow(SnipersTableModel snipers) {
 		super(MAIN_WINDOW_NAME);
 		this.snipers = snipers;
@@ -69,4 +69,6 @@ public class MainWindow extends JFrame {
  		
  		return controls;
  	}
+ 	
+ 	public void addUserRequestListener(UserRequestListener userRequestListener){}
 }
