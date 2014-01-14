@@ -21,7 +21,8 @@ public class MainWindow extends JFrame {
 		
 	private final SnipersTableModel snipers;
 	
-	MainWindow(SnipersTableModel snipers) {
+	//MainWindow(SnipersTableModel snipers) {
+	public MainWindow(SnipersTableModel snipers) {
 		super(MAIN_WINDOW_NAME);
 		this.snipers = snipers;
 		setName(MAIN_WINDOW_NAME);

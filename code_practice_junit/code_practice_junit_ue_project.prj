@@ -237,3 +237,5 @@ Source Paths=
 9=src\main\java\components\TableSorterDemo.java
 10=src\main\java\components\TableFTFEditDemo.java
 11=lib\windowlicker_svn\src\swing\tests\com\objogate\wl\swing\driver\tests\JTableDriverTest.java
+[Files - Auction Sniper - test - integration]
+0=src\test\java\auctionsniper\tests\integration\MainWindowTests.java
