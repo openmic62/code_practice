@@ -20,7 +20,6 @@ public class ApplicationRunner {
 	public void startBiddingIn(final FakeAuctionServer... auctions) {
 				
 		startSniper();
-		//startSniper(auctions);
 		
 		for ( FakeAuctionServer auction : auctions ) {
 			final String itemId = auction.getItemID();
@@ -29,14 +28,11 @@ public class ApplicationRunner {
 		}
 	}
 	
-	//private void startSniper() {
-	private void startSniper(final FakeAuctionServer... auctions) {
+	private void startSniper() {
 		Thread thread = new Thread("Test Application") {
 			@Override public void run() {
 				try {
-					Main.main(  arguments(                            ));
-					//Main.main(arguments(                    auctions));
-					//Main.main(arguments( (FakeAuctionServer)    null));
+					Main.main( arguments() );
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -49,19 +45,13 @@ public class ApplicationRunner {
 		driver.hasColumnTitles();
 	}
 	
-	//private String[] arguments(FakeAuctionServer... auctions) {
 	private String[] arguments() {
-		//String[] args = new String[3 + auctions.length];
 		String[] args = new String[3];
 		args[0] = "localhost";
 		args[1] = SNIPER_ID;
 		args[2] = SNIPER_PASSWORD;
-		/*
-		for (int i=0; i<auctions.length; i++) {
-		 	args[i+3] = auctions[i].getItemID();
-		}
-		*/
-		return args;
+
+    return args;
 	}
 	
 	public void hasShownSniperIsBidding(FakeAuctionServer auction, int lastPrice, int lastBid){
