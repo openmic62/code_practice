@@ -30,7 +30,7 @@
  H:\> copy and paste the following lines straight onto the command line
       NOTE: 131117 - SIH is short for SYSINTERNALS_HOME 
                      (usually =C:\Users\Mike\Downloads\SysinternalsSuite in system ENV)
- 
+ e:
  set CLASSPATH=lib;lib\Smack.jar;lib\Smackx.jar;lib\Smackx-debug.jar;lib\junit-4.11.jar;lib\hamcrest-all-1.3.jar
  set WL=lib\windowlicker-core-DEV.jar;lib\windowlicker-swing-DEV.jar
  set CLASSPATH=%WL%;%CLASSPATH%
@@ -45,7 +45,7 @@
  set TC=target\test-classes
  set SD=src\main\java
  set TD=src\test\java
- g:
+
  cd student\code_practice_junit
  javac -cp %CLASSPATH%;%SC% -d %SC% %SD%\auctionsniper\MainWindow.java
  javac -cp %CLASSPATH%;%SC%;%TC% -d %TC% %TD%\auctionsniper\tests\integration\MainWindowTests.java
@@ -89,7 +89,7 @@ import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
 
 public class MainWindowTests {
 	

@@ -24,6 +24,7 @@ public class Main {
 	
 	private final SnipersTableModel snipers = new SnipersTableModel();
 	private MainWindow ui;
+	private XMPPConnection connection;
 	
 	private static final int ARG_HOSTNAME = 0;
 	private static final int ARG_USERNAME = 1;
@@ -65,9 +66,14 @@ public class Main {
 		Connection.DEBUG_ENABLED = false;
 		XMPPConnection connection = 
 		  main.connection(args[ARG_HOSTNAME], args[ARG_USERNAME], args[ARG_PASSWORD]);
+		main.disconnectWhenUICloses(connection);
+		main.addUserRequestListener(connection);
+		
+		/*  
 		for (int i=3; i<args.length; i++) {
 			main.joinAuction(connection, args[i]);
 		}
+		*/
 		sleep(0); /*>>>REMOVE<<<*/
 	}
 	
@@ -89,6 +95,29 @@ public class Main {
 	}
  	/*>>>REMOVE-END<<<*/
 	
+	private void addUserRequestListener(final XMPPConnection connection) {
+		ui.addUserRequestListener(new UserRequestListener() 
+		{
+			public void joinAuction(String itemId) {
+				//logger.debug("bitches-->" + itemId + "<--");
+				snipers.addSniper(SniperSnapshot.joining(itemId));
+        final Chat chat = 
+        	connection.getChatManager().createChat(
+          auctionId(itemId, connection),
+          null
+          );
+        notToBeGCd.add(chat);
+        Auction auction = new XMPPAuction(chat);
+        chat.addMessageListener(
+        	new AuctionMessageTranslator(
+        	      connection.getUser(), 
+        	      new AuctionSniper(itemId, auction, new SwingThreadSniperListener(snipers))));
+        auction.join();
+			}
+		}
+	  );
+	}
+	
 	private void joinAuction(XMPPConnection connection, String itemId) 
 	  throws XMPPException, Exception
 	{
@@ -96,7 +125,7 @@ public class Main {
 		
 		safelyAddItemToModel(itemId);
 		
-		disconnectWhenUICloses(connection);
+		//disconnectWhenUICloses(connection);
 		
 		final Chat chat = 
 			connection.getChatManager().createChat(

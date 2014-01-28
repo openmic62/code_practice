@@ -99,7 +99,7 @@ import org.apache.logging.log4j.Logger;
 import org.hamcrest.Matcher;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.beans.SamePropertyValuesAs.*;
+import static org.hamcrest.beans.SamePropertyValuesAs.samePropertyValuesAs;
 
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JUnitRuleMockery;

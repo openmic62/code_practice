@@ -103,12 +103,16 @@ foreach (@ARGV) {
 print Data::Dumper->Dump( [\%G], [qw(command_line_args)] ) if $opt_d =~ /args/;
 
 # set the Openfire server executable location base on the host
+print "Current hostname is: ", hostname, "\n" if $opt_v;
 if (hostname eq "roco-3") {
 	$OFH = 'lib\openfire_3_8_2\bin';
 	$SLEEP_DURATION *= 1;
+} elsif (hostname eq "VIRepair2x-PC") {
+	$OFH = 'C:\Users\cxdi\openfire_3_8_2\bin';
+	$SLEEP_DURATION *= 1;
 } else {
 	$OFH = 'c:\dev\openfire_3_8_2\bin';
-	$SLEEP_DURATION *= 2;
+	$SLEEP_DURATION *= 1.2;
 }
 # check if openfire is running
 $PSLIST_RESULT = `$PSLIST_CMD`;

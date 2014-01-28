@@ -1,8 +1,12 @@
 package auctionsniper;
 
+import auctionsniper.Announcer;
+
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -11,7 +15,11 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class MainWindow extends JFrame {
+	static Logger logger = LogManager.getLogger(MainWindow.class.getName());	
 
 	public static final String MAIN_WINDOW_NAME = "Auction Sniper Main";
 	public static final String SNIPERS_TABLE_NAME = "snipers table";
@@ -20,8 +28,10 @@ public class MainWindow extends JFrame {
 	public static final String JOIN_BUTTON_NAME = "join button";
 		
 	private final SnipersTableModel snipers;
+	private final Announcer<UserRequestListener> userRequests =
+	  Announcer.to(UserRequestListener.class);
 	
-	//MainWindow(SnipersTableModel snipers) { // >>>>>>>> I don't like make this public; have to for testing
+	//MainWindow(SnipersTableModel snipers) { // >>>>>>>> I don't like to make this public; have to for testing JMock 2 ... as far as I can see right now
 	public MainWindow(SnipersTableModel snipers) {
 		super(MAIN_WINDOW_NAME);
 		this.snipers = snipers;
@@ -31,7 +41,7 @@ public class MainWindow extends JFrame {
 		fillContentPane(makeSnipersTable(), makeControls());
 		pack();
 		setVisible(true);
-	}
+	}	
 	
  	void configGui() {
  	  setLocation(50, 100);
@@ -63,12 +73,28 @@ public class MainWindow extends JFrame {
  		itemIdField.setName(NEW_ITEM_ID_NAME);
  		controls.add(itemIdField);
  		
+ 		// <mlr 140117: begin - some log info to help gain understanding of the reflection stuff used in Announcer.java>
+ 		logger.info(getClassNameInfo(UserRequestListener.class));
+ 		logger.info(getClassNameInfo(userRequests));
+ 		// <mlr 140117: end - some log info to help gain understanding of the reflection stuff used in Announcer.java>
+ 		
  		final JButton joinAuctionButton = new JButton("Join Auction");
  		joinAuctionButton.setName(JOIN_BUTTON_NAME);
+ 		joinAuctionButton.addActionListener( new ActionListener() {
+ 			public void actionPerformed(ActionEvent ae) {
+ 				userRequests.announce().joinAuction(itemIdField.getText());
+ 			}
+ 		});
+ 			
  		controls.add(joinAuctionButton);
  		
  		return controls;
  	}
+  private String getClassNameInfo(Object obj) {
+    return String.format("The class of object-->%s<-- is -->%s<--", obj, obj.getClass().getName());
+  }
  	
- 	public void addUserRequestListener(UserRequestListener userRequestListener){}
+ 	public void addUserRequestListener(UserRequestListener userRequestListener){
+ 		userRequests.addListener(userRequestListener);
+ 	}
 }
