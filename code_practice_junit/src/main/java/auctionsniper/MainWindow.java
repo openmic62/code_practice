@@ -37,7 +37,6 @@ public class MainWindow extends JFrame {
 		this.snipers = snipers;
 		setName(MAIN_WINDOW_NAME);
 		configGui();
-		//fillContentPane(makeSnipersTable());
 		fillContentPane(makeSnipersTable(), makeControls());
 		pack();
 		setVisible(true);
@@ -49,7 +48,6 @@ public class MainWindow extends JFrame {
  	  setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
  	}
  	
- 	//private void fillContentPane(JTable snipersTable) {
  	private void fillContentPane(JTable snipersTable, JPanel addItemControlPanel) {
  		final Container contentPane = getContentPane();
  		contentPane.setLayout(new BorderLayout());

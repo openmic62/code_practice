@@ -237,7 +237,6 @@ public class AuctionSniperEndToEndTests {
 		logger.info("Stop auction ...");
 		auction.stop();
 		auction2.stop();
-		//if (auction2 != null) {auction2.stop();}
 	}
 	
 	@After
