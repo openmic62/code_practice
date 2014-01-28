@@ -21,8 +21,8 @@ import javax.swing.JTextField;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import static org.hamcrest.Matchers.*;
-import static com.objogate.wl.swing.matcher.JLabelTextMatcher.*;
+import static org.hamcrest.Matchers.equalTo;
+import static com.objogate.wl.swing.matcher.JLabelTextMatcher.withLabelText;
 
 public class AuctionSniperDriver extends JFrameDriver {
 	static Logger logger = LogManager.getLogger(AuctionSniperDriver.class.getName());	

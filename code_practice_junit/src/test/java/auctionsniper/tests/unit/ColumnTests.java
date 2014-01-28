@@ -97,11 +97,6 @@ import auctionsniper.SniperSnapshot;
 import auctionsniper.SnipersTableModel;
 import auctionsniper.SniperState;
 
-import org.hamcrest.Matcher;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.beans.SamePropertyValuesAs.*;
-
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JUnitRuleMockery;
 
