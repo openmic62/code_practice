@@ -1,6 +1,6 @@
 package auctionsniper;
 
-import auctionsniper.Announcer;
+//import auctionsniper.Announcer;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -29,7 +29,7 @@ public class MainWindow extends JFrame {
 		
 	private final SnipersTableModel snipers;
 	private final Announcer<UserRequestListener> userRequests =
-	  Announcer.to(UserRequestListener.class);
+	              Announcer.to(UserRequestListener.class);
 	
 	//MainWindow(SnipersTableModel snipers) { // >>>>>>>> I don't like to make this public; have to for testing JMock 2 ... as far as I can see right now
 	public MainWindow(SnipersTableModel snipers) {

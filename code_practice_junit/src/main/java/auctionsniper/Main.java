@@ -24,6 +24,7 @@ public class Main {
 	
 	private final SnipersTableModel snipers = new SnipersTableModel();
 	private MainWindow ui;
+	
 	private XMPPConnection connection;
 	
 	private static final int ARG_HOSTNAME = 0;
@@ -101,16 +102,25 @@ public class Main {
           null
           );
         notToBeGCd.add(chat);
-        Auction auction = new XMPPAuction(chat);
+        //Auction auction = new XMPPAuction(chat);
+        Announcer<AuctionEventListener> auctionEvents = 
+	              Announcer.to(AuctionEventListener.class);
         chat.addMessageListener(
         	new AuctionMessageTranslator(
-        	      connection.getUser(), 
-        	      new AuctionSniper(itemId, auction, new SwingThreadSniperListener(snipers))));
+        	      connection.getUser(),
+        	      auctionEvents.announce()
+        	      //new AuctionSniper(itemId, auction, new SwingThreadSniperListener(snipers))
+        	                            )   // end constructor - new AuctionMessageTranslator
+                               );         // end statement   - chat.addMessageListener
+                               
+        Auction auction = new XMPPAuction(chat);
+        auctionEvents.addListener(
+          new AuctionSniper(itemId, auction, new SwingThreadSniperListener(snipers)));
         auction.join();
-			}
-		}
-	  );
-	}
+			} // end method           - joinAuction
+		}   // end annonymous class - new UserRequestListener
+	  );  // end statement        - ui.addUserRequestListener
+	}     // end method           - addUserRequestListener
 	
 	private void disconnectWhenUICloses(final XMPPConnection connection) {
 		ui.addWindowListener(new WindowAdapter()
