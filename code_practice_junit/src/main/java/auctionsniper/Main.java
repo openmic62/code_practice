@@ -11,18 +11,21 @@ import org.apache.logging.log4j.Logger;
 
 import org.jivesoftware.smack.Connection;
 import org.jivesoftware.smack.XMPPConnection;
+import org.jivesoftware.smack.XMPPException;
+/*
 
 import org.jivesoftware.smack.Chat;
-import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Message;
 
 import org.jivesoftware.smack.ChatManager;
 import org.jivesoftware.smack.MessageListener;
+*/
 
 public class Main {
 	static Logger logger = LogManager.getLogger(Main.class.getName());	
 	
-	@SuppressWarnings("unused") private ArrayList<Chat> notToBeGCd = new ArrayList<Chat>();
+	//@SuppressWarnings("unused") private ArrayList<Chat> notToBeGCd = new ArrayList<Chat>();
+	@SuppressWarnings("unused") private ArrayList<Auction> notToBeGCd = new ArrayList<Auction>();
 	
 	private final SnipersTableModel snipers = new SnipersTableModel();
 	private MainWindow ui;
@@ -108,9 +111,11 @@ public class Main {
         */
         /////Auction auction = new XMPPAuction(connection, itemId, chat);
         Auction auction = new XMPPAuction(connection, itemId);
-        final Chat chat = auction.getChat();
-        notToBeGCd.add(chat);
+        //////final Chat chat = auction.getChat();
+        //notToBeGCd.add(chat);
+        notToBeGCd.add(auction);
         //Auction auction = new XMPPAuction(chat);
+	      /*
         Announcer<AuctionEventListener> auctionEvents = 
 	              Announcer.to(AuctionEventListener.class);
         chat.addMessageListener(
