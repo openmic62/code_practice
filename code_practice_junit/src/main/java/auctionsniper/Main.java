@@ -9,13 +9,15 @@ import javax.swing.SwingUtilities;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import org.jivesoftware.smack.Chat;
-import org.jivesoftware.smack.ChatManager;
 import org.jivesoftware.smack.Connection;
-import org.jivesoftware.smack.MessageListener;
 import org.jivesoftware.smack.XMPPConnection;
+
+import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Message;
+
+import org.jivesoftware.smack.ChatManager;
+import org.jivesoftware.smack.MessageListener;
 
 public class Main {
 	static Logger logger = LogManager.getLogger(Main.class.getName());	
@@ -96,11 +98,16 @@ public class Main {
 		{
 			public void joinAuction(String itemId) {
 				snipers.addSniper(SniperSnapshot.joining(itemId));
+        /*
         final Chat chat = 
         	connection.getChatManager().createChat(
           auctionId(itemId, connection),
           null
           );
+        */
+        /////Auction auction = new XMPPAuction(connection, itemId, chat);
+        Auction auction = new XMPPAuction(connection, itemId);
+        final Chat chat = auction.getChat();
         notToBeGCd.add(chat);
         //Auction auction = new XMPPAuction(chat);
         Announcer<AuctionEventListener> auctionEvents = 
@@ -113,7 +120,9 @@ public class Main {
         	                            )   // end constructor - new AuctionMessageTranslator
                                );         // end statement   - chat.addMessageListener
                                
-        Auction auction = new XMPPAuction(chat);
+        //Auction auction = new XMPPAuction(chat);
+        ///Auction auction = new XMPPAuction(connection, chat);
+        ////Auction auction = new XMPPAuction(connection, itemId, chat);
         auctionEvents.addListener(
           new AuctionSniper(itemId, auction, new SwingThreadSniperListener(snipers)));
         auction.join();
@@ -135,7 +144,7 @@ public class Main {
 	
 	private XMPPConnection 
 	connection(String hostname, String username, String password)
-		throws Exception 
+		throws XMPPException 
 	{
 		XMPPConnection connection = new XMPPConnection(hostname);
 		connection.connect();
