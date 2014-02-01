@@ -124,8 +124,14 @@ public class Main {
         //Auction auction = new XMPPAuction(chat);
         ///Auction auction = new XMPPAuction(connection, chat);
         ////Auction auction = new XMPPAuction(connection, itemId, chat);
+        /*
         auctionEvents.addListener(
           new AuctionSniper(itemId, auction, new SwingThreadSniperListener(snipers)));
+        */
+        AuctionEventListener ael = new AuctionSniper(itemId, auction, new SwingThreadSniperListener(snipers));
+        //auctionEvents.addListener(ael);
+        auction.addAuctionEventListener(ael);
+          
         auction.join();
 			} // end method           - joinAuction
 		}   // end annonymous class - new UserRequestListener
