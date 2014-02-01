@@ -70,7 +70,7 @@ public class Main {
 		XMPPConnection connection = 
 		  main.connection(args[ARG_HOSTNAME], args[ARG_USERNAME], args[ARG_PASSWORD]);
 		main.disconnectWhenUICloses(connection);
-		main.addUserRequestListener(connection);
+		main.addUserRequestListenerFor(connection);
 
     sleep(0); /*>>>REMOVE<<<*/
 	}
@@ -93,7 +93,8 @@ public class Main {
 	}
  	/*>>>REMOVE-END<<<*/
 	
-	private void addUserRequestListener(final XMPPConnection connection) {
+	//private void addUserRequestListener(final XMPPConnection connection) {
+	private void addUserRequestListenerFor(final XMPPConnection connection) {
 		ui.addUserRequestListener(new UserRequestListener() 
 		{
 			public void joinAuction(String itemId) {
@@ -153,9 +154,10 @@ public class Main {
 		return connection;
 	}
 	
+	/*
 	private String auctionId(String itemId, XMPPConnection connection) {
 		return String.format(AUCTION_ID_FORMAT, itemId,
 		                     connection.getServiceName());
 	}
-	
+	*/
  }
