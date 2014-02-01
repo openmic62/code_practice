@@ -4,9 +4,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import org.jivesoftware.smack.Chat;
+import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
-import org.jivesoftware.smack.packet.Message;
 
 public class XMPPAuction implements Auction
 {
@@ -18,7 +18,8 @@ public class XMPPAuction implements Auction
 
 	private Chat chat;
 	//private final String itemId;
-  private final Announcer<AuctionEventListener> auctionEventsXX = 
+  //private final Announcer<AuctionEventListener> auctionEventsXX = 
+  private final Announcer<AuctionEventListener> auctionEvents = 
           Announcer.to(AuctionEventListener.class);
 
   @Override
@@ -36,7 +37,8 @@ public class XMPPAuction implements Auction
       //null
     	new AuctionMessageTranslator(
     	      connection.getUser(),
-    	      auctionEventsXX.announce()
+    	      //auctionEventsXX.announce()
+    	      auctionEvents.announce()
     	                            )
       );
     
@@ -58,7 +60,8 @@ public class XMPPAuction implements Auction
 	
 	@Override
 	public void addAuctionEventListener(AuctionEventListener ael) {
-		auctionEventsXX.addListener(ael);
+		//auctionEventsXX.addListener(ael);
+		auctionEvents.addListener(ael);
 	}
 	
 	@Override
