@@ -12,19 +12,10 @@ import org.apache.logging.log4j.Logger;
 import org.jivesoftware.smack.Connection;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
-/*
-
-import org.jivesoftware.smack.Chat;
-import org.jivesoftware.smack.packet.Message;
-
-import org.jivesoftware.smack.ChatManager;
-import org.jivesoftware.smack.MessageListener;
-*/
 
 public class Main {
 	static Logger logger = LogManager.getLogger(Main.class.getName());	
 	
-	//@SuppressWarnings("unused") private ArrayList<Chat> notToBeGCd = new ArrayList<Chat>();
 	@SuppressWarnings("unused") private ArrayList<Auction> notToBeGCd = new ArrayList<Auction>();
 	
 	private final SnipersTableModel snipers = new SnipersTableModel();
@@ -37,9 +28,7 @@ public class Main {
 	private static final int ARG_PASSWORD = 2;
 	private static final int ARG_ITEM_ID  = 3;
 
-	public static final String AUCTION_RESOURCE = "Auction";
-	public static final String ITEM_ID_AS_LOGIN = "auction-%s";
-	public static final String AUCTION_ID_FORMAT = ITEM_ID_AS_LOGIN + "@%S/" + AUCTION_RESOURCE;
+	public static final String AUCTION_RESOURCE = "Auction"; // <mlr 140201: duplicated in XMPPAuction>
 
 	public static final String JOIN_COMMAND_FORMAT = "SQLVersion: 1.1; Command: JOIN;";
 	public static final String REPORT_PRICE_COMMAND_FORMAT = "SQLVersion: 1.1; Event: PRICE; CurrentPrice: %d; Increment: %d; Bidder: %s;";
@@ -96,45 +85,14 @@ public class Main {
 	}
  	/*>>>REMOVE-END<<<*/
 	
-	//private void addUserRequestListener(final XMPPConnection connection) {
 	private void addUserRequestListenerFor(final XMPPConnection connection) {
 		ui.addUserRequestListener(new UserRequestListener() 
 		{
 			public void joinAuction(String itemId) {
 				snipers.addSniper(SniperSnapshot.joining(itemId));
-        /*
-        final Chat chat = 
-        	connection.getChatManager().createChat(
-          auctionId(itemId, connection),
-          null
-          );
-        */
-        /////Auction auction = new XMPPAuction(connection, itemId, chat);
         Auction auction = new XMPPAuction(connection, itemId);
-        //////final Chat chat = auction.getChat();
-        //notToBeGCd.add(chat);
         notToBeGCd.add(auction);
-        //Auction auction = new XMPPAuction(chat);
-	      /*
-        Announcer<AuctionEventListener> auctionEvents = 
-	              Announcer.to(AuctionEventListener.class);
-        chat.addMessageListener(
-        	new AuctionMessageTranslator(
-        	      connection.getUser(),
-        	      auctionEvents.announce()
-        	      //new AuctionSniper(itemId, auction, new SwingThreadSniperListener(snipers))
-        	                            )   // end constructor - new AuctionMessageTranslator
-                               );         // end statement   - chat.addMessageListener
-                               
-        //Auction auction = new XMPPAuction(chat);
-        ///Auction auction = new XMPPAuction(connection, chat);
-        ////Auction auction = new XMPPAuction(connection, itemId, chat);
-        /*
-        auctionEvents.addListener(
-          new AuctionSniper(itemId, auction, new SwingThreadSniperListener(snipers)));
-        */
         AuctionEventListener ael = new AuctionSniper(itemId, auction, new SwingThreadSniperListener(snipers));
-        //auctionEvents.addListener(ael);
         auction.addAuctionEventListener(ael);
           
         auction.join();
@@ -164,11 +122,4 @@ public class Main {
 		
 		return connection;
 	}
-	
-	/*
-	private String auctionId(String itemId, XMPPConnection connection) {
-		return String.format(AUCTION_ID_FORMAT, itemId,
-		                     connection.getServiceName());
-	}
-	*/
- }
+}
