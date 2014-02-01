@@ -180,16 +180,16 @@ public class AuctionSniperEndToEndTests {
 		application.startBiddingIn(auction2);       
 		auction2.hasReceivedJoinRequestFromSniper(ApplicationRunner.SNIPER_XMPP_ID);
 		
-		auction2.reportPrice(1000, 98, "other bidder");
-		application.hasShownSniperIsBidding(auction2, 1000, 1098);
+		auction2.reportPrice(7877, 69, "other bidder");
+		application.hasShownSniperIsBidding(auction2, 7877, 7946);
 		
-		auction2.hasReceivedBid(1098, ApplicationRunner.SNIPER_XMPP_ID);
+		auction2.hasReceivedBid(7946, ApplicationRunner.SNIPER_XMPP_ID);
 		
-		auction2.reportPrice(1098, 97, ApplicationRunner.SNIPER_XMPP_ID);
-		application.showsSniperIsWinning(auction2, 1098);		
+		auction2.reportPrice(7946, 222, ApplicationRunner.SNIPER_XMPP_ID);
+		application.showsSniperIsWinning(auction2, 7946);		
 		
 		auction2.announceClosed();
-		application.showsSniperHasWonAuction(auction2, 1098);		
+		application.showsSniperHasWonAuction(auction2, 7946);		
 		sleep(forThisLong);
 
 	}
