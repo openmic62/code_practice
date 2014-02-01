@@ -17,7 +17,9 @@ public class XMPPAuction implements Auction
 	public static final String AUCTION_ID_FORMAT = ITEM_ID_AS_LOGIN + "@%S/" + AUCTION_RESOURCE;
 
 	private Chat chat;
-	private final String itemId;
+	//private final String itemId;
+  private final Announcer<AuctionEventListener> auctionEventsXX = 
+          Announcer.to(AuctionEventListener.class);
 
   @Override
   public Chat getChat() { return chat; }
@@ -26,19 +28,36 @@ public class XMPPAuction implements Auction
 	///XMPPAuction(XMPPConnection connection, Chat c) {
 	////XMPPAuction(XMPPConnection connection, String itemId, Chat c) {
 	XMPPAuction(XMPPConnection connection, String itemId) {
-		this.itemId = itemId;
+		//this.itemId = itemId;
 		
     this.chat = 
     	connection.getChatManager().createChat(
       auctionId(itemId, connection),
-      null
+      //null
+    	new AuctionMessageTranslator(
+    	      connection.getUser(),
+    	      auctionEventsXX.announce()
+    	                            )
       );
+    
+    /*
+    chat.addMessageListener(
+    	new AuctionMessageTranslator(
+    	      connection.getUser(),
+    	      auctionEventsXX.announce()
+    	                            )
+                           );
+    */
 		
 	}
 
 	private String auctionId(String itemId, XMPPConnection connection) {
 		return String.format(AUCTION_ID_FORMAT, itemId,
 		                     connection.getServiceName());
+	}
+	
+	@Override
+	public void addAuctionEventListener(AuctionEventListener ael) {
 	}
 	
 	@Override
