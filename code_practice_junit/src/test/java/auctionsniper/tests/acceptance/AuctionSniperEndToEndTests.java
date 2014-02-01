@@ -119,7 +119,8 @@ public class AuctionSniperEndToEndTests {
 	private  FakeAuctionServer auction2    = new FakeAuctionServer(AuctionSniperTestUtilities.ITEM_ID2);
 	private  ApplicationRunner application = new ApplicationRunner();
 	
-	@Test
+	//@Test
+	@Ignore
 	public void sniperJoinsAuctionUntilAuctionCloses() throws Exception {        
 		auction.startSellingItem();                                                    // step 1
 		application.startBiddingIn(auction);                                           // step 2
@@ -129,7 +130,8 @@ public class AuctionSniperEndToEndTests {
 		sleep(forThisLong);
 	}
 
-	@Test
+	//@Test
+	@Ignore
 	public void sniperMakesHigherBidButLoses() throws Exception {
 		auction.startSellingItem();
 		application.startBiddingIn(auction);       
@@ -155,7 +157,8 @@ public class AuctionSniperEndToEndTests {
 		sleep(forThisLong);
 	}
 
-	@Test
+	//@Test
+	@Ignore
 	public void sniperWinsAnAuctionByBiddingHigher_onItem54321() throws Exception {
 		auction.startSellingItem();
 		application.startBiddingIn(auction);       
@@ -174,7 +177,8 @@ public class AuctionSniperEndToEndTests {
 		sleep(forThisLong);
 	}
 
-	@Test
+	//@Test
+	@Ignore
 	public void sniperWinsAnAuctionByBiddingHigher_onItem65432() throws Exception {
 		auction2.startSellingItem();
 		application.startBiddingIn(auction2);       
