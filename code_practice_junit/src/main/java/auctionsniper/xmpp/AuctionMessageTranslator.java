@@ -1,7 +1,8 @@
-package auctionsniper;
+package auctionsniper.xmpp;
 
 import static auctionsniper.AuctionEventListener.PriceSource.FromOtherBidder;
 import static auctionsniper.AuctionEventListener.PriceSource.FromSniper;
+import auctionsniper.AuctionEventListener;
 import auctionsniper.AuctionEventListener.PriceSource;
 
 import java.util.HashMap;

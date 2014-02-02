@@ -77,8 +77,8 @@
 package auctionsniper.tests.integration;
 
 import auctionsniper.Auction;
-import auctionsniper.XMPPAuction;
 import auctionsniper.AuctionEventListener;
+import auctionsniper.xmpp.XMPPAuction;
 
 import auctionsniper.tests.AuctionSniperTestUtilities;
 import auctionsniper.tests.acceptance.FakeAuctionServer;

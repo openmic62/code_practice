@@ -1,4 +1,9 @@
-package auctionsniper;
+package auctionsniper.xmpp;
+
+import auctionsniper.Announcer;
+import auctionsniper.Auction;
+import auctionsniper.AuctionEventListener;
+import auctionsniper.Main;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,7 +25,7 @@ public class XMPPAuction implements Auction
   private final Announcer<AuctionEventListener> auctionEvents = 
           Announcer.to(AuctionEventListener.class);
 
-	XMPPAuction(XMPPConnection connection, String itemId) {
+	public XMPPAuction(XMPPConnection connection, String itemId) {
 		
     this.chat = 
     	connection.getChatManager().createChat(

@@ -58,6 +58,7 @@ CTags Legacy Support=0
 35=00_learning_curve_src_files - enum
 36=00_learning_curve_src_files - swing
 37=Auction Sniper - src - auctionsniper - ui
+38=Auction Sniper - src - auctionsniper - xmpp
 [Files - ch02_a_first_unit_test - src]
 0=src\main\java\LogAnalyzer.java
 1=src\main\java\MemCalculator.java
@@ -187,18 +188,17 @@ CTags Legacy Support=0
 0=src\test\scripts\openfirectl.pl
 1=src\test\scripts\keywords.pl
 [Files - Auction Sniper - src - auctionsniper]
-0=src\main\java\auctionsniper\AuctionMessageTranslator.java
-1=src\main\java\auctionsniper\Main.java
-2=src\main\java\auctionsniper\AuctionSniper.java
-3=src\main\java\auctionsniper\AuctionEventListener.java
-4=src\main\java\auctionsniper\SniperListener.java
-5=src\main\java\auctionsniper\Auction.java
-6=src\main\java\auctionsniper\XMPPAuction.java
-7=src\main\java\auctionsniper\SniperSnapshot.java
-8=src\main\java\auctionsniper\SniperState.java
-9=src\main\java\auctionsniper\Defect.java
-10=src\main\java\auctionsniper\Announcer.java
-11=src\main\java\auctionsniper\UserRequestListener.java
+0=src\main\java\auctionsniper\Main.java
+1=src\main\java\auctionsniper\AuctionSniper.java
+2=src\main\java\auctionsniper\AuctionEventListener.java
+3=src\main\java\auctionsniper\SniperListener.java
+4=src\main\java\auctionsniper\Auction.java
+5=src\main\java\auctionsniper\XMPPAuction.java
+6=src\main\java\auctionsniper\SniperSnapshot.java
+7=src\main\java\auctionsniper\SniperState.java
+8=src\main\java\auctionsniper\Defect.java
+9=src\main\java\auctionsniper\Announcer.java
+10=src\main\java\auctionsniper\UserRequestListener.java
 [Files - Auction Sniper - test - acceptance]
 0=src\test\java\auctionsniper\tests\acceptance\AuctionSniperEndToEndTests.java
 1=src\test\java\auctionsniper\tests\acceptance\ApplicationRunner.java
@@ -244,3 +244,6 @@ Source Paths=
 1=src\main\java\auctionsniper\ui\SnipersTableModel.java
 2=src\main\java\auctionsniper\ui\Column.java
 3=src\main\java\auctionsniper\ui\SwingThreadSniperListener.java
+[Files - Auction Sniper - src - auctionsniper - xmpp]
+0=src\main\java\auctionsniper\xmpp\AuctionMessageTranslator.java
+1=src\main\java\auctionsniper\xmpp\XMPPAuction.java
