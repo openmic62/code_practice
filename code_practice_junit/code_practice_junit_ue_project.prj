@@ -241,3 +241,4 @@ Source Paths=
 11=lib\windowlicker_svn\src\swing\tests\com\objogate\wl\swing\driver\tests\JTableDriverTest.java
 [Files - Auction Sniper - test - integration]
 0=src\test\java\auctionsniper\tests\integration\MainWindowTests.java
+1=src\test\java\auctionsniper\tests\integration\XMPPAuctionTests.java
