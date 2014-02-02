@@ -77,8 +77,8 @@
 package auctionsniper.tests.unit;
 
 import auctionsniper.AuctionEventListener;
-import auctionsniper.AuctionMessageTranslator;
 import auctionsniper.tests.AuctionSniperTestUtilities;
+import auctionsniper.xmpp.AuctionMessageTranslator;
 
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.packet.Message;
