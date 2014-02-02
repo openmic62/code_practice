@@ -1,4 +1,9 @@
-package auctionsniper;
+package auctionsniper.ui;
+
+import auctionsniper.Defect;
+import auctionsniper.SniperListener;
+import auctionsniper.SniperSnapshot;
+import auctionsniper.SniperState;
 
 import java.util.ArrayList;
 

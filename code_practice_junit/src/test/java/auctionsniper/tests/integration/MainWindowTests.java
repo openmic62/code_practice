@@ -76,8 +76,8 @@
  */ 
 package auctionsniper.tests.integration;
 
-import auctionsniper.MainWindow;
-import auctionsniper.SnipersTableModel;
+import auctionsniper.ui.MainWindow;
+import auctionsniper.ui.SnipersTableModel;
 import auctionsniper.UserRequestListener;
 
 import auctionsniper.tests.AuctionSniperTestUtilities;

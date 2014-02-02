@@ -1,7 +1,7 @@
 package auctionsniper.tests.acceptance;
 
 import auctionsniper.Main;
-import auctionsniper.MainWindow;
+import auctionsniper.ui.MainWindow;
 
 import com.objogate.wl.gesture.Gestures;
 import com.objogate.wl.swing.AWTEventQueueProber;

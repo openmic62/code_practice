@@ -1,11 +1,11 @@
 package auctionsniper.tests.acceptance;
 
 import auctionsniper.Main;
-import auctionsniper.MainWindow;
 import auctionsniper.SniperSnapshot;
 import auctionsniper.SniperState;
-import auctionsniper.SnipersTableModel;
 import auctionsniper.tests.AuctionSniperTestUtilities;
+import auctionsniper.ui.MainWindow;
+import auctionsniper.ui.SnipersTableModel;
 
 public class ApplicationRunner {
 	

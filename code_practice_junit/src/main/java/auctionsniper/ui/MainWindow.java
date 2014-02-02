@@ -1,6 +1,7 @@
-package auctionsniper;
+package auctionsniper.ui;
 
-//import auctionsniper.Announcer;
+import auctionsniper.Announcer;
+import auctionsniper.UserRequestListener;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
