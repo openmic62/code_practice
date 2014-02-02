@@ -1,8 +1,8 @@
 package auctionsniper;
 
 public class Defect extends RuntimeException {
-	Defect() {}
-	Defect(String message) {
+	public Defect() {}
+	public Defect(String message) {
 		super(message);
 	}
 }

@@ -57,6 +57,7 @@ CTags Legacy Support=0
 34=00_learning_curve_src_files
 35=00_learning_curve_src_files - enum
 36=00_learning_curve_src_files - swing
+37=Auction Sniper - src - auctionsniper - ui
 [Files - ch02_a_first_unit_test - src]
 0=src\main\java\LogAnalyzer.java
 1=src\main\java\MemCalculator.java
@@ -188,20 +189,16 @@ CTags Legacy Support=0
 [Files - Auction Sniper - src - auctionsniper]
 0=src\main\java\auctionsniper\AuctionMessageTranslator.java
 1=src\main\java\auctionsniper\Main.java
-2=src\main\java\auctionsniper\MainWindow.java
-3=src\main\java\auctionsniper\AuctionSniper.java
-4=src\main\java\auctionsniper\AuctionEventListener.java
-5=src\main\java\auctionsniper\SniperListener.java
-6=src\main\java\auctionsniper\Auction.java
-7=src\main\java\auctionsniper\XMPPAuction.java
-8=src\main\java\auctionsniper\Column.java
-9=src\main\java\auctionsniper\SniperSnapshot.java
-10=src\main\java\auctionsniper\SnipersTableModel.java
-11=src\main\java\auctionsniper\SniperState.java
-12=src\main\java\auctionsniper\Defect.java
-13=src\main\java\auctionsniper\SwingThreadSniperListener.java
-14=src\main\java\auctionsniper\Announcer.java
-15=src\main\java\auctionsniper\UserRequestListener.java
+2=src\main\java\auctionsniper\AuctionSniper.java
+3=src\main\java\auctionsniper\AuctionEventListener.java
+4=src\main\java\auctionsniper\SniperListener.java
+5=src\main\java\auctionsniper\Auction.java
+6=src\main\java\auctionsniper\XMPPAuction.java
+7=src\main\java\auctionsniper\SniperSnapshot.java
+8=src\main\java\auctionsniper\SniperState.java
+9=src\main\java\auctionsniper\Defect.java
+10=src\main\java\auctionsniper\Announcer.java
+11=src\main\java\auctionsniper\UserRequestListener.java
 [Files - Auction Sniper - test - acceptance]
 0=src\test\java\auctionsniper\tests\acceptance\AuctionSniperEndToEndTests.java
 1=src\test\java\auctionsniper\tests\acceptance\ApplicationRunner.java
@@ -242,3 +239,8 @@ Source Paths=
 [Files - Auction Sniper - test - integration]
 0=src\test\java\auctionsniper\tests\integration\MainWindowTests.java
 1=src\test\java\auctionsniper\tests\integration\XMPPAuctionTests.java
+[Files - Auction Sniper - src - auctionsniper - ui]
+0=src\main\java\auctionsniper\ui\MainWindow.java
+1=src\main\java\auctionsniper\ui\SnipersTableModel.java
+2=src\main\java\auctionsniper\ui\Column.java
+3=src\main\java\auctionsniper\ui\SwingThreadSniperListener.java

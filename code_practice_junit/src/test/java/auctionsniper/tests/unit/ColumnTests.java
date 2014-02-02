@@ -92,10 +92,10 @@
  */ 
 package auctionsniper.tests.unit;
 
-import auctionsniper.Column;
 import auctionsniper.SniperSnapshot;
-import auctionsniper.SnipersTableModel;
 import auctionsniper.SniperState;
+import auctionsniper.ui.Column;
+import auctionsniper.ui.SnipersTableModel;
 
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JUnitRuleMockery;

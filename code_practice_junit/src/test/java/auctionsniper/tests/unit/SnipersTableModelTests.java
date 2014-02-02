@@ -82,11 +82,11 @@
  */ 
 package auctionsniper.tests.unit;
 
-import auctionsniper.Column;
 import auctionsniper.Defect;
 import auctionsniper.SniperSnapshot;
-import auctionsniper.SnipersTableModel;
 import auctionsniper.SniperState;
+import auctionsniper.ui.Column;
+import auctionsniper.ui.SnipersTableModel;
 // <mlr 131225: ITEM_ID - added per GOOS, p. 155a>
 import auctionsniper.tests.AuctionSniperTestUtilities;
 
