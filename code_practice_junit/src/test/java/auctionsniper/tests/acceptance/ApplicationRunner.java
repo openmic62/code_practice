@@ -9,8 +9,9 @@ import auctionsniper.ui.SnipersTableModel;
 
 public class ApplicationRunner {
 	
-	static final String SNIPER_ID = "sniper";
-	static final String SNIPER_PASSWORD = "sniper";
+	private final String LOCALHOST       = AuctionSniperTestUtilities.LOCALHOST;
+	private final String SNIPER_ID       = AuctionSniperTestUtilities.SNIPER_ID;
+	private final String SNIPER_PASSWORD = AuctionSniperTestUtilities.SNIPER_PASSWORD;
 	private AuctionSniperDriver driver;
 
 	private String itemId;
@@ -47,7 +48,7 @@ public class ApplicationRunner {
 	
 	private String[] arguments() {
 		String[] args = new String[3];
-		args[0] = "localhost";
+		args[0] = LOCALHOST;
 		args[1] = SNIPER_ID;
 		args[2] = SNIPER_PASSWORD;
 
