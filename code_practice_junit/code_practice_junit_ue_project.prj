@@ -238,7 +238,7 @@ Source Paths=
 11=lib\windowlicker_svn\src\swing\tests\com\objogate\wl\swing\driver\tests\JTableDriverTest.java
 [Files - Auction Sniper - test - integration]
 0=src\test\java\auctionsniper\tests\integration\MainWindowTests.java
-1=src\test\java\auctionsniper\tests\integration\XMPPAuctionTests.java
+1=src\test\java\auctionsniper\tests\integration\XMPPAuctionHouseTests.java
 [Files - Auction Sniper - src - auctionsniper - ui]
 0=src\main\java\auctionsniper\ui\MainWindow.java
 1=src\main\java\auctionsniper\ui\SnipersTableModel.java
@@ -247,3 +247,5 @@ Source Paths=
 [Files - Auction Sniper - src - auctionsniper - xmpp]
 0=src\main\java\auctionsniper\xmpp\AuctionMessageTranslator.java
 1=src\main\java\auctionsniper\xmpp\XMPPAuction.java
+2=src\main\java\auctionsniper\xmpp\XMPPAuctionHouse.java
+3=src\main\java\auctionsniper\xmpp\AuctionHouse.java

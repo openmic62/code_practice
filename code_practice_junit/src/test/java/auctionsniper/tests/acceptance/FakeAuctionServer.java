@@ -1,6 +1,7 @@
 package auctionsniper.tests.acceptance;
 
 import auctionsniper.Main;
+import auctionsniper.xmpp.XMPPAuction;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.TimeUnit;
@@ -74,7 +75,8 @@ public class FakeAuctionServer {
 	public void hasReceivedBid(int bid, String sniperId) 
 		throws InterruptedException 
 	{
-		receivesAMessageMatching(sniperId, equalTo(String.format(Main.BID_COMMAND_FORMAT, bid)));
+		//receivesAMessageMatching(sniperId, equalTo(String.format(Main.BID_COMMAND_FORMAT, bid)));
+		receivesAMessageMatching(sniperId, equalTo(String.format(XMPPAuction.BID_COMMAND_FORMAT, bid)));
 	}
 	
 	// helper method

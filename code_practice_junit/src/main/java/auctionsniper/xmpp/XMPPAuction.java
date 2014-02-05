@@ -17,9 +17,12 @@ public class XMPPAuction implements Auction
 {
 	static Logger logger = LogManager.getLogger(XMPPAuction.class.getName());	
 	
-	public static final String AUCTION_RESOURCE = "Auction"; // <mlr 140201: duplicated in Main>
-	public static final String ITEM_ID_AS_LOGIN = "auction-%s";
-	public static final String AUCTION_ID_FORMAT = ITEM_ID_AS_LOGIN + "@%S/" + AUCTION_RESOURCE;
+	public static final String AUCTION_RESOURCE    = "Auction"; // <mlr 140201: duplicated in Main>
+	private       final String ITEM_ID_AS_LOGIN    = "auction-%s";
+	private       final String AUCTION_ID_FORMAT   = ITEM_ID_AS_LOGIN + "@%S/" + AUCTION_RESOURCE;
+
+	private       final String JOIN_COMMAND_FORMAT = "SQLVersion: 1.1; Command: JOIN;";
+	public static final String BID_COMMAND_FORMAT  = "SQLVersion: 1.1; Command: BID; Price: %d;";
 
 	private Chat chat;
   private final Announcer<AuctionEventListener> auctionEvents = 
@@ -42,6 +45,7 @@ public class XMPPAuction implements Auction
 		                     connection.getServiceName());
 	}
 	
+	// ----- OVERRIDES FOR INTERFACE Aucion -----
 	@Override
 	public void addAuctionEventListener(AuctionEventListener ael) {
 		auctionEvents.addListener(ael);
@@ -50,7 +54,8 @@ public class XMPPAuction implements Auction
 	@Override
 	public void bid(int amount){
 		try {
-			chat.sendMessage(String.format(Main.BID_COMMAND_FORMAT, amount));
+			//chat.sendMessage(String.format(Main.BID_COMMAND_FORMAT, amount));
+			chat.sendMessage(String.format(BID_COMMAND_FORMAT, amount));
 		} catch (XMPPException e) {
 			e.printStackTrace();
 		}
@@ -59,7 +64,8 @@ public class XMPPAuction implements Auction
 	public void join() {
 		try {
 			logger.debug("chat.getParticipant() -->" + chat.getParticipant() + "<--");
-			chat.sendMessage(Main.JOIN_COMMAND_FORMAT);
+			//chat.sendMessage(Main.JOIN_COMMAND_FORMAT);
+			chat.sendMessage(JOIN_COMMAND_FORMAT);
 		} catch (XMPPException e) {
 			e.printStackTrace();
 		}
