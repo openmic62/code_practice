@@ -19,11 +19,13 @@ public class AuctionSniper implements AuctionEventListener {
 		this.snapShot = SniperSnapshot.joining(itemId);
 	}
 
+	@Override
 	public void auctionClosed(){
 		snapShot = snapShot.closed();
 		notifyChange();
 	}
 	
+	@Override
 	public void currentPrice(int price, int increment, PriceSource priceSource){		
 		switch (priceSource) {
 			case FromSniper:

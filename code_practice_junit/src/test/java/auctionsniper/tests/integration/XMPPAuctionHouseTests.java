@@ -79,21 +79,17 @@ package auctionsniper.tests.integration;
 import auctionsniper.Auction;
 import auctionsniper.AuctionEventListener;
 import auctionsniper.xmpp.XMPPAuction;
+import auctionsniper.xmpp.XMPPAuctionHouse;
 
 import auctionsniper.tests.AuctionSniperTestUtilities;
 import auctionsniper.tests.acceptance.ApplicationRunner;
 import auctionsniper.tests.acceptance.FakeAuctionServer;
-
-import com.objogate.wl.swing.probe.ValueMatcherProbe;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
-
-import org.jmock.Expectations;
-import org.jmock.integration.junit4.JUnitRuleMockery;
 
 import org.junit.Ignore;
 import org.junit.Rule;
@@ -102,7 +98,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertTrue;
 import static org.hamcrest.Matchers.equalTo;
 
-public class XMPPAuctionTests {
+public class XMPPAuctionHouseTests {
 	
 	private final String HOSTNAME         = AuctionSniperTestUtilities.LOCALHOST;
 	private final String USERNAME         = AuctionSniperTestUtilities.SNIPER_ID;
@@ -111,18 +107,15 @@ public class XMPPAuctionTests {
 	private final String AUCTION_RESOURCE = XMPPAuction.AUCTION_RESOURCE;
 
 	private final FakeAuctionServer auctionServer  = new FakeAuctionServer(AuctionSniperTestUtilities.ITEM_ID1);
-  private final XMPPConnection connection        = connection(HOSTNAME, USERNAME, PASSWORD);
-  
-  /*
-	@Rule public final JUnitRuleMockery context = new JUnitRuleMockery();
-	private final AuctionEventListener listener = context.mock(AuctionEventListener.class);
-  */
+  //private final XMPPConnection connection     =               connection(HOSTNAME, USERNAME, PASSWORD);
   
 	@Test public void 
 	receivesEventsFromAuctionServerAfterJoining() throws Exception{
 		CountDownLatch auctionWasClosed = new CountDownLatch(1);
 		auctionServer.startSellingItem();
 		
+	  XMPPAuctionHouse auctionHouse = makeAuctionHouse(HOSTNAME, USERNAME, PASSWORD);
+	  XMPPConnection   connection   = auctionHouse.connection;
 		Auction auction = new XMPPAuction(connection, auctionServer.getItemID());
 		auction.addAuctionEventListener(auctionClosedListener(auctionWasClosed));
 		
@@ -131,6 +124,16 @@ public class XMPPAuctionTests {
 		auctionServer.announceClosed();
 		
 		assertTrue("should have been closed", auctionWasClosed.await(2, TimeUnit.SECONDS));
+	}
+	
+	private XMPPAuctionHouse makeAuctionHouse(String hostname, String username, String password) {
+		XMPPAuctionHouse auctionHouse = null;
+		try {
+			auctionHouse = XMPPAuctionHouse.connect(hostname, username, password);
+		} catch (XMPPException xe) {
+			xe.printStackTrace();
+		}
+		return auctionHouse;
 	}
 	
 	private AuctionEventListener
@@ -143,6 +146,7 @@ public class XMPPAuctionTests {
 		};
 	}
 	
+	/*
 	private XMPPConnection 
 	connection(String hostname, String username, String password)
 	{
@@ -158,4 +162,5 @@ public class XMPPAuctionTests {
 		
 		return connection;
 	}
+	*/
 }
