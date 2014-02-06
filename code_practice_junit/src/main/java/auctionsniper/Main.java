@@ -3,7 +3,6 @@ package auctionsniper;
 import auctionsniper.ui.MainWindow;
 import auctionsniper.ui.SnipersTableModel;
 import auctionsniper.ui.SwingThreadSniperListener;
-import auctionsniper.xmpp.XMPPAuction;
 import auctionsniper.xmpp.XMPPAuctionHouse;
 
 import java.awt.event.WindowAdapter;
@@ -15,10 +14,6 @@ import javax.swing.SwingUtilities;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import org.jivesoftware.smack.Connection;
-import org.jivesoftware.smack.XMPPConnection;
-import org.jivesoftware.smack.XMPPException;
-
 public class Main {
 	static Logger logger = LogManager.getLogger(Main.class.getName());	
 	
@@ -27,18 +22,12 @@ public class Main {
 	private final SnipersTableModel snipers = new SnipersTableModel();
 	private MainWindow ui;
 	
-	private XMPPConnection connection;
-	
 	private static final int ARG_HOSTNAME = 0;
 	private static final int ARG_USERNAME = 1;
 	private static final int ARG_PASSWORD = 2;
 	private static final int ARG_ITEM_ID  = 3;
 
-	//public static final String AUCTION_RESOURCE = "Auction"; // <mlr 140201: duplicated in XMPPAuction>
-
-	//public static final String JOIN_COMMAND_FORMAT = "SQLVersion: 1.1; Command: JOIN;";
 	public static final String REPORT_PRICE_COMMAND_FORMAT = "SQLVersion: 1.1; Event: PRICE; CurrentPrice: %d; Increment: %d; Bidder: %s;";
-	//public static final String BID_COMMAND_FORMAT = "SQLVersion: 1.1; Command: BID; Price: %d;";
 	public static final String CLOSE_COMMAND_FORMAT = "SQLVersion: 1.1; Event: CLOSE;";
 	public static final String WINNER_COMMAND_FORMAT = "SQLVersion: 1.1; Event: WINNER; WinningPrice: %d; Bidder: %s";
 	
@@ -64,16 +53,8 @@ public class Main {
 		
 		Main main = new Main();
 		
-		Connection.DEBUG_ENABLED = false;
-		//XMPPConnection connection = 
 	  XMPPAuctionHouse auctionHouse = 
 		  XMPPAuctionHouse.connect(args[ARG_HOSTNAME], args[ARG_USERNAME], args[ARG_PASSWORD]);
-		  //main.connect(args[ARG_HOSTNAME], args[ARG_USERNAME], args[ARG_PASSWORD]);
-		  //main.connection(args[ARG_HOSTNAME], args[ARG_USERNAME], args[ARG_PASSWORD]);
-		//main.disconnectWhenUICloses(connection);
-		//main.addUserRequestListenerFor(connection);
-		///main.disconnectWhenUICloses(auctionHouse.connection);
-		///main.addUserRequestListenerFor(auctionHouse.connection);
 		main.disconnectWhenUICloses(auctionHouse);
 		main.addUserRequestListenerFor(auctionHouse);
 
@@ -98,13 +79,11 @@ public class Main {
 	}
  	/*>>>REMOVE-END<<<*/
 	
-	//private void addUserRequestListenerFor(final XMPPConnection connection) {
 	private void addUserRequestListenerFor(final XMPPAuctionHouse auctionHouse) {
 		ui.addUserRequestListener(new UserRequestListener() 
 		{
 			public void joinAuction(String itemId) {
 				snipers.addSniper(SniperSnapshot.joining(itemId));
-        //Auction auction = new XMPPAuction(connection, itemId);
         Auction auction = auctionHouse.auctionFor(itemId);
         notToBeGCd.add(auction);
         AuctionEventListener ael = new AuctionSniper(itemId, auction, new SwingThreadSniperListener(snipers));
@@ -116,7 +95,6 @@ public class Main {
 	  );  // end statement        - ui.addUserRequestListener
 	}     // end method           - addUserRequestListener
 	
-	//private void disconnectWhenUICloses(final XMPPConnection connection) {
 	private void disconnectWhenUICloses(final XMPPAuctionHouse auctionHouse) {
 		ui.addWindowListener(new WindowAdapter()
 			{
@@ -127,18 +105,4 @@ public class Main {
 			}
 		);
 	}
-	
-	/*
-	private XMPPConnection 
-	connect(String hostname, String username, String password)
-	//connection(String hostname, String username, String password)
-		throws XMPPException 
-	{
-		XMPPConnection connection = new XMPPConnection(hostname);
-		connection.connect();
-		connection.login(username, password, AUCTION_RESOURCE);
-		
-		return connection;
-	}
-	*/
 }
