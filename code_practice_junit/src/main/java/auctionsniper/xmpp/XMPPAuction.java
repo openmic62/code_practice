@@ -17,7 +17,7 @@ public class XMPPAuction implements Auction
 {
 	static Logger logger = LogManager.getLogger(XMPPAuction.class.getName());	
 	
-	public static final String AUCTION_RESOURCE    = "Auction"; // <mlr 140201: duplicated in Main>
+	public static final String AUCTION_RESOURCE    = "Auction";
 	private       final String ITEM_ID_AS_LOGIN    = "auction-%s";
 	private       final String AUCTION_ID_FORMAT   = ITEM_ID_AS_LOGIN + "@%S/" + AUCTION_RESOURCE;
 
@@ -45,7 +45,7 @@ public class XMPPAuction implements Auction
 		                     connection.getServiceName());
 	}
 	
-	// ----- OVERRIDES FOR INTERFACE Aucion -----
+	// ----- OVERRIDES FOR INTERFACE Auction -----
 	@Override
 	public void addAuctionEventListener(AuctionEventListener ael) {
 		auctionEvents.addListener(ael);
@@ -54,7 +54,6 @@ public class XMPPAuction implements Auction
 	@Override
 	public void bid(int amount){
 		try {
-			//chat.sendMessage(String.format(Main.BID_COMMAND_FORMAT, amount));
 			chat.sendMessage(String.format(BID_COMMAND_FORMAT, amount));
 		} catch (XMPPException e) {
 			e.printStackTrace();
@@ -64,7 +63,7 @@ public class XMPPAuction implements Auction
 	public void join() {
 		try {
 			logger.debug("chat.getParticipant() -->" + chat.getParticipant() + "<--");
-			//chat.sendMessage(Main.JOIN_COMMAND_FORMAT);
+
 			chat.sendMessage(JOIN_COMMAND_FORMAT);
 		} catch (XMPPException e) {
 			e.printStackTrace();
