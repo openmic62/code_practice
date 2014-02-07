@@ -80,7 +80,11 @@ public class Main {
  	/*>>>REMOVE-END<<<*/
 	
 	private void addUserRequestListenerFor(final XMPPAuctionHouse auctionHouse) {
-		ui.addUserRequestListener(new UserRequestListener() 
+		//ui.addUserRequestListener(new UserRequestListener() 
+		///UserRequestListener userRequestListener = new SniperLauncher(snipers, auctionHouse);
+		UserRequestListener sniperLauncher = new SniperLauncher(snipers, auctionHouse);
+		/*
+		UserRequestListener userRequestListener = new UserRequestListener() 
 		{
 			public void joinAuction(String itemId) {
 				snipers.addSniper(SniperSnapshot.joining(itemId));
@@ -91,10 +95,12 @@ public class Main {
           
         auction.join();
 			} // end method           - joinAuction
-		}   // end annonymous class - new UserRequestListener
-	  );  // end statement        - ui.addUserRequestListener
-	}     // end method           - addUserRequestListener
-	
+		};   // end annonymous class - new UserRequestListener
+		*/
+	  ///ui.addUserRequestListener(userRequestListener);
+	  ui.addUserRequestListener(sniperLauncher);
+	}
+
 	private void disconnectWhenUICloses(final XMPPAuctionHouse auctionHouse) {
 		ui.addWindowListener(new WindowAdapter()
 			{
