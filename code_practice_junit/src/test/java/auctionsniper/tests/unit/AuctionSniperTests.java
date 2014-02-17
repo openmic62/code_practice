@@ -63,7 +63,6 @@
  cd student\code_practice_junit
  javac -cp %CLASSPATH%;%SC% -d %SC% %SD%\auctionsniper\AuctionSniper.java
  javac -cp %CLASSPATH%;%SC%;%TC% -d %TC% %TD%\auctionsniper\tests\\unit\AuctionSniperTests.java
- ant run-perl-openfirectl
  java  -cp %CLASSPATH%;%SC%;%TC% org.junit.runner.JUnitCore auctionsniper.tests.unit.AuctionSniperTests
  ant runtest -DtestClass=AuctionSniperTests
  
@@ -117,6 +116,7 @@ import org.jmock.Expectations;
 import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.jmock.States;
 
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
@@ -129,8 +129,15 @@ public class AuctionSniperTests {
 	private final Auction auction = context.mock(Auction.class);
 	private final States sniperState = context.states("sniper");
 	
-	private final AuctionSniper sniper = new AuctionSniper(AuctionSniperTestUtilities.ITEM_ID1, auction, sniperListener);
+	//private final AuctionSniper sniper = new AuctionSniper(AuctionSniperTestUtilities.ITEM_ID1, auction, sniperListener);
+	private final AuctionSniper sniper = new AuctionSniper(AuctionSniperTestUtilities.ITEM_ID1, auction);
 	
+	// setup test fixture
+	@Before
+	public void setUpFixture() {
+		sniper.addSniperListener(sniperListener);
+	}
+
 	@Test public void 
 	reportLostIfAuctionClosesImmediately() {
 		context.checking(new Expectations() {{
