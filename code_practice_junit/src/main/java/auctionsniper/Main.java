@@ -3,6 +3,7 @@ package auctionsniper;
 import auctionsniper.ui.MainWindow;
 import auctionsniper.ui.SnipersTableModel;
 import auctionsniper.ui.SwingThreadSniperListener;
+import auctionsniper.xmpp.AuctionHouse;
 import auctionsniper.xmpp.XMPPAuctionHouse;
 
 import java.awt.event.WindowAdapter;
@@ -79,7 +80,7 @@ public class Main {
 	}
  	/*>>>REMOVE-END<<<*/
 	
-	private void addUserRequestListenerFor(final XMPPAuctionHouse auctionHouse) {
+	private void addUserRequestListenerFor(final AuctionHouse auctionHouse) {
 		//ui.addUserRequestListener(new UserRequestListener() 
 		///UserRequestListener userRequestListener = new SniperLauncher(snipers, auctionHouse);
 		UserRequestListener sniperLauncher = new SniperLauncher(snipers, auctionHouse);

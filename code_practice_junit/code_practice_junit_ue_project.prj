@@ -161,6 +161,7 @@ CTags Legacy Support=0
 5=src\test\java\auctionsniper\tests\unit\ColumnTests.java
 6=src\test\java\auctionsniper\tests\unit\SniperStateTests.java
 7=src\test\java\auctionsniper\tests\unit\AnnouncerTests.java
+8=src\test\java\auctionsniper\tests\unit\SniperLauncherTests.java
 <<<<<<< .mine
 [Files - ant_and_maven]
 0=build.properties
@@ -245,6 +246,7 @@ Source Paths=
 1=src\main\java\auctionsniper\ui\SnipersTableModel.java
 2=src\main\java\auctionsniper\ui\Column.java
 3=src\main\java\auctionsniper\ui\SwingThreadSniperListener.java
+4=src\main\java\auctionsniper\ui\SniperCollector.java
 [Files - Auction Sniper - src - auctionsniper - xmpp]
 0=src\main\java\auctionsniper\xmpp\AuctionMessageTranslator.java
 1=src\main\java\auctionsniper\xmpp\XMPPAuction.java
