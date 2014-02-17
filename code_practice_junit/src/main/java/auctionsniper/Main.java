@@ -81,24 +81,7 @@ public class Main {
  	/*>>>REMOVE-END<<<*/
 	
 	private void addUserRequestListenerFor(final AuctionHouse auctionHouse) {
-		//ui.addUserRequestListener(new UserRequestListener() 
-		///UserRequestListener userRequestListener = new SniperLauncher(snipers, auctionHouse);
 		UserRequestListener sniperLauncher = new SniperLauncher(snipers, auctionHouse);
-		/*
-		UserRequestListener userRequestListener = new UserRequestListener() 
-		{
-			public void joinAuction(String itemId) {
-				snipers.addSniper(SniperSnapshot.joining(itemId));
-        Auction auction = auctionHouse.auctionFor(itemId);
-        notToBeGCd.add(auction);
-        AuctionEventListener ael = new AuctionSniper(itemId, auction, new SwingThreadSniperListener(snipers));
-        auction.addAuctionEventListener(ael);
-          
-        auction.join();
-			} // end method           - joinAuction
-		};   // end annonymous class - new UserRequestListener
-		*/
-	  ///ui.addUserRequestListener(userRequestListener);
 	  ui.addUserRequestListener(sniperLauncher);
 	}
 
