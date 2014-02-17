@@ -78,11 +78,10 @@ package auctionsniper.tests.unit;
 import auctionsniper.Auction;
 import auctionsniper.AuctionSniper;
 import auctionsniper.xmpp.AuctionHouse;
-//import auctionsniper.xmpp.XMPPAuctionHouse;
 import auctionsniper.ui.SniperCollector;
-//import auctionsniper.ui.SnipersTableModel;
 import auctionsniper.SniperLauncher;
 import auctionsniper.SniperSnapshot;
+
 // <mlr 131225: ITEM_ID - added per GOOS, p. 155a>
 import auctionsniper.tests.AuctionSniperTestUtilities;
 
@@ -105,22 +104,16 @@ public class SniperLauncherTests {
 	private final Auction auction = context.mock(Auction.class);
 	private final AuctionHouse auctionHouse = context.mock(AuctionHouse.class);
 	private final SniperCollector collector = context.mock(SniperCollector.class);
-	//private final SnipersTableModel snipers = context.mock(SnipersTableModel.class);
 	
 	private final States auctionState = context.states("auction states")
 	                                           .startsAs("not joined");
 	
-	//private final SniperLauncher launcher = new SniperLauncher(snipers, (XMPPAuctionHouse) auctionHouse);
-	//private final SniperLauncher launcher = new SniperLauncher((SnipersTableModel) collector, (XMPPAuctionHouse) auctionHouse);
-	///private final SniperLauncher launcher = new SniperLauncher((SnipersTableModel) collector, auctionHouse);
 	private final SniperLauncher launcher = new SniperLauncher(collector, auctionHouse);
 	
 	@Test public void 
 	addNewSniperToCollectorThenJoinsAuction() {
 		final String         itemId   = "item 123";
-		//final SniperSnapshot snapShot = SniperSnapshot.joining(itemId);
 		context.checking(new Expectations() {{
-			//oneOf(collector).addSniper(snapShot);
 			allowing(auctionHouse).auctionFor(itemId); will(returnValue(auction));
 			
 			oneOf(auction).addAuctionEventListener(with(sniperForItem(itemId)));

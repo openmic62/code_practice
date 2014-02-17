@@ -18,37 +18,22 @@ public class SnipersTableModel extends AbstractTableModel implements SniperListe
                                         "Won auction!!! Bitches!"};
                                         
 
-  private ArrayList<SniperSnapshot> snapshots = new ArrayList<SniperSnapshot>();
-  ///private ArrayList<AuctionSniper> auctionSnipers = new ArrayList<AuctionSniper>();
-  
-	/* <mlr 140217: begin - moved over from SniperLauncher> */
-	//@SuppressWarnings("unused") private ArrayList<Auction> notToBeGCd = new ArrayList<Auction>();
+  private ArrayList<SniperSnapshot> snapshots = new ArrayList<SniperSnapshot>(); 
 	private ArrayList<AuctionSniper> notToBeGCd = new ArrayList<AuctionSniper>();
-	/*<mlr 140217: end - moved over to SnipersTableModel> */
 
 	public static String textFor(SniperState state) {
 		return STATUS_TEXT[state.ordinal()];
 	}
 	
-	//public void addSniper(SniperSnapshot newSnapshot) {
-	///public String addSniper(SniperSnapshot newSnapshot) {
-	////public void addSniperSnapshot(SniperSnapshot sniperSnapshot) {
 	private void addSniperSnapshot(SniperSnapshot sniperSnapshot) {
 	  snapshots.add(sniperSnapshot);
 	  int rowAddedIndex = snapshots.size()-1;
 	  fireTableRowsInserted(rowAddedIndex, rowAddedIndex);
-	  //return null; //<mlr 140213: I added this when teasing out SnipersTableModel from Main>
 	}
 	
 	// Implement the SniperCollector interface
 	@Override
 	public void addSniper(AuctionSniper auctionSniper) {
-	//public String addSniper(AuctionSniper auctionSniper) {
-	  //snapshots.add(newSnapshot);
-    //snapshots.add(auctionSniper.getSnapShot());
-	  //int rowAddedIndex = snapshots.size()-1;
-	  //fireTableRowsInserted(rowAddedIndex, rowAddedIndex);
-		//return null;
 	  notToBeGCd.add(auctionSniper); // <mlr 140217: moved over from SniperLauncher>
     addSniperSnapshot(auctionSniper.getSnapShot());
     auctionSniper.addSniperListener(new SwingThreadSniperListener(this));
