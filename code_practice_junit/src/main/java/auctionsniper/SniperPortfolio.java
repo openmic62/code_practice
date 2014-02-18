@@ -16,7 +16,7 @@ public class SniperPortfolio implements SniperCollector {
 	// Implement the SniperCollector interface
 	@Override
 	public void addSniper(AuctionSniper auctionSniper) {
-	  snipers.add(auctionSniper); // <mlr 140217: moved over from SnipersTableModel>
+	  snipers.add(auctionSniper);
 	  sniperPortfolioListener.sniperAdded(auctionSniper);
 	}
 }
