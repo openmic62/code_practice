@@ -11,19 +11,15 @@ public class AuctionSniper implements AuctionEventListener {
 	private String itemId;
 	private SniperSnapshot snapShot;
 	
-	//public AuctionSniper(String itemId, Auction a, SniperListener sl) {
 	public AuctionSniper(String itemId, Auction a) {
 		this.itemId = itemId;
 		this.auction = a;
-		//this.sniperListener = sl;
 		
 		this.snapShot = SniperSnapshot.joining(itemId); // <mlr 140208: SniperLauncher.java duplicates SniperSnapshot.joining(itemId)>
 	}
 	
-	// <mlr 140213: I added this when teasing out SnipersTableModel from Main>
 	public SniperSnapshot getSnapShot() {return this.snapShot;}
 
-	// <mlr 140217: I added this when teasing out SnipersTableModel from Main>
 	public void addSniperListener(SniperListener sl) {
 		this.sniperListener = sl;
 	}

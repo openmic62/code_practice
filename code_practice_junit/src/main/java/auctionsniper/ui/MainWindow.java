@@ -29,17 +29,12 @@ public class MainWindow extends JFrame {
 	public static final String NEW_ITEM_ID_NAME = "item id text field";
 	public static final String JOIN_BUTTON_NAME = "join button";
 		
-	//private final SnipersTableModel snipers;
-	//private final SnipersTableModel snipersXX = new SnipersTableModel();
 	private final Announcer<UserRequestListener> userRequests =
 	              Announcer.to(UserRequestListener.class);
 	
 	//MainWindow(SnipersTableModel snipers) { // >>>>>>>> I don't like to make this public; have to for testing JMock 2 ... as far as I can see right now
-	//public MainWindow(SnipersTableModel snipers) {
-	///public MainWindow(SniperPortfolio portfolio, SnipersTableModel snipers) {
 	public MainWindow(SniperPortfolio portfolio) {
 		super(MAIN_WINDOW_NAME);
-		//this.snipers = snipers;
 		setName(MAIN_WINDOW_NAME);
 		configGui();
 		fillContentPane(makeSnipersTable(portfolio), makeControls());

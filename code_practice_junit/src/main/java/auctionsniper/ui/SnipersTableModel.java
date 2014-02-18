@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
-//public class SnipersTableModel extends AbstractTableModel implements SniperListener, PortfolioListener, SniperCollector {
 public class SnipersTableModel extends AbstractTableModel implements SniperListener, PortfolioListener {
   public static String[] STATUS_TEXT = {"Joining auction",
                                         "Bidding in auction",
@@ -21,7 +20,6 @@ public class SnipersTableModel extends AbstractTableModel implements SniperListe
                                         
 
   private ArrayList<SniperSnapshot> snapshots = new ArrayList<SniperSnapshot>(); 
-	//private ArrayList<AuctionSniper> notToBeGCd = new ArrayList<AuctionSniper>();
 
 	public static String textFor(SniperState state) {
 		return STATUS_TEXT[state.ordinal()];
@@ -39,16 +37,6 @@ public class SnipersTableModel extends AbstractTableModel implements SniperListe
     addSniperSnapshot(auctionSniper.getSnapShot());
     auctionSniper.addSniperListener(new SwingThreadSniperListener(this));
 	}
-	
-	/*
-	// Implement the SniperCollector interface
-	@Override
-	public void addSniper(AuctionSniper auctionSniper) {
-	  notToBeGCd.add(auctionSniper); // <mlr 140217: moved over from SniperLauncher>
-    addSniperSnapshot(auctionSniper.getSnapShot());
-    auctionSniper.addSniperListener(new SwingThreadSniperListener(this));
-	}
-	*/
 	
 	// Implement the SniperListener interface
 	@Override
