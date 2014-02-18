@@ -145,7 +145,8 @@ public class SnipersTableModelTests {
 		/// <mlr 140217: triple slashed code - changed due to GOOS, p. 198b>
 		///SniperSnapshot joining = SniperSnapshot.joining("item-98765");
 		///model.addSniper(joining);
-		model.addSniper(new AuctionSniper("item-98765", null));
+		////model.addSniper(new AuctionSniper("item-98765", null));
+		model.sniperAdded(new AuctionSniper("item-98765", null));
 		
 		// this should produce a Defect exception
 		model.sniperStateChanged(defective);
@@ -161,7 +162,8 @@ public class SnipersTableModelTests {
 		
 		///SniperSnapshot joining = SniperSnapshot.joining("item id");
 		///model.addSniper(joining);
-		model.addSniper(new AuctionSniper("item id", null));
+		////model.addSniper(new AuctionSniper("item id", null));
+		model.sniperAdded(new AuctionSniper("item id", null));
 		
 		int rowCountAfterAdd = model.getRowCount();
 		int actualRowCountDifference = rowCountAfterAdd - rowCountBeforeAdd;
@@ -177,7 +179,8 @@ public class SnipersTableModelTests {
 		
 		///SniperSnapshot joining = SniperSnapshot.joining("item id INSERT");
 		///model.addSniper(joining);
-		model.addSniper(new AuctionSniper("item id INSERT", null));
+		////model.addSniper(new AuctionSniper("item id INSERT", null));
+		model.sniperAdded(new AuctionSniper("item id INSERT", null));
 		
 		assertColumnEquals(Column.ITEM_IDENTIFIER, "item id INSERT");
 		assertColumnEquals(Column.LAST_PRICE, 0);
@@ -193,7 +196,8 @@ public class SnipersTableModelTests {
 		
 		///SniperSnapshot joining = SniperSnapshot.joining("anudda id");
 		///model.addSniper(joining);
-		model.addSniper(new AuctionSniper("anudda id", null));
+		////model.addSniper(new AuctionSniper("anudda id", null));
+		model.sniperAdded(new AuctionSniper("anudda id", null));
 	}
   private Matcher<TableModelEvent> aRowInsertedEvent(int rowIndex) {
   	int lastRow = rowIndex;
@@ -212,8 +216,10 @@ public class SnipersTableModelTests {
 		///SniperSnapshot joining2 = SniperSnapshot.joining("item-2");
 		///model.addSniper(joining1);
 		///model.addSniper(joining2);
-		model.addSniper(new AuctionSniper("item-1", null));
-		model.addSniper(new AuctionSniper("item-2", null));
+		////model.addSniper(new AuctionSniper("item-1", null));
+		////model.addSniper(new AuctionSniper("item-2", null));
+		model.sniperAdded(new AuctionSniper("item-1", null));
+		model.sniperAdded(new AuctionSniper("item-2", null));
 		
 		assertOrderedRowHasAColumnOneValueOf(0, "item-1");		
 		assertOrderedRowHasAColumnOneValueOf(1, "item-2");		
@@ -239,9 +245,12 @@ public class SnipersTableModelTests {
 		///model.addSniper(joining1);
 		///model.addSniper(joining2);		
 		///model.addSniper(joining3);
-		model.addSniper(new AuctionSniper("item-1a", null));
-		model.addSniper(new AuctionSniper("item-2a", null));
-		model.addSniper(new AuctionSniper("item-3a", null));
+		////model.addSniper(new AuctionSniper("item-1a", null));
+		////model.addSniper(new AuctionSniper("item-2a", null));
+		////model.addSniper(new AuctionSniper("item-3a", null));
+		model.sniperAdded(new AuctionSniper("item-1a", null));
+		model.sniperAdded(new AuctionSniper("item-2a", null));
+		model.sniperAdded(new AuctionSniper("item-3a", null));
 		
 		SniperSnapshot bidding2 = joining2.bidding(345, 678);
 		model.sniperStateChanged(bidding2);
@@ -269,7 +278,8 @@ public class SnipersTableModelTests {
 		SniperSnapshot joining = SniperSnapshot.joining("item id xxx");
 		SniperSnapshot bidding = joining.bidding(555, 666);
 		///model.addSniper(joining);
-		model.addSniper(new AuctionSniper("item id xxx", null));
+		////model.addSniper(new AuctionSniper("item id xxx", null));
+		model.sniperAdded(new AuctionSniper("item id xxx", null));
 		model.sniperStateChanged(bidding);
 		
 		assertColumnEquals(Column.ITEM_IDENTIFIER, "item id xxx");

@@ -2,6 +2,7 @@ package auctionsniper.ui;
 
 import auctionsniper.Announcer;
 import auctionsniper.UserRequestListener;
+import auctionsniper.SniperPortfolio;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -28,17 +29,20 @@ public class MainWindow extends JFrame {
 	public static final String NEW_ITEM_ID_NAME = "item id text field";
 	public static final String JOIN_BUTTON_NAME = "join button";
 		
-	private final SnipersTableModel snipers;
+	//private final SnipersTableModel snipers;
+	//private final SnipersTableModel snipersXX = new SnipersTableModel();
 	private final Announcer<UserRequestListener> userRequests =
 	              Announcer.to(UserRequestListener.class);
 	
 	//MainWindow(SnipersTableModel snipers) { // >>>>>>>> I don't like to make this public; have to for testing JMock 2 ... as far as I can see right now
-	public MainWindow(SnipersTableModel snipers) {
+	//public MainWindow(SnipersTableModel snipers) {
+	///public MainWindow(SniperPortfolio portfolio, SnipersTableModel snipers) {
+	public MainWindow(SniperPortfolio portfolio) {
 		super(MAIN_WINDOW_NAME);
-		this.snipers = snipers;
+		//this.snipers = snipers;
 		setName(MAIN_WINDOW_NAME);
 		configGui();
-		fillContentPane(makeSnipersTable(), makeControls());
+		fillContentPane(makeSnipersTable(portfolio), makeControls());
 		pack();
 		setVisible(true);
 	}	
@@ -56,8 +60,10 @@ public class MainWindow extends JFrame {
  		contentPane.add(new JScrollPane(snipersTable), BorderLayout.CENTER);
  	}
  	
- 	private JTable makeSnipersTable() {
- 		JTable table = new JTable(snipers);
+ 	private JTable makeSnipersTable(SniperPortfolio portfolio) {
+ 		SnipersTableModel model = new SnipersTableModel(); 
+ 		portfolio.addPortfolioListener(model);
+ 		JTable table = new JTable(model);
  		table.setPreferredScrollableViewportSize(new Dimension(450, 150));
  		table.setFillsViewportHeight(true);
  		table.setName(SNIPERS_TABLE_NAME);

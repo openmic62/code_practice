@@ -2,7 +2,7 @@ package auctionsniper;
 
 import auctionsniper.ui.MainWindow;
 import auctionsniper.ui.SnipersTableModel;
-import auctionsniper.ui.SwingThreadSniperListener;
+//import auctionsniper.ui.SwingThreadSniperListener;
 import auctionsniper.xmpp.AuctionHouse;
 import auctionsniper.xmpp.XMPPAuctionHouse;
 
@@ -18,9 +18,10 @@ import org.apache.logging.log4j.Logger;
 public class Main {
 	static Logger logger = LogManager.getLogger(Main.class.getName());	
 	
-	@SuppressWarnings("unused") private ArrayList<Auction> notToBeGCd = new ArrayList<Auction>();
+//	@SuppressWarnings("unused") private ArrayList<Auction> notToBeGCd = new ArrayList<Auction>();
 	
-	private final SnipersTableModel snipers = new SnipersTableModel();
+	//private final SnipersTableModel snipers = new SnipersTableModel();
+	private final SniperPortfolio portfolio = new SniperPortfolio();
 	private MainWindow ui;
 	
 	private static final int ARG_HOSTNAME = 0;
@@ -40,7 +41,9 @@ public class Main {
 		try {
 			SwingUtilities.invokeAndWait(new Runnable() {
 				public void run() {
-					ui = new MainWindow(snipers);
+					//ui = new MainWindow(snipers);
+					///ui = new MainWindow(portfolio, snipers);
+					ui = new MainWindow(portfolio);
 				}
 			});
 		} catch (Exception e) {
@@ -81,7 +84,8 @@ public class Main {
  	/*>>>REMOVE-END<<<*/
 	
 	private void addUserRequestListenerFor(final AuctionHouse auctionHouse) {
-		UserRequestListener sniperLauncher = new SniperLauncher(snipers, auctionHouse);
+		//UserRequestListener sniperLauncher = new SniperLauncher(snipers, auctionHouse);
+		UserRequestListener sniperLauncher = new SniperLauncher(portfolio, auctionHouse);
 	  ui.addUserRequestListener(sniperLauncher);
 	}
 
