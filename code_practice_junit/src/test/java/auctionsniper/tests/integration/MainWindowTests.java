@@ -47,7 +47,7 @@
  set TD=src\test\java
 
  cd student\code_practice_junit
- javac -cp %CLASSPATH%;%SC% -d %SC% %SD%\auctionsniper\MainWindow.java
+ javac -cp %CLASSPATH%;%SC% -d %SC% %SD%\auctionsniper\\ui\MainWindow.java
  javac -cp %CLASSPATH%;%SC%;%TC% -d %TC% %TD%\auctionsniper\tests\integration\MainWindowTests.java
  java  -cp %CLASSPATH%;%SC%;%TC% org.junit.runner.JUnitCore auctionsniper.tests.integration.MainWindowTests
  ant runtest -DtestClass=MainWindowTests
@@ -79,6 +79,7 @@ package auctionsniper.tests.integration;
 import auctionsniper.ui.MainWindow;
 import auctionsniper.ui.SnipersTableModel;
 import auctionsniper.UserRequestListener;
+import auctionsniper.SniperPortfolio;
 
 import auctionsniper.tests.AuctionSniperTestUtilities;
 import auctionsniper.tests.acceptance.AuctionSniperDriver;
@@ -93,8 +94,9 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class MainWindowTests {
 	
+	private final SniperPortfolio   portfolio  = new SniperPortfolio();
 	private final SnipersTableModel tableModel = new SnipersTableModel();
-	private final MainWindow mainWindow = new MainWindow(tableModel);
+	private final MainWindow mainWindow = new MainWindow(portfolio);
 	private final AuctionSniperDriver driver = new AuctionSniperDriver(100);
 	
 	@Test public void 

@@ -2,6 +2,7 @@ package auctionsniper.ui;
 
 import auctionsniper.AuctionSniper;
 import auctionsniper.Defect;
+import auctionsniper.PortfolioListener;
 import auctionsniper.SniperListener;
 import auctionsniper.SniperSnapshot;
 import auctionsniper.SniperState;
@@ -10,7 +11,8 @@ import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
-public class SnipersTableModel extends AbstractTableModel implements SniperListener, SniperCollector {
+//public class SnipersTableModel extends AbstractTableModel implements SniperListener, PortfolioListener, SniperCollector {
+public class SnipersTableModel extends AbstractTableModel implements SniperListener, PortfolioListener {
   public static String[] STATUS_TEXT = {"Joining auction",
                                         "Bidding in auction",
                                         "Winning auction",
@@ -19,7 +21,7 @@ public class SnipersTableModel extends AbstractTableModel implements SniperListe
                                         
 
   private ArrayList<SniperSnapshot> snapshots = new ArrayList<SniperSnapshot>(); 
-	private ArrayList<AuctionSniper> notToBeGCd = new ArrayList<AuctionSniper>();
+	//private ArrayList<AuctionSniper> notToBeGCd = new ArrayList<AuctionSniper>();
 
 	public static String textFor(SniperState state) {
 		return STATUS_TEXT[state.ordinal()];
@@ -31,6 +33,14 @@ public class SnipersTableModel extends AbstractTableModel implements SniperListe
 	  fireTableRowsInserted(rowAddedIndex, rowAddedIndex);
 	}
 	
+	// Implement the PortfolioListener interface
+	@Override
+	public void sniperAdded(AuctionSniper auctionSniper) {
+    addSniperSnapshot(auctionSniper.getSnapShot());
+    auctionSniper.addSniperListener(new SwingThreadSniperListener(this));
+	}
+	
+	/*
 	// Implement the SniperCollector interface
 	@Override
 	public void addSniper(AuctionSniper auctionSniper) {
@@ -38,6 +48,7 @@ public class SnipersTableModel extends AbstractTableModel implements SniperListe
     addSniperSnapshot(auctionSniper.getSnapShot());
     auctionSniper.addSniperListener(new SwingThreadSniperListener(this));
 	}
+	*/
 	
 	// Implement the SniperListener interface
 	@Override
