@@ -23,11 +23,12 @@ import org.apache.logging.log4j.Logger;
 public class MainWindow extends JFrame {
 	static Logger logger = LogManager.getLogger(MainWindow.class.getName());	
 
-	public static final String MAIN_WINDOW_NAME = "Auction Sniper Main";
-	public static final String SNIPERS_TABLE_NAME = "snipers table";
-	public static final String SNIPER_STATUS_NAME = "status";
-	public static final String NEW_ITEM_ID_NAME = "item id text field";
-	public static final String JOIN_BUTTON_NAME = "join button";
+	public static final String MAIN_WINDOW_NAME         = "Auction Sniper Main";
+	public static final String SNIPERS_TABLE_NAME       = "snipers table";
+	public static final String SNIPER_STATUS_NAME       = "status";
+	public static final String NEW_ITEM_ID_NAME         = "item id text field";
+	public static final String NEW_ITEM_STOP_PRICE_NAME = "stop price text field";
+	public static final String JOIN_BUTTON_NAME         = "join button";
 		
 	private final Announcer<UserRequestListener> userRequests =
 	              Announcer.to(UserRequestListener.class);

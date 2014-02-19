@@ -41,8 +41,10 @@ public class AuctionSniperDriver extends JFrameDriver {
 	}
 	
 	// <mlr 140112: begin - add items thru UI>
-	public void startBiddingFor(String itemId) {
+	///public void startBiddingFor(String itemId) {
+	public void startBiddingFor(String itemId, int stopPrice) {
 		itemIdField().replaceAllText(itemId);
+		stopPriceField().replaceAllText(String.valueOf(stopPrice));
 		bidButton().click();
 	}	
 	
@@ -52,6 +54,14 @@ public class AuctionSniperDriver extends JFrameDriver {
 		  new JTextFieldDriver(this, JTextField.class, named(MainWindow.NEW_ITEM_ID_NAME));
 		newItemId.focusWithMouse();
 		return newItemId;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private JTextFieldDriver stopPriceField() {
+		JTextFieldDriver stopPrice = 
+		  new JTextFieldDriver(this, JTextField.class, named(MainWindow.NEW_ITEM_STOP_PRICE_NAME));
+		stopPrice.focusWithMouse();
+		return stopPrice;
 	}
 	
 	@SuppressWarnings("unchecked")
