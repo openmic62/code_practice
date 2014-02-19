@@ -120,6 +120,30 @@ public class AuctionSniperEndToEndTests {
 	private  ApplicationRunner application = new ApplicationRunner();
 	
 	@Test
+	public void sniperLosesAnAuctionWhenThePriceIsTooHigh() throws Exception {
+		// <mlr 140218: begin - added from GOOS, p. 206b>   
+		auction.startSellingItem();                                                
+		application.startBiddingWithStopPrice(auction, 1100);
+		                     
+		auction.reportPrice(1000, 98, "other bidder");
+		application.hasShownSniperIsBidding(auction, 1000, 1098);
+		
+		auction.hasReceivedBid(1098, ApplicationRunner.SNIPER_XMPP_ID);
+		
+		auction.reportPrice(1197, 10, "third party");
+		application.showsSniperIsLosing(auction, 1197, 1098);		
+		
+		auction.reportPrice(1207, 10, "fourth party");
+		application.showsSniperIsLosing(auction, 1207, 1098);		
+		
+		auction.announceClosed();
+		application.showsSniperHasLostAuction(auction, 1207, 1098);
+		sleep(forThisLong);
+		// <mlr 140218: end - added from GOOS, p. 206b>   
+	}
+
+	//@Test
+	@Ignore
 	public void sniperJoinsAuctionUntilAuctionCloses() throws Exception {        
 		auction.startSellingItem();                                                    // step 1
 		application.startBiddingIn(auction);                                           // step 2
@@ -129,7 +153,8 @@ public class AuctionSniperEndToEndTests {
 		sleep(forThisLong);
 	}
 
-	@Test
+	//@Test
+	@Ignore
 	public void sniperMakesHigherBidButLoses() throws Exception {
 		auction.startSellingItem();
 		application.startBiddingIn(auction);       
@@ -155,7 +180,8 @@ public class AuctionSniperEndToEndTests {
 		sleep(forThisLong);
 	}
 
-	@Test
+	//@Test
+	@Ignore
 	public void sniperWinsAnAuctionByBiddingHigher_onItem54321() throws Exception {
 		auction.startSellingItem();
 		application.startBiddingIn(auction);       
@@ -174,7 +200,8 @@ public class AuctionSniperEndToEndTests {
 		sleep(forThisLong);
 	}
 
-	@Test
+	//@Test
+	@Ignore
 	public void sniperWinsAnAuctionByBiddingHigher_onItem65432() throws Exception {
 		auction2.startSellingItem();
 		application.startBiddingIn(auction2);       
@@ -194,7 +221,8 @@ public class AuctionSniperEndToEndTests {
 
 	}
 
-	@Test
+	//@Test
+	@Ignore
 	public void sniperBidsForMultipleItems() throws Exception {
 		auction.startSellingItem();
 		auction2.startSellingItem();

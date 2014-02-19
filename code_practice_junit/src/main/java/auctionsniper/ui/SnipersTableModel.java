@@ -15,6 +15,7 @@ public class SnipersTableModel extends AbstractTableModel implements SniperListe
   public static String[] STATUS_TEXT = {"Joining auction",
                                         "Bidding in auction",
                                         "Winning auction",
+                                        "Losing auction",
                                         "Lost auction",
                                         "Won auction!!! Bitches!"};
                                         
