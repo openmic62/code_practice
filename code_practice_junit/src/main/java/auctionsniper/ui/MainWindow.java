@@ -11,7 +11,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -23,12 +25,16 @@ import org.apache.logging.log4j.Logger;
 public class MainWindow extends JFrame {
 	static Logger logger = LogManager.getLogger(MainWindow.class.getName());	
 
-	public static final String MAIN_WINDOW_NAME         = "Auction Sniper Main";
-	public static final String SNIPERS_TABLE_NAME       = "snipers table";
-	public static final String SNIPER_STATUS_NAME       = "status";
-	public static final String NEW_ITEM_ID_NAME         = "item id text field";
-	public static final String NEW_ITEM_STOP_PRICE_NAME = "stop price text field";
-	public static final String JOIN_BUTTON_NAME         = "join button";
+	public static final String MAIN_WINDOW_NAME               = "Auction Sniper Main";
+	public static final String SNIPERS_TABLE_NAME             = "snipers table";
+	public static final String SNIPER_STATUS_NAME             = "status";
+	public static final String NEW_ITEM_ID_NAME               = "item id text field";
+	public static final String NEW_ITEM_ID_LABEL_NAME         = "item id label";
+	public static final String NEW_ITEM_ID_LABEL_TEXT         = "Item ID: ";
+	public static final String NEW_ITEM_STOP_PRICE_NAME       = "stop price text field";
+	public static final String NEW_ITEM_STOP_PRICE_LABEL_NAME = "stop price label";
+	public static final String NEW_ITEM_STOP_PRICE_LABEL_TEXT = "Stop Price: ";
+	public static final String JOIN_BUTTON_NAME               = "join button";
 		
 	private final Announcer<UserRequestListener> userRequests =
 	              Announcer.to(UserRequestListener.class);
@@ -69,10 +75,25 @@ public class MainWindow extends JFrame {
  	private JPanel makeControls() {
  		JPanel controls = new JPanel(new FlowLayout());
  		
+ 		final JLabel itemIdLabel = new JLabel();
+ 		itemIdLabel.setName(NEW_ITEM_ID_LABEL_NAME);
+ 		itemIdLabel.setText(NEW_ITEM_ID_LABEL_TEXT);
+ 		controls.add(itemIdLabel);
+ 		
  		final JTextField itemIdField = new JTextField();
  		itemIdField.setColumns(25);
  		itemIdField.setName(NEW_ITEM_ID_NAME);
  		controls.add(itemIdField);
+ 		
+ 		final JLabel stopPriceLabel = new JLabel();
+ 		stopPriceLabel.setName(NEW_ITEM_STOP_PRICE_LABEL_NAME);
+ 		stopPriceLabel.setText(NEW_ITEM_STOP_PRICE_LABEL_TEXT);
+ 		controls.add(stopPriceLabel);
+ 		
+ 		final JFormattedTextField stopPriceField = new JFormattedTextField();
+ 		stopPriceField.setColumns(10);
+ 		stopPriceField.setName(NEW_ITEM_STOP_PRICE_NAME);
+ 		controls.add(stopPriceField);
  		
  		// <mlr 140117: begin - some log info to help gain understanding of the reflection stuff used in Announcer.java>
  		logger.info(getClassNameInfo(UserRequestListener.class));
