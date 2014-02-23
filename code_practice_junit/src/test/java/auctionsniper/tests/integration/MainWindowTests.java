@@ -112,7 +112,8 @@ public class MainWindowTests {
 		  }
 		);
 		
-		driver.startBiddingFor("an item-id");
+		//driver.startBiddingFor("an item-id");
+		driver.startBiddingFor("an item-id", 6969);
 		driver.check(buttonProbe);
 	}
 }
