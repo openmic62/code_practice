@@ -77,6 +77,7 @@ package auctionsniper.tests.unit;
 
 import auctionsniper.Auction;
 import auctionsniper.AuctionSniper;
+import auctionsniper.Item;
 import auctionsniper.xmpp.AuctionHouse;
 import auctionsniper.ui.SniperCollector;
 import auctionsniper.SniperLauncher;
@@ -124,7 +125,8 @@ public class SniperLauncherTests {
 			oneOf(auction).join(); then(auctionState.is("joined"));
 		}});
 		
-		launcher.joinAuction(itemId);
+		//launcher.joinAuction(itemId);
+		launcher.joinAuction(new Item(itemId, 6969));
 	}	
   private Matcher<AuctionSniper> sniperForItem(String itemId) {
   	return samePropertyValuesAs(new AuctionSniper(itemId, null));
