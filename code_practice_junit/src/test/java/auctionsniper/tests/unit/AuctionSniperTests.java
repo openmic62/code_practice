@@ -218,4 +218,27 @@ public class AuctionSniperTests {
 		sniper.currentPrice(135, 45, PriceSource.FromSniper);
 	}
 	
+	// <mlr 140223: begin - add tests for Item class changes>
+	@Test
+	public void
+	doesNotBidAndReortsLosingIfSubsequentPriceIsAboveStopPrice() {
+		final int bid = 123 + 45;
+		allowingSniperBidding();
+		context.checking(new Expectations() {{
+			atLeast(1).of(sniperListener).sniperStateChanged(
+			  new SniperSnapshot(AuctionSniperTestUtilities.ITEM_ID1, 2345, bid, SniperState.LOSING));
+			                                  }}
+		);
+		sniper.currentPrice(123, 45, PriceSource.FromOtherBidder);
+		sniper.currentPrice(2345, 25, PriceSource.FromOtherBidder);
+	}
+	private void allowingSniperBidding() {
+		context.checking(new Expectations() {{
+			allowing(sniperListener).sniperStateChanged(with(aSniperThatIs(SniperState.BIDDING)));
+			                                            then(sniperState.is("bidding"));
+			                                  }}
+	  );
+	}
+	// <mlr 140223: end - add tests for Item class changes>
+	
 }
