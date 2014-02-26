@@ -219,9 +219,10 @@ public class AuctionSniperTests {
 	}
 	
 	// <mlr 140223: begin - add tests for Item class changes>
+	// GOOS, p. 206a: 1 - BIDDING to LOSING transition (given by book on p. 210b)
 	@Test
 	public void
-	doesNotBidAndReortsLosingIfSubsequentPriceIsAboveStopPrice() {
+	doesNotBidAndReportsLosingIfSubsequentPriceIsAboveStopPrice() {
 		final int bid = 123 + 45;
 		allowingSniperBidding();
 		context.checking(new Expectations() {{
@@ -239,6 +240,44 @@ public class AuctionSniperTests {
 			                                  }}
 	  );
 	}
+	
+	// GOOS, p. 206a: 2 - JOINING to LOSING transition (method name given by book, my implementation)
+	@Test
+	public void
+	doesNotBidAndReportsLosingIfFirstPriceIsAboveStopPrice() {
+		final int bid = 123 + 45;
+		sniperNeverBidding();
+		context.checking(new Expectations() {{
+			atLeast(1).of(sniperListener).sniperStateChanged(
+			  new SniperSnapshot(AuctionSniperTestUtilities.ITEM_ID1, 2345, bid, SniperState.LOSING));
+			                                  }}
+		);
+		sniper.currentPrice(2345, 25, PriceSource.FromOtherBidder);
+	}
+	private void sniperNeverBidding() {
+		context.checking(new Expectations() {{
+			never(sniperListener).sniperStateChanged(with(aSniperThatIs(SniperState.BIDDING)));
+			                                         then(sniperState.is("joining"));
+			                                  }}
+	  );
+	}
+	
+	// GOOS, p. 206a: 3 - WINNING to LOSING transition (method name given by book, my implementation)
+	@Test
+	public void
+	doesNotBidAndReportsLosingIfPriceAfterWinningIsAboveStopPrice() {
+	}
+	
+	@Test
+	public void
+	reportsLostIfAuctionClosesWhenLosing() {
+	}
+	
+	@Test
+	public void
+	continuesToBeLosingOnceStopPriceHasBeenReached() {
+	}
+
 	// <mlr 140223: end - add tests for Item class changes>
 	
 }
