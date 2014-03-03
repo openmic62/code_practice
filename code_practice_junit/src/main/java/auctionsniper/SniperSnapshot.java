@@ -44,6 +44,14 @@ public class SniperSnapshot {
 		return new SniperSnapshot(this.itemId, newLastPrice, newLastPrice, SniperState.WINNING);
 	}
 	
+	// <mlr 140301: begin - added for GOOS, p. 211b)
+	///public SniperSnapshot losing(int newLastPrice, int stopPrice) {
+		///return new SniperSnapshot(this.itemId, newLastPrice, stopPrice, SniperState.LOSING);
+	public SniperSnapshot losing(int newLastPrice) {
+		return new SniperSnapshot(this.itemId, newLastPrice, this.lastBid, SniperState.LOSING);
+	}
+	// <mlr 140301: end - added for GOOS, p. 211b)
+	
 	public SniperSnapshot closed() {
 		return state.name().contains("WINNING") ? won() : lost();
 	}
