@@ -98,6 +98,7 @@ import auctionsniper.AuctionEventListener.PriceSource;
 
 import auctionsniper.Auction;
 import auctionsniper.AuctionSniper;
+import auctionsniper.Item;
 import auctionsniper.SniperListener;
 import auctionsniper.SniperSnapshot;
 import auctionsniper.SniperState;
@@ -129,7 +130,10 @@ public class AuctionSniperTests {
 	private final Auction auction = context.mock(Auction.class);
 	private final States sniperState = context.states("sniper");
 	
-	private final AuctionSniper sniper = new AuctionSniper(AuctionSniperTestUtilities.ITEM_ID1, auction);
+	///private final Item item_1 = new Item(AuctionSniperTestUtilities.ITEM_ID1, Integer.MAX_VALUE);
+	private final Item item_1 = new Item(AuctionSniperTestUtilities.ITEM_ID1, 1000);
+	//private final AuctionSniper sniper = new AuctionSniper(AuctionSniperTestUtilities.ITEM_ID1, auction);
+	private final AuctionSniper sniper = new AuctionSniper(item_1, auction);
 	
 	// setup test fixture
 	@Before
@@ -223,11 +227,14 @@ public class AuctionSniperTests {
 	@Test
 	public void
 	doesNotBidAndReportsLosingIfSubsequentPriceIsAboveStopPrice() {
-		final int bid = 123 + 45;
+		//final int bid = 123 + 45;
 		allowingSniperBidding();
 		context.checking(new Expectations() {{
+			int bid = 123 + 45;
+			allowing(auction).bid(bid);
 			atLeast(1).of(sniperListener).sniperStateChanged(
 			  new SniperSnapshot(AuctionSniperTestUtilities.ITEM_ID1, 2345, bid, SniperState.LOSING));
+			                              when(sniperState.is("bidding"));
 			                                  }}
 		);
 		sniper.currentPrice(123, 45, PriceSource.FromOtherBidder);
