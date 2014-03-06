@@ -120,6 +120,7 @@ public class AuctionSniperEndToEndTests {
 	private  ApplicationRunner application = new ApplicationRunner();
 	
 	@Test
+	//@Ignore
 	public void sniperLosesAnAuctionWhenThePriceIsTooHigh() throws Exception {
 		// <mlr 140218: begin - added from GOOS, p. 206b>   
 		auction.startSellingItem();                                                
