@@ -10,9 +10,13 @@
 			-->
 			<PatternLayout pattern="%r [%t] %-5p %c{2} %x - %m%n"/>
 		</Console>
+	  <File name="AuctionSniperLog" fileName="logs/auctionsniper.log">
+			<PatternLayout pattern="%r [%t] %-5p %c{2} %x - %m%n"/>
+		</File>
 	</Appenders>
 	<Loggers>
 		<Root level="info">
+			<AppenderRef ref="AuctionSniperLog"/>
 			<AppenderRef ref="Console"/>
 		</Root>
 	</Loggers>
