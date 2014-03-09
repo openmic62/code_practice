@@ -11,11 +11,12 @@
 			<PatternLayout pattern="%r [%t] %-5p %c{2} %x - %m%n"/>
 		</Console>
 	  <File name="AuctionSniperLog" fileName="logs/auctionsniper.log">
+			<MarkerFilter marker="ANNOUNCER" onMatch="DENY" onMismatch="NEUTRAL"/>
 			<PatternLayout pattern="%r [%t] %-5p %c{2} %x - %m%n"/>
 		</File>
 	</Appenders>
 	<Loggers>
-		<Root level="info">
+		<Root level="warn">
 			<AppenderRef ref="AuctionSniperLog"/>
 			<AppenderRef ref="Console"/>
 		</Root>
