@@ -47,7 +47,7 @@ public class Main {
 
 	public static void main(String[] args) throws Exception {
 		//     Main - args[]-->[localhost, sniper, sniper, item-54321, item-65432]<--
-		logger.debug("args[]-->" + Arrays.toString(args) + "<--");
+		logger.info("in call as: main({})", Arrays.toString(args));
 		
 		Main main = new Main();
 		

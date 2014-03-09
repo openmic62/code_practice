@@ -51,7 +51,7 @@ public class FakeAuctionServer {
 		connection.connect();
 		connection.login(String.format(ITEM_ID_AS_LOGIN, itemID),
 		                 AUCTION_PASSWORD, AUCTION_RESOURCE);
-		logger.debug("startSellingItem: connection.getUser() -->" + connection.getUser() + "<--");
+		logger.info("in call: startSellingItem(), XMPP connected as -->{}<--", connection.getUser());
 		connection.getChatManager().addChatListener(
 			new ChatManagerListener() {
 				@Override
@@ -116,8 +116,8 @@ public class FakeAuctionServer {
     	throws InterruptedException 
     {
     	final Message message = messages.poll(5, TimeUnit.SECONDS);
-    	logger.debug(connection.getUser() + " received -->" + message.getBody() + "<--; \n\t\t\tfrom -->" 
-    	                                   + currentChat.getParticipant() + "<--");
+    	logger.info("in call: receivesAMessage(...)\n\t\t{}\n\t\tmsg from -->{}<--\n\t\tmsg rx'd -->{}<--",
+    	            connection.getUser(), currentChat.getParticipant(), message.getBody());
     	assertThat("Message", message, is(notNullValue()));
     	//assertThat("Message", message, is(nullValue()));
     	assertThat(message, hasProperty("body", messageMatcher));

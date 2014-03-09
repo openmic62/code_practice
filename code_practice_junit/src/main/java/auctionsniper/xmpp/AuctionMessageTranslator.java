@@ -28,7 +28,9 @@ public class AuctionMessageTranslator implements MessageListener {
 	
 	@Override
 	public void processMessage(Chat chat, Message message) {
-		logger.debug("message received -->" + message.getBody() + "<--");
+		logger.info("in call: processMessage(...)\n\t\tmsg from -->{}<--\n\t\tmsg rx'd -->{}<--", 
+		            chat.getParticipant(),
+		            message.getBody());
 		
 		AuctionEvent auctionEvent = AuctionEvent.find(message.getBody());
 		

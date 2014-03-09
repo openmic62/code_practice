@@ -41,7 +41,7 @@ public class ApplicationRunner {
 	}
 	
 	private void startSniper() {
-		Thread thread = new Thread("Test Application") {
+		Thread thread = new Thread("Test App") {
 			@Override public void run() {
 				try {
 					Main.main( arguments() );

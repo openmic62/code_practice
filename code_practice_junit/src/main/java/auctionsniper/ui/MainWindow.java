@@ -97,8 +97,8 @@ public class MainWindow extends JFrame {
  		controls.add(stopPriceField);
  		
  		// <mlr 140117: begin - some log info to help gain understanding of the reflection stuff used in Announcer.java>
- 		logger.info(getClassNameInfo(UserRequestListener.class));
- 		logger.info(getClassNameInfo(userRequests));
+ 		logger.debug(getClassNameInfo(UserRequestListener.class));
+ 		logger.debug(getClassNameInfo(userRequests));
  		// <mlr 140117: end - some log info to help gain understanding of the reflection stuff used in Announcer.java>
  		
  		final JButton joinAuctionButton = new JButton("Join Auction");

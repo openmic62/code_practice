@@ -62,7 +62,7 @@ public class XMPPAuction implements Auction
 	@Override
 	public void join() {
 		try {
-			logger.debug("chat.getParticipant() -->" + chat.getParticipant() + "<--");
+			logger.info("in call: join(), sniper join msg to -->{}<--", chat.getParticipant());
 
 			chat.sendMessage(JOIN_COMMAND_FORMAT);
 		} catch (XMPPException e) {

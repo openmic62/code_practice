@@ -77,8 +77,7 @@ public class AuctionSniperDriver extends JFrameDriver {
 	
 	@SuppressWarnings("unchecked")
 	public void showSniperStatus(String itemId, int lastPrice, int lastBid, String statusText) {
-		logger.info("args(...)-->" + itemId + ", " + lastPrice + ", " + lastBid + ", " 
-		                            + statusText + "<--");
+		logger.info("in call as: showSniperStatus({}, {}, {}, {})", itemId, lastPrice, lastBid, statusText);
 		
 		JTableDriver tableDriver = new JTableDriver(this);
 		tableDriver.hasRow(IterableComponentsMatcher.matching(
