@@ -40,8 +40,6 @@ public class AuctionSniperDriver extends JFrameDriver {
 		      new AWTEventQueueProber(timeoutMillis, 100));
 	}
 	
-	// <mlr 140112: begin - add items thru UI>
-	///public void startBiddingFor(String itemId) {
 	public void startBiddingFor(String itemId, int stopPrice) {
 		itemIdField().replaceAllText(itemId);
 		stopPriceField().replaceAllText(String.valueOf(stopPrice));
@@ -68,7 +66,6 @@ public class AuctionSniperDriver extends JFrameDriver {
 	private JButtonDriver bidButton() {
 		return new JButtonDriver(this, JButton.class, named(MainWindow.JOIN_BUTTON_NAME));
 	}
-	// <mlr 140112: end - add items thru UI>
 	
 	@SuppressWarnings("unchecked")
 	public void showSniperStatus(String statusText) {

@@ -16,7 +16,6 @@ public class Item {
 	public String  getItemId()       { return itemId; }
 	public int     getStopPrice()    { return stopPrice; }
 	public boolean allowsBid(int bid){ return bid <= stopPrice;  }
-	//public boolean allowsBid(int bid){ System.out.println("bidding bitches: " + bid + ", " + stopPrice + ", " + (bid <= stopPrice));return bid <= stopPrice;  }
 
 	@Override
   public boolean equals(Object obj) {

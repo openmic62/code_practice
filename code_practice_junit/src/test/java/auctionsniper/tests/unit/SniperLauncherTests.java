@@ -119,23 +119,17 @@ public class SniperLauncherTests {
 		context.checking(new Expectations() {{
 			allowing(auctionHouse).auctionFor(itemId); will(returnValue(auction));
 			
-			//oneOf(auction).addAuctionEventListener(with(sniperForItem(itemId)));
 			oneOf(auction).addAuctionEventListener(with(sniperForItem(testItem)));
 			                                       when(auctionState.is("not joined"));
-			//oneOf(collector).addSniper(with(sniperForItem(itemId)));
 			oneOf(collector).addSniper(with(sniperForItem(testItem)));
 			                           when(auctionState.is("not joined"));
 			                           
 			oneOf(auction).join(); then(auctionState.is("joined"));
 		}});
 		
-		//launcher.joinAuction(itemId);
-		///launcher.joinAuction(new Item(itemId, stopPrice));
 		launcher.joinAuction(testItem);
 	}	
-  //private Matcher<AuctionSniper> sniperForItem(String itemId) {
   private Matcher<AuctionSniper> sniperForItem(Item testItem) {
-  	//return samePropertyValuesAs(new AuctionSniper(itemId, null));
   	return samePropertyValuesAs(new AuctionSniper(testItem, null));
   }
 
