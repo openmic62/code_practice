@@ -22,9 +22,12 @@ import javax.swing.JTextField;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.Marker;
+import org.apache.logging.log4j.MarkerManager;
 
 public class MainWindow extends JFrame {
-	static Logger logger = LogManager.getLogger(MainWindow.class.getName());	
+	static Logger logger = LogManager.getLogger(MainWindow.class.getName());
+	private static final Marker ANNOUNCER_MARKER = MarkerManager.getMarker("ANNOUNCER");
 
 	public static final String MAIN_WINDOW_NAME               = "Auction Sniper Main";
 	public static final String SNIPERS_TABLE_NAME             = "snipers table";
@@ -97,8 +100,8 @@ public class MainWindow extends JFrame {
  		controls.add(stopPriceField);
  		
  		// <mlr 140117: begin - some log info to help gain understanding of the reflection stuff used in Announcer.java>
- 		logger.debug(getClassNameInfo(UserRequestListener.class));
- 		logger.debug(getClassNameInfo(userRequests));
+ 		logger.info(ANNOUNCER_MARKER, getClassNameInfo(UserRequestListener.class));
+ 		logger.info(ANNOUNCER_MARKER, getClassNameInfo(userRequests));
  		// <mlr 140117: end - some log info to help gain understanding of the reflection stuff used in Announcer.java>
  		
  		final JButton joinAuctionButton = new JButton("Join Auction");
