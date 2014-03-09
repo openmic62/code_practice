@@ -47,7 +47,7 @@
  set TD=src\test\java
  g:
  cd student\code_practice_junit
- javac -cp %CLASSPATH%;%SC% -d %SC% %SD%\auctionsniper\AuctionMessageTranslator.java
+ javac -cp %CLASSPATH%;%SC% -d %SC% %SD%\auctionsniper\xmpp\AuctionMessageTranslator.java
  javac -cp %CLASSPATH%;%SC%;%TC% -d %TC% %TD%\auctionsniper\tests\\unit\AuctionMessageTranslatorTests.java
  java  -cp %CLASSPATH%;%SC%;%TC% org.junit.runner.JUnitCore auctionsniper.tests.unit.AuctionMessageTranslatorTests
  ant runtest -DtestClass=AuctionMessageTranslatorTests

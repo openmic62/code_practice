@@ -10,6 +10,8 @@ import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.Marker;
+import org.apache.logging.log4j.MarkerManager;
 
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.MessageListener;
@@ -17,6 +19,7 @@ import org.jivesoftware.smack.packet.Message;
 
 public class AuctionMessageTranslator implements MessageListener {
 	static Logger logger = LogManager.getLogger(AuctionMessageTranslator.class.getName());	
+	private static final Marker UNIT_TEST_MARKER = MarkerManager.getMarker("UNIT_TEST");
 	
 	private AuctionEventListener auctionEventListener;
 	private String sniperXmppID;
@@ -29,7 +32,7 @@ public class AuctionMessageTranslator implements MessageListener {
 	@Override
 	public void processMessage(Chat chat, Message message) {
 		logger.info("in call: processMessage(...)\n\t\tmsg from -->{}<--\n\t\tmsg rx'd -->{}<--", 
-		            chat.getParticipant(),
+		            chat != null ? chat.getParticipant(): "unit_test",
 		            message.getBody());
 		
 		AuctionEvent auctionEvent = AuctionEvent.find(message.getBody());

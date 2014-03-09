@@ -119,14 +119,15 @@ public class AuctionSniperEndToEndTests {
 	private  FakeAuctionServer auction2    = new FakeAuctionServer(AuctionSniperTestUtilities.ITEM_ID2);
 	private  ApplicationRunner application = new ApplicationRunner();
 	
-	//@Test
-	@Ignore
+	@Test
+	//@Ignore
 	public void sniperLosesAnAuctionWhenThePriceIsTooHigh() throws Exception {
 		logger.trace("logger name is -->{}<--", AuctionSniperEndToEndTests.class.getName());
 		
 		// <mlr 140218: begin - added from GOOS, p. 206b>   
 		auction.startSellingItem();                                                
 		application.startBiddingWithStopPrice(auction, 1100);
+		auction.hasReceivedJoinRequestFromSniper(ApplicationRunner.SNIPER_XMPP_ID);
 		                     
 		auction.reportPrice(1000, 98, "other bidder");
 		application.hasShownSniperIsBidding(auction, 1000, 1098);
@@ -145,8 +146,8 @@ public class AuctionSniperEndToEndTests {
 		// <mlr 140218: end - added from GOOS, p. 206b>   
 	}
 
-	//@Test
-	@Ignore
+	@Test
+	//@Ignore
 	public void sniperJoinsAuctionUntilAuctionCloses() throws Exception {        
 		auction.startSellingItem();                                                    // step 1
 		application.startBiddingIn(auction);                                           // step 2
@@ -156,8 +157,8 @@ public class AuctionSniperEndToEndTests {
 		sleep(forThisLong);
 	}
 
-	//@Test
-	@Ignore
+	@Test
+	//@Ignore
 	public void sniperMakesHigherBidButLoses() throws Exception {
 		auction.startSellingItem();
 		application.startBiddingIn(auction);       
@@ -203,8 +204,8 @@ public class AuctionSniperEndToEndTests {
 		sleep(forThisLong);
 	}
 
-	//@Test
-	@Ignore
+	@Test
+	//@Ignore
 	public void sniperWinsAnAuctionByBiddingHigher_onItem65432() throws Exception {
 		auction2.startSellingItem();
 		application.startBiddingIn(auction2);       
@@ -224,8 +225,8 @@ public class AuctionSniperEndToEndTests {
 
 	}
 
-	//@Test
-	@Ignore
+	@Test
+	//@Ignore
 	public void sniperBidsForMultipleItems() throws Exception {
 		auction.startSellingItem();
 		auction2.startSellingItem();
