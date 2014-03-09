@@ -69,7 +69,7 @@
  H:\student\code_practice_junit>javac -cp %CLASSPATH%;%SC% -d %SC% %SD%\auctionsniper\%FAS_FILES%
                                 javac -cp %CLASSPATH%;%SC% -d %SC% %SD%\auctionsniper\Main.java
                                 
-                                logger.debug("message received -->" + message.getBody() + "<--");
+                                logger.info("message received -->{}<--", message.getBody());
                                                                
  ***** build the Tests AuctionSniperEndToEndTests
  H:\student\code_practice_junit>javac -cp %CLASSPATH%;%SC%;%TC% -d %TC% %TD%\auctionsniper\tests\acceptance\AuctionSniperEndToEndTests.java
@@ -119,9 +119,11 @@ public class AuctionSniperEndToEndTests {
 	private  FakeAuctionServer auction2    = new FakeAuctionServer(AuctionSniperTestUtilities.ITEM_ID2);
 	private  ApplicationRunner application = new ApplicationRunner();
 	
-	@Test
-	//@Ignore
+	//@Test
+	@Ignore
 	public void sniperLosesAnAuctionWhenThePriceIsTooHigh() throws Exception {
+		logger.trace("logger name is -->{}<--", AuctionSniperEndToEndTests.class.getName());
+		
 		// <mlr 140218: begin - added from GOOS, p. 206b>   
 		auction.startSellingItem();                                                
 		application.startBiddingWithStopPrice(auction, 1100);
@@ -181,8 +183,8 @@ public class AuctionSniperEndToEndTests {
 		sleep(forThisLong);
 	}
 
-	//@Test
-	@Ignore
+	@Test
+	//@Ignore
 	public void sniperWinsAnAuctionByBiddingHigher_onItem54321() throws Exception {
 		auction.startSellingItem();
 		application.startBiddingIn(auction);       
@@ -257,20 +259,20 @@ public class AuctionSniperEndToEndTests {
 	// setup test fixture
 	@Before
 	public void setUpFixture() {
-		logger.info("Setup fixture...");
+		logger.debug("Setup fixture...");
 	}
 
 	// clean up
 	@After
 	public void stopAuction() {
-		logger.info("Stop auction ...");
+		logger.debug("Stop auction ...");
 		auction.stop();
 		auction2.stop();
 	}
 	
 	@After
 	public void stopApplication() {
-		logger.info("Stop Sniper ...");
+		logger.debug("Stop Sniper ...");
 		application.stop();
 	}
 	
