@@ -8,17 +8,12 @@ public class AuctionSniper implements AuctionEventListener {
 		
 	private Auction auction;
 	private SniperListener sniperListener;
-	//private String itemId;
 	private Item item;
 	private SniperSnapshot snapShot;
 	
-	//public AuctionSniper(String itemId, Auction a) {
 	public AuctionSniper(Item item, Auction a) {
-		//this.itemId = itemId;
-		this.item = item;
-    this.auction = a;
-		
-		//this.snapShot = SniperSnapshot.joining(itemId); // <mlr 140208: SniperLauncher.java duplicates SniperSnapshot.joining(itemId)>
+		this.item     = item;
+    this.auction  = a;
 		this.snapShot = SniperSnapshot.joining(item.getItemId());
 	}
 	
@@ -43,13 +38,10 @@ public class AuctionSniper implements AuctionEventListener {
 				break;
 			case FromOtherBidder:
 			  int bid = price + increment;
-			  ///int stopPrice = item.getStopPrice();
-			  ///if ( bid <= stopPrice ) {
 			  if ( item.allowsBid(bid) ) {
 			    auction.bid(bid);
 			  	snapShot = snapShot.bidding(price, bid); 
 			  } else {
-			  	///snapShot = snapShot.losing(price, stopPrice);
 			  	snapShot = snapShot.losing(price);
 			  }
 				break;

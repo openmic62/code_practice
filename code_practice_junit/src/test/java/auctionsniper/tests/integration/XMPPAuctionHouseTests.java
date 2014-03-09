@@ -107,7 +107,6 @@ public class XMPPAuctionHouseTests {
 	private final String AUCTION_RESOURCE = XMPPAuction.AUCTION_RESOURCE;
 
 	private final FakeAuctionServer auctionServer  = new FakeAuctionServer(AuctionSniperTestUtilities.ITEM_ID1);
-  //private final XMPPConnection connection     =               connection(HOSTNAME, USERNAME, PASSWORD);
   
 	@Test public void 
 	receivesEventsFromAuctionServerAfterJoining() throws Exception{
@@ -141,26 +140,8 @@ public class XMPPAuctionHouseTests {
 		return new AuctionEventListener() {
 			public void auctionClosed() { auctionWasClosed.countDown(); }
 			public void currentPrice(int price, int increment, PriceSource priceSource) {
-				// not implemented
+				// not implemented because not needed for testing
 			}
 		};
 	}
-	
-	/*
-	private XMPPConnection 
-	connection(String hostname, String username, String password)
-	{
-		XMPPConnection connection = null;
-		try {
-		  connection = new XMPPConnection(hostname);
-		  connection.connect();
-		  connection.login(username, password, AUCTION_RESOURCE);
-		}
-		catch (XMPPException ue) {
-			ue.printStackTrace();
-		}
-		
-		return connection;
-	}
-	*/
 }

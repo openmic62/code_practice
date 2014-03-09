@@ -14,7 +14,6 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-//public class AnnouncerTests extends MockObjectTestCase {
 public class AnnouncerTests {
 	@Rule public final JUnitRuleMockery context = new JUnitRuleMockery();
 
