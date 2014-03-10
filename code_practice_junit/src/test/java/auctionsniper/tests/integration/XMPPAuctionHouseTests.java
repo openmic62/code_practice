@@ -142,6 +142,9 @@ public class XMPPAuctionHouseTests {
 			public void currentPrice(int price, int increment, PriceSource priceSource) {
 				// not implemented because not needed for testing
 			}
+	    // <mlr 140310: begin - add failure detection code>
+	    public void auctionFailed() {}
+	    // <mlr 140310: end - add failure detection code>
 		};
 	}
 }
