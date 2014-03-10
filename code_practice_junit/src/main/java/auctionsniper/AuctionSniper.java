@@ -30,6 +30,12 @@ public class AuctionSniper implements AuctionEventListener {
 		notifyChange();
 	}
 	
+	// <mlr 140310: begin - add failure detection code>
+	@Override
+	public void auctionFailed(){
+	}
+	// <mlr 140310: end - add failure detection code>
+	
 	@Override
 	public void currentPrice(int price, int increment, PriceSource priceSource){		
 		switch (priceSource) {

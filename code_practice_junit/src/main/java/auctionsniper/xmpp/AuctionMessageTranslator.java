@@ -94,7 +94,16 @@ public class AuctionMessageTranslator implements MessageListener {
 		
 		private String bidder() { return get("Bidder"); }
 		private int getInt(String fieldName) { return Integer.parseInt(get(fieldName)); }
-		private String get(String fieldName) { return auctionEventFields.get(fieldName); }
+	  // <mlr 140310: begin - add failure detection code>
+		///private String get(String fieldName) { return auctionEventFields.get(fieldName); }
+		private String get(String fieldName) {
+			String value = auctionEventFields.get(fieldName);
+			if ( null == value ) {
+				throw new MissingValueException(fieldName);
+			}
+			return value;
+		}
+	  // <mlr 140310: end - add failure detection code>
 		
 		static AuctionEvent find(String messageBody) {
 			AuctionEvent auctionEvent = new AuctionEvent();
