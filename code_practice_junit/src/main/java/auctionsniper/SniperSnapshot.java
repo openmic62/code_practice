@@ -48,6 +48,12 @@ public class SniperSnapshot {
 		return new SniperSnapshot(this.itemId, newLastPrice, this.lastBid, SniperState.LOSING);
 	}
 	
+	// <mlr 140310: begin - add failure detection code>
+	public SniperSnapshot failed() {
+		return new SniperSnapshot(this.itemId, 0, 0, SniperState.FAILED);
+	}
+	// <mlr 140310: end - add failure detection code>
+
 	public SniperSnapshot closed() {
 		return state.name().contains("WINNING") ? won() : lost();
 	}

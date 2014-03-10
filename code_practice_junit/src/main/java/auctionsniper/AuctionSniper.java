@@ -33,6 +33,8 @@ public class AuctionSniper implements AuctionEventListener {
 	// <mlr 140310: begin - add failure detection code>
 	@Override
 	public void auctionFailed(){
+		snapShot = snapShot.failed();
+		notifyChange();
 	}
 	// <mlr 140310: end - add failure detection code>
 	

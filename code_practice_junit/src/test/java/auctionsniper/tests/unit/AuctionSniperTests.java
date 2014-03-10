@@ -140,7 +140,73 @@ public class AuctionSniperTests {
 		sniper.addSniperListener(sniperListener);
 	}
 
-@Ignore public void 
+	// <mlr 140310: begin - add failure detection code>
+  @Test
+  //@Ignore
+  public void 
+	reportFailedIfAuctionFailsWhenJoining() {
+		context.checking(new Expectations() {{
+			allowing(auction).join();
+			  then(sniperState.is("joining"));
+			  
+			atLeast(1).of(sniperListener).sniperStateChanged(with(aSniperThatIs(SniperState.FAILED)));
+			  when(sniperState.is("joining"));
+		}});
+		
+		auction.join();
+		sniper.auctionFailed();
+	}
+	
+  @Test
+  public void 
+	reportFailedIfAuctionFailsWhenBidding() {
+		context.checking(new Expectations() {{
+			ignoring(auction);
+			allowing(sniperListener).sniperStateChanged(with(aSniperThatIs(SniperState.BIDDING)));
+			  then(sniperState.is("bidding"));
+			  
+			atLeast(1).of(sniperListener).sniperStateChanged(with(aSniperThatIs(SniperState.FAILED)));
+			  when(sniperState.is("bidding"));
+		}});
+		
+		sniper.currentPrice(123, 45, PriceSource.FromOtherBidder);
+		sniper.auctionFailed();
+	}
+	
+  @Test
+  public void 
+	reportFailedIfAuctionFailsWhenWinning() {
+		context.checking(new Expectations() {{
+			ignoring(auction);
+			allowing(sniperListener).sniperStateChanged(with(aSniperThatIs(SniperState.WINNING)));
+			  then(sniperState.is("winning"));
+			  
+			atLeast(1).of(sniperListener).sniperStateChanged(with(aSniperThatIs(SniperState.FAILED)));
+			  when(sniperState.is("winning"));
+		}});
+		
+		sniper.currentPrice(123, 45, PriceSource.FromSniper);
+		sniper.auctionFailed();
+	}
+		
+  @Test
+	public void
+	reportsFailedIfAuctionFailsWhenLosing() {
+		context.checking(new Expectations() {{
+			oneOf(sniperListener).sniperStateChanged(
+			  new SniperSnapshot(AuctionSniperTestUtilities.ITEM_ID1, 2345, 0, SniperState.LOSING));
+			                              then(sniperState.is("losing"));
+		  oneOf(sniperListener).sniperStateChanged(with(aSniperThatIs(SniperState.FAILED)));
+		                                when(sniperState.is("losing"));
+			                                  }}
+		);
+		sniper.currentPrice(2345, 25, PriceSource.FromOtherBidder);
+		sniper.auctionFailed();
+	}
+
+	// <mlr 140310: end - add failure detection code>
+  @Test
+  public void 
 	reportLostIfAuctionClosesImmediately() {
 		context.checking(new Expectations() {{
 			atLeast(1).of(sniperListener).sniperStateChanged(with(aSniperThatIs(SniperState.LOST)));
@@ -149,7 +215,8 @@ public class AuctionSniperTests {
 		sniper.auctionClosed();
 	}
 	
-@Ignore public void 
+  @Test
+  public void 
 	reportLostIfAuctionClosesWhenBidding() {
 		context.checking(new Expectations() {{
 			ignoring(auction);
@@ -176,7 +243,8 @@ public class AuctionSniperTests {
     };
 	}
 	
-@Ignore public void 
+  @Test
+  public void 
 	reportWonIfAuctionClosesWhenWinning() {
 		context.checking(new Expectations() {{
 			ignoring(auction);
@@ -191,7 +259,8 @@ public class AuctionSniperTests {
 		sniper.auctionClosed();
 	}
 	
-@Ignore public void
+  @Test
+  public void
 	bidsHigherAndReportsBiddingWhenNewPriceArrives() {
 		//final int price = 1001;
 		final int price = 901;
@@ -205,7 +274,8 @@ public class AuctionSniperTests {
 		sniper.currentPrice(price, increment, PriceSource.FromOtherBidder);
 	}
 	
-@Ignore public void
+  @Test
+  public void
 	reportsWinningWhenNewCurrentPriceComesFromSniper() {
 		final int lastBidFromOther = 123;
 		int increment = 45;
@@ -291,9 +361,7 @@ public class AuctionSniperTests {
 	reportsLostIfAuctionClosesWhenLosing() {
 		context.checking(new Expectations() {{
 			oneOf(sniperListener).sniperStateChanged(
-			  //new SniperSnapshot(AuctionSniperTestUtilities.ITEM_ID1, 2345, bid(theStopPrice), SniperState.LOSING));
 			  new SniperSnapshot(AuctionSniperTestUtilities.ITEM_ID1, 2345, 0, SniperState.LOSING));
-			                              //when(sniperState.is("joining"));
 			                              then(sniperState.is("losing"));
 		  oneOf(sniperListener).sniperStateChanged(with(aSniperThatIs(SniperState.LOST)));
 		                                when(sniperState.is("losing"));
