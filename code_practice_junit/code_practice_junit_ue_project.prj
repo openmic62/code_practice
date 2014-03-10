@@ -254,3 +254,4 @@ Source Paths=
 1=src\main\java\auctionsniper\xmpp\XMPPAuction.java
 2=src\main\java\auctionsniper\xmpp\XMPPAuctionHouse.java
 3=src\main\java\auctionsniper\xmpp\AuctionHouse.java
+4=src\main\java\auctionsniper\xmpp\MissingValueException.java

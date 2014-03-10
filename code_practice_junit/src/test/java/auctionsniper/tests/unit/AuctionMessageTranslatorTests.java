@@ -102,11 +102,59 @@ public class AuctionMessageTranslatorTests {
 	@Test public void 
 	notifiesAuctionFailedWhenBadMessageReceived() {
 		context.checking(new Expectations() {{
-			oneOf(listener).auctionFailed();
+			exactly(1).of(listener).auctionFailed();
 		}});
 		
 		Message message = new Message();
 		message.setBody("a bad unit test message");
+		
+		translator.processMessage(UNUSED_CHAT, message);
+	}
+	
+	@Test public void 
+	notifiesAuctionFailedWhenEventTypeMissing() {
+		context.checking(new Expectations() {{
+			exactly(1).of(listener).auctionFailed();
+		}});
+		
+		Message message = new Message();
+		message.setBody("SQLVersion: 1.1; CurrentPrice: 234; Increment: 5; Bidder: " + SNIPER_XMPP_ID + ";");
+		
+		translator.processMessage(UNUSED_CHAT, message);
+	}
+	
+	@Test public void 
+	notifiesAuctionFailedWhenCurrentPriceMissing() {
+		context.checking(new Expectations() {{
+			exactly(1).of(listener).auctionFailed();
+		}});
+		
+		Message message = new Message();
+		message.setBody("SQLVersion: 1.1; Event: PRICE; Increment: 5; Bidder: " + SNIPER_XMPP_ID + ";");
+		
+		translator.processMessage(UNUSED_CHAT, message);
+	}
+	
+	@Test public void 
+	notifiesAuctionFailedWhenIncrementMissing() {
+		context.checking(new Expectations() {{
+			exactly(1).of(listener).auctionFailed();
+		}});
+		
+		Message message = new Message();
+		message.setBody("SQLVersion: 1.1; Event: PRICE; CurrentPrice: 234; Bidder: " + SNIPER_XMPP_ID + ";");
+		
+		translator.processMessage(UNUSED_CHAT, message);
+	}
+	
+	@Test public void 
+	notifiesAuctionFailedWhenBidderMissing() {
+		context.checking(new Expectations() {{
+			exactly(1).of(listener).auctionFailed();
+		}});
+		
+		Message message = new Message();
+		message.setBody("SQLVersion: 1.1; Event: PRICE; CurrentPrice: 234; Increment: 5;");
 		
 		translator.processMessage(UNUSED_CHAT, message);
 	}
