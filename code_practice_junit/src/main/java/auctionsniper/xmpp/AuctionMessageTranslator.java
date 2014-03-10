@@ -34,7 +34,15 @@ public class AuctionMessageTranslator implements MessageListener {
 		logger.info("in call: processMessage(...)\n\t\tmsg from -->{}<--\n\t\tmsg rx'd -->{}<--", 
 		            chat != null ? chat.getParticipant(): "unit_test",
 		            message.getBody());
-		
+	  
+	  try {
+	  	translate(message.getBody());
+	  } catch (Exception parseException) {
+	  	auctionEventListener.auctionFailed();
+	  }
+	  
+  // <mlr 140310: begin - add failure detection code>
+  /*
 		AuctionEvent auctionEvent = AuctionEvent.find(message.getBody());
 		
 		String eventType = auctionEvent.eventType();
@@ -47,7 +55,25 @@ public class AuctionMessageTranslator implements MessageListener {
 		 		auctionEvent.isFrom(sniperXmppID)
 		 	);
 		}
+	*/
+  // <mlr 140310: end - add failure detection code>
 	}
+  // <mlr 140310: begin - add failure detection code>
+  private void translate(String messageBody) {
+		AuctionEvent auctionEvent = AuctionEvent.find(messageBody);
+		
+		String eventType = auctionEvent.eventType();
+		if ("CLOSE".equals(eventType)) {
+			auctionEventListener.auctionClosed();
+		} else if ("PRICE".equals(eventType)) {
+		 	auctionEventListener.currentPrice(
+		 		auctionEvent.currentPrice(),
+		 		auctionEvent.increment(),
+		 		auctionEvent.isFrom(sniperXmppID)
+		 	);
+		}
+  }
+  // <mlr 140310: end - add failure detection code>	
 
 	private static class AuctionEvent {
 		

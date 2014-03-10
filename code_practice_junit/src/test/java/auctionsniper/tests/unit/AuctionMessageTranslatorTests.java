@@ -98,6 +98,20 @@ public class AuctionMessageTranslatorTests {
 	
 	private final AuctionMessageTranslator translator = new AuctionMessageTranslator(SNIPER_XMPP_ID, listener);
 	
+	// <mlr 140310: begin - add failure detection code>
+	@Test public void 
+	notifiesAuctionFailedWhenBadMessageReceived() {
+		context.checking(new Expectations() {{
+			oneOf(listener).auctionFailed();
+		}});
+		
+		Message message = new Message();
+		message.setBody("a bad unit test message");
+		
+		translator.processMessage(UNUSED_CHAT, message);
+	}
+	// <mlr 140310: end - add failure detection code>
+	
 	@Test public void 
 	notifiesAuctionClosedWhenCloseMessageReceived() {
 		context.checking(new Expectations() {{
