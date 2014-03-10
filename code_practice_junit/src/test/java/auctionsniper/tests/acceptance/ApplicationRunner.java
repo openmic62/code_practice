@@ -84,6 +84,14 @@ public class ApplicationRunner {
 		driver.showSniperStatus(auction.getItemID(), lastPrice, lastPrice, SnipersTableModel.textFor(SniperState.WON));
 	}
 		
+	// <mlr 140310: begin - add failure detection code>
+	public void showsSniperHasFailed(FakeAuctionServer auction) {
+		driver.showSniperStatus(auction.getItemID(), 0, 0, SnipersTableModel.textFor(SniperState.FAILED));
+	}
+	
+	public void reportsInvalidMessage(FakeAuctionServer auction, String brokenMessage) {}
+	// <mlr 140310: end - add failure detection code>
+		
 	public void stop() {
 		if (driver != null) {
 		 	driver.dispose();

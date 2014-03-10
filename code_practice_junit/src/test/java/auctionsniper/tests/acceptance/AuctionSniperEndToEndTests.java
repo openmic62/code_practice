@@ -94,7 +94,6 @@
  */ 
 package auctionsniper.tests.acceptance;
 
-// <mlr 131225: ITEM_ID - added per GOOS, p. 155a>
 import auctionsniper.tests.AuctionSniperTestUtilities;
 
 import org.apache.logging.log4j.LogManager;
@@ -119,12 +118,50 @@ public class AuctionSniperEndToEndTests {
 	private  FakeAuctionServer auction2    = new FakeAuctionServer(AuctionSniperTestUtilities.ITEM_ID2);
 	private  ApplicationRunner application = new ApplicationRunner();
 	
+	// <mlr 140310: begin - add failure detection code>
 	@Test
 	//@Ignore
+	//public void sniperReportsFailureAfterReceivingBadMessageFromAuction() throws Exception {
+	public void sniperReportsInvalidAuctionMessageAndStopsRespondingToEvents() throws Exception {
+		
+		String brokenMessage = "a broken message";
+		
+		auction.startSellingItem();                                                
+		//application.startBiddingWithStopPrice(auction, 1100);
+		application.startBiddingIn(auction, auction2);       
+		auction.hasReceivedJoinRequestFromSniper(ApplicationRunner.SNIPER_XMPP_ID);
+		                     
+		//auction.reportPrice(1000, 98, "other bidder");
+		//application.hasShownSniperIsBidding(auction, 1000, 1098);
+		auction.reportPrice(500, 20, "other bidder");
+		application.hasShownSniperIsBidding(auction, 500, 520);
+	
+		auction.hasReceivedBid(520, ApplicationRunner.SNIPER_XMPP_ID);
+		
+		auction.sendInvalidMessageContaining(brokenMessage);
+		application.showsSniperHasFailed(auction);		
+		
+		auction.reportPrice(520, 21, "other bidder");
+		waitForAnotherAuctionEvent();
+		
+		application.reportsInvalidMessage(auction, brokenMessage);
+		application.showsSniperHasFailed(auction);		
+	
+		sleep(forThisLong);
+	}
+	// <mlr 140310: end - add failure detection code>
+	
+	private void waitForAnotherAuctionEvent() throws Exception {
+		auction2.hasReceivedJoinRequestFromSniper(ApplicationRunner.SNIPER_XMPP_ID);
+		auction2.reportPrice(600, 6, "other bidder");
+		application.hasShownSniperIsBidding(auction2, 600, 606);
+	}
+	
+	//@Test
+	@Ignore
 	public void sniperLosesAnAuctionWhenThePriceIsTooHigh() throws Exception {
 		logger.trace("logger name is -->{}<--", AuctionSniperEndToEndTests.class.getName());
 		
-		// <mlr 140218: begin - added from GOOS, p. 206b>   
 		auction.startSellingItem();                                                
 		application.startBiddingWithStopPrice(auction, 1100);
 		auction.hasReceivedJoinRequestFromSniper(ApplicationRunner.SNIPER_XMPP_ID);
@@ -143,11 +180,10 @@ public class AuctionSniperEndToEndTests {
 		auction.announceClosed();
 		application.showsSniperHasLostAuction(auction, 1207, 1098);
 		sleep(forThisLong);
-		// <mlr 140218: end - added from GOOS, p. 206b>   
 	}
 
-	@Test
-	//@Ignore
+	//@Test
+	@Ignore
 	public void sniperJoinsAuctionUntilAuctionCloses() throws Exception {        
 		auction.startSellingItem();                                                    // step 1
 		application.startBiddingIn(auction);                                           // step 2
@@ -157,8 +193,8 @@ public class AuctionSniperEndToEndTests {
 		sleep(forThisLong);
 	}
 
-	@Test
-	//@Ignore
+	//@Test
+	@Ignore
 	public void sniperMakesHigherBidButLoses() throws Exception {
 		auction.startSellingItem();
 		application.startBiddingIn(auction);       
@@ -184,8 +220,8 @@ public class AuctionSniperEndToEndTests {
 		sleep(forThisLong);
 	}
 
-	@Test
-	//@Ignore
+	//@Test
+	@Ignore
 	public void sniperWinsAnAuctionByBiddingHigher_onItem54321() throws Exception {
 		auction.startSellingItem();
 		application.startBiddingIn(auction);       
@@ -204,8 +240,8 @@ public class AuctionSniperEndToEndTests {
 		sleep(forThisLong);
 	}
 
-	@Test
-	//@Ignore
+	//@Test
+	@Ignore
 	public void sniperWinsAnAuctionByBiddingHigher_onItem65432() throws Exception {
 		auction2.startSellingItem();
 		application.startBiddingIn(auction2);       
@@ -225,8 +261,8 @@ public class AuctionSniperEndToEndTests {
 
 	}
 
-	@Test
-	//@Ignore
+	//@Test
+	@Ignore
 	public void sniperBidsForMultipleItems() throws Exception {
 		auction.startSellingItem();
 		auction2.startSellingItem();

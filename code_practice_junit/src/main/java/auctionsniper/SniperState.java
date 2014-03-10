@@ -14,7 +14,8 @@ public enum SniperState {
 		@Override public SniperState whenAuctionClosed() { return LOST; }
 	},
 	LOST,
-	WON;
+	WON,
+	FAILED; // <mlr 140310: add failure detection code>
 	
 	public SniperState whenAuctionClosed() {
 		throw new Defect("Auction is already closed");

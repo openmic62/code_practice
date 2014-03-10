@@ -26,8 +26,8 @@ public class SwingThreadSniperListener implements SniperListener {
   }
 
  	/*>>>REMOVE-BEGIN<<<*/
- 	//private double forThisLong = 0.50;
- 	private double forThisLong = 0.0;
+ 	private double forThisLong = 0.50;
+ 	//private double forThisLong = 0.0;
 	private void sleep(double sleepDuration) {
 		try {
 			Thread.sleep((int)(sleepDuration * 1000));

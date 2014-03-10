@@ -93,6 +93,14 @@ public class FakeAuctionServer {
 			String.format(Main.REPORT_PRICE_COMMAND_FORMAT, price, increment, bidder));
 	}
 	
+	// <mlr 140310: begin - add failure detection code>
+	public void sendInvalidMessageContaining(String brokenMessage) 
+	  throws XMPPException 
+	{
+		currentChat.sendMessage(brokenMessage);
+	}
+	// <mlr 140310: end - add failure detection code>
+	
 	public void announceClosed() throws XMPPException {
 		currentChat.sendMessage(Main.CLOSE_COMMAND_FORMAT);
 	}
