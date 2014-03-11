@@ -12,6 +12,8 @@ http://www.avajava.com/tutorials/lessons/how-do-i-use-the-enum-type-with-a-const
  set CLASSPATH=%L4J2%;%CLASSPATH%
  set ACL3=lib\commons-lang3-3.1.jar
  set CLASSPATH=%ACL3%;%CLASSPATH%
+ set ACIO=lib\commons-io-2.4.jar
+ set CLASSPATH=%ACIO%;%CLASSPATH%
  set SIH=src\test\scripts\SysinternalsSuite_131101
  set SC=target\classes
  set TC=target\test-classes
