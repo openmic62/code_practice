@@ -30,14 +30,22 @@ public class XMPPAuction implements Auction
 
 	public XMPPAuction(XMPPConnection connection, String itemId) {
 		
+	  // <mlr 140310: begin - add failure detection code>
+	  AuctionMessageTranslator translator = translatorFor(connection);
+	  
     this.chat = 
     	connection.getChatManager().createChat(
       auctionId(itemId, connection),
+      translator
+      /*
     	new AuctionMessageTranslator(
     	      connection.getUser(),
     	      auctionEvents.announce()
     	                             )
+    	*/
       );
+    addAuctionEventListener(chatDisconnectorFor(translator));
+	  // <mlr 140310: end - add failure detection code>
 	}
 
 	private String auctionId(String itemId, XMPPConnection connection) {
@@ -45,6 +53,22 @@ public class XMPPAuction implements Auction
 		                     connection.getServiceName());
 	}
 	
+	// <mlr 140310: begin - add failure detection code>
+	private AuctionMessageTranslator translatorFor(XMPPConnection connection) {
+		return new AuctionMessageTranslator(connection.getUser(), auctionEvents.announce());
+	}
+	
+	private AuctionEventListener
+	chatDisconnectorFor(final AuctionMessageTranslator translator) {
+		return new AuctionEventListener() {
+			public void auctionFailed() {
+				chat.removeMessageListener(translator);
+			}
+			public void auctionClosed(){}
+			public void currentPrice(int p, int i, PriceSource ps){}
+		};
+	}
+	// <mlr 140310: end - add failure detection code>
 	// ----- OVERRIDES FOR INTERFACE Auction -----
 	@Override
 	public void addAuctionEventListener(AuctionEventListener ael) {

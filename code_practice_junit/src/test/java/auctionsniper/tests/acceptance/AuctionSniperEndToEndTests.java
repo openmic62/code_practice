@@ -127,6 +127,7 @@ public class AuctionSniperEndToEndTests {
 		String brokenMessage = "a broken message";
 		
 		auction.startSellingItem();                                                
+		auction2.startSellingItem();                                                
 		//application.startBiddingWithStopPrice(auction, 1100);
 		application.startBiddingIn(auction, auction2);       
 		auction.hasReceivedJoinRequestFromSniper(ApplicationRunner.SNIPER_XMPP_ID);
