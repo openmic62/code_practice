@@ -208,6 +208,7 @@ CTags Legacy Support=0
 1=src\test\java\auctionsniper\tests\acceptance\ApplicationRunner.java
 2=src\test\java\auctionsniper\tests\acceptance\AuctionSniperDriver.java
 3=src\test\java\auctionsniper\tests\acceptance\FakeAuctionServer.java
+4=src\test\java\auctionsniper\tests\acceptance\AuctionLogDriver.java
 [uemakeXp]
 Compiler=Configs\Java Compiler\Console Application
 ReleaseMode=0

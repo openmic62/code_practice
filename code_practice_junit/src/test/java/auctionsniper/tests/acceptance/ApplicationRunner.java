@@ -9,6 +9,8 @@ import auctionsniper.ui.SnipersTableModel;
 
 import java.io.IOException;
 
+import static org.hamcrest.Matchers.containsString;
+
 public class ApplicationRunner {
 	
 	private final String LOCALHOST       = AuctionSniperTestUtilities.LOCALHOST;
@@ -16,7 +18,7 @@ public class ApplicationRunner {
 	private final String SNIPER_PASSWORD = AuctionSniperTestUtilities.SNIPER_PASSWORD;
 	private AuctionSniperDriver driver;
 	// <mlr 140311: add failure logging code>
-	///private AuctionLogDriver logDriver = new AuctionLogDriver();;
+	private AuctionLogDriver logDriver = new AuctionLogDriver();;
 
 	private String itemId;
 
@@ -43,7 +45,6 @@ public class ApplicationRunner {
 	}		
 	
 	public void startBiddingWithStopPrice(final FakeAuctionServer auction, int stopPrice) {
-				
 		startSniper();
 		openBiddingFor(auction, stopPrice);
 		/*
@@ -54,6 +55,8 @@ public class ApplicationRunner {
 	}
 	
 	private void startSniper() {
+	  // <mlr 140311: add failure logging code>
+		logDriver.clearLog();		
 		Thread thread = new Thread("Test App") {
 			@Override public void run() {
 				try {
@@ -106,7 +109,7 @@ public class ApplicationRunner {
 	}
 	
 	public void reportsInvalidMessage(FakeAuctionServer auction, String brokenMessage) throws IOException {
-		///logDriver.hasEntry(containsString(brokenMessage));
+		logDriver.hasEntry(containsString(brokenMessage));
 	}
 	// <mlr 140310: end - add failure detection code>
 	// <mlr 140311: end - add failure logging code>
