@@ -7,12 +7,16 @@ import auctionsniper.tests.AuctionSniperTestUtilities;
 import auctionsniper.ui.MainWindow;
 import auctionsniper.ui.SnipersTableModel;
 
+import java.io.IOException;
+
 public class ApplicationRunner {
 	
 	private final String LOCALHOST       = AuctionSniperTestUtilities.LOCALHOST;
 	private final String SNIPER_ID       = AuctionSniperTestUtilities.SNIPER_ID;
 	private final String SNIPER_PASSWORD = AuctionSniperTestUtilities.SNIPER_PASSWORD;
 	private AuctionSniperDriver driver;
+	// <mlr 140311: add failure logging code>
+	///private AuctionLogDriver logDriver = new AuctionLogDriver();;
 
 	private String itemId;
 
@@ -23,19 +27,30 @@ public class ApplicationRunner {
 		startSniper();
 		
 		for ( FakeAuctionServer auction : auctions ) {
+			openBiddingFor(auction, Integer.MAX_VALUE);
+			/*
 			final String itemId = auction.getItemID();
 			driver.startBiddingFor(itemId, Integer.MAX_VALUE);
 			driver.showSniperStatus(auction.getItemID(), 0, 0, SnipersTableModel.textFor(SniperState.JOINING));
+			*/
 		}
 	}
+	
+	private void openBiddingFor(FakeAuctionServer auction, int stopPrice) {
+		final String itemId = auction.getItemID();
+		driver.startBiddingFor(itemId, stopPrice);
+		driver.showSniperStatus(auction.getItemID(), 0, 0, SnipersTableModel.textFor(SniperState.JOINING));
+	}		
 	
 	public void startBiddingWithStopPrice(final FakeAuctionServer auction, int stopPrice) {
 				
 		startSniper();
-		
+		openBiddingFor(auction, stopPrice);
+		/*
 		final String itemId = auction.getItemID();
 		driver.startBiddingFor(itemId, stopPrice);
 		driver.showSniperStatus(auction.getItemID(), 0, 0, SnipersTableModel.textFor(SniperState.JOINING));
+		*/
 	}
 	
 	private void startSniper() {
@@ -84,13 +99,17 @@ public class ApplicationRunner {
 		driver.showSniperStatus(auction.getItemID(), lastPrice, lastPrice, SnipersTableModel.textFor(SniperState.WON));
 	}
 		
+	// <mlr 140311: begin - add failure logging code>
 	// <mlr 140310: begin - add failure detection code>
 	public void showsSniperHasFailed(FakeAuctionServer auction) {
 		driver.showSniperStatus(auction.getItemID(), 0, 0, SnipersTableModel.textFor(SniperState.FAILED));
 	}
 	
-	public void reportsInvalidMessage(FakeAuctionServer auction, String brokenMessage) {}
+	public void reportsInvalidMessage(FakeAuctionServer auction, String brokenMessage) throws IOException {
+		///logDriver.hasEntry(containsString(brokenMessage));
+	}
 	// <mlr 140310: end - add failure detection code>
+	// <mlr 140311: end - add failure logging code>
 		
 	public void stop() {
 		if (driver != null) {
