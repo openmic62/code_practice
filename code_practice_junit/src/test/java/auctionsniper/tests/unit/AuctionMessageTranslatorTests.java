@@ -81,6 +81,7 @@ package auctionsniper.tests.unit;
 import auctionsniper.AuctionEventListener;
 import auctionsniper.tests.AuctionSniperTestUtilities;
 import auctionsniper.xmpp.AuctionMessageTranslator;
+import auctionsniper.xmpp.XMPPFailureReporter;
 
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.packet.Message;
@@ -96,9 +97,35 @@ public class AuctionMessageTranslatorTests {
 	
 	@Rule public final JUnitRuleMockery context = new JUnitRuleMockery();
 	private final AuctionEventListener listener = context.mock(AuctionEventListener.class);
+	private final XMPPFailureReporter  failureReporter = context.mock(XMPPFailureReporter.class);
 	private final String SNIPER_XMPP_ID = String.format("billyBob@%s/Auction", AuctionSniperTestUtilities.myGetHostName());
 	
 	private final AuctionMessageTranslator translator = new AuctionMessageTranslator(SNIPER_XMPP_ID, listener);
+	
+	// <mlr 140311: begin - add failure reporting code>
+	@Test public void 
+	notifiesAuctionFailurWhenBadMessageReceived() {
+		String badMessage = "a bad UT message";
+		expectFailureWithMessage(badMessage);
+		translator.processMessage(UNUSED_CHAT, message(badMessage));
+	}
+	
+	private Message message(String body) {
+		Message message = new Message();
+		message.setBody(body);
+		return message;
+	}
+	
+	private void expectFailureWithMessage(final String badMessage) {
+		context.checking(new Expectations() {{
+			oneOf(listener).auctionFailed();
+			oneOf(failureReporter).cannotTranslateMessage(
+			                         with(SNIPER_XMPP_ID), 
+			                         with(badMessage),
+			                         with(any(Exception.class)));
+	  }});
+	}
+	// <mlr 140311: end - add failure reporting code>
 	
 	// <mlr 140310: begin - add failure detection code>
 	@Test public void 
