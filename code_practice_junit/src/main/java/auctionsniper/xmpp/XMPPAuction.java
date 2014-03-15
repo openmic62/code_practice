@@ -15,7 +15,8 @@ import org.jivesoftware.smack.XMPPException;
 
 public class XMPPAuction implements Auction
 {
-	static Logger logger = LogManager.getLogger(XMPPAuction.class.getName());	
+	static Logger logger = LogManager.getLogger(XMPPAuction.class.getName());
+	private       final XMPPFailureReporter failureLogger;
 	
 	public static final String AUCTION_RESOURCE    = "Auction";
 	private       final String ITEM_ID_AS_LOGIN    = "auction-%s";
@@ -28,8 +29,10 @@ public class XMPPAuction implements Auction
   private final Announcer<AuctionEventListener> auctionEvents = 
           Announcer.to(AuctionEventListener.class);
 
-	public XMPPAuction(XMPPConnection connection, String itemId) {
-		
+	//public XMPPAuction(XMPPConnection connection, String itemId) {
+	public XMPPAuction(XMPPConnection connection, String itemId, XMPPFailureReporter xfl) {
+		this.failureLogger = xfl;
+
 	  // <mlr 140310: begin - add failure detection code>
 	  AuctionMessageTranslator translator = translatorFor(connection);
 	  
@@ -56,7 +59,8 @@ public class XMPPAuction implements Auction
 	// <mlr 140310: begin - add failure detection code>
 	private AuctionMessageTranslator translatorFor(XMPPConnection connection) {
 		//return new AuctionMessageTranslator(connection.getUser(), auctionEvents.announce());
-		return new AuctionMessageTranslator(connection.getUser(), auctionEvents.announce(), null); // null to appease the compiler god
+		///return new AuctionMessageTranslator(connection.getUser(), auctionEvents.announce(), null); // null to appease the compiler god
+		return new AuctionMessageTranslator(connection.getUser(), auctionEvents.announce(), failureLogger); // null to appease the compiler god
 	}
 	
 	private AuctionEventListener
@@ -87,7 +91,7 @@ public class XMPPAuction implements Auction
 	@Override
 	public void join() {
 		try {
-			logger.info("in call: join(), sniper join msg to -->{}<--", chat.getParticipant());
+			//logger.info("in call: join(), sniper join msg to -->{}<--", chat.getParticipant());
 			chat.sendMessage(JOIN_COMMAND_FORMAT);
 		} catch (XMPPException e) {
 			e.printStackTrace();
