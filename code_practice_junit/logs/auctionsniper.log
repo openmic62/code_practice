@@ -1017,3 +1017,417 @@
 1377 [main] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
 		msg from -->unit_test<--
 		msg rx'd -->SQLVersion: 1.1; Event: PRICE; CurrentPrice: 234; Increment: 5; Bidder: billyBob@vi-miker6430s/Auction;<--
+1630 [main] INFO  acceptance.FakeAuctionServer [] - in call: startSellingItem(), XMPP connected as -->auction-item-54321@roco-3/Auction<--
+1720 [Test App] INFO  auctionsniper.Main [] - in call as: main([localhost, sniper, sniper])
+5456 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 0, 0, Joining auction)
+5486 [AWT-EventQueue-0] INFO  xmpp.XMPPAuction [] - in call: join(), sniper join msg to -->auction-item-54321@ROCO-3/Auction<--
+5496 [main] INFO  acceptance.FakeAuctionServer [] - in call: receivesAMessage(...)
+		auction-item-54321@roco-3/Auction
+		msg from -->sniper@roco-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Command: JOIN;<--
+5536 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 1000, 1098, Bidding in auction)
+5536 [Smack Listener Processor (2)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-54321@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: PRICE; CurrentPrice: 1000; Increment: 98; Bidder: other bidder;<--
+5636 [main] INFO  acceptance.FakeAuctionServer [] - in call: receivesAMessage(...)
+		auction-item-54321@roco-3/Auction
+		msg from -->sniper@roco-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Command: BID; Price: 1098;<--
+5636 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 1197, 1098, Losing auction)
+5636 [Smack Listener Processor (2)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-54321@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: PRICE; CurrentPrice: 1197; Increment: 10; Bidder: third party;<--
+5736 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 1207, 1098, Losing auction)
+5736 [Smack Listener Processor (2)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-54321@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: PRICE; CurrentPrice: 1207; Increment: 10; Bidder: fourth party;<--
+5836 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 1207, 1098, Lost auction)
+5836 [Smack Listener Processor (2)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-54321@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: CLOSE;<--
+6206 [main] INFO  acceptance.FakeAuctionServer [] - in call: startSellingItem(), XMPP connected as -->auction-item-54321@roco-3/Auction<--
+6226 [Test App] INFO  auctionsniper.Main [] - in call as: main([localhost, sniper, sniper])
+9792 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 0, 0, Joining auction)
+9792 [AWT-EventQueue-0] INFO  xmpp.XMPPAuction [] - in call: join(), sniper join msg to -->auction-item-54321@ROCO-3/Auction<--
+9792 [main] INFO  acceptance.FakeAuctionServer [] - in call: receivesAMessage(...)
+		auction-item-54321@roco-3/Auction
+		msg from -->sniper@roco-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Command: JOIN;<--
+9802 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 0, 0, Lost auction)
+9802 [Smack Listener Processor (5)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-54321@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: CLOSE;<--
+10142 [main] INFO  acceptance.FakeAuctionServer [] - in call: startSellingItem(), XMPP connected as -->auction-item-54321@roco-3/Auction<--
+10162 [Test App] INFO  auctionsniper.Main [] - in call as: main([localhost, sniper, sniper])
+13670 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 0, 0, Joining auction)
+13670 [AWT-EventQueue-0] INFO  xmpp.XMPPAuction [] - in call: join(), sniper join msg to -->auction-item-54321@ROCO-3/Auction<--
+13670 [main] INFO  acceptance.FakeAuctionServer [] - in call: receivesAMessage(...)
+		auction-item-54321@roco-3/Auction
+		msg from -->sniper@roco-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Command: JOIN;<--
+13680 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 1000, 1098, Bidding in auction)
+13680 [Smack Listener Processor (8)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-54321@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: PRICE; CurrentPrice: 1000; Increment: 98; Bidder: other bidder;<--
+13780 [main] INFO  acceptance.FakeAuctionServer [] - in call: receivesAMessage(...)
+		auction-item-54321@roco-3/Auction
+		msg from -->sniper@roco-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Command: BID; Price: 1098;<--
+13780 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 1098, 1098, Winning auction)
+13780 [Smack Listener Processor (8)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-54321@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: PRICE; CurrentPrice: 1098; Increment: 97; Bidder: sniper@roco-3/Auction;<--
+13880 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 1098, 1098, Won auction!!! Bitches!)
+13880 [Smack Listener Processor (8)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-54321@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: CLOSE;<--
+14240 [main] INFO  acceptance.FakeAuctionServer [] - in call: startSellingItem(), XMPP connected as -->auction-item-65432@roco-3/Auction<--
+14400 [Test App] INFO  auctionsniper.Main [] - in call as: main([localhost, sniper, sniper])
+17895 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-65432, 0, 0, Joining auction)
+17895 [AWT-EventQueue-0] INFO  xmpp.XMPPAuction [] - in call: join(), sniper join msg to -->auction-item-65432@ROCO-3/Auction<--
+17895 [main] INFO  acceptance.FakeAuctionServer [] - in call: receivesAMessage(...)
+		auction-item-65432@roco-3/Auction
+		msg from -->sniper@roco-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Command: JOIN;<--
+17905 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-65432, 7877, 7946, Bidding in auction)
+17905 [Smack Listener Processor (11)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-65432@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: PRICE; CurrentPrice: 7877; Increment: 69; Bidder: other bidder;<--
+18015 [main] INFO  acceptance.FakeAuctionServer [] - in call: receivesAMessage(...)
+		auction-item-65432@roco-3/Auction
+		msg from -->sniper@roco-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Command: BID; Price: 7946;<--
+18015 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-65432, 7946, 7946, Winning auction)
+18015 [Smack Listener Processor (11)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-65432@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: PRICE; CurrentPrice: 7946; Increment: 222; Bidder: sniper@roco-3/Auction;<--
+18115 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-65432, 7946, 7946, Won auction!!! Bitches!)
+18115 [Smack Listener Processor (11)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-65432@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: CLOSE;<--
+18475 [main] INFO  acceptance.FakeAuctionServer [] - in call: startSellingItem(), XMPP connected as -->auction-item-54321@roco-3/Auction<--
+18495 [Test App] INFO  auctionsniper.Main [] - in call as: main([localhost, sniper, sniper])
+21983 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 0, 0, Joining auction)
+21983 [AWT-EventQueue-0] INFO  xmpp.XMPPAuction [] - in call: join(), sniper join msg to -->auction-item-54321@ROCO-3/Auction<--
+22083 [main] INFO  acceptance.FakeAuctionServer [] - in call: receivesAMessage(...)
+		auction-item-54321@roco-3/Auction
+		msg from -->sniper@roco-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Command: JOIN;<--
+22083 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 900, 948, Bidding in auction)
+22083 [Smack Listener Processor (14)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-54321@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: PRICE; CurrentPrice: 900; Increment: 48; Bidder: other bidder;<--
+22183 [main] INFO  acceptance.FakeAuctionServer [] - in call: receivesAMessage(...)
+		auction-item-54321@roco-3/Auction
+		msg from -->sniper@roco-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Command: BID; Price: 948;<--
+22183 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 900, 948, Lost auction)
+22183 [Smack Listener Processor (14)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-54321@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: CLOSE;<--
+22553 [main] INFO  acceptance.FakeAuctionServer [] - in call: startSellingItem(), XMPP connected as -->auction-item-54321@roco-3/Auction<--
+22633 [main] INFO  acceptance.FakeAuctionServer [] - in call: startSellingItem(), XMPP connected as -->auction-item-65432@roco-3/Auction<--
+22643 [Test App] INFO  auctionsniper.Main [] - in call as: main([localhost, sniper, sniper])
+26117 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 0, 0, Joining auction)
+26117 [AWT-EventQueue-0] INFO  xmpp.XMPPAuction [] - in call: join(), sniper join msg to -->auction-item-54321@ROCO-3/Auction<--
+29559 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-65432, 0, 0, Joining auction)
+29559 [AWT-EventQueue-0] INFO  xmpp.XMPPAuction [] - in call: join(), sniper join msg to -->auction-item-65432@ROCO-3/Auction<--
+29559 [main] INFO  acceptance.FakeAuctionServer [] - in call: receivesAMessage(...)
+		auction-item-54321@roco-3/Auction
+		msg from -->sniper@roco-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Command: JOIN;<--
+29569 [Smack Listener Processor (17)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-54321@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: PRICE; CurrentPrice: 500; Increment: 20; Bidder: other bidder;<--
+29579 [main] INFO  acceptance.FakeAuctionServer [] - in call: receivesAMessage(...)
+		auction-item-54321@roco-3/Auction
+		msg from -->sniper@roco-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Command: BID; Price: 520;<--
+29579 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 0, 0, FAILED!!!)
+29579 [Smack Listener Processor (17)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-54321@ROCO-3/Auction<--
+		msg rx'd -->a broken message<--
+31109 [main] INFO  acceptance.FakeAuctionServer [] - in call: startSellingItem(), XMPP connected as -->auction-item-54321@roco-3/Auction<--
+31189 [main] INFO  acceptance.FakeAuctionServer [] - in call: startSellingItem(), XMPP connected as -->auction-item-65432@roco-3/Auction<--
+31209 [Test App] INFO  auctionsniper.Main [] - in call as: main([localhost, sniper, sniper])
+34660 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 0, 0, Joining auction)
+34660 [AWT-EventQueue-0] INFO  xmpp.XMPPAuction [] - in call: join(), sniper join msg to -->auction-item-54321@ROCO-3/Auction<--
+38203 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-65432, 0, 0, Joining auction)
+38203 [AWT-EventQueue-0] INFO  xmpp.XMPPAuction [] - in call: join(), sniper join msg to -->auction-item-65432@ROCO-3/Auction<--
+38203 [main] INFO  acceptance.FakeAuctionServer [] - in call: receivesAMessage(...)
+		auction-item-54321@roco-3/Auction
+		msg from -->sniper@roco-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Command: JOIN;<--
+38213 [main] INFO  acceptance.FakeAuctionServer [] - in call: receivesAMessage(...)
+		auction-item-65432@roco-3/Auction
+		msg from -->sniper@roco-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Command: JOIN;<--
+38213 [Smack Listener Processor (20)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-54321@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: PRICE; CurrentPrice: 1000; Increment: 98; Bidder: other bidder;<--
+38223 [main] INFO  acceptance.FakeAuctionServer [] - in call: receivesAMessage(...)
+		auction-item-54321@roco-3/Auction
+		msg from -->sniper@roco-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Command: BID; Price: 1098;<--
+38243 [Smack Listener Processor (20)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-65432@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: PRICE; CurrentPrice: 500; Increment: 21; Bidder: other bidder;<--
+38243 [main] INFO  acceptance.FakeAuctionServer [] - in call: receivesAMessage(...)
+		auction-item-65432@roco-3/Auction
+		msg from -->sniper@roco-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Command: BID; Price: 521;<--
+38243 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 1098, 1098, Winning auction)
+38253 [Smack Listener Processor (20)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-54321@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: PRICE; CurrentPrice: 1098; Increment: 97; Bidder: sniper@roco-3/Auction;<--
+38253 [Smack Listener Processor (20)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-65432@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: PRICE; CurrentPrice: 521; Increment: 22; Bidder: sniper@roco-3/Auction;<--
+38353 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-65432, 521, 521, Winning auction)
+38353 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 1098, 1098, Won auction!!! Bitches!)
+38353 [Smack Listener Processor (20)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-65432@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: CLOSE;<--
+38353 [Smack Listener Processor (20)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-54321@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: CLOSE;<--
+38453 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-65432, 521, 521, Won auction!!! Bitches!)
+2150 [main] INFO  acceptance.FakeAuctionServer [] - in call: startSellingItem(), XMPP connected as -->auction-item-54321@roco-3/Auction<--
+2250 [main] INFO  acceptance.FakeAuctionServer [] - in call: startSellingItem(), XMPP connected as -->auction-item-65432@roco-3/Auction<--
+2280 [Test App] INFO  auctionsniper.Main [] - in call as: main([localhost, sniper, sniper])
+6193 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 0, 0, Joining auction)
+9693 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-65432, 0, 0, Joining auction)
+9693 [main] INFO  acceptance.FakeAuctionServer [] - in call: receivesAMessage(...)
+		auction-item-54321@roco-3/Auction
+		msg from -->sniper@roco-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Command: JOIN;<--
+9743 [Smack Listener Processor (2)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-54321@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: PRICE; CurrentPrice: 500; Increment: 20; Bidder: other bidder;<--
+9763 [main] INFO  acceptance.FakeAuctionServer [] - in call: receivesAMessage(...)
+		auction-item-54321@roco-3/Auction
+		msg from -->sniper@roco-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Command: BID; Price: 520;<--
+9763 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 0, 0, FAILED!!!)
+9763 [Smack Listener Processor (2)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-54321@ROCO-3/Auction<--
+		msg rx'd -->a broken message<--
+9863 [main] INFO  acceptance.FakeAuctionServer [] - in call: receivesAMessage(...)
+		auction-item-65432@roco-3/Auction
+		msg from -->sniper@roco-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Command: JOIN;<--
+9863 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-65432, 600, 606, Bidding in auction)
+9863 [Smack Listener Processor (2)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-65432@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: PRICE; CurrentPrice: 600; Increment: 6; Bidder: other bidder;<--
+10063 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 0, 0, FAILED!!!)
+1771 [main] INFO  acceptance.FakeAuctionServer [] - in call: startSellingItem(), XMPP connected as -->auction-item-54321@roco-3/Auction<--
+1821 [Test App] INFO  auctionsniper.Main [] - in call as: main([localhost, sniper, sniper])
+5457 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 0, 0, Joining auction)
+5477 [main] INFO  acceptance.FakeAuctionServer [] - in call: receivesAMessage(...)
+		auction-item-54321@roco-3/Auction
+		msg from -->sniper@roco-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Command: JOIN;<--
+5537 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 1000, 1098, Bidding in auction)
+5537 [Smack Listener Processor (2)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-54321@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: PRICE; CurrentPrice: 1000; Increment: 98; Bidder: other bidder;<--
+5637 [main] INFO  acceptance.FakeAuctionServer [] - in call: receivesAMessage(...)
+		auction-item-54321@roco-3/Auction
+		msg from -->sniper@roco-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Command: BID; Price: 1098;<--
+5637 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 1197, 1098, Losing auction)
+5637 [Smack Listener Processor (2)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-54321@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: PRICE; CurrentPrice: 1197; Increment: 10; Bidder: third party;<--
+5737 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 1207, 1098, Losing auction)
+5737 [Smack Listener Processor (2)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-54321@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: PRICE; CurrentPrice: 1207; Increment: 10; Bidder: fourth party;<--
+5837 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 1207, 1098, Lost auction)
+5837 [Smack Listener Processor (2)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-54321@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: CLOSE;<--
+6217 [main] INFO  acceptance.FakeAuctionServer [] - in call: startSellingItem(), XMPP connected as -->auction-item-54321@roco-3/Auction<--
+6237 [Test App] INFO  auctionsniper.Main [] - in call as: main([localhost, sniper, sniper])
+9724 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 0, 0, Joining auction)
+9724 [main] INFO  acceptance.FakeAuctionServer [] - in call: receivesAMessage(...)
+		auction-item-54321@roco-3/Auction
+		msg from -->sniper@roco-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Command: JOIN;<--
+9724 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 0, 0, Lost auction)
+9734 [Smack Listener Processor (5)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-54321@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: CLOSE;<--
+10104 [main] INFO  acceptance.FakeAuctionServer [] - in call: startSellingItem(), XMPP connected as -->auction-item-54321@roco-3/Auction<--
+10264 [Test App] INFO  auctionsniper.Main [] - in call as: main([localhost, sniper, sniper])
+13835 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 0, 0, Joining auction)
+13835 [main] INFO  acceptance.FakeAuctionServer [] - in call: receivesAMessage(...)
+		auction-item-54321@roco-3/Auction
+		msg from -->sniper@roco-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Command: JOIN;<--
+13835 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 1000, 1098, Bidding in auction)
+13845 [Smack Listener Processor (8)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-54321@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: PRICE; CurrentPrice: 1000; Increment: 98; Bidder: other bidder;<--
+13945 [main] INFO  acceptance.FakeAuctionServer [] - in call: receivesAMessage(...)
+		auction-item-54321@roco-3/Auction
+		msg from -->sniper@roco-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Command: BID; Price: 1098;<--
+13945 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 1098, 1098, Winning auction)
+13945 [Smack Listener Processor (8)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-54321@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: PRICE; CurrentPrice: 1098; Increment: 97; Bidder: sniper@roco-3/Auction;<--
+14045 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 1098, 1098, Won auction!!! Bitches!)
+14045 [Smack Listener Processor (8)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-54321@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: CLOSE;<--
+14415 [main] INFO  acceptance.FakeAuctionServer [] - in call: startSellingItem(), XMPP connected as -->auction-item-65432@roco-3/Auction<--
+14425 [Test App] INFO  auctionsniper.Main [] - in call as: main([localhost, sniper, sniper])
+17975 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-65432, 0, 0, Joining auction)
+17975 [main] INFO  acceptance.FakeAuctionServer [] - in call: receivesAMessage(...)
+		auction-item-65432@roco-3/Auction
+		msg from -->sniper@roco-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Command: JOIN;<--
+17975 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-65432, 7877, 7946, Bidding in auction)
+17985 [Smack Listener Processor (11)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-65432@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: PRICE; CurrentPrice: 7877; Increment: 69; Bidder: other bidder;<--
+18085 [main] INFO  acceptance.FakeAuctionServer [] - in call: receivesAMessage(...)
+		auction-item-65432@roco-3/Auction
+		msg from -->sniper@roco-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Command: BID; Price: 7946;<--
+18085 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-65432, 7946, 7946, Winning auction)
+18085 [Smack Listener Processor (11)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-65432@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: PRICE; CurrentPrice: 7946; Increment: 222; Bidder: sniper@roco-3/Auction;<--
+18185 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-65432, 7946, 7946, Won auction!!! Bitches!)
+18185 [Smack Listener Processor (11)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-65432@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: CLOSE;<--
+18545 [main] INFO  acceptance.FakeAuctionServer [] - in call: startSellingItem(), XMPP connected as -->auction-item-54321@roco-3/Auction<--
+18565 [Test App] INFO  auctionsniper.Main [] - in call as: main([localhost, sniper, sniper])
+22066 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 0, 0, Joining auction)
+22066 [main] INFO  acceptance.FakeAuctionServer [] - in call: receivesAMessage(...)
+		auction-item-54321@roco-3/Auction
+		msg from -->sniper@roco-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Command: JOIN;<--
+22066 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 900, 948, Bidding in auction)
+22076 [Smack Listener Processor (14)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-54321@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: PRICE; CurrentPrice: 900; Increment: 48; Bidder: other bidder;<--
+22176 [main] INFO  acceptance.FakeAuctionServer [] - in call: receivesAMessage(...)
+		auction-item-54321@roco-3/Auction
+		msg from -->sniper@roco-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Command: BID; Price: 948;<--
+22176 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 900, 948, Lost auction)
+22176 [Smack Listener Processor (14)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-54321@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: CLOSE;<--
+22536 [main] INFO  acceptance.FakeAuctionServer [] - in call: startSellingItem(), XMPP connected as -->auction-item-54321@roco-3/Auction<--
+22616 [main] INFO  acceptance.FakeAuctionServer [] - in call: startSellingItem(), XMPP connected as -->auction-item-65432@roco-3/Auction<--
+22626 [Test App] INFO  auctionsniper.Main [] - in call as: main([localhost, sniper, sniper])
+26106 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 0, 0, Joining auction)
+29550 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-65432, 0, 0, Joining auction)
+29550 [main] INFO  acceptance.FakeAuctionServer [] - in call: receivesAMessage(...)
+		auction-item-54321@roco-3/Auction
+		msg from -->sniper@roco-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Command: JOIN;<--
+29550 [Smack Listener Processor (17)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-54321@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: PRICE; CurrentPrice: 500; Increment: 20; Bidder: other bidder;<--
+29560 [main] INFO  acceptance.FakeAuctionServer [] - in call: receivesAMessage(...)
+		auction-item-54321@roco-3/Auction
+		msg from -->sniper@roco-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Command: BID; Price: 520;<--
+29560 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 0, 0, FAILED!!!)
+29560 [Smack Listener Processor (17)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-54321@ROCO-3/Auction<--
+		msg rx'd -->a broken message<--
+29660 [main] INFO  acceptance.FakeAuctionServer [] - in call: receivesAMessage(...)
+		auction-item-65432@roco-3/Auction
+		msg from -->sniper@roco-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Command: JOIN;<--
+29660 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-65432, 600, 606, Bidding in auction)
+29660 [Smack Listener Processor (17)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-65432@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: PRICE; CurrentPrice: 600; Increment: 6; Bidder: other bidder;<--
+29800 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 0, 0, FAILED!!!)
+30220 [main] INFO  acceptance.FakeAuctionServer [] - in call: startSellingItem(), XMPP connected as -->auction-item-54321@roco-3/Auction<--
+30300 [main] INFO  acceptance.FakeAuctionServer [] - in call: startSellingItem(), XMPP connected as -->auction-item-65432@roco-3/Auction<--
+30450 [Test App] INFO  auctionsniper.Main [] - in call as: main([localhost, sniper, sniper])
+33938 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 0, 0, Joining auction)
+37472 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-65432, 0, 0, Joining auction)
+37472 [main] INFO  acceptance.FakeAuctionServer [] - in call: receivesAMessage(...)
+		auction-item-54321@roco-3/Auction
+		msg from -->sniper@roco-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Command: JOIN;<--
+37472 [main] INFO  acceptance.FakeAuctionServer [] - in call: receivesAMessage(...)
+		auction-item-65432@roco-3/Auction
+		msg from -->sniper@roco-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Command: JOIN;<--
+37482 [Smack Listener Processor (20)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-54321@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: PRICE; CurrentPrice: 1000; Increment: 98; Bidder: other bidder;<--
+37492 [main] INFO  acceptance.FakeAuctionServer [] - in call: receivesAMessage(...)
+		auction-item-54321@roco-3/Auction
+		msg from -->sniper@roco-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Command: BID; Price: 1098;<--
+37492 [Smack Listener Processor (20)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-65432@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: PRICE; CurrentPrice: 500; Increment: 21; Bidder: other bidder;<--
+37492 [main] INFO  acceptance.FakeAuctionServer [] - in call: receivesAMessage(...)
+		auction-item-65432@roco-3/Auction
+		msg from -->sniper@roco-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Command: BID; Price: 521;<--
+37502 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 1098, 1098, Winning auction)
+37502 [Smack Listener Processor (20)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-54321@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: PRICE; CurrentPrice: 1098; Increment: 97; Bidder: sniper@roco-3/Auction;<--
+37502 [Smack Listener Processor (20)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-65432@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: PRICE; CurrentPrice: 521; Increment: 22; Bidder: sniper@roco-3/Auction;<--
+37602 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-65432, 521, 521, Winning auction)
+37602 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-54321, 1098, 1098, Won auction!!! Bitches!)
+37602 [Smack Listener Processor (20)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-65432@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: CLOSE;<--
+37602 [Smack Listener Processor (20)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-54321@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: CLOSE;<--
+37702 [main] INFO  acceptance.AuctionSniperDriver [] - in call as: showSniperStatus(item-65432, 521, 521, Won auction!!! Bitches!)
+1941 [main] INFO  acceptance.FakeAuctionServer [] - in call: startSellingItem(), XMPP connected as -->auction-item-54321@roco-3/Auction<--
+2381 [main] INFO  acceptance.FakeAuctionServer [] - in call: receivesAMessage(...)
+		auction-item-54321@roco-3/Auction
+		msg from -->sniper@roco-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Command: JOIN;<--
+2401 [Smack Listener Processor (1)] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->auction-item-54321@ROCO-3/Auction<--
+		msg rx'd -->SQLVersion: 1.1; Event: CLOSE;<--
+1351 [main] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->unit_test<--
+		msg rx'd -->SQLVersion: 1.1; Event: PRICE; CurrentPrice: 192; Increment: 7; Bidder: Someone else;<--
+1391 [main] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->unit_test<--
+		msg rx'd -->SQLVersion: 1.1; Event: PRICE; CurrentPrice: 234; Bidder: billyBob@roco-3/Auction;<--
+1411 [main] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->unit_test<--
+		msg rx'd -->SQLVersion: 1.1; Event: CLOSE<--
+1431 [main] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->unit_test<--
+		msg rx'd -->SQLVersion: 1.1; Event: PRICE; CurrentPrice: 234; Increment: 5;<--
+1621 [main] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->unit_test<--
+		msg rx'd -->SQLVersion: 1.1; CurrentPrice: 234; Increment: 5; Bidder: billyBob@roco-3/Auction;<--
+1651 [main] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->unit_test<--
+		msg rx'd -->SQLVersion: 1.1; Event: PRICE; Increment: 5; Bidder: billyBob@roco-3/Auction;<--
+1681 [main] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->unit_test<--
+		msg rx'd -->a bad unit test message<--
+1851 [main] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->unit_test<--
+		msg rx'd -->a bad UT message<--
+1881 [main] INFO  xmpp.AuctionMessageTranslator [] - in call: processMessage(...)
+		msg from -->unit_test<--
+		msg rx'd -->SQLVersion: 1.1; Event: PRICE; CurrentPrice: 234; Increment: 5; Bidder: billyBob@roco-3/Auction;<--

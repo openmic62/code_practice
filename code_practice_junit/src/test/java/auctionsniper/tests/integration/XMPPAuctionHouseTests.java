@@ -51,32 +51,32 @@
  set TD=src\test\java
 
  cd student\code_practice_junit
- javac -cp %CLASSPATH%;%SC% -d %SC% %SD%\auctionsniper\xmpp\XMPPAuction.java
- javac -cp %CLASSPATH%;%SC%;%TC% -d %TC% %TD%\auctionsniper\tests\integration\XMPPAuctionTests.java
- java  -cp %CLASSPATH%;%SC%;%TC% org.junit.runner.JUnitCore auctionsniper.tests.integration.XMPPAuctionTests
- ant runtest -DtestClass=XMPPAuctionTests
+ javac -cp %CLASSPATH%;%SC% -d %SC% %SD%\auctionsniper\xmpp\XMPPAuctionHouse.java
+ javac -cp %CLASSPATH%;%SC%;%TC% -d %TC% %TD%\auctionsniper\tests\integration\XMPPAuctionHouseTests.java
+ java  -cp %CLASSPATH%;%SC%;%TC% org.junit.runner.JUnitCore auctionsniper.tests.integration.XMPPAuctionHouseTests
+ ant runtest -DtestClass=XMPPAuctionHouseTests
  
- ***** build the XMPPAuction source file
+ ***** build the XMPPAuctionHouse source file
  H:\>cd student\code_practice_junit
  H:\student\code_practice_junit>l
  H:\student\code_practice_junit>echo %CLASSPATH%
- H:\student\code_practice_junit>set XA_FILES=XMPPAuction.java
+ H:\student\code_practice_junit>set XA_FILES=XMPPAuctionHouse.java
  H:\student\code_practice_junit>echo %XA_FILES%
  H:\student\code_practice_junit>javac -cp %CLASSPATH%;%SC% -d %SC% %SD%\auctionsniper\%XA_FILES%
-                                javac -cp %CLASSPATH%;%SC% -d %SC% %SD%\auctionsniper\XMPPAuction.java
+                                javac -cp %CLASSPATH%;%SC% -d %SC% %SD%\auctionsniper\XMPPAuctionHouse.java
                                 
- ***** build the Tests XMPPAuctionTests
- H:\student\code_practice_junit>javac -cp %CLASSPATH%;%SC%;%TC% -d %TC% %TD%\auctionsniper\tests\integration\XMPPAuctionTests.java
+ ***** build the Tests XMPPAuctionHouseTests
+ H:\student\code_practice_junit>javac -cp %CLASSPATH%;%SC%;%TC% -d %TC% %TD%\auctionsniper\tests\integration\XMPPAuctionHouseTests.java
  
  ***** run the Tests (command line Java)
- H:\student\code_practice_junit>java  -cp %CLASSPATH%;%SC%;%TC% org.junit.runner.JUnitCore auctionsniper.tests.integration.XMPPAuctionTests
+ H:\student\code_practice_junit>java  -cp %CLASSPATH%;%SC%;%TC% org.junit.runner.JUnitCore auctionsniper.tests.integration.XMPPAuctionHouseTests
  
  ***** run the Tests (command line Ant)
  H:\student\code_practice_junit>ant clean_all
- H:\student\code_practice_junit>ant runtest -DtestClass=XMPPAuctionTests
+ H:\student\code_practice_junit>ant runtest -DtestClass=XMPPAuctionHouseTests
 
  ***** run the Tests (command line Maven)
- H:\student\code_practice_junit>mvn antrun:run test -Dtest=XMPPAuctionTests
+ H:\student\code_practice_junit>mvn antrun:run test -Dtest=XMPPAuctionHouseTests
  */ 
 package auctionsniper.tests.integration;
 
@@ -119,7 +119,8 @@ public class XMPPAuctionHouseTests {
 		
 	  XMPPAuctionHouse auctionHouse = makeAuctionHouse(HOSTNAME, USERNAME, PASSWORD);
 	  XMPPConnection   connection   = auctionHouse.connection;
-		Auction auction = new XMPPAuction(connection, auctionServer.getItemID());
+		//Auction auction = new XMPPAuction(connection, auctionServer.getItemID());
+		Auction auction = new XMPPAuction(connection, auctionServer.getItemID(),null);
 		auction.addAuctionEventListener(auctionClosedListener(auctionWasClosed));
 		
 		auction.join();

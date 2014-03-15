@@ -16,7 +16,7 @@
 		</File>
 	</Appenders>
 	<Loggers>
-		<Root level="warn">
+		<Root level="info">
 			<AppenderRef ref="AuctionSniperLog"/>
 			<AppenderRef ref="Console"/>
 		</Root>
