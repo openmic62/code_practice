@@ -8,6 +8,8 @@ http://stackoverflow.com/questions/7296785/using-nested-enum-types-in-java
  set CLASSPATH=%WL%;%CLASSPATH%
  set JM=lib\jmock-2.6.0.jar;lib\jmock-junit4-2.6.0.jar
  set CLASSPATH=%JM%;%CLASSPATH%
+ set JML=lib\jmock-legacy-2.6.0.jar;lib\cglib-nodep-2.2.3.jar;lib\objenesis-1.0.jar
+ set CLASSPATH=%JML%;%CLASSPATH%
  set L4J2=lib\log4j-api-2.0-rc1.jar;lib\log4j-core-2.0-rc1.jar
  set CLASSPATH=%L4J2%;%CLASSPATH%
  set ACL3=lib\commons-lang3-3.1.jar
