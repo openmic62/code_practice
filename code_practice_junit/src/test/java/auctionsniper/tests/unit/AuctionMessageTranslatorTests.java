@@ -36,6 +36,8 @@
  set CLASSPATH=%WL%;%CLASSPATH%
  set JM=lib\jmock-2.6.0.jar;lib\jmock-junit4-2.6.0.jar
  set CLASSPATH=%JM%;%CLASSPATH%
+ set JML=lib\jmock-legacy-2.6.0.jar;lib\cglib-nodep-2.2.3.jar;lib\objenesis-1.0.jar
+ set CLASSPATH=%JML%;%CLASSPATH%
  set L4J2=lib\log4j-api-2.0-rc1.jar;lib\log4j-core-2.0-rc1.jar
  set CLASSPATH=%L4J2%;%CLASSPATH%
  set ACL3=lib\commons-lang3-3.1.jar
@@ -47,7 +49,6 @@
  set TC=target\test-classes
  set SD=src\main\java
  set TD=src\test\java
- g:
  cd student\code_practice_junit
  javac -cp %CLASSPATH%;%SC% -d %SC% %SD%\auctionsniper\xmpp\AuctionMessageTranslator.java
  javac -cp %CLASSPATH%;%SC%;%TC% -d %TC% %TD%\auctionsniper\tests\\unit\AuctionMessageTranslatorTests.java
@@ -89,6 +90,7 @@ import org.jivesoftware.smack.packet.Message;
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JUnitRuleMockery;
 
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -100,11 +102,14 @@ public class AuctionMessageTranslatorTests {
 	private final XMPPFailureReporter  failureReporter = context.mock(XMPPFailureReporter.class);
 	private final String SNIPER_XMPP_ID = String.format("billyBob@%s/Auction", AuctionSniperTestUtilities.myGetHostName());
 	
-	private final AuctionMessageTranslator translator = new AuctionMessageTranslator(SNIPER_XMPP_ID, listener);
+	//private final AuctionMessageTranslator translator = new AuctionMessageTranslator(SNIPER_XMPP_ID, listener);
+	private final AuctionMessageTranslator translator = new AuctionMessageTranslator(SNIPER_XMPP_ID, listener, failureReporter);
 	
 	// <mlr 140311: begin - add failure reporting code>
-	@Test public void 
-	notifiesAuctionFailurWhenBadMessageReceived() {
+	@Test
+	//@Ignore
+	public void 
+	notifiesAuctionFailureWhenBadMessageReceived() {
 		String badMessage = "a bad UT message";
 		expectFailureWithMessage(badMessage);
 		translator.processMessage(UNUSED_CHAT, message(badMessage));
@@ -118,78 +123,95 @@ public class AuctionMessageTranslatorTests {
 	
 	private void expectFailureWithMessage(final String badMessage) {
 		context.checking(new Expectations() {{
-			oneOf(listener).auctionFailed();
 			oneOf(failureReporter).cannotTranslateMessage(
 			                         with(SNIPER_XMPP_ID), 
 			                         with(badMessage),
 			                         with(any(Exception.class)));
+			oneOf(listener).auctionFailed();
 	  }});
 	}
 	// <mlr 140311: end - add failure reporting code>
 	
 	// <mlr 140310: begin - add failure detection code>
-	@Test public void 
+	@Test
+	//@Ignore
+	public void 
 	notifiesAuctionFailedWhenBadMessageReceived() {
+		final String badMessage = "a bad unit test message";
 		context.checking(new Expectations() {{
-			exactly(1).of(listener).auctionFailed();
+			expectFailureWithMessage(badMessage);
 		}});
 		
 		Message message = new Message();
-		message.setBody("a bad unit test message");
+		message.setBody(badMessage);
 		
 		translator.processMessage(UNUSED_CHAT, message);
 	}
 	
-	@Test public void 
+	@Test
+	//@Ignore
+	public void 
 	notifiesAuctionFailedWhenEventTypeMissing() {
+		final String badMessage = "SQLVersion: 1.1; CurrentPrice: 234; Increment: 5; Bidder: " + SNIPER_XMPP_ID + ";";
 		context.checking(new Expectations() {{
-			exactly(1).of(listener).auctionFailed();
+			expectFailureWithMessage(badMessage);
 		}});
 		
 		Message message = new Message();
-		message.setBody("SQLVersion: 1.1; CurrentPrice: 234; Increment: 5; Bidder: " + SNIPER_XMPP_ID + ";");
+		message.setBody(badMessage);
 		
 		translator.processMessage(UNUSED_CHAT, message);
 	}
 	
-	@Test public void 
+	@Test
+	//@Ignore
+	public void 
 	notifiesAuctionFailedWhenCurrentPriceMissing() {
+		final String badMessage = "SQLVersion: 1.1; Event: PRICE; Increment: 5; Bidder: " + SNIPER_XMPP_ID + ";";
 		context.checking(new Expectations() {{
-			exactly(1).of(listener).auctionFailed();
+			expectFailureWithMessage(badMessage);
 		}});
 		
 		Message message = new Message();
-		message.setBody("SQLVersion: 1.1; Event: PRICE; Increment: 5; Bidder: " + SNIPER_XMPP_ID + ";");
+		message.setBody(badMessage);
 		
 		translator.processMessage(UNUSED_CHAT, message);
 	}
 	
-	@Test public void 
+	@Test
+	//@Ignore
+	public void 
 	notifiesAuctionFailedWhenIncrementMissing() {
+		final String badMessage = "SQLVersion: 1.1; Event: PRICE; CurrentPrice: 234; Bidder: " + SNIPER_XMPP_ID + ";";
 		context.checking(new Expectations() {{
-			exactly(1).of(listener).auctionFailed();
+			expectFailureWithMessage(badMessage);
 		}});
 		
 		Message message = new Message();
-		message.setBody("SQLVersion: 1.1; Event: PRICE; CurrentPrice: 234; Bidder: " + SNIPER_XMPP_ID + ";");
+		message.setBody(badMessage);
 		
 		translator.processMessage(UNUSED_CHAT, message);
 	}
 	
-	@Test public void 
+	@Test
+	//@Ignore
+	public void 
 	notifiesAuctionFailedWhenBidderMissing() {
+		final String badMessage = "SQLVersion: 1.1; Event: PRICE; CurrentPrice: 234; Increment: 5;";
 		context.checking(new Expectations() {{
-			exactly(1).of(listener).auctionFailed();
+			expectFailureWithMessage(badMessage);
 		}});
 		
 		Message message = new Message();
-		message.setBody("SQLVersion: 1.1; Event: PRICE; CurrentPrice: 234; Increment: 5;");
+		message.setBody(badMessage);
 		
 		translator.processMessage(UNUSED_CHAT, message);
 	}
 	// <mlr 140310: end - add failure detection code>
 	
-	@Test public void 
+	@Test
+	//@Ignore
+	public void 
 	notifiesAuctionClosedWhenCloseMessageReceived() {
 		context.checking(new Expectations() {{
 			oneOf(listener).auctionClosed();
@@ -201,7 +223,9 @@ public class AuctionMessageTranslatorTests {
 		translator.processMessage(UNUSED_CHAT, message);
 	}
 	
-	@Test public void
+	@Test
+	//@Ignore
+	public void
 	notifiesBidDetailsWhenPriceMessageReceivedFromOtherBidder() {
 		context.checking(new Expectations() {{
 			oneOf(listener).currentPrice(192, 7, AuctionEventListener.PriceSource.FromOtherBidder);
@@ -212,7 +236,9 @@ public class AuctionMessageTranslatorTests {
 		translator.processMessage(UNUSED_CHAT, message);
 	}
 	
-	@Test public void
+	@Test
+	//@Ignore
+	public void
 	notifiesBidDetailsWhenPriceMessageReceivedFromSniper() {
 		context.checking(new Expectations() {{
 			oneOf(listener).currentPrice(234, 5, AuctionEventListener.PriceSource.FromSniper);

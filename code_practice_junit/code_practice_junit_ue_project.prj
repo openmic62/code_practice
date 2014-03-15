@@ -244,6 +244,7 @@ Source Paths=
 [Files - Auction Sniper - test - integration]
 0=src\test\java\auctionsniper\tests\integration\MainWindowTests.java
 1=src\test\java\auctionsniper\tests\integration\XMPPAuctionHouseTests.java
+2=src\test\java\auctionsniper\tests\integration\LoggingXMPPFailureReporterTests.java
 [Files - Auction Sniper - src - auctionsniper - ui]
 0=src\main\java\auctionsniper\ui\MainWindow.java
 1=src\main\java\auctionsniper\ui\SnipersTableModel.java
@@ -257,3 +258,4 @@ Source Paths=
 3=src\main\java\auctionsniper\xmpp\AuctionHouse.java
 4=src\main\java\auctionsniper\xmpp\MissingValueException.java
 5=src\main\java\auctionsniper\xmpp\XMPPFailureReporter.java
+6=src\main\java\auctionsniper\xmpp\LoggingXMPPFailureReporter.java

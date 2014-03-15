@@ -23,10 +23,13 @@ public class AuctionMessageTranslator implements MessageListener {
 	
 	private AuctionEventListener auctionEventListener;
 	private String sniperXmppID;
+	private XMPPFailureReporter failureReporter;
 	
-	public AuctionMessageTranslator(String sniperXmppID, AuctionEventListener ael) {
+	//public AuctionMessageTranslator(String sniperXmppID, AuctionEventListener ael) {
+	public AuctionMessageTranslator(String sniperXmppID, AuctionEventListener ael, XMPPFailureReporter fr) {
 		this.auctionEventListener = ael;
 		this.sniperXmppID = sniperXmppID;
+		this.failureReporter = fr;
 	}
 	
 	@Override
@@ -34,10 +37,14 @@ public class AuctionMessageTranslator implements MessageListener {
 		logger.info("in call: processMessage(...)\n\t\tmsg from -->{}<--\n\t\tmsg rx'd -->{}<--", 
 		            chat != null ? chat.getParticipant(): "unit_test",
 		            message.getBody());
-	  
+		            
+    // <mlr 140312: add failure detection code>
+	  String messageBody = message.getBody();
 	  try {
 	  	translate(message.getBody());
 	  } catch (Exception parseException) {
+      // <mlr 140312: add failure detection code>
+	  	failureReporter.cannotTranslateMessage(sniperXmppID, messageBody, parseException);
 	  	auctionEventListener.auctionFailed();
 	  }
 	  

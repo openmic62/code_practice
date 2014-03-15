@@ -55,7 +55,8 @@ public class XMPPAuction implements Auction
 	
 	// <mlr 140310: begin - add failure detection code>
 	private AuctionMessageTranslator translatorFor(XMPPConnection connection) {
-		return new AuctionMessageTranslator(connection.getUser(), auctionEvents.announce());
+		//return new AuctionMessageTranslator(connection.getUser(), auctionEvents.announce());
+		return new AuctionMessageTranslator(connection.getUser(), auctionEvents.announce(), null); // null to appease the compiler god
 	}
 	
 	private AuctionEventListener
