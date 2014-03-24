@@ -33,19 +33,25 @@
  set CLASSPATH=%WL%;%CLASSPATH%
  set JM=lib\jmock-2.6.0.jar;lib\jmock-junit4-2.6.0.jar
  set CLASSPATH=%JM%;%CLASSPATH%
+ set JML=lib\jmock-legacy-2.6.0.jar;lib\cglib-nodep-2.2.3.jar;lib\objenesis-1.0.jar
+ set CLASSPATH=%JML%;%CLASSPATH%
  set L4J2=lib\log4j-api-2.0-rc1.jar;lib\log4j-core-2.0-rc1.jar
  set CLASSPATH=%L4J2%;%CLASSPATH%
+ set ACL3=lib\commons-lang3-3.1.jar
+ set CLASSPATH=%ACL3%;%CLASSPATH%
+ set ACIO=lib\commons-io-2.4.jar
+ set CLASSPATH=%ACIO%;%CLASSPATH%
  set SIH=src\test\scripts\SysinternalsSuite_131101
  set SC=target\classes
  set TC=target\test-classes
  set SD=src\main\java
  set TD=src\test\java
+
  cd student\code_practice_junit
  javac -cp %CLASSPATH%;%SC% -d %SC% %SD%\components\TableToolTipsDemo.java
  java -cp %CLASSPATH%;%SC%;%TC% components.TableToolTipsDemo
   
  */ 
-
 package components;
 
 /* 
