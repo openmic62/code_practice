@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<!-- The Basics -->
@@ -55,191 +56,210 @@
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-api</artifactId>
-			<version>2.0-beta9</version>
+			<version>2.0-rc1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
-			<version>2.0-beta9</version>
-		</dependency>	
+			<version>2.0-rc1</version>
+		</dependency>
 		<dependency>
-		  <groupId>org.jmock</groupId>
-		  <artifactId>jmock-junit4</artifactId>
-		  <version>2.6.0</version>
+			<groupId>org.jmock</groupId>
+			<artifactId>jmock-junit4</artifactId>
+			<version>2.6.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jmock</groupId>
+			<artifactId>jmock-legacy</artifactId>
+			<version>2.6.0</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-library</artifactId>
+			<version>1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-core</artifactId>
+			<version>1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-all</artifactId>
+			<version>1.3</version>
 		</dependency>
 	</dependencies>
-		<!-- The following parent object looks to me like it's needed to deploy to Sonatype OSS Maven Repository,
-		which pl.pragmatists did with JUnitParams -->
-		<parent>
-			<artifactId>oss-parent</artifactId>
-			<groupId>org.sonatype.oss</groupId>
-			<version>7</version>
-		</parent>
-		<dependencyManagement/>
-		<modules/>
-		<properties/>
+	<!-- The following parent object looks to me like it's needed to deploy 
+		to Sonatype OSS Maven Repository, which pl.pragmatists did with JUnitParams -->
+	<parent>
+		<artifactId>oss-parent</artifactId>
+		<groupId>org.sonatype.oss</groupId>
+		<version>7</version>
+	</parent>
+	<dependencyManagement />
+	<modules />
+	<properties />
 
-		<!-- Build Settings -->
-		<build>
-			<plugins>
-				<!-- <mlr 131117: begin - add capability to run Perl script that starts Openfire -->
-				<!-- http://stackoverflow.com/questions/3970753/how-to-run-an-ant-target-from-maven2
-				mvn antrun:run
-				mvn antrun:run -Dcommand=kill
-				-->
-				<plugin>
-					<artifactId>maven-antrun-plugin</artifactId>
-					<version>1.7</version>
-					<executions>
-						<execution>
-							<id>default-cli</id>
-							<configuration>
-								<tasks>
-									<ant target="run-perl-openfirectl"  inheritRefs="true"/>
-								</tasks>
-							</configuration>
-							<goals>
-								<goal>run</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
-				<!-- <mlr 131117: end - add capability to run Perl script that starts Openfire -->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.0</version>
-					<configuration>
-						<source>1.7</source>
-						<target>1.7</target>
-						<encoding>UTF-8</encoding>
-						<excludes/>
-					</configuration>
-					<!-- I need the following <executions> block to prevent a test file from compiling.
-					Source: http://stackoverflow.com/questions/3028612/maven-compiler-plugin-exclude
-					Test file to exclude: /H:/student/code_practice_junit/src/test/java/LogAnalyzerHWJMockitStubTests_130921_bad.java
-					-->
-					<executions>
-						<execution>
-							<id>default-testCompile</id>
-							<phase>test-compile</phase>
-							<configuration>
-								<testExcludes>
-									<exclude>**/*_bad.java</exclude>
-								</testExcludes>
-							</configuration>
-							<goals>
-								<goal>testCompile</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-javadoc-plugin</artifactId>
-					<version>2.9</version>
-					<configuration>
-						<sourcepath>${project.basedir}/src/main/javadoc;${project.basedir}/src/main/java</sourcepath>
-						<reportOutputDirectory>${project.basedir}</reportOutputDirectory>
-						<docfilessubdirs>false</docfilessubdirs>
-					</configuration>
-				</plugin>
-				
-				<!-- <mlr 131213: begin - insert comments for CLI to test various combinations> -->
-				<!--
-				     http://stackoverflow.com/questions/6819888/how-to-run-all-tests-in-a-particular-package-with-maven
-				     mvn test                                                 - all tests
-				     mvn test -Dtest=auctionsniper.tests.unit.*Tests          - AuctionSniper all unit tests only
-			 	     mvn antrun:run test -Dtest=AuctionMessageTranslatorTests - Auction Sniper only the specified unit test
-				     mvn antrun:run test -Dtest=auctionsniper.tests.*.*Tests  - start Openfire server, AuctionSniper acceptance and unit tests
-				     mvn antrun:run test -Dtest=AuctionSniperEndToEndTests    - start Openfire server, AuctionSniper acceptance tests only
-				-->
-				<!-- <mlr 131213: end - insert comments for CLI to test various combinations> -->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-surefire-plugin</artifactId>
-					<version>2.16</version>
-					<configuration>
-						<includes>
-							<include>**/*Tests.java</include>
-						</includes>
-						<excludes>
-							<exclude>**/ReentrantMockTest.java</exclude>
-						</excludes>
-					</configuration>
-				</plugin>
-				
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-jar-plugin</artifactId>
-					<version>2.4</version>
-					<configuration>
-						<archive>
-							<manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
-						</archive>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-release-plugin</artifactId>
-					<version>2.4</version>
-					<configuration>
-						<mavenExecutorId>forked-path</mavenExecutorId>
-						<useReleaseProfile>false</useReleaseProfile>
-						<arguments>-Psonatype-oss-release</arguments>
-					</configuration>
-				</plugin>
-			</plugins>
-		</build>
-		<reporting/>
-		<!-- More Project Information -->
-		<name>Auction Sniper</name>
-		<description>A Worked Example from the book Growing Object-Oriented Software, Guided by Tests</description>
-		<url>http://junitparams.googlecode.com</url>
-		<inceptionYear/>
-		<licenses>
-			<license>
-				<name>Apache 2</name>
-				<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-				<distribution>repo</distribution>
-				<comments>A business-friendly OSS license</comments>
-			</license>
-		</licenses>
-		<organization>
-			<name>Pragmatists</name>
-			<url>http://pragmatists.pl</url>
-		</organization>
-		<developers>
-			<developer>
-				<id>pawel.lipinski</id>
-				<name>Pawel Lipinski</name>
-				<email>pawel.lipinski@pragmatists.pl</email>
-				<organization>Pragmatists</organization>
-				<organizationUrl>http://pragmatists.pl</organizationUrl>
-			</developer>
-		</developers>
-		<contributors/>
-		<!-- Environment Settings -->
-		<issueManagement>
-			<system>Google Code</system>
-			<url>http://code.google.com/p/junitparams/issues/list</url>
-		</issueManagement>
-		<ciManagement/>
-		<mailingLists/>
-		<scm>
-			<connection>scm:hg:http://junitparams.googlecode.com/hg/</connection>
-			<developerConnection>scm:hg:https://junitparams.googlecode.com/hg/</developerConnection>
-			<url>http://junitparams.googlecode.com/hg/</url>
-			<tag>HEAD</tag>
-		</scm>
-		<prerequisites/>
-		<!-- For the reason why the next to tags stand commented, see
-		https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide#SonatypeOSSMavenRepositoryUsageGuide-6.CentralSyncRequirement -->
-		<!--
-		AVOID RELEASE REPOSITORY/PLUGINREPOSITORY:
-		<repositories></repositories>
-		<pluginRepositories></pluginRepositories>
-		-->
-		<distributionManagement/>
-		<profiles/>
-	</project>
+	<!-- Build Settings -->
+	<build>
+		<plugins>
+			<!-- <mlr 131117: begin - add capability to run Perl script that starts 
+				Openfire -->
+			<!-- http://stackoverflow.com/questions/3970753/how-to-run-an-ant-target-from-maven2 
+				mvn antrun:run mvn antrun:run -Dcommand=kill -->
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+						<id>default-cli</id>
+						<configuration>
+							<tasks>
+								<ant target="run-perl-openfirectl" inheritRefs="true" />
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- <mlr 131117: end - add capability to run Perl script that starts 
+				Openfire -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.0</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+					<encoding>UTF-8</encoding>
+					<excludes />
+				</configuration>
+				<!-- I need the following <executions> block to prevent a test file from 
+					compiling. Source: http://stackoverflow.com/questions/3028612/maven-compiler-plugin-exclude 
+					Test file to exclude: /H:/student/code_practice_junit/src/test/java/LogAnalyzerHWJMockitStubTests_130921_bad.java -->
+				<executions>
+					<execution>
+						<id>default-testCompile</id>
+						<phase>test-compile</phase>
+						<configuration>
+							<testExcludes>
+								<exclude>**/*_bad.java</exclude>
+							</testExcludes>
+						</configuration>
+						<goals>
+							<goal>testCompile</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9</version>
+				<configuration>
+					<sourcepath>${project.basedir}/src/main/javadoc;${project.basedir}/src/main/java</sourcepath>
+					<reportOutputDirectory>${project.basedir}</reportOutputDirectory>
+					<docfilessubdirs>false</docfilessubdirs>
+				</configuration>
+			</plugin>
+
+			<!-- <mlr 131213: begin - insert comments for CLI to test various combinations> -->
+			<!-- http://stackoverflow.com/questions/6819888/how-to-run-all-tests-in-a-particular-package-with-maven 
+				mvn test - all tests mvn test -Dtest=auctionsniper.tests.unit.*Tests - AuctionSniper 
+				all unit tests only mvn antrun:run test -Dtest=AuctionMessageTranslatorTests 
+				- Auction Sniper only the specified unit test mvn antrun:run test -Dtest=auctionsniper.tests.*.*Tests 
+				- start Openfire server, AuctionSniper acceptance and unit tests mvn antrun:run 
+				test -Dtest=AuctionSniperEndToEndTests - start Openfire server, AuctionSniper 
+				acceptance tests only -->
+			<!-- <mlr 131213: end - insert comments for CLI to test various combinations> -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.16</version>
+				<configuration>
+					<includes>
+						<include>**/*Tests.java</include>
+					</includes>
+					<excludes>
+						<exclude>**/ReentrantMockTest.java</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<archive>
+						<manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<mavenExecutorId>forked-path</mavenExecutorId>
+					<useReleaseProfile>false</useReleaseProfile>
+					<arguments>-Psonatype-oss-release</arguments>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<reporting />
+	<!-- More Project Information -->
+	<name>Auction Sniper</name>
+	<description>A Worked Example from the book Growing Object-Oriented Software, Guided by Tests</description>
+	<url>http://junitparams.googlecode.com</url>
+	<inceptionYear />
+	<licenses>
+		<license>
+			<name>Apache 2</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+			<comments>A business-friendly OSS license</comments>
+		</license>
+	</licenses>
+	<organization>
+		<name>Pragmatists</name>
+		<url>http://pragmatists.pl</url>
+	</organization>
+	<developers>
+		<developer>
+			<id>pawel.lipinski</id>
+			<name>Pawel Lipinski</name>
+			<email>pawel.lipinski@pragmatists.pl</email>
+			<organization>Pragmatists</organization>
+			<organizationUrl>http://pragmatists.pl</organizationUrl>
+		</developer>
+	</developers>
+	<contributors />
+	<!-- Environment Settings -->
+	<issueManagement>
+		<system>Google Code</system>
+		<url>http://code.google.com/p/junitparams/issues/list</url>
+	</issueManagement>
+	<ciManagement />
+	<mailingLists />
+	<scm>
+		<connection>scm:hg:http://junitparams.googlecode.com/hg/</connection>
+		<developerConnection>scm:hg:https://junitparams.googlecode.com/hg/</developerConnection>
+		<url>http://junitparams.googlecode.com/hg/</url>
+		<tag>HEAD</tag>
+	</scm>
+	<prerequisites />
+	<!-- For the reason why the next to tags stand commented, see https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide#SonatypeOSSMavenRepositoryUsageGuide-6.CentralSyncRequirement -->
+	<!-- AVOID RELEASE REPOSITORY/PLUGINREPOSITORY: <repositories></repositories> 
+		<pluginRepositories></pluginRepositories> -->
+	<distributionManagement />
+	<profiles />
+</project>
