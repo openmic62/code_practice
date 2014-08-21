@@ -22,6 +22,7 @@ VCS Default Module={12760A58-74E1-48ad-AB78-863CACF8557F}
 3=src\test\java\path_02_user.txt
 4=src\test\java\path_03_env.txt
 5=C:\dev\svn_working\code_practice\trunk\code_practice_junit\
+6=src\main\resources\modena.css
 [Group]
 0=ch02_a_first_unit_test
 1=ch02_a_first_unit_test - src

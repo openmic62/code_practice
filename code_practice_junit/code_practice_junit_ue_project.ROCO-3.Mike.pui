@@ -1,26 +1,36 @@
 [Open Files]
 Active File Display Mode=1
-Active File Index=0
+Active File Index=4
 Open File Line0=0
 Open File Line1=0
 Open File Line2=0
+Open File Line3=0
+Open File Line4=0
 Open File Pos0=948
 Open File Pos1=0
 Open File Pos2=0
-Open File Window Pos0=0,1,-1,-1,-1,-1,3,31,1213,712
-Open File Window Pos1=0,1,-1,-1,-1,-1,3,31,1213,712
-Open File Window Pos2=0,1,-1,-1,-1,-1,3,31,1213,712
+Open File Pos3=307
+Open File Pos4=0
+Open File Window Pos0=0,1,-1,-1,-1,-1,3,60,1160,712
+Open File Window Pos1=0,1,-1,-1,-1,-1,3,60,1160,712
+Open File Window Pos2=0,1,-1,-1,-1,-1,3,60,1160,712
+Open File Window Pos3=0,1,-1,-1,-1,-1,3,60,1160,712
+Open File Window Pos4=0,1,-1,-1,-1,-1,3,60,1160,712
 Open File0=.\src\test\java\auctionsniper\tests\acceptance\AuctionSniperEndToEndTests.java
 Open File1=.\src\test\java\auctionsniper\tests\acceptance\ApplicationRunner.java
 Open File2=.\src\test\java\auctionsniper\tests\acceptance\AuctionSniperDriver.java
-Open File3=
+Open File3=.\src\main\java\PropertiesManager.java
+Open File4=.\src\test\java\path_01_system.txt
+Open File5=
 Remember Files=1
 
 [Project Information]
 Project Start=DE070400040003000A0025000300000022
-Working Time=1258
+Working Time=1352
 
 [Folders]
+00_learning_curve_src_files=1
+Auction Sniper - src=1
 Auction Sniper - src - auctionsniper=1
 Auction Sniper - test - acceptance=1
 Auction Sniper - test - integration=1
@@ -29,4 +39,4 @@ C:\Users\Mike\Documents\trunk\ - code_practice_junit - src - main - java - aucti
 C:\dev\svn_working\code_practice\trunk\code_practice_junit\ - src - main=1
 tdd - money_example=1
 tdd - money_example - src=1
-Auction Sniper - src=1
+
