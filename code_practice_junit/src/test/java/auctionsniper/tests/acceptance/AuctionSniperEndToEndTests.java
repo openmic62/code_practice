@@ -65,28 +65,25 @@
  ant runtest -DtestClass=AuctionSniperEndToEndTests
  
  ***** build the FakeAuctionServer source file
- H:\>cd student\code_practice_junit
- H:\student\code_practice_junit>l
- H:\student\code_practice_junit>echo %CLASSPATH%
- H:\student\code_practice_junit>set FAS_FILES=FakeAuctionServer.java
- H:\student\code_practice_junit>echo %FAS_FILES%
- H:\student\code_practice_junit>javac -cp %CLASSPATH%;%SC% -d %SC% %SD%\auctionsniper\%FAS_FILES%
-                                javac -cp %CLASSPATH%;%SC% -d %SC% %SD%\auctionsniper\Main.java
-                                
-                                logger.info("message received -->{}<--", message.getBody());
+ cd student\code_practice_junit
+ l
+ echo %CLASSPATH%
+ set FAS_FILES=FakeAuctionServer.java
+ echo %FAS_FILES%
+ javac -cp %CLASSPATH%;%SC% -d %SC% %TD%\auctionsniper\tests\acceptance\%FAS_FILES%
                                                                
  ***** build the Tests AuctionSniperEndToEndTests
- H:\student\code_practice_junit>javac -cp %CLASSPATH%;%SC%;%TC% -d %TC% %TD%\auctionsniper\tests\acceptance\AuctionSniperEndToEndTests.java
+ javac -cp %CLASSPATH%;%SC%;%TC% -d %TC% %TD%\auctionsniper\tests\acceptance\AuctionSniperEndToEndTests.java
  
  ***** run the Tests (command line Java)
- H:\student\code_practice_junit>java  -cp %CLASSPATH%;%SC%;%TC% org.junit.runner.JUnitCore auctionsniper.tests.acceptance.AuctionSniperEndToEndTests
+ java  -cp %CLASSPATH%;%SC%;%TC% org.junit.runner.JUnitCore auctionsniper.tests.acceptance.AuctionSniperEndToEndTests
  
  ***** run the Tests (command line Ant)
- H:\student\code_practice_junit>ant clean_all
- H:\student\code_practice_junit>ant runtest -DtestClass=AuctionSniperEndToEndTests
+ ant clean_all
+ ant runtest -DtestClass=AuctionSniperEndToEndTests
 
  ***** run the Tests (command line Maven)
- H:\student\code_practice_junit>mvn antrun:run test -Dtest=AuctionSniperEndToEndTests
+ mvn antrun:run test -Dtest=AuctionSniperEndToEndTests
  
    http://stackoverflow.com/questions/6819888/how-to-run-all-tests-in-a-particular-package-with-maven
    mvn test                                                 - all tests
