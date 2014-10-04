@@ -1,0 +1,25 @@
+
+# /code_practice_junit/
+/code_practice_junit/.settings
+/code_practice_junit/.classpath
+/code_practice_junit/.project
+/code_practice_junit/auction-sniper.log.1
+/code_practice_junit/AuctionSniper.prw
+/code_practice_junit/code_practice_junit_ue_project.udp
+
+# /code_practice_junit/lib/
+/code_practice_junit/lib/ant-contrib-1.0b3-bin.zip
+/code_practice_junit/lib/ant-contrib-1.0b3-src.zip
+/code_practice_junit/lib/apache-log4j-2.0-beta9-bin.zip
+/code_practice_junit/lib/commons-beanutils-1.9.0-bin.zip
+/code_practice_junit/lib/commons-io-2.4-bin.zip
+/code_practice_junit/lib/commons-io-2.4-src.zip
+/code_practice_junit/lib/commons-lang3-3.1-bin.zip
+/code_practice_junit/lib/hamcrest-1.3.zip
+/code_practice_junit/lib/jmock-2.6.0-jars.zip
+/code_practice_junit/lib/jmock-2.6.0-javadoc.zip
+/code_practice_junit/lib/openfire_3_8_2.zip
+/code_practice_junit/lib/smack_3_3_1.zip
+
+# /code_practice_junit/src/test/scripts/
+/code_practice_junit/src/test/scripts/SysinternalsSuite_131101.zip
