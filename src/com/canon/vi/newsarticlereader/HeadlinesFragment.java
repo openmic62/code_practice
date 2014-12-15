@@ -84,9 +84,11 @@ public class HeadlinesFragment extends ListFragment {
 		 * android.R.layout.simple_list_item_1, android.R.id.text1,
 		 * ArticlesContent.ARTICLES));
 		 */
-		highlightedItemArrayAdapter = new HighlightedItemArrayAdapter<ArticlesContent.Article>(
+/*		highlightedItemArrayAdapter = new HighlightedItemArrayAdapter<ArticlesContent.Article>(
 				getActivity(), android.R.layout.simple_list_item_1,
 				android.R.id.text1, ArticlesContent.ARTICLES);
+*/		highlightedItemArrayAdapter = new HighlightedItemArrayAdapter<ArticlesContent.Article>(
+				getActivity(), R.layout.fragment_headlines, ArticlesContent.ARTICLES);
 		setListAdapter(highlightedItemArrayAdapter);
 	}
 

@@ -1,22 +1,15 @@
 package com.canon.vi.newsarticlereader;
 
-import com.canon.vi.newsarticlereader.content.ArticlesContent;
-
 import android.app.Activity;
-import android.app.ActionBar;
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
-import android.provider.MediaStore.Audio.ArtistColumns;
+import android.widget.TextView;
 
 public class MainActivity extends Activity implements
 		HeadlinesFragment.OnHeadlineClickedListener,
@@ -32,9 +25,15 @@ public class MainActivity extends Activity implements
 		super.onCreate(savedInstanceState);
 		Log.d("NAR", "MainActivity.onCreate - method called.");
 		setContentView(R.layout.activity_main);
-		HeadlinesFragment headlineFragment = HeadlinesFragment.newInstance(-1);
-		if (savedInstanceState == null) {
-			doFragmentTransaction(headlineFragment, "headlineFragment", TRANS_ACTION_ADD);
+		
+		View articleFragment = (TextView) findViewById(R.id.article_body);
+		if (true) {
+			HeadlinesFragment headlineFragment = HeadlinesFragment
+					.newInstance(-1);
+			if (savedInstanceState == null) {
+				doFragmentTransaction(headlineFragment, "headlineFragment",
+						TRANS_ACTION_ADD);
+			}
 		}
 	}
 
