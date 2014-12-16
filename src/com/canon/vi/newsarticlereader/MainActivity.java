@@ -47,10 +47,10 @@ public class MainActivity extends Activity implements
 
 	private void doActionOnFragment(Fragment fragment, String fragmentTag, int actionType) {
 		if (actionType == TRANS_ACTION_ADD) {
-			mTx.add(R.id.container, fragment, fragmentTag);
+			mTx.add(R.id.single_pane_container, fragment, fragmentTag);
 		}
 		else if (actionType == TRANS_ACTION_REPLACE) {
-			mTx.replace(R.id.container, fragment, fragmentTag);
+			mTx.replace(R.id.single_pane_container, fragment, fragmentTag);
 		}
 	}
 
