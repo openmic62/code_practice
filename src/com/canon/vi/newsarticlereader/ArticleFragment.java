@@ -79,11 +79,12 @@ public class ArticleFragment extends Fragment {
 	@Override
 	public void onStart() {
 		super.onStart();
-		int position = getArguments().getInt(ARG_POSITION);
-		updateViewWithArticleBody(position);
+		updateViewWithArticleBody(mPosition);
 	}
 
-	private void updateViewWithArticleBody(int position) {
+	protected void updateViewWithArticleBody(int position) {
+		if (position == -1)
+			return;
 		TextView textView = (TextView) getActivity().findViewById(
 				R.id.article_body);
 		String articleBody = "" + (position + 1) + " "
@@ -96,6 +97,12 @@ public class ArticleFragment extends Fragment {
 		if (mListener != null) {
 			mListener.onArticleAction(uri);
 		}
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putInt(ARG_POSITION, mPosition);
 	}
 
 	@Override

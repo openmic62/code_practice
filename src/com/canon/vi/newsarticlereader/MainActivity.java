@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 public class MainActivity extends Activity implements
@@ -17,17 +18,17 @@ public class MainActivity extends Activity implements
 
 	private static final int TRANS_ACTION_ADD = 1;
 	private static final int TRANS_ACTION_REPLACE = 2;
-	
+
 	private FragmentTransaction mTx;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Log.d("NAR", "MainActivity.onCreate - method called.");
 		setContentView(R.layout.activity_main);
-		
-		View articleFragment = (TextView) findViewById(R.id.article_body);
-		if (true) {
+
+		FrameLayout singlePaneContainer = (FrameLayout) findViewById(R.id.single_pane_container);
+		if (singlePaneContainer != null) {
 			HeadlinesFragment headlineFragment = HeadlinesFragment
 					.newInstance(-1);
 			if (savedInstanceState == null) {
@@ -37,7 +38,8 @@ public class MainActivity extends Activity implements
 		}
 	}
 
-	private void doFragmentTransaction(Fragment fragment, String fragmentTag, int actionType) {
+	private void doFragmentTransaction(Fragment fragment, String fragmentTag,
+			int actionType) {
 		mTx = getFragmentManager().beginTransaction();
 		doActionOnFragment(fragment, fragmentTag, actionType);
 		mTx.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
@@ -45,11 +47,11 @@ public class MainActivity extends Activity implements
 		mTx.commit();
 	}
 
-	private void doActionOnFragment(Fragment fragment, String fragmentTag, int actionType) {
+	private void doActionOnFragment(Fragment fragment, String fragmentTag,
+			int actionType) {
 		if (actionType == TRANS_ACTION_ADD) {
 			mTx.add(R.id.single_pane_container, fragment, fragmentTag);
-		}
-		else if (actionType == TRANS_ACTION_REPLACE) {
+		} else if (actionType == TRANS_ACTION_REPLACE) {
 			mTx.replace(R.id.single_pane_container, fragment, fragmentTag);
 		}
 	}
@@ -77,9 +79,14 @@ public class MainActivity extends Activity implements
 	public void onHeadlineClicked(int position) {
 		Log.d("NAR", "MainActivity.onHeadlineClicked - method called with: -->"
 				+ position + "<--");
-
-		ArticleFragment articleFragment = ArticleFragment.newInstance(position);
-		doFragmentTransaction(articleFragment, "articleFragment", TRANS_ACTION_REPLACE);
+		ArticleFragment articleFragment = (ArticleFragment) getFragmentManager()
+				.findFragmentById(R.id.fragment_article);
+		if (articleFragment == null) {
+			ArticleFragment af = ArticleFragment.newInstance(position);
+			doFragmentTransaction(af, "articleFragment", TRANS_ACTION_REPLACE);
+		} else {
+			articleFragment.updateViewWithArticleBody(position);
+		}
 	}
 
 	@Override
