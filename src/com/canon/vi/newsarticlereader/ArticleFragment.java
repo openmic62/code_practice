@@ -21,7 +21,7 @@ import android.widget.TextView;
  */
 public class ArticleFragment extends Fragment {
 
-	private static final String ARG_POSITION = "position";
+	private static final String CURRENT_ARTICLE_INDEX = "current.article.index";
 
 	// TODO: Rename and change types of parameters
 	private int mPosition = -1;
@@ -41,7 +41,7 @@ public class ArticleFragment extends Fragment {
 	public static ArticleFragment newInstance(int position) {
 		ArticleFragment fragment = new ArticleFragment();
 		Bundle args = new Bundle();
-		args.putInt(ARG_POSITION, position);
+		args.putInt(CURRENT_ARTICLE_INDEX, position);
 		fragment.setArguments(args);
 		return fragment;
 	}
@@ -65,7 +65,10 @@ public class ArticleFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		if (getArguments() != null) {
-			mPosition = getArguments().getInt(ARG_POSITION);
+			mPosition = getArguments().getInt(CURRENT_ARTICLE_INDEX);
+		}
+		if (savedInstanceState != null) {
+			mPosition = savedInstanceState.getInt(CURRENT_ARTICLE_INDEX);
 		}
 	}
 
@@ -102,7 +105,7 @@ public class ArticleFragment extends Fragment {
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putInt(ARG_POSITION, mPosition);
+		outState.putInt(CURRENT_ARTICLE_INDEX, mPosition);
 	}
 
 	@Override

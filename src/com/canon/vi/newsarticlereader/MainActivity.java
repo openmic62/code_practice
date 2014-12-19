@@ -85,6 +85,8 @@ public class MainActivity extends Activity implements
 			ArticleFragment af = ArticleFragment.newInstance(position);
 			doFragmentTransaction(af, "articleFragment", TRANS_ACTION_REPLACE);
 		} else {
+			Log.d("NAR",
+					"MainActivity.onHeadlineClicked - articleFragment != null");
 			articleFragment.updateViewWithArticleBody(position);
 		}
 	}

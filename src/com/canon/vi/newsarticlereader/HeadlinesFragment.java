@@ -31,7 +31,7 @@ public class HeadlinesFragment extends ListFragment {
 
 	// TODO: Rename parameter arguments, choose names that match
 	// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-	private static final String CURRENT_SELECTION = "current.selection";
+	private static final String CURRENT_HEADLINE_SELECTION = "current.headline.selection";
 
 	// TODO: Rename and change types of parameters
 	private int mItemCurrentlySelected = -1;
@@ -43,7 +43,7 @@ public class HeadlinesFragment extends ListFragment {
 	public static HeadlinesFragment newInstance(int currentSelection) {
 		HeadlinesFragment fragment = new HeadlinesFragment();
 		Bundle args = new Bundle();
-		args.putInt(CURRENT_SELECTION, currentSelection);
+		args.putInt(CURRENT_HEADLINE_SELECTION, currentSelection);
 		fragment.setArguments(args);
 		return fragment;
 	}
@@ -71,11 +71,11 @@ public class HeadlinesFragment extends ListFragment {
 		super.onCreate(savedInstanceState);
 
 		if (getArguments() != null) {
-			mItemCurrentlySelected = getArguments().getInt(CURRENT_SELECTION);
+			mItemCurrentlySelected = getArguments().getInt(CURRENT_HEADLINE_SELECTION);
 		}
 		if (savedInstanceState != null) {
 			mItemCurrentlySelected = savedInstanceState
-					.getInt(CURRENT_SELECTION);
+					.getInt(CURRENT_HEADLINE_SELECTION);
 		}
 
 		/*
@@ -89,6 +89,7 @@ public class HeadlinesFragment extends ListFragment {
 				android.R.id.text1, ArticlesContent.ARTICLES);
 */		highlightedItemArrayAdapter = new HighlightedItemArrayAdapter<ArticlesContent.Article>(
 				getActivity(), R.layout.fragment_headlines, ArticlesContent.ARTICLES);
+		highlightedItemArrayAdapter.setSelectedIndex(mItemCurrentlySelected);
 		setListAdapter(highlightedItemArrayAdapter);
 	}
 
@@ -102,7 +103,7 @@ public class HeadlinesFragment extends ListFragment {
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putInt(CURRENT_SELECTION, mItemCurrentlySelected);
+		outState.putInt(CURRENT_HEADLINE_SELECTION, mItemCurrentlySelected);
 	}
 
 	@Override
