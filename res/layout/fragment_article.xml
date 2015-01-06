@@ -1,16 +1,16 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_article"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.canon.vi.newsarticlereader.ArticleFragment" >
 
-    <!-- TODO: Update blank fragment layout -->
-
-    <TextView
+    TODO: Update blank fragment layout
+ -->
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/article_body"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+<!-- </FrameLayout> -->

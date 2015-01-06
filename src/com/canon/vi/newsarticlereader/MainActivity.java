@@ -80,7 +80,8 @@ public class MainActivity extends Activity implements
 		Log.d("NAR", "MainActivity.onHeadlineClicked - method called with: -->"
 				+ position + "<--");
 		ArticleFragment articleFragment = (ArticleFragment) getFragmentManager()
-				.findFragmentById(R.id.fragment_article);
+//				.findFragmentById(R.id.fragment_article);
+				.findFragmentById(R.id.article_body);
 		if (articleFragment == null) {
 			ArticleFragment af = ArticleFragment.newInstance(position);
 			doFragmentTransaction(af, "articleFragment", TRANS_ACTION_REPLACE);
