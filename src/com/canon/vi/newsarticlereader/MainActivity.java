@@ -14,9 +14,6 @@ public class MainActivity extends Activity implements
 		HeadlinesFragment.OnHeadlineClickedListener,
 		ArticleFragment.OnArticleActionListener {
 
-//	private static final int TRANS_ACTION_ADD = 1;
-//	private static final int TRANS_ACTION_REPLACE = 2;
-
 	private FragmentTransaction mTx;
 
 	@Override
@@ -39,22 +36,12 @@ public class MainActivity extends Activity implements
 
 	private void doFragmentTransaction(Fragment fragment, String fragmentTag) {
 		mTx = getFragmentManager().beginTransaction();
-//		doActionOnFragment(fragment, fragmentTag, actionType);
 		mTx.replace(R.id.single_pane_container, fragment, fragmentTag);
 		mTx.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 		mTx.addToBackStack(null);
 		mTx.commit();
 	}
 
-/*	private void doActionOnFragment(Fragment fragment, String fragmentTag, int actionType) {
-		if (actionType == TRANS_ACTION_ADD) {
-//			mTx.add(R.id.single_pane_container, fragment, fragmentTag);
-			mTx.replace(R.id.single_pane_container, fragment, fragmentTag);
-		} else if (actionType == TRANS_ACTION_REPLACE) {
-			mTx.replace(R.id.single_pane_container, fragment, fragmentTag);
-		}
-	}
-*/
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
