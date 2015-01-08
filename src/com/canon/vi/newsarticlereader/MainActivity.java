@@ -39,7 +39,8 @@ public class MainActivity extends Activity implements
 
 	private void doFragmentTransaction(Fragment fragment, String fragmentTag, int actionType) {
 		mTx = getFragmentManager().beginTransaction();
-		doActionOnFragment(fragment, fragmentTag, actionType);
+//		doActionOnFragment(fragment, fragmentTag, actionType);
+		mTx.replace(R.id.single_pane_container, fragment, fragmentTag);
 		mTx.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 		mTx.addToBackStack(null);
 		mTx.commit();
@@ -47,7 +48,8 @@ public class MainActivity extends Activity implements
 
 	private void doActionOnFragment(Fragment fragment, String fragmentTag, int actionType) {
 		if (actionType == TRANS_ACTION_ADD) {
-			mTx.add(R.id.single_pane_container, fragment, fragmentTag);
+//			mTx.add(R.id.single_pane_container, fragment, fragmentTag);
+			mTx.replace(R.id.single_pane_container, fragment, fragmentTag);
 		} else if (actionType == TRANS_ACTION_REPLACE) {
 			mTx.replace(R.id.single_pane_container, fragment, fragmentTag);
 		}
