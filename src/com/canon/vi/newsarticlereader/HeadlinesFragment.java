@@ -69,16 +69,7 @@ public class HeadlinesFragment extends ListFragment {
 					.getInt(CURRENT_HEADLINE_SELECTION);
 		}
 
-		/*
-		 * setListAdapter(new
-		 * ArrayAdapter<ArticlesContent.Article>(getActivity(),
-		 * android.R.layout.simple_list_item_1, android.R.id.text1,
-		 * ArticlesContent.ARTICLES));
-		 */
-/*		highlightedItemArrayAdapter = new HighlightedItemArrayAdapter<ArticlesContent.Article>(
-				getActivity(), android.R.layout.simple_list_item_1,
-				android.R.id.text1, ArticlesContent.ARTICLES);
-*/		highlightedItemArrayAdapter = new HighlightedItemArrayAdapter<ArticlesContent.Article>(
+		highlightedItemArrayAdapter = new HighlightedItemArrayAdapter<ArticlesContent.Article>(
 				getActivity(), R.layout.fragment_headlines, ArticlesContent.ARTICLES);
 		highlightedItemArrayAdapter.setSelectedIndex(mItemCurrentlySelected);
 		setListAdapter(highlightedItemArrayAdapter);

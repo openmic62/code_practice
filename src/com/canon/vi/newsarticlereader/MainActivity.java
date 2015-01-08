@@ -28,19 +28,16 @@ public class MainActivity extends Activity implements
 		FrameLayout singlePaneContainer = (FrameLayout) findViewById(R.id.single_pane_container);
 		if (singlePaneContainer != null) {
 			Log.d("MainActivity", "onCreate (single-pane)");
-			HeadlinesFragment headlineFragment = HeadlinesFragment
-					.newInstance(-1);
+			HeadlinesFragment headlineFragment = HeadlinesFragment.newInstance(-1);
 			if (savedInstanceState == null) {
-				doFragmentTransaction(headlineFragment, "headlineFragment",
-						TRANS_ACTION_ADD);
+				doFragmentTransaction(headlineFragment, "headlineFragment", TRANS_ACTION_ADD);
 			}
 		} else {
 			Log.d("MainActivity", "onCreate (dual-pane)");
 		}
 	}
 
-	private void doFragmentTransaction(Fragment fragment, String fragmentTag,
-			int actionType) {
+	private void doFragmentTransaction(Fragment fragment, String fragmentTag, int actionType) {
 		mTx = getFragmentManager().beginTransaction();
 		doActionOnFragment(fragment, fragmentTag, actionType);
 		mTx.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
@@ -48,8 +45,7 @@ public class MainActivity extends Activity implements
 		mTx.commit();
 	}
 
-	private void doActionOnFragment(Fragment fragment, String fragmentTag,
-			int actionType) {
+	private void doActionOnFragment(Fragment fragment, String fragmentTag, int actionType) {
 		if (actionType == TRANS_ACTION_ADD) {
 			mTx.add(R.id.single_pane_container, fragment, fragmentTag);
 		} else if (actionType == TRANS_ACTION_REPLACE) {
@@ -79,18 +75,16 @@ public class MainActivity extends Activity implements
 	@Override
 	public void onHeadlineClicked(int position) {
 		Log.d("MainActivity", "onHeadlineClicked - method called with: -->" + position + "<--");
-		ArticleFragment articleFragment = (ArticleFragment) getFragmentManager()
-//				.findFragmentById(R.id.fragment_article);
-//				.findFragmentById(R.id.article_body);
-				.findFragmentById(R.layout.fragment_article);
-//		if (articleFragment == null) {
+
 		if (findViewById(R.id.single_pane_container) != null) {
 			Log.d("MainActivity", "onHeadlineClicked: single-pane");
 			ArticleFragment af = ArticleFragment.newInstance(position);
 			doFragmentTransaction(af, "articleFragment", TRANS_ACTION_REPLACE);
 		} else {
 			Log.d("MainActivity", "onHeadlineClicked: dual-pane");
-			articleFragment.updateViewWithArticleBody(position);
+			ArticleFragment af = (ArticleFragment) getFragmentManager()
+				.findFragmentById(R.layout.fragment_article);
+			af.updateViewWithArticleBody(position);
 		}
 	}
 
