@@ -1,22 +1,13 @@
 package com.canon.vi.newsarticlereader;
 
-import java.util.List;
-
 import android.app.Activity;
 import android.app.ListFragment;
-import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.canon.vi.newsarticlereader.content.ArticlesContent;
-import com.canon.vi.newsarticlereader.content.ArticlesContent.Article;
 
 /**
  * A fragment representing a list of Items.
