@@ -24,6 +24,7 @@ public class ArticleFragment extends Fragment {
 
 	// TODO: Rename and change types of parameters
 	private int mPosition = -1;
+	View mArticleTextView;
 
 	private OnArticleActionListener mListener;
 
@@ -75,7 +76,9 @@ public class ArticleFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
-		return inflater.inflate(R.layout.fragment_article, container, false);
+		mArticleTextView = inflater.inflate(R.layout.fragment_article, container, false);
+		return mArticleTextView;
+//		return inflater.inflate(R.layout.fragment_article, container, false);
 	}
 
 	@Override
@@ -87,11 +90,10 @@ public class ArticleFragment extends Fragment {
 	protected void updateViewWithArticleBody(int position) {
 		if (position == -1)
 			return;
-		TextView textView = (TextView) getActivity().findViewById(
-				R.id.article_body);
-		String articleBody = "" + (position + 1) + " "
-				+ ArticlesContent.ARTICLES.get(position).getBody();
-		textView.setText(articleBody);
+//		TextView textView = (TextView) getActivity().findViewById(R.id.article_body);
+		String articleBody = "" + (position + 1) + " " + ArticlesContent.ARTICLES.get(position).getBody();
+		((TextView)mArticleTextView).setText(articleBody);
+//		textView.setText(articleBody);
 	}
 
 	// TODO: Rename method, update argument and hook method into UI event

@@ -111,7 +111,7 @@ public class HeadlinesFragment extends ListFragment {
 		highlightedItemArrayAdapter.setSelectedIndex(mItemCurrentlySelected);
 
 		if (null != mListener) {
-			Log.d("NAR", "HeadlineFragment.onListItemClick - method called");
+			Log.d("HeadlineFragment", "onListItemClick - method called");
 			// Notify the active callbacks interface (the activity, if the
 			// fragment is attached to one) that an item has been selected.
 			mListener.onHeadlineClicked(position);

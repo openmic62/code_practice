@@ -22,17 +22,20 @@ public class MainActivity extends Activity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Log.d("NAR", "MainActivity.onCreate - method called.");
+		Log.d("MainActivity", "onCreate - method called.");
 		setContentView(R.layout.activity_main);
 
 		FrameLayout singlePaneContainer = (FrameLayout) findViewById(R.id.single_pane_container);
 		if (singlePaneContainer != null) {
+			Log.d("MainActivity", "onCreate (single-pane)");
 			HeadlinesFragment headlineFragment = HeadlinesFragment
 					.newInstance(-1);
 			if (savedInstanceState == null) {
 				doFragmentTransaction(headlineFragment, "headlineFragment",
 						TRANS_ACTION_ADD);
 			}
+		} else {
+			Log.d("MainActivity", "onCreate (dual-pane)");
 		}
 	}
 
@@ -75,17 +78,18 @@ public class MainActivity extends Activity implements
 
 	@Override
 	public void onHeadlineClicked(int position) {
-		Log.d("NAR", "MainActivity.onHeadlineClicked - method called with: -->"
-				+ position + "<--");
+		Log.d("MainActivity", "onHeadlineClicked - method called with: -->" + position + "<--");
 		ArticleFragment articleFragment = (ArticleFragment) getFragmentManager()
 //				.findFragmentById(R.id.fragment_article);
-				.findFragmentById(R.id.article_body);
-		if (articleFragment == null) {
+//				.findFragmentById(R.id.article_body);
+				.findFragmentById(R.layout.fragment_article);
+//		if (articleFragment == null) {
+		if (findViewById(R.id.single_pane_container) != null) {
+			Log.d("MainActivity", "onHeadlineClicked: single-pane");
 			ArticleFragment af = ArticleFragment.newInstance(position);
 			doFragmentTransaction(af, "articleFragment", TRANS_ACTION_REPLACE);
 		} else {
-			Log.d("NAR",
-					"MainActivity.onHeadlineClicked - articleFragment != null");
+			Log.d("MainActivity", "onHeadlineClicked: dual-pane");
 			articleFragment.updateViewWithArticleBody(position);
 		}
 	}
@@ -93,7 +97,8 @@ public class MainActivity extends Activity implements
 	@Override
 	public void onArticleAction(Uri uri) {
 		// TODO Auto-generated method stub
-		Log.d("NAR", "MainActivity.onArticleAction - method called with: -->"
+		Log.d("MainActivity", "onArticleAction - method called with: -->"
 				+ uri + "<--");
 	}
 }
+
