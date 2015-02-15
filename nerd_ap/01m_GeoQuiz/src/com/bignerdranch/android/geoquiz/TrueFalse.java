@@ -4,6 +4,7 @@ public class TrueFalse {
 
 	private int mQuestion;
 	private boolean mTrueQuestion;
+	private boolean mAnswerCheated = false;
 	
 	public TrueFalse(int question, boolean trueQuestion) {
 		mQuestion = question;
@@ -24,6 +25,14 @@ public class TrueFalse {
 
 	public void setTrueQuestion(boolean trueQuestion) {
 		mTrueQuestion = trueQuestion;
+	}
+
+	public boolean isAnswerCheated() {
+		return mAnswerCheated;
+	}
+
+	public void setAnswerCheated(boolean answerCheated) {
+		mAnswerCheated = answerCheated;
 	}
 	
 }

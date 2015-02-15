@@ -1,7 +1,9 @@
 package com.bignerdranch.android.geoquiz;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,10 +13,18 @@ import android.widget.Toast;
 
 public class QuizActivity extends ActionBarActivity {
 
+	private int mCurrentIndex = 0;
+	private boolean mIsCheater;
+
 	private Button mTrueButton;
 	private Button mFalseButton;
 	private Button mNextButton;
+	private Button mCheatButton;
 	private TextView mQuestionTextView;
+
+	private static final String TAG = "QuizActivity";
+	private static final String KEY_INDEX = "index";
+	private static final String KEY_IS_CHEATER = "isCheater";
 
 	private TrueFalse[] mQuestionBank = new TrueFalse[] {
 			new TrueFalse(R.string.question_oceans, true),
@@ -23,14 +33,20 @@ public class QuizActivity extends ActionBarActivity {
 			new TrueFalse(R.string.question_americas, true),
 			new TrueFalse(R.string.question_asia, true), };
 
-	private int mCurrentIndex = 0;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Log.d(TAG, "onCreate(Bundle) called");
 		setContentView(R.layout.activity_quiz);
 
 		mQuestionTextView = (TextView) findViewById(R.id.question_text_view);
+
+		if (savedInstanceState != null) {
+			mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
+			// mIsCheater = savedInstanceState.getBoolean(KEY_IS_CHEATER, false);
+		}
+		mIsCheater = mQuestionBank[mCurrentIndex].isAnswerCheated();
+
 		updateQuestion();
 
 		mTrueButton = (Button) findViewById(R.id.true_button);
@@ -57,7 +73,21 @@ public class QuizActivity extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
+				//mIsCheater = false;
 				updateQuestion();
+			}
+		});
+
+		mCheatButton = (Button) findViewById(R.id.cheat_button);
+		mCheatButton.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(QuizActivity.this, CheatActivity.class);
+				boolean answerIsTrue = mQuestionBank[mCurrentIndex]
+						.isTrueQuestion();
+				i.putExtra(CheatActivity.EXTRA_IN_ANSWER_IS_TRUE, answerIsTrue);
+				startActivityForResult(i, 0);
 			}
 		});
 	}
@@ -70,12 +100,45 @@ public class QuizActivity extends ActionBarActivity {
 	private void checkAnswer(boolean userPressedTrue) {
 		int messageId = 0;
 		boolean answerIsTrue = mQuestionBank[mCurrentIndex].isTrueQuestion();
-		if (userPressedTrue == answerIsTrue) {
-			messageId = R.string.correct_toast;
+		if (mIsCheater) {
+			messageId = R.string.judgment_toast;
 		} else {
-			messageId = R.string.incorrect_toast;
+			if (userPressedTrue == answerIsTrue) {
+				messageId = R.string.correct_toast;
+			} else {
+				messageId = R.string.incorrect_toast;
+			}
 		}
 		Toast.makeText(this, messageId, Toast.LENGTH_SHORT).show();
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (data == null) {
+			return;
+		}
+		mIsCheater = data.getBooleanExtra(CheatActivity.EXTRA_OUT_ANSWER_SHOWN,
+				false);
+		persistCheatState(mIsCheater);
+	}
+
+	private void persistCheatState(boolean weAreCheating) {
+		boolean alreadyACheater = mQuestionBank[mCurrentIndex].isAnswerCheated();
+		if (alreadyACheater) {
+			return;
+		}
+		if (weAreCheating) {
+			mQuestionBank[mCurrentIndex].setAnswerCheated(mIsCheater);
+		}
+	}
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		Log.d(TAG, "onSaveInstanceState(Bundle) called");
+		outState.putInt(KEY_INDEX, mCurrentIndex);
+		outState.putBoolean(KEY_IS_CHEATER, mIsCheater);
 	}
 
 	@Override
@@ -95,5 +158,35 @@ public class QuizActivity extends ActionBarActivity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+		Log.d(TAG, "onstart() called");
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		Log.d(TAG, "onPause() called");
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		Log.d(TAG, "onResume() called");
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		Log.d(TAG, "onStop() called");
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		Log.d(TAG, "onDestroy() called");
 	}
 }
