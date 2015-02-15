@@ -2,6 +2,7 @@ package com.bignerdranch.android.geoquiz;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +16,9 @@ public class QuizActivity extends ActionBarActivity {
 	private Button mFalseButton;
 	private Button mNextButton;
 	private TextView mQuestionTextView;
+	
+	private static final String TAG = "QuizActivity";
+	private static final String KEY_INDEX = "index";
 
 	private TrueFalse[] mQuestionBank = new TrueFalse[] {
 			new TrueFalse(R.string.question_oceans, true),
@@ -28,9 +32,15 @@ public class QuizActivity extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Log.d(TAG, "onCreate(Bundle) called");
 		setContentView(R.layout.activity_quiz);
 
 		mQuestionTextView = (TextView) findViewById(R.id.question_text_view);
+
+		if (savedInstanceState != null) {
+			mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
+		}
+		
 		updateQuestion();
 
 		mTrueButton = (Button) findViewById(R.id.true_button);
@@ -77,6 +87,13 @@ public class QuizActivity extends ActionBarActivity {
 		}
 		Toast.makeText(this, messageId, Toast.LENGTH_SHORT).show();
 	}
+	
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		Log.d(TAG, "onSaveInstanceState(Bundle) called");
+		outState.putInt(KEY_INDEX, mCurrentIndex);
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -95,5 +112,35 @@ public class QuizActivity extends ActionBarActivity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	@Override
+	protected void onStart() {
+		super.onStart();
+		Log.d(TAG, "onstart() called");
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		Log.d(TAG, "onPause() called");
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		Log.d(TAG, "onResume() called");
+	}
+	
+	@Override
+	protected void onStop() {
+		super.onStop();
+		Log.d(TAG, "onStop() called");
+	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		Log.d(TAG, "onDestroy() called");
 	}
 }
