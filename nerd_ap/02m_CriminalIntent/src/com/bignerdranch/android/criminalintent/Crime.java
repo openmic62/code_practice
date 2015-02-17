@@ -8,29 +8,19 @@ public class Crime {
 	private String mTitle;
 	
 	public Crime() {
-		this(generateRandomUuid(), "default title");
-	}
-	
-	public Crime(UUID id, String title) {
-		this.mId = id;
-		this.mTitle = title;
-	}
-	
-	private static UUID generateRandomUuid() {
-		return UUID.randomUUID();
+		this.mId = UUID.randomUUID();
 	}
 
-	public String getmTitle() {
+	public String getTitle() {
 		return mTitle;
 	}
 
-	public void setmTitle(String mTitle) {
+	public void setTitle(String mTitle) {
 		this.mTitle = mTitle;
 	}
 
-	public UUID getmId() {
+	public UUID getId() {
 		return mId;
 	}
-	
 	
 }
