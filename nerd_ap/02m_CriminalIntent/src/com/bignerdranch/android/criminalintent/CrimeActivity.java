@@ -1,9 +1,9 @@
 package com.bignerdranch.android.criminalintent;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.ActionBarActivity;
 
-public class CrimeActivity extends FragmentActivity {
+public class CrimeActivity extends ActionBarActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
