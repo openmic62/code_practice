@@ -14,6 +14,11 @@ public class Crime {
 		this.mId = UUID.randomUUID();
 		this.mDate = new Date();
 	}
+	
+	@Override
+	public String toString() {
+		return mTitle;
+	}
 
 	public String getTitle() {
 		return mTitle;
