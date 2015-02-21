@@ -3,8 +3,6 @@ package com.bignerdranch.android.criminalintent;
 import java.util.ArrayList;
 import java.util.Date;
 
-import com.bignerdranch.android.criminalintent.R.string;
-
 import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.content.Intent;
