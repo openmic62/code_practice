@@ -14,16 +14,6 @@ public class CrimeLab {
 	private CrimeLab(Context appContext) {
 		this.mAppContext = appContext;
 		this.mCrimes = new ArrayList<Crime>();
-		populateArrayListWithBoringCrimes();
-	}
-	
-	private void populateArrayListWithBoringCrimes() {
-		for (int i = 0; i < 100; i++) {
-			Crime c = new Crime();
-			c.setTitle("Crime #" + i);
-			c.setSolved(i % 2 == 0);
-			mCrimes.add(c);
-		}
 	}
 	
 	public static CrimeLab getCrimeLab(Context c) {
@@ -43,5 +33,9 @@ public class CrimeLab {
 			}
 		}
 		return crimeReturned;
+	}
+	
+	public void addCrime(Crime c) {
+		mCrimes.add(c);
 	}
 }
