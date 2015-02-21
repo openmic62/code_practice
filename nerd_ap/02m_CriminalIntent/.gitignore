@@ -1,2 +1,4 @@
 bin
 gen
+/crimes.json
+/crimes_gingerbread_device.json
