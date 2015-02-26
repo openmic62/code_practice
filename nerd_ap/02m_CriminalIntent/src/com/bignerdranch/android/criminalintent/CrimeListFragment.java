@@ -5,6 +5,7 @@ import java.util.Date;
 
 import android.annotation.TargetApi;
 import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -35,6 +36,26 @@ public class CrimeListFragment extends ListFragment {
 	private CrimeLab mCrimeLab;
 	private ArrayList<Crime> mCrimes;
 	private boolean mSubtitleVisible;
+	private Callbacks mCallbacks;
+
+	/**
+	 * Required interface for hosting activities
+	 */
+	public interface Callbacks {
+		public void onCrimeSelected(Crime crime);
+	}
+
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		mCallbacks = (Callbacks) activity;
+	}
+
+	@Override
+	public void onDetach() {
+		super.onDetach();
+		mCallbacks = null;
+	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -71,30 +92,31 @@ public class CrimeListFragment extends ListFragment {
 			// Use contextual action bar on Honeycomb and higher
 			listView.setChoiceMode(listView.CHOICE_MODE_MULTIPLE_MODAL);
 			listView.setMultiChoiceModeListener(new MultiChoiceModeListener() {
-				
+
 				@Override
 				public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
 					// Required, but not used in this implementation
 					return false;
 				}
-				
+
 				@Override
 				public void onDestroyActionMode(ActionMode mode) {
 					// Required, but not used in this implementation
 				}
-				
+
 				@Override
 				public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 					MenuInflater inflater = mode.getMenuInflater();
 					inflater.inflate(R.menu.crime_list_item_context, menu);
 					return true;
 				}
-				
+
 				@Override
-				public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+				public boolean onActionItemClicked(ActionMode mode,
+						MenuItem item) {
 					switch (item.getItemId()) {
 					case R.id.menu_item_delete_crime:
-						CrimeAdapter adapter = (CrimeAdapter)getListAdapter();
+						CrimeAdapter adapter = (CrimeAdapter) getListAdapter();
 						CrimeLab crimeLab = CrimeLab.getCrimeLab(getActivity());
 						for (int i = adapter.getCount() - 1; i >= 0; i--) {
 							if (getListView().isItemChecked(i)) {
@@ -109,16 +131,17 @@ public class CrimeListFragment extends ListFragment {
 						return false;
 					}
 				}
-				
+
 				@Override
-				public void onItemCheckedStateChanged(ActionMode mode, int position,
-						long id, boolean checked) {
+				public void onItemCheckedStateChanged(ActionMode mode,
+						int position, long id, boolean checked) {
 					// TODO Auto-generated method stub
-					
+
 				}
 			});
-		};
-		
+		}
+		;
+
 		return v;
 	}
 
@@ -126,8 +149,8 @@ public class CrimeListFragment extends ListFragment {
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 		Crime c = ((CrimeAdapter) getListAdapter()).getItem(position);
-
-		startCrimePagerActivity(c);
+		// /startCrimePagerActivity(c);
+		mCallbacks.onCrimeSelected(c);
 	}
 
 	private void startCrimePagerActivity(Crime c) {
@@ -140,6 +163,11 @@ public class CrimeListFragment extends ListFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
+		//((CrimeAdapter) getListAdapter()).notifyDataSetChanged();
+		updateUI();
+	}
+	
+	protected void updateUI() {
 		((CrimeAdapter) getListAdapter()).notifyDataSetChanged();
 	}
 
@@ -161,7 +189,8 @@ public class CrimeListFragment extends ListFragment {
 			mCrimeLab.addCrime(c);
 
 			// Start CrimePagerActivity
-			startCrimePagerActivity(c);
+			// /startCrimePagerActivity(c);
+			mCallbacks.onCrimeSelected(c);
 			return true;
 		case R.id.menu_item_show_subtitle:
 			ActionBar actionBar = getActivity().getActionBar();
@@ -193,11 +222,12 @@ public class CrimeListFragment extends ListFragment {
 
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
-		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item
+				.getMenuInfo();
 		int position = info.position;
-		CrimeAdapter adapter = (CrimeAdapter)getListAdapter();
+		CrimeAdapter adapter = (CrimeAdapter) getListAdapter();
 		Crime crime = (Crime) adapter.getItem(position);
-		
+
 		switch (item.getItemId()) {
 		case R.id.menu_item_delete_crime:
 			Log.d(TAG, "Someone wanted to delete a crime record.");
