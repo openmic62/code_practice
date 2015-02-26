@@ -12,11 +12,13 @@ import android.support.v4.view.ViewPager;
 //import android.support.v7.app.ActionBarActivity;
 
 // http://stackoverflow.com/questions/18451575/action-bar-fragment-activity
-public class CrimePagerActivity extends FragmentActivity {
+public class CrimePagerActivity extends FragmentActivity implements CrimeFragment.Callbacks {
 //public class CrimePagerActivity extends ActionBarActivity {
 
 	private ViewPager mViewPager;
 	private ArrayList<Crime> mCrimes;
+	
+	public void onCrimeUpdate(Crime crime) {};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
