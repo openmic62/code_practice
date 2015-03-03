@@ -2,11 +2,13 @@ package com.bignerdranch.android.photogallery;
 
 import java.util.ArrayList;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.SearchManager;
 import android.app.SearchableInfo;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -39,10 +41,12 @@ public class PhotoGalleryFragment extends Fragment {
 		super.onCreate(savedInstanceState);
 		setRetainInstance(true);
 		setHasOptionsMenu(true);
-		// new FetchItemsTask().execute();
 		updateItems();
 
-		// mThumbnailThread = new ThumbnailDownloader<ImageView>();
+//		Intent i = new Intent(getActivity(), PollService.class);
+//		getActivity().startService(i);
+//		PollService.setServiceAlarm(getActivity(), true);
+		
 		mThumbnailThread = new ThumbnailDownloader<ImageView>(new Handler());
 		mThumbnailThread
 				.setListener(new ThumbnailDownloader.Listener<ImageView>() {
@@ -112,8 +116,28 @@ public class PhotoGalleryFragment extends Fragment {
 					.putString(FlickrFetchr.PREF_SEARCH_QUERY, null).commit();
 			updateItems();
 			return true;
+		case R.id.menu_item_toggle_polling:
+			boolean shouldStartAlarm = !PollService.isServiceAlarmOn(getActivity());
+			PollService.setServiceAlarm(getActivity(), shouldStartAlarm);
+			
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+				getActivity().invalidateOptionsMenu();
+			}
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
+		}
+	}
+	
+	@Override
+	public void onPrepareOptionsMenu(Menu menu) {
+		super.onPrepareOptionsMenu(menu);
+		
+		MenuItem toggleItem = menu.findItem(R.id.menu_item_toggle_polling);
+		if (PollService.isServiceAlarmOn(getActivity())) {
+			toggleItem.setTitle(R.string.stop_polling);
+		} else {
+			toggleItem.setTitle(R.string.start_polling);
 		}
 	}
 
@@ -130,8 +154,6 @@ public class PhotoGalleryFragment extends Fragment {
 		}
 
 		if (mItems != null) {
-			// mGridView.setAdapter(new ArrayAdapter<GalleryItem>(getActivity(),
-			// android.R.layout.simple_gallery_item, mItems));
 			mGridView.setAdapter(new GalleryItemAdapter(mItems));
 		} else {
 			mGridView.setAdapter(null);
@@ -142,7 +164,6 @@ public class PhotoGalleryFragment extends Fragment {
 			AsyncTask<Void, Void, ArrayList<GalleryItem>> {
 		@Override
 		protected ArrayList<GalleryItem> doInBackground(Void... params) {
-			// String query = "android"; // Just for testing
 			Activity activity = getActivity();
 			if (activity == null)
 				return new ArrayList<GalleryItem>();
@@ -178,7 +199,6 @@ public class PhotoGalleryFragment extends Fragment {
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			// return super.getView(position, convertView, parent);
 			if (convertView == null) {
 				convertView = getActivity().getLayoutInflater().inflate(
 						R.layout.gallery_item, parent, false);
