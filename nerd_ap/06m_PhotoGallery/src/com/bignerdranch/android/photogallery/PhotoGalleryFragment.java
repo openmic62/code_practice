@@ -2,20 +2,20 @@ package com.bignerdranch.android.photogallery;
 
 import java.util.ArrayList;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.SearchManager;
 import android.app.SearchableInfo;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.support.v4.app.Fragment;
 //import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,12 +24,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.SearchView;
 
-//public class PhotoGalleryFragment extends Fragment {
 public class PhotoGalleryFragment extends VisibleFragment {
 	private static final String TAG = "PhotoGalleryFragment";
 
@@ -44,10 +45,6 @@ public class PhotoGalleryFragment extends VisibleFragment {
 		setHasOptionsMenu(true);
 		updateItems();
 
-//		Intent i = new Intent(getActivity(), PollService.class);
-//		getActivity().startService(i);
-//		PollService.setServiceAlarm(getActivity(), true);
-		
 		mThumbnailThread = new ThumbnailDownloader<ImageView>(new Handler());
 		mThumbnailThread
 				.setListener(new ThumbnailDownloader.Listener<ImageView>() {
@@ -78,6 +75,21 @@ public class PhotoGalleryFragment extends VisibleFragment {
 
 		setUpAdapter();
 
+		mGridView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				GalleryItem item = mItems.get(position);
+				
+				Uri photoPageUri = Uri.parse(item.getPhotoPageUrl());
+//				Intent i = new Intent(Intent.ACTION_VIEW, photoPageUri); // implicit
+				Intent i = new Intent(getActivity(), PhotoPageActivity.class);
+				i.setData(photoPageUri);
+				
+				startActivity(i);
+			}
+		});
+		
 		return v;
 	}
 
