@@ -3,6 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.bignerdranch.android.runtracker.RunActivity" >
 
+    <item 
+        android:id="@+id/menu_item_new_run"
+        android:showAsAction="always"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="@string/new_run"/>
+    
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
