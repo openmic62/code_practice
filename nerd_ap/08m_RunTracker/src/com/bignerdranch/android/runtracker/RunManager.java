@@ -105,6 +105,10 @@ public class RunManager {
 		return mHelper.queryRuns();
 	}
 	
+	public LocationCursor queryLocationsForRun(long runId) {
+		return mHelper.queryLastLocationForRun(runId);
+	}
+	
 	public void insertLocation(Location loc) {
 		if (mCurrentRunId != -1) {
 			mHelper.insertLocation(mCurrentRunId, loc);
