@@ -53,7 +53,7 @@ public class RunMapFragment extends SupportMapFragment implements
 		Bundle args = getArguments();
 		if (args != null) {
 			long runId = args.getLong(ARG_RUN_ID, -1);
-			if (runId == -1) {
+			if (runId != -1) {
 				LoaderManager lm = getLoaderManager();
 				lm.initLoader(LOAD_LOCATIONS, args, this);
 			}
@@ -87,12 +87,13 @@ public class RunMapFragment extends SupportMapFragment implements
 		PolylineOptions line = new PolylineOptions();
 		// Also create a LatLngBounds so you can zoom to fit
 		LatLngBounds.Builder latLngBuilder = new LatLngBounds.Builder();
-		// Iterat over the locations
+		// Iterate over the locations
 		mLocationCursor.moveToFirst();
 		while (!mLocationCursor.isAfterLast()) {
 			Location loc = mLocationCursor.getLocation();
 			LatLng latLng = new LatLng(loc.getLatitude(), loc.getLongitude());
 			
+			//----------------------------------------------------------------
 			Resources r = getResources();
 			
 			// If this is the first location, add a marker for it
@@ -112,6 +113,7 @@ public class RunMapFragment extends SupportMapFragment implements
 					.snippet(r.getString(R.string.run_finished_at_format, endDate));
 				mGoogleMap.addMarker(finishMarkerOptions);
 			}
+			//----------------------------------------------------------------
 			
 			line.add(latLng);
 			latLngBuilder.include(latLng);
