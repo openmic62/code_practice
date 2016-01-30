@@ -2,6 +2,8 @@
     Document   : index
     Created on : Jan 24, 2016, 10:15:48 AM
     Author     : Mike
+    Introduction to Developing Web Applications
+    https://netbeans.org/kb/docs/web/quickstart-webapps.html
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
