@@ -108,7 +108,8 @@ public class ConsultantStatus implements Serializable {
 
     @Override
     public String toString() {
-        return "jpa.entities.ConsultantStatus[ statusId=" + statusId + " ]";
+        //return "jpa.entities.ConsultantStatus[ statusId=" + statusId + " ]";
+        return statusId + ", " + description;
     }
     
 }
