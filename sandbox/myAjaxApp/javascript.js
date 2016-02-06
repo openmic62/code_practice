@@ -31,3 +31,10 @@ function initRequest() {
         return new ActiveXObject("Microsoft.XMLHTTP")
     }
 }
+
+function callback() {
+    if (req.readyState == 4)
+        if (req.status == 200) {
+            parseMessages(req.responseXML);
+        }
+}
