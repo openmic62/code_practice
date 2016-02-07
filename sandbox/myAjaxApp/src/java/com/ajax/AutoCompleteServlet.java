@@ -25,10 +25,10 @@ public class AutoCompleteServlet extends HttpServlet {
     private ServletContext context;
     private final ComposerData compData = new ComposerData();
     private final HashMap composers = compData.getComposers();
-    
+
     @Override
     public void init(ServletConfig config) throws ServletException {
-        super.init(); //To change body of generated methods, choose Tools | Templates.
+        ///super.init(); //To change body of generated methods, choose Tools | Templates.
         this.context = config.getServletContext();
     }
 
@@ -49,7 +49,7 @@ public class AutoCompleteServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AutoCompleteServlet</title>");            
+            out.println("<title>Servlet AutoCompleteServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet AutoCompleteServlet at " + request.getContextPath() + "</h1>");
@@ -71,37 +71,37 @@ public class AutoCompleteServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ///processRequest(request, response);
-        
+
         String action = request.getParameter("action");
         String targetId = request.getParameter("id");
-        StringBuilder sb = new StringBuilder();
-        
+        StringBuffer sb = new StringBuffer();
+
         if (targetId != null) {
             targetId = targetId.trim().toLowerCase();
         } else {
             context.getRequestDispatcher("/error.jsp").forward(request, response);
         }
-        
+
         boolean namesAdded = false;
         if (action.equals("complete")) {
-            
+
             // check if user sent empty string
             if (!targetId.equals("")) {
-                
+
                 Iterator it = composers.keySet().iterator();
-                
-                while (it.hasNext()){
+
+                while (it.hasNext()) {
                     String id = (String) it.next();
                     Composer composer = (Composer) composers.get(id);
-                    
+
                     if (// targetId matches first name) {
-                        composer.getFirstName().toLowerCase().startsWith(targetId) ||
-                        // targetID matches last name
-                        composer.getLastName().toLowerCase().startsWith(targetId)  ||
-                        // targetID matches full name
-                        composer.getFirstName().toLowerCase().concat(" ")
+                            composer.getFirstName().toLowerCase().startsWith(targetId)
+                            || // targetID matches last name
+                            composer.getLastName().toLowerCase().startsWith(targetId)
+                            || // targetID matches full name
+                            composer.getFirstName().toLowerCase().concat(" ")
                             .concat(composer.getLastName().toLowerCase()).startsWith(targetId)) {
-                        
+
                         sb.append("<composer");
                         sb.append("<id>").append(composer.getId()).append("</id>");
                         sb.append("<firstName>").append(composer.getFirstName()).append("</firstName>");
@@ -111,16 +111,15 @@ public class AutoCompleteServlet extends HttpServlet {
                     }
                 }
             }
+            if (namesAdded) {
+                response.setContentType("text/xml");
+                response.setHeader("Cache-Control", "no-cache");
+                response.getWriter().write("<composers>" + sb.toString() + "</composeres>");
+            } else {
+                // nothing to show
+                response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+            }
         }
-        if (namesAdded) {
-            response.setContentType("text/xml");
-            response.setHeader("Cache-Control", "no-cache");
-            response.getWriter().write("<composers>" + sb.toString() + "</composeres>");
-        } else {
-            // nothing to show
-            response.setStatus(HttpServletResponse.SC_NO_CONTENT);
-        }
-        
         if (action.equals("lookup")) {
             // put the target composer in the request scope to display
             if ((targetId != null && composers.containsKey(targetId.trim()))) {
