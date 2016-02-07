@@ -29,7 +29,7 @@ function doCompletion() {
 
 function initRequest() {
     if (window.XMLHttpRequest) {
-        if (navigator.userAgent.indexOf('MSIE') !== -1) {
+        if (navigator.userAgent.indexOf('MSIE') != -1) {
             isIE = true;
         }
         return new XMLHttpRequest();
@@ -43,8 +43,8 @@ function callback() {
     
     clearTable();
     
-    if (req.readyState === 4)
-        if (req.status === 200) {
+    if (req.readyState == 4)
+        if (req.status == 200) {
             parseMessages(req.responseXML);
         }
 }
@@ -103,7 +103,7 @@ function clearTable() {
 function parseMessages(responseXML) {
     
     // no matches returned
-    if (responseXML === null) {
+    if (responseXML == null) {
         return false;
     } else {
         
