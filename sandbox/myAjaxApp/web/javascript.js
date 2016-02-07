@@ -7,7 +7,6 @@
 
 var req;
 var isIE;
-
 var completeField;
 var completeTable;
 var autoRow;
@@ -20,6 +19,7 @@ function init() {
 }
 
 function doCompletion() {
+    
     var url = "autocomplete?action=complete&id=" + escape(completeField.value);
     req = initRequest();
     req.open("GET", url, true);
@@ -40,13 +40,13 @@ function initRequest() {
 }
 
 function callback() {
-    
     clearTable();
     
-    if (req.readyState == 4)
+    if (req.readyState == 4) {
         if (req.status == 200) {
             parseMessages(req.responseXML);
         }
+    }
 }
 
 function appendComposer(firstName, lastName, composerId) {
@@ -76,6 +76,15 @@ function appendComposer(firstName, lastName, composerId) {
     cell.appendChild(linkElement);
 }
 
+function clearTable() {
+    if (completeTable.getElementsByTagName("tr").length > 0) {
+        completeTable.style.display = 'none';
+        for (loop = completeTable.childNodes.length -1; loop >= 0 ; loop--) {
+            completeTable.removeChild(completeField.childNodes[loop]);
+        }
+    }
+}
+
 function getElementY(element) {
     
     var targetTop = 0;
@@ -89,15 +98,6 @@ function getElementY(element) {
         targetTop += element.y;
     }
     return targetTop;
-}
-
-function clearTable() {
-    if (completeTable.getElementsByTagName("tr").length > 0) {
-        completeTable.style.display = 'none';
-        for (loop = completeTable.childNodes.length -1; loop >= 0 ; loop--) {
-            completeTable.removeChild(completeField.childNodes[loop]);
-        }
-    }
 }
 
 function parseMessages(responseXML) {
@@ -114,10 +114,10 @@ function parseMessages(responseXML) {
             completeTable.setAttribute("border", "1");
             
             for (loop = 0; loop < composers.childNodes.length; loop++) {
-                var composer = composer.childNodes[loop];
+                var composer = composers.childNodes[loop];
                 var firstName = composer.getElementsByTagName("firstName")[0];
                 var lastName = composer.getElementsByTagName("lastName")[0];
-                var composerId = composer.getElementsByTagName("composerId")[0];
+                var composerId = composer.getElementsByTagName("id")[0];
                 appendComposer(firstName.childNodes[0].nodeValue,
                     lastName.childNodes[0].nodeValue,
                     composerId.childNodes[0].nodeValue);
