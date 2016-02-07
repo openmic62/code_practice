@@ -80,7 +80,7 @@ function clearTable() {
     if (completeTable.getElementsByTagName("tr").length > 0) {
         completeTable.style.display = 'none';
         for (loop = completeTable.childNodes.length -1; loop >= 0 ; loop--) {
-            completeTable.removeChild(completeField.childNodes[loop]);
+            completeTable.removeChild(completeTable.childNodes[loop]);
         }
     }
 }
