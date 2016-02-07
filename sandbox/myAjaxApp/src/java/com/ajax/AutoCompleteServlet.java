@@ -124,7 +124,7 @@ public class AutoCompleteServlet extends HttpServlet {
             // put the target composer in the request scope to display
             if ((targetId != null && composers.containsKey(targetId.trim()))) {
                 request.setAttribute("composer", composers.get(targetId));
-                context.getRequestDispatcher("/composer.html").forward(request, response);
+                context.getRequestDispatcher("/composer.jsp").forward(request, response);
             }
         }
     }
