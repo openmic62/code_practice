@@ -102,10 +102,10 @@ public class AutoCompleteServlet extends HttpServlet {
                             composer.getFirstName().toLowerCase().concat(" ")
                             .concat(composer.getLastName().toLowerCase()).startsWith(targetId)) {
 
-                        sb.append("<composer");
+                        sb.append("<composer>");
                         sb.append("<id>").append(composer.getId()).append("</id>");
                         sb.append("<firstName>").append(composer.getFirstName()).append("</firstName>");
-                        sb.append("<lastName").append(composer.getLastName()).append("</lastName>");
+                        sb.append("<lastName>").append(composer.getLastName()).append("</lastName>");
                         sb.append("</composer>");
                         namesAdded = true;
                     }
@@ -114,7 +114,7 @@ public class AutoCompleteServlet extends HttpServlet {
             if (namesAdded) {
                 response.setContentType("text/xml");
                 response.setHeader("Cache-Control", "no-cache");
-                response.getWriter().write("<composers>" + sb.toString() + "</composeres>");
+                response.getWriter().write("<composers>" + sb.toString() + "</composers>");
             } else {
                 // nothing to show
                 response.setStatus(HttpServletResponse.SC_NO_CONTENT);
