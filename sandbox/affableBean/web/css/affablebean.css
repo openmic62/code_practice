@@ -84,6 +84,20 @@ hr {
     background: #eee;
 }
 
+#categoryLeftColumn {
+    height: 400px;
+    width: 200px;
+    float: left;
+    background: #ddd;
+}
+
+#categoryRightColumn {
+    height: 400px;
+    width: 650px;
+    float: left;
+    background: #eee;
+}
+
 .categoryBox {
     height: 176px;
     width: 212px;
@@ -92,7 +106,73 @@ hr {
     background: #ccc;
 }
 
+.categoryLink {
+    height: 40px;
+    width: 120px;
+    margin: 21px 40px 20px;
+    float: inherit;
+    background: #e0ffff;
+}
+
 .categoryLabelText {
     line-height: 150%;
     font-size: x-large;
+}
+
+#productRow {
+    height: 100px;
+    width: 650px;
+    float: top;
+    background: #eee;
+}
+
+#productCell {
+    height: 100px;
+    width: 162.5px;
+    float: left;
+    background: #ccc;
+}
+
+.productImage {
+    height: 80px;
+    width: 130px;
+    margin: 10px 10px;
+    float: left;
+    background: #ccc;
+}
+
+.productNameWidget {
+    width: 180px;
+    margin: 20px 0px;
+    font-size: large;
+    float: top;
+    /*line-height: 25px;*/
+    background: #aaa;
+}
+
+.productDescriptionWidget {
+    width: 180px;
+    margin: 5px 0px;
+    font-size: small;
+    float: top;
+    /*line-height: 25px;*/
+    background: #aaa;
+}
+
+.productPriceWidget {
+    width: 180px;
+    margin: 20px 0px;
+    font-size: large;
+    float: top;
+    /*line-height: 25px;*/
+    background: #aaa;
+}
+
+.productPurchaseWidget {
+    width: 180px;
+    margin: 20px 0px;
+    font-size: large;
+    float: top;
+    /*line-height: 25px;*/
+    background: #aaa;
 }

@@ -43,7 +43,7 @@
             
             <div id="indexRightColumn">
                 <div class="categoryBox">
-                    <a href="#">
+                    <a href="category.jsp">
                         <span class="categoryLabelText">dairy</span>
                     </a>
                 </div>
