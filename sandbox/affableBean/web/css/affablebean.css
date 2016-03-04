@@ -119,16 +119,34 @@ hr {
     font-size: x-large;
 }
 
+.categorySelectedWidget {
+    width: 260px;
+    margin: -20px 0px -10px 200px;
+    font-size: x-large;
+    float: bottom;
+    /*line-height: 25px;*/
+    background: #ec8;
+}
+
+#productRows {
+    height: 380px;
+    width: 630px;
+    margin: 2px 0px 0px 0px;
+    padding: 10px;
+    float: bottom;
+    background: #eee;
+}
+
 #productRow {
-    height: 100px;
-    width: 650px;
+    height: 95p;
+    width: 630px;
     float: top;
     background: #eee;
 }
 
 #productCell {
-    height: 100px;
-    width: 162.5px;
+    height: 95px;
+    width: 157.5px;
     float: left;
     background: #ccc;
 }
@@ -142,7 +160,7 @@ hr {
 }
 
 .productNameWidget {
-    width: 180px;
+    width: 160px;
     margin: 20px 0px;
     font-size: large;
     float: top;
@@ -151,7 +169,7 @@ hr {
 }
 
 .productDescriptionWidget {
-    width: 180px;
+    width: 160px;
     margin: 5px 0px;
     font-size: small;
     float: top;
@@ -160,7 +178,7 @@ hr {
 }
 
 .productPriceWidget {
-    width: 180px;
+    width: 160px;
     margin: 20px 0px;
     font-size: large;
     float: top;
@@ -169,7 +187,7 @@ hr {
 }
 
 .productPurchaseWidget {
-    width: 180px;
+    width: 150px;
     margin: 20px 0px;
     font-size: large;
     float: top;

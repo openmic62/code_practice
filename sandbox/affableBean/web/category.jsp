@@ -38,135 +38,141 @@
 
                 <img src="#" id="logoText" alt="the affable bean">
             </div>
-        </div>
 
-        <div id="categoryLeftColumn">
-            <div class="categoryLink">
-                <a href="#">
-                    <span class="categoryLabelText">dairy</span>
-                </a>
-            </div>
-            <div class="categoryLink">
-                <a href="#">
-                    <span class="categoryLabelText">meats</span>
-                </a>
-            </div>
-            <div class="categoryLink">
-                <a href="#">
-                    <span class="categoryLabelText">bakery</span>
-                </a>
-            </div>
-            <div class="categoryLink">
-                <a href="#">
-                    <span class="categoryLabelText">fruti & veg</span>
-                </a>
-            </div>
-        </div>
-        <div id="categoryRightColumn">
-            <div id="productRow">
-                <div id="productCell">                    
+
+            <div id="categoryLeftColumn">
+                <div class="categoryLink">
                     <a href="#">
-                        <img src="#" class="productImage" alt="product image"
+                        <span class="categoryLabelText">dairy</span>
                     </a>
                 </div>
-                <div id="productCell">
-                    <div class="productNameWidget">
-                        [ product name ]
-                    </div>
-                    <div class="productDescriptionWidget">
-                        [ product description ]
-                    </div>
-                </div>
-                <div id="productCell">
-                    <div class="productPriceWidget">
-                        [ price ]
-                    </div>
-                </div>
-                <div id="productCell">
-                    <div class="productPurchaseWidget">
-                        [ purchase button ]
-                    </div>
-                </div>
-            </div>
-            <div id="productRow">
-                <div id="productCell">                    
+                <div class="categoryLink">
                     <a href="#">
-                        <img src="#" class="productImage" alt="product image"
+                        <span class="categoryLabelText">meats</span>
                     </a>
                 </div>
-                <div id="productCell">
-                    <div class="productNameWidget">
-                        [ product name ]
-                    </div>
-                    <div class="productDescriptionWidget">
-                        [ product description ]
-                    </div>
-                </div>
-                <div id="productCell">
-                    <div class="productPriceWidget">
-                        [ price ]
-                    </div>
-                </div>
-                <div id="productCell">
-                    <div class="productPurchaseWidget">
-                        [ purchase button ]
-                    </div>
-                </div>
-            </div>
-            <div id="productRow">
-                <div id="productCell">                    
+                <div class="categoryLink">
                     <a href="#">
-                        <img src="#" class="productImage" alt="product image"
+                        <span class="categoryLabelText">bakery</span>
                     </a>
                 </div>
-                <div id="productCell">
-                    <div class="productNameWidget">
-                        [ product name ]
-                    </div>
-                    <div class="productDescriptionWidget">
-                        [ product description ]
-                    </div>
-                </div>
-                <div id="productCell">
-                    <div class="productPriceWidget">
-                        [ price ]
-                    </div>
-                </div>
-                <div id="productCell">
-                    <div class="productPurchaseWidget">
-                        [ purchase button ]
-                    </div>
-                </div>
-            </div>
-            <div id="productRow">
-                <div id="productCell">                    
+                <div class="categoryLink">
                     <a href="#">
-                        <img src="#" class="productImage" alt="product image"
+                        <span class="categoryLabelText">fruti & veg</span>
                     </a>
                 </div>
-                <div id="productCell">
-                    <div class="productNameWidget">
-                        [ product name ]
-                    </div>
-                    <div class="productDescriptionWidget">
-                        [ product description ]
-                    </div>
+            </div>
+            <div id="categoryRightColumn">
+                <div class="categorySelectedWidget">
+                    [ selected category ]
                 </div>
-                <div id="productCell">
-                    <div class="productPriceWidget">
-                        [ price ]
+                <div id="productRows">
+                    <div id="productRow">
+                        <div id="productCell">                    
+                            <a href="#">
+                                <img src="#" class="productImage" alt="product image"
+                            </a>
+                        </div>
+                        <div id="productCell">
+                            <div class="productNameWidget">
+                                [ product name ]
+                            </div>
+                            <div class="productDescriptionWidget">
+                                [ product description ]
+                            </div>
+                        </div>
+                        <div id="productCell">
+                            <div class="productPriceWidget">
+                                [ price ]
+                            </div>
+                        </div>
+                        <div id="productCell">
+                            <div class="productPurchaseWidget">
+                                [ purchase button ]
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div id="productCell">
-                    <div class="productPurchaseWidget">
-                        [ purchase button ]
+                    <div id="productRow">
+                        <div id="productCell">                    
+                            <a href="#">
+                                <img src="#" class="productImage" alt="product image"
+                            </a>
+                        </div>
+                        <div id="productCell">
+                            <div class="productNameWidget">
+                                [ product name ]
+                            </div>
+                            <div class="productDescriptionWidget">
+                                [ product description ]
+                            </div>
+                        </div>
+                        <div id="productCell">
+                            <div class="productPriceWidget">
+                                [ price ]
+                            </div>
+                        </div>
+                        <div id="productCell">
+                            <div class="productPurchaseWidget">
+                                [ purchase button ]
+                            </div>
+                        </div>
+                    </div>
+                    <div id="productRow">
+                        <div id="productCell">                    
+                            <a href="#">
+                                <img src="#" class="productImage" alt="product image"
+                            </a>
+                        </div>
+                        <div id="productCell">
+                            <div class="productNameWidget">
+                                [ product name ]
+                            </div>
+                            <div class="productDescriptionWidget">
+                                [ product description ]
+                            </div>
+                        </div>
+                        <div id="productCell">
+                            <div class="productPriceWidget">
+                                [ price ]
+                            </div>
+                        </div>
+                        <div id="productCell">
+                            <div class="productPurchaseWidget">
+                                [ purchase button ]
+                            </div>
+                        </div>
+                    </div>
+                    <div id="productRow">
+                        <div id="productCell">                    
+                            <a href="#">
+                                <img src="#" class="productImage" alt="product image"
+                            </a>
+                        </div>
+                        <div id="productCell">
+                            <div class="productNameWidget">
+                                [ product name ]
+                            </div>
+                            <div class="productDescriptionWidget">
+                                [ product description ]
+                            </div>
+                        </div>
+                        <div id="productCell">
+                            <div class="productPriceWidget">
+                                [ price ]
+                            </div>
+                        </div>
+                        <div id="productCell">
+                            <div class="productPurchaseWidget">
+                                [ purchase button ]
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div id="footer">
-            <hr>
-            <p id="footerText">[ footer text ]</p>
+            <div id="footer">
+                <hr>
+                <p id="footerText">[ footer text ]</p>
+            </div>
         </div>
     </div>
 </body>
