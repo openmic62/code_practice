@@ -41,22 +41,22 @@
 
 
             <div id="categoryLeftColumn">
-                <div class="categoryLink">
+                <div class="categoryButton">
                     <a href="#">
                         <span class="categoryLabelText">dairy</span>
                     </a>
                 </div>
-                <div class="categoryLink">
+                <div class="categoryButton">
                     <a href="#">
                         <span class="categoryLabelText">meats</span>
                     </a>
                 </div>
-                <div class="categoryLink">
+                <div class="categoryButton">
                     <a href="#">
                         <span class="categoryLabelText">bakery</span>
                     </a>
                 </div>
-                <div class="categoryLink">
+                <div class="categoryButton">
                     <a href="#">
                         <span class="categoryLabelText">fruti & veg</span>
                     </a>
