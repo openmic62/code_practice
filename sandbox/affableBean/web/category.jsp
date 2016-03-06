@@ -67,7 +67,7 @@
                 <table class="categoryTable">
                     <tr>
                         <td>
-                            <img src="#" class="productImage" alt="product image">
+                            <img src="#" alt="product image">
                         </td>
                         <td>
                             <div class="productNameWidget">
@@ -90,7 +90,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <img src="#" class="productImage" alt="product image"
+                            <img src="#" alt="product image"
                         </td>
                         <td>
                             <div class="productNameWidget">
@@ -113,7 +113,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <img src="#" class="productImage" alt="product image"
+                            <img src="#" alt="product image"
                         </td>
                         <td>
                             <div class="productNameWidget">
@@ -136,7 +136,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <img src="#" class="productImage" alt="product image"
+                            <img src="#" alt="product image"
                         </td>
                         <td>
                             <div class="productNameWidget">

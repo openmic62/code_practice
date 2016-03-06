@@ -171,13 +171,6 @@ tr:nth-child(even){
         bottom: 0px;
 }
 
-.productImage {
-    height: 72px;
-    width: 130px;
-    margin: 10px 10px;
-    float: left;
-}
-
 .productNameWidget {
     width: 140px;
     margin: 20px 0px;
