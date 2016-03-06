@@ -15,32 +15,34 @@
     <body>
         <div id="main">
             <div id="header">
-                
+
                 <div id="widgetBar">
-                    
+
                     <div class="headerWidget">
                         [ language toggle ]
                     </div>
-                    
+
                     <div class="headerWidget">
-                        [ shopping cart widget ]
+                        <a href="cart.jsp">
+                            [ shopping cart widget ]
+                        </a>
                     </div>
-                    
+
                 </div>
-                
+
                 <a href="#">
                     <img src="#" id="logo" alt="Affable Bean logo">
                 </a>
-                
+
                 <img src="#" id="logoText" alt="the affable bean">
             </div>
-            
+
             <div id="indexLeftColumn">
                 <div id="welcomeText">
                     <p>[ welcome text ]</p>
                 </div>
             </div>
-            
+
             <div id="indexRightColumn">
                 <div class="categoryBox">
                     <a href="category.jsp">
@@ -63,12 +65,12 @@
                     </a>
                 </div>
             </div>
-            
+
             <div id="footer">
                 <hr>
                 <p id="footerText">[ footer text ]</p>
             </div>
-            
+
         </div>
     </body>
 </html>

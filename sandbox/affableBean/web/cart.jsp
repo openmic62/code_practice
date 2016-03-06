@@ -1,6 +1,6 @@
 <%-- 
-    Document   : cart
-    Created on : Feb 10, 2016, 7:25:29 PM
+    Document   : category
+    Created on : Feb 10, 2016, 7:24:37 PM
     Author     : Mike
 --%>
 
@@ -9,9 +9,117 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <link rel="stylesheet" type="text/css" href="css/affablebean.css">
+        <title>The Affable Bean</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
-    </body>
+        <div id="main">
+            <div id="header">
+
+                <div id="widgetBar">
+
+                    <div class="headerWidget">
+                        [ language toggle ]
+                    </div>
+
+                    <div class="headerWidget">
+                        [ checkout button ]
+                    </div>
+
+                    <div class="headerWidget">
+                        [ shopping cart widget ]
+                    </div>
+
+                </div>
+
+                <a href="#">
+                    <img src="#" id="logo" alt="The Affable Bean">
+                </a>
+
+                <img src="#" id="logoText" alt="the affable bean">
+            </div>
+
+
+            <div id="cartLeftColumn">
+                Your shopping cart contains x items
+                <div id="cartBar">
+
+                    <div class="cartWidget">
+                        [ proceed to checkout ]
+                    </div>
+
+                    <div class="cartWidget">
+                        [ continue shopping ]
+                    </div>
+
+                    <div class="cartWidget">
+                        [ clear cart ]
+                    </div>
+
+                </div>
+
+                <div id="cartSubTotal">
+                    [ subtotal: xxx ]
+                </div>
+
+                <div id="cartRows">
+                    <div id="productRow">
+                        <div id="productCell">                    
+                            <a href="#">
+                                <img src="#" class="productImage" alt="product image"
+                            </a>
+                        </div>
+                        <div id="productCell">
+                            <div class="productNameWidget">
+                                [ product name ]
+                            </div>
+                            <div class="productDescriptionWidget">
+                                [ product description ]
+                            </div>
+                        </div>
+                        <div id="productCell">
+                            <div class="productPriceWidget">
+                                [ price ]
+                            </div>
+                        </div>
+                        <div id="productCell">
+                            <div class="productUpdateWidget">
+                                <button name="Update">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="productRow">
+                        <div id="productCell">                    
+                            <a href="#">
+                                <img src="#" class="productImage" alt="product image"
+                            </a>
+                        </div>
+                        <div id="productCell">
+                            <div class="productNameWidget">
+                                [ product name ]
+                            </div>
+                            <div class="productDescriptionWidget">
+                                [ product description ]
+                            </div>
+                        </div>
+                        <div id="productCell">
+                            <div class="productPriceWidget">
+                                [ price ]
+                            </div>
+                        </div>
+                        <div id="productCell">
+                            <div class="productUpdateWidget">
+                                <button name="Update">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="footer">
+                <hr>
+                <p id="footerText">[ footer text ]</p>
+            </div>
+        </div>
+    </div>
+</body>
 </html>

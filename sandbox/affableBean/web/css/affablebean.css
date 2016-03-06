@@ -15,11 +15,11 @@ body {
     margin: 20px auto;
 }
 
-#main { background: #eee }
+#main { background: #F1F3F2 }
 
 #header {
     height: 250px;
-    background: #aaa;
+    background: #AAAAAA;
 }
 
 #logo {
@@ -43,7 +43,7 @@ body {
     height: 50px;
     width: 850px;
     float: right;
-    background: #ccc;
+    background: #CCCCCC;
 }
 
 .headerWidget {
@@ -52,14 +52,14 @@ body {
     font-size: small;
     float: right;
     /*line-height: 25px;*/
-    background: #aaa;
+    background: #AAAAAA;
 }
 
 #footer {
     height: 60px;
     width: 350px;
     clear: left;
-    background: #aaa;
+    background: #AAAAAA;
 }
 
 hr {
@@ -74,28 +74,56 @@ hr {
     height: 400px;
     width: 350px;
     float: left;
-    background: #ccc;
+    background: #CCCCCC;
 }
 
 #indexRightColumn {
     height: 400px;
     width: 500px;
     float: left;
-    background: #eee;
+    background: #F1F3F2;
 }
 
 #categoryLeftColumn {
     height: 400px;
     width: 200px;
     float: left;
-    background: #ddd;
+    background: #F1F3F2;
 }
 
 #categoryRightColumn {
     height: 400px;
     width: 650px;
     float: left;
-    background: #eee;
+    background: #F1F3F2;
+    position: relative;
+}
+
+#cartLeftColumn {
+    height: 400px;
+    width: 850;
+    float: left;
+    background: #F1F3F2;
+}
+
+#cartBar {
+    height: 40px;
+    width: 850px;
+    float: right;
+    background: #F1F3F2;
+}
+
+#cartSubTotal {
+    
+}
+
+.cartWidget {
+    width: 194px;
+    margin: 20px 2px;
+    font-size: small;
+    float: right;
+    /*line-height: 25px;*/
+    background: #AAAAAA;
 }
 
 .categoryBox {
@@ -103,7 +131,7 @@ hr {
     width: 212px;
     margin: 21px 14px 6px;
     float: inherit;
-    background: #ccc;
+    background: #CCCCCC;
 }
 
 .categoryLink {
@@ -111,7 +139,7 @@ hr {
     width: 120px;
     margin: 21px 40px 20px;
     float: inherit;
-    background: #e0ffff;
+    background: #E0F0ED;
 }
 
 .categoryLabelText {
@@ -125,38 +153,40 @@ hr {
     font-size: x-large;
     float: bottom;
     /*line-height: 25px;*/
-    background: #ec8;
+    background: #F7EDC9;
 }
 
-#productRows {
-    height: 380px;
-    width: 630px;
-    margin: 2px 0px 0px 0px;
-    padding: 10px;
-    float: bottom;
-    background: #eee;
+/*http://www.textfixer.com/tutorials/css-table-alternating-rows.php*/
+/*http://jonathannicol.com/blog/2009/06/20/aligning-an-element-to-the-bottom-of-its-container/*/
+.categoryTable{
+        width:95%; 
+        border-collapse:collapse;
+        padding: 0px 20px 0px 0px;
+        position: absolute;
+        bottom: 0px;
 }
-
-#productRow {
-    height: 95p;
-    width: 630px;
-    float: top;
-    background: #eee;
+.categoryTable td{ 
+        padding:2px; border:#4e95f4 0px solid;
 }
-
-#productCell {
-    height: 95px;
-    width: 157.5px;
-    float: left;
-    background: #ccc;
+/* provide some minimal visual accomodation for IE8 and below */
+.categoryTable tr{
+        background: #F3F9F9;
+}
+/*  Define the background color for all the ODD background rows  */
+.categoryTable tr:nth-child(odd){ 
+        background: #F3F9F9;
+}
+/*  Define the background color for all the EVEN background rows  */
+.categoryTable tr:nth-child(even){
+        background: #FFFFFF;
 }
 
 .productImage {
-    height: 80px;
+    height: 72px;
     width: 130px;
     margin: 10px 10px;
     float: left;
-    background: #ccc;
+    /*background: #CCCCCC;*/
 }
 
 .productNameWidget {
@@ -165,7 +195,7 @@ hr {
     font-size: large;
     float: top;
     /*line-height: 25px;*/
-    background: #aaa;
+    /*background: #CCCCCC;*/
 }
 
 .productDescriptionWidget {
@@ -174,16 +204,16 @@ hr {
     font-size: small;
     float: top;
     /*line-height: 25px;*/
-    background: #aaa;
+    /*background: #CCCCCC;*/
 }
 
 .productPriceWidget {
-    width: 160px;
+    width: 150px;
     margin: 20px 0px;
     font-size: large;
     float: top;
     /*line-height: 25px;*/
-    background: #aaa;
+    /*background: #CCCCCC;*/
 }
 
 .productPurchaseWidget {
@@ -192,5 +222,15 @@ hr {
     font-size: large;
     float: top;
     /*line-height: 25px;*/
-    background: #aaa;
+    /*background: #CCCCCC;*/
 }
+
+.productUpdateWidget {
+    width: 150px;
+    margin: 20px 0px;
+    font-size: large;
+    float: top;
+    /*line-height: 25px;*/
+    background: #CCCCCC;
+}
+
