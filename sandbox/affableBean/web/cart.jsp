@@ -40,9 +40,10 @@
             </div>
 
 
-            <div id="cartLeftColumn">
-                Your shopping cart contains x items
-                <div id="cartBar">
+            <div id="singleColumn">
+                <p>Your shopping cart contains x items</p>
+                <!--<div id="cartBar">-->
+                <div id="actionBar">
 
                     <div class="cartWidget">
                         [ proceed to checkout ]
@@ -58,11 +59,9 @@
 
                 </div>
 
-                <div id="cartSubTotal">
-                    [ subtotal: xxx ]
-                </div>
+                <h4 id="subtotal">[ subtotal: xxx ]</h4>
 
-                <table class="cartTable">
+                <table id="cartTable">
                     <tr>
                         <th>
                             product
@@ -84,10 +83,10 @@
                             </a>
                         </td>
                         <td>
-                                [ product name ]
-                         </td>
+                            [ product name ]
+                        </td>
                         <td>
-                               [ price ]
+                            [ price ]
                         </td>
                         <td>
                             <form action="updateCart" method="post">
@@ -109,10 +108,10 @@
                             </a>
                         </td>
                         <td>
-                                [ product name ]
-                         </td>
+                            [ product name ]
+                        </td>
                         <td>
-                               [ price ]
+                            [ price ]
                         </td>
                         <td>
                             <form action="updateCart" method="post">

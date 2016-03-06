@@ -54,6 +54,11 @@ tr:nth-child(even){
 /* general styles */
 #main { background: #F1F3F2 }
 
+#singleColumn {
+    margin: 20px 30px;
+    text-align: left;
+}
+
 .smallText { font-size: small }
 
 /* styles for elements contained in the header, i.e.,
@@ -167,8 +172,7 @@ tr:nth-child(even){
     margin: -20px 0px -10px 200px;
     font-size: x-large;
     float: bottom;
-    /*line-height: 25px;*/
-    background: #F7EDC9;
+    background: #F6EEC9;
 }
 
 .categoryText {
@@ -194,15 +198,17 @@ tr:nth-child(even){
     position: relative;
 }
 
-#cartBar {
-    height: 40px;
-    width: 850px;
-    float: right;
-    background: #F1F3F2;
+#actionBar {
+    margin: 30px;
+    width: 650px;
+    text-align: center;
+    background: #F6EEC9;
 }
 
+#subtotal { margin: 40px 0 20px 430px }
+
 #cartSubTotal {
-    
+    margin: 40px 0 20px 430px
 }
 
 .cartWidget {
@@ -211,32 +217,19 @@ tr:nth-child(even){
     font-size: small;
     float: right;
     /*line-height: 25px;*/
-    background: #AAAAAA;
+    background: #F6EEC9;
 }
 
-/*http://www.textfixer.com/tutorials/css-table-alternating-rows.php*/
-/*http://jonathannicol.com/blog/2009/06/20/aligning-an-element-to-the-bottom-of-its-container/*/
-.cartTable{
-        width:95%; 
-        border-collapse:collapse;
-        margin: 0 auto 0 auto;
-        padding: 0px 20px 0px 0px;
-        position: absolute;
-        bottom: 0px;
+#cartTable { 
+    width: 790px;
+    margin: 10px;
 }
 
-.productQuantityWidget {
-    width: 20px;
-    margin: 20px 0px;
-    float: left;
+#cartTable td {
+    width: 145px;
+    height: 90px;
 }
 
-.productUpdateWidget {
-    width: 80px;
-    margin: 20px 0px;
-    font-size: large;
-    float: left;
-}
 
 /* checkout page styles */
 /* confirmation page styles */
