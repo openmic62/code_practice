@@ -43,7 +43,7 @@
             <div id="singleColumn">
                 <h2>checkout</h2>
                 <p>[ text ]</p>
-                <form action="purchase" method="post">
+                <form action="confirmation.jsp" method="post">
                     <table id="checkoutTable">
                         <tr>
                             <td>[ form containing fields to

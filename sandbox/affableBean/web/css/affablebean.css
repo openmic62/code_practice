@@ -263,3 +263,37 @@ tr:nth-child(even){
 }
 
 /* confirmation page styles */
+#confirmationText {
+    margin: 0 20px 20px;
+    padding: 10px;
+    background-color: #f5eabe;
+    float: left;
+    width:540px;
+}
+
+.summaryColumn {
+    margin-top: 15px;
+    width: 50%;
+    float: left;
+}
+
+#orderSummaryTable {
+    width: 100%;
+    text-align: left;
+    height: 200px;
+}
+
+#orderSummaryTable tr {
+    background: #D3E7E6;
+}
+
+#deliveryAddressTable {
+    width: 70%;
+    margin-left: 15%;
+    text-align: left;
+    height: 200px;
+}
+
+#deliveryAddressTable tr {
+    background: #D3E7E6;
+}
