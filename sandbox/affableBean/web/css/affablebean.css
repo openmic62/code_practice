@@ -148,6 +148,13 @@ tr:nth-child(even){
     background: #E0F0ED;
 }
 
+#selectedCategory {
+    margin: 15px 20px 15px;
+    padding: 13px;
+    display: block;
+    background-color: #b2d2d2;
+}
+
 #categoryTitle {
     width: 260px;
     margin: -20px 0px -10px 200px;

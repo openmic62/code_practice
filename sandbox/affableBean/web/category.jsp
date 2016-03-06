@@ -41,7 +41,7 @@
 
 
             <div id="categoryLeftColumn">
-                <div class="categoryButton">
+                <div id="selectedCategory">
                     <a href="#">
                         <span class="categoryText">dairy</span>
                     </a>
