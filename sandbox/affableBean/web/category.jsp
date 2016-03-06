@@ -70,12 +70,9 @@
                             <img src="#" alt="product image">
                         </td>
                         <td>
-                            <div class="productNameWidget">
-                                [ product name ]
-                            </div>
-                            <div class="productDescriptionWidget">
-                                [ product description ]
-                            </div>
+                            [ product name ]
+                            <br>
+                            <span class="smallText">[ product description ]</span>
                         </td>
                         <td>
                             <div class="productPriceWidget">
@@ -93,12 +90,9 @@
                             <img src="#" alt="product image"
                         </td>
                         <td>
-                            <div class="productNameWidget">
-                                [ product name ]
-                            </div>
-                            <div class="productDescriptionWidget">
-                                [ product description ]
-                            </div>
+                            [ product name ]
+                            <br>
+                            <span class="smallText">[ product description ]</span>
                         </td>
                         <td>
                             <div class="productPriceWidget">
@@ -116,12 +110,9 @@
                             <img src="#" alt="product image"
                         </td>
                         <td>
-                            <div class="productNameWidget">
-                                [ product name ]
-                            </div>
-                            <div class="productDescriptionWidget">
-                                [ product description ]
-                            </div>
+                            [ product name ]
+                            <br>
+                            <span class="smallText">[ product description ]</span>
                         </td>
                         <td>
                             <div class="productPriceWidget">
@@ -139,12 +130,9 @@
                             <img src="#" alt="product image"
                         </td>
                         <td>
-                            <div class="productNameWidget">
-                                [ product name ]
-                            </div>
-                            <div class="productDescriptionWidget">
-                                [ product description ]
-                            </div>
+                            [ product name ]
+                            <br>
+                            <span class="smallText">[ product description ]</span>
                         </td>
                         <td>
                             <div class="productPriceWidget">

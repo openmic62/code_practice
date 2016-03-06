@@ -47,6 +47,8 @@ tr:nth-child(even){
 /* general styles */
 #main { background: #F1F3F2 }
 
+.smallText { font-size: small }
+
 /* styles for elements contained in the header, i.e.,
    shopping cart widget, language toggle, and logo */
 #header {
