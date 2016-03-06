@@ -64,108 +64,100 @@
             </div>
             <div id="categoryRightColumn">
                 <p id="categorySelectedWidget">[ selected category ]</p>
-                    <table class="categoryTable">
-                        <tr>
-                            <td>
-                                 <a href="#">
-                                    <img src="#" class="productImage" alt="product image"
-                                </a>                           
-                            </td>
-                            <td>
-                                <div class="productNameWidget">
-                                    [ product name ]
-                                </div>
-                                <div class="productDescriptionWidget">
-                                    [ product description ]
-                                </div>
-                            </td>
-                            <td>
-                                <div class="productPriceWidget">
-                                    [ price ]
-                                </div>
-                            </td>
-                            <td>
-                                <div class="productPurchaseWidget">
-                                    <button name="Purchase">Purchase button</button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                 <a href="#">
-                                    <img src="#" class="productImage" alt="product image"
-                                </a>                           
-                            </td>
-                            <td>
-                                <div class="productNameWidget">
-                                    [ product name ]
-                                </div>
-                                <div class="productDescriptionWidget">
-                                    [ product description ]
-                                </div>
-                            </td>
-                            <td>
-                                <div class="productPriceWidget">
-                                    [ price ]
-                                </div>
-                            </td>
-                            <td>
-                                <div class="productPurchaseWidget">
-                                    <button name="Purchase">Purchase button</button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                 <a href="#">
-                                    <img src="#" class="productImage" alt="product image"
-                                </a>                           
-                            </td>
-                            <td>
-                                <div class="productNameWidget">
-                                    [ product name ]
-                                </div>
-                                <div class="productDescriptionWidget">
-                                    [ product description ]
-                                </div>
-                            </td>
-                            <td>
-                                <div class="productPriceWidget">
-                                    [ price ]
-                                </div>
-                            </td>
-                            <td>
-                                <div class="productPurchaseWidget">
-                                    <button name="Purchase">Purchase button</button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                 <a href="#">
-                                    <img src="#" class="productImage" alt="product image"
-                                </a>                           
-                            </td>
-                            <td>
-                                <div class="productNameWidget">
-                                    [ product name ]
-                                </div>
-                                <div class="productDescriptionWidget">
-                                    [ product description ]
-                                </div>
-                            </td>
-                            <td>
-                                <div class="productPriceWidget">
-                                    [ price ]
-                                </div>
-                            </td>
-                            <td>
-                                <div class="productPurchaseWidget">
-                                    <button name="Purchase">Purchase button</button>
-                                </div>
-                            </td>
-                        </tr>
-                   </table>
+                <table class="categoryTable">
+                    <tr>
+                        <td>
+                            <img src="#" class="productImage" alt="product image">
+                        </td>
+                        <td>
+                            <div class="productNameWidget">
+                                [ product name ]
+                            </div>
+                            <div class="productDescriptionWidget">
+                                [ product description ]
+                            </div>
+                        </td>
+                        <td>
+                            <div class="productPriceWidget">
+                                [ price ]
+                            </div>
+                        </td>
+                        <td>
+                            <div class="productPurchaseWidget">
+                                <button name="Purchase">Purchase button</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="#" class="productImage" alt="product image"
+                        </td>
+                        <td>
+                            <div class="productNameWidget">
+                                [ product name ]
+                            </div>
+                            <div class="productDescriptionWidget">
+                                [ product description ]
+                            </div>
+                        </td>
+                        <td>
+                            <div class="productPriceWidget">
+                                [ price ]
+                            </div>
+                        </td>
+                        <td>
+                            <div class="productPurchaseWidget">
+                                <button name="Purchase">Purchase button</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="#" class="productImage" alt="product image"
+                        </td>
+                        <td>
+                            <div class="productNameWidget">
+                                [ product name ]
+                            </div>
+                            <div class="productDescriptionWidget">
+                                [ product description ]
+                            </div>
+                        </td>
+                        <td>
+                            <div class="productPriceWidget">
+                                [ price ]
+                            </div>
+                        </td>
+                        <td>
+                            <div class="productPurchaseWidget">
+                                <button name="Purchase">Purchase button</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="#" class="productImage" alt="product image"
+                        </td>
+                        <td>
+                            <div class="productNameWidget">
+                                [ product name ]
+                            </div>
+                            <div class="productDescriptionWidget">
+                                [ product description ]
+                            </div>
+                        </td>
+                        <td>
+                            <div class="productPriceWidget">
+                                [ price ]
+                            </div>
+                        </td>
+                        <td>
+                            <div class="productPurchaseWidget">
+                                <button name="Purchase">Purchase button</button>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
             </div>
             <div id="footer">
                 <hr>
