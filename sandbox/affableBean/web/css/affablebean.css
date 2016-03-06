@@ -148,7 +148,7 @@ tr:nth-child(even){
     background: #E0F0ED;
 }
 
-#categorySelectedWidget {
+#categoryTitle {
     width: 260px;
     margin: -20px 0px -10px 200px;
     font-size: x-large;
@@ -171,34 +171,6 @@ tr:nth-child(even){
         padding: 0px 20px 0px 0px;
         position: absolute;
         bottom: 0px;
-}
-
-.productNameWidget {
-    width: 140px;
-    margin: 20px 0px;
-    font-size: large;
-    float: top;
-}
-
-.productDescriptionWidget {
-    width: 160px;
-    margin: 5px 0px;
-    font-size: small;
-    float: top;
-}
-
-.productPriceWidget {
-    width: 140px;
-    margin: 20px 0px;
-    font-size: large;
-    float: top;
-}
-
-.productPurchaseWidget {
-    width: 150px;
-    margin: 20px 0px;
-    font-size: large;
-    float: top;
 }
 
 /* cart page styles */

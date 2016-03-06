@@ -63,7 +63,7 @@
                 </div>
             </div>
             <div id="categoryRightColumn">
-                <p id="categorySelectedWidget">[ selected category ]</p>
+                <p id="categoryTitle">[ selected category ]</p>
                 <table class="categoryTable">
                     <tr>
                         <td>
@@ -75,14 +75,12 @@
                             <span class="smallText">[ product description ]</span>
                         </td>
                         <td>
-                            <div class="productPriceWidget">
-                                [ price ]
-                            </div>
+                            [ price ]
                         </td>
                         <td>
-                            <div class="productPurchaseWidget">
-                                <button name="Purchase">Purchase button</button>
-                            </div>
+                            <form action="#" method="post">
+                                <input type="submit" value="purchase button">
+                            </form>
                         </td>
                     </tr>
                     <tr>
@@ -95,14 +93,12 @@
                             <span class="smallText">[ product description ]</span>
                         </td>
                         <td>
-                            <div class="productPriceWidget">
-                                [ price ]
-                            </div>
+                            [ price ]
                         </td>
                         <td>
-                            <div class="productPurchaseWidget">
-                                <button name="Purchase">Purchase button</button>
-                            </div>
+                            <form action="#" method="post">
+                                <input type="submit" value="purchase button">
+                            </form>
                         </td>
                     </tr>
                     <tr>
@@ -115,14 +111,12 @@
                             <span class="smallText">[ product description ]</span>
                         </td>
                         <td>
-                            <div class="productPriceWidget">
-                                [ price ]
-                            </div>
+                            [ price ]
                         </td>
                         <td>
-                            <div class="productPurchaseWidget">
-                                <button name="Purchase">Purchase button</button>
-                            </div>
+                            <form action="#" method="post">
+                                <input type="submit" value="purchase button">
+                            </form>
                         </td>
                     </tr>
                     <tr>
@@ -135,14 +129,12 @@
                             <span class="smallText">[ product description ]</span>
                         </td>
                         <td>
-                            <div class="productPriceWidget">
-                                [ price ]
-                            </div>
+                            [ price ]
                         </td>
                         <td>
-                            <div class="productPurchaseWidget">
-                                <button name="Purchase">Purchase button</button>
-                            </div>
+                            <form action="#" method="post">
+                                <input type="submit" value="purchase button">
+                            </form>
                         </td>
                     </tr>
                 </table>
