@@ -24,12 +24,19 @@ hr {
     width: 300px;
 }
 
+table {
+    margin: 0 20px;
+    border-spacing: 0;
+    text-align: center;
+    border: solid 1px #f5eabe;
+}
+
 th {
     padding: 2px;
     background: #D0E8E8;
 }
 td{ 
-    padding:2px; border:#4e95f4 1px solid;
+    padding:2px; border:#4e95f4 0px solid;
 }
 /* provide some minimal visual accomodation for IE8 and below */
 tr{
@@ -169,16 +176,14 @@ tr:nth-child(even){
     font-size: x-large;
 }
 
-/*http://www.textfixer.com/tutorials/css-table-alternating-rows.php*/
-/*http://jonathannicol.com/blog/2009/06/20/aligning-an-element-to-the-bottom-of-its-container/*/
-.categoryTable{
-        width:95%; 
-        border-collapse:collapse;
-        margin: 0 auto 0 auto;
-        padding: 0px 20px 0px 0px;
-        position: absolute;
-        bottom: 0px;
+#productTable { 
+    width: 600px;
+    margin: 20px 20px;       
 }
+
+#productTable tr { height: 90px }
+
+#productTable td { width: 145px }
 
 /* cart page styles */
 #cartLeftColumn {

@@ -64,7 +64,8 @@
             </div>
             <div id="categoryRightColumn">
                 <p id="categoryTitle">[ selected category ]</p>
-                <table class="categoryTable">
+                <!--<table class="categoryTable">-->
+                <table id="productTable">
                     <tr>
                         <td>
                             <img src="#" alt="product image">
