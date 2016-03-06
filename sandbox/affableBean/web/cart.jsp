@@ -62,58 +62,72 @@
                     [ subtotal: xxx ]
                 </div>
 
-                <div id="cartRows">
-                    <div id="productRow">
-                        <div id="productCell">                    
+                <table class="cartTable">
+                    <tr>
+                        <th>
+                            product
+                        </th>
+                        <th>
+                            name
+                        </th>
+                        <th>
+                            price
+                        </th>
+                        <th>
+                            quantity
+                        </th>
+                    <tr>
+                    <tr>
+                        <td>
                             <a href="#">
                                 <img src="#" class="productImage" alt="product image"
                             </a>
-                        </div>
-                        <div id="productCell">
-                            <div class="productNameWidget">
+                        </td>
+                        <td>
                                 [ product name ]
-                            </div>
-                            <div class="productDescriptionWidget">
-                                [ product description ]
-                            </div>
-                        </div>
-                        <div id="productCell">
-                            <div class="productPriceWidget">
-                                [ price ]
-                            </div>
-                        </div>
-                        <div id="productCell">
-                            <div class="productUpdateWidget">
-                                <button name="Update">Update</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="productRow">
-                        <div id="productCell">                    
+                         </td>
+                        <td>
+                               [ price ]
+                        </td>
+                        <td>
+                            <form action="updateCart" method="post">
+                                <input type="text"
+                                       maxlength="2"
+                                       size="2"
+                                       value="1"
+                                       name="quantity">
+                                <input type="submit"
+                                       name="submit"
+                                       value="update button">
+                            </form>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
                             <a href="#">
                                 <img src="#" class="productImage" alt="product image"
                             </a>
-                        </div>
-                        <div id="productCell">
-                            <div class="productNameWidget">
+                        </td>
+                        <td>
                                 [ product name ]
-                            </div>
-                            <div class="productDescriptionWidget">
-                                [ product description ]
-                            </div>
-                        </div>
-                        <div id="productCell">
-                            <div class="productPriceWidget">
-                                [ price ]
-                            </div>
-                        </div>
-                        <div id="productCell">
-                            <div class="productUpdateWidget">
-                                <button name="Update">Update</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                         </td>
+                        <td>
+                               [ price ]
+                        </td>
+                        <td>
+                            <form action="updateCart" method="post">
+                                <input type="text"
+                                       maxlength="2"
+                                       size="2"
+                                       value="1"
+                                       name="quantity">
+                                <input type="submit"
+                                       name="submit"
+                                       value="update button">
+                            </form>
+                        </td>
+                    </tr>
+                </table>
             </div>
             <div id="footer">
                 <hr>

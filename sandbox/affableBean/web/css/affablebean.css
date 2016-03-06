@@ -8,6 +8,7 @@ and open the template in the editor.
     Author     : Mike
 */
 
+/* html tags */
 body {
     font-family: Arial, Helvetica, sans-serif;
     width: 850px;
@@ -15,8 +16,39 @@ body {
     margin: 20px auto;
 }
 
+hr {
+    border: 0;
+    background-color: #333;
+    height: 1px;
+    margin: 0 25px;
+    width: 300px;
+}
+
+th {
+    padding: 2px;
+    background: #D0E8E8;
+}
+td{ 
+    padding:2px; border:#4e95f4 1px solid;
+}
+/* provide some minimal visual accomodation for IE8 and below */
+tr{
+    background: #F3F9F9;
+}
+/*  Define the background color for all the ODD background rows  */
+tr:nth-child(odd){ 
+    background: #F3F9F9;
+}
+/*  Define the background color for all the EVEN background rows  */
+tr:nth-child(even){
+    background: #FFFFFF;
+}
+
+/* general styles */
 #main { background: #F1F3F2 }
 
+/* styles for elements contained in the header, i.e.,
+   shopping cart widget, language toggle, and logo */
 #header {
     height: 250px;
     background: #AAAAAA;
@@ -55,6 +87,7 @@ body {
     background: #AAAAAA;
 }
 
+/* footer styles */
 #footer {
     height: 60px;
     width: 350px;
@@ -62,14 +95,7 @@ body {
     background: #AAAAAA;
 }
 
-hr {
-    border: 0;
-    background-color: #333;
-    height: 1px;
-    margin: 0 25px;
-    width: 300px;
-}
-
+/* index page styles */
 #indexLeftColumn {
     height: 400px;
     width: 350px;
@@ -84,6 +110,20 @@ hr {
     background: #F1F3F2;
 }
 
+.categoryBox {
+    height: 176px;
+    width: 212px;
+    margin: 21px 14px 6px;
+    float: inherit;
+    background: #CCCCCC;
+}
+
+.categoryLabelText {
+    line-height: 150%;
+    font-size: x-large;
+}
+
+/* category page styles */
 #categoryLeftColumn {
     height: 400px;
     width: 200px;
@@ -99,11 +139,76 @@ hr {
     position: relative;
 }
 
+.categorySelectedWidget {
+    width: 260px;
+    margin: -20px 0px -10px 200px;
+    font-size: x-large;
+    float: bottom;
+    /*line-height: 25px;*/
+    background: #F7EDC9;
+}
+
+.categoryLink {
+    height: 40px;
+    width: 120px;
+    margin: 21px 40px 20px;
+    float: inherit;
+    background: #E0F0ED;
+}
+
+/*http://www.textfixer.com/tutorials/css-table-alternating-rows.php*/
+/*http://jonathannicol.com/blog/2009/06/20/aligning-an-element-to-the-bottom-of-its-container/*/
+.categoryTable{
+        width:95%; 
+        border-collapse:collapse;
+        margin: 0 auto 0 auto;
+        padding: 0px 20px 0px 0px;
+        position: absolute;
+        bottom: 0px;
+}
+
+.productImage {
+    height: 72px;
+    width: 130px;
+    margin: 10px 10px;
+    float: left;
+}
+
+.productNameWidget {
+    width: 140px;
+    margin: 20px 0px;
+    font-size: large;
+    float: top;
+}
+
+.productDescriptionWidget {
+    width: 160px;
+    margin: 5px 0px;
+    font-size: small;
+    float: top;
+}
+
+.productPriceWidget {
+    width: 140px;
+    margin: 20px 0px;
+    font-size: large;
+    float: top;
+}
+
+.productPurchaseWidget {
+    width: 150px;
+    margin: 20px 0px;
+    font-size: large;
+    float: top;
+}
+
+/* cart page styles */
 #cartLeftColumn {
     height: 400px;
     width: 850;
     float: left;
     background: #F1F3F2;
+    position: relative;
 }
 
 #cartBar {
@@ -126,111 +231,29 @@ hr {
     background: #AAAAAA;
 }
 
-.categoryBox {
-    height: 176px;
-    width: 212px;
-    margin: 21px 14px 6px;
-    float: inherit;
-    background: #CCCCCC;
-}
-
-.categoryLink {
-    height: 40px;
-    width: 120px;
-    margin: 21px 40px 20px;
-    float: inherit;
-    background: #E0F0ED;
-}
-
-.categoryLabelText {
-    line-height: 150%;
-    font-size: x-large;
-}
-
-.categorySelectedWidget {
-    width: 260px;
-    margin: -20px 0px -10px 200px;
-    font-size: x-large;
-    float: bottom;
-    /*line-height: 25px;*/
-    background: #F7EDC9;
-}
-
 /*http://www.textfixer.com/tutorials/css-table-alternating-rows.php*/
 /*http://jonathannicol.com/blog/2009/06/20/aligning-an-element-to-the-bottom-of-its-container/*/
-.categoryTable{
+.cartTable{
         width:95%; 
         border-collapse:collapse;
+        margin: 0 auto 0 auto;
         padding: 0px 20px 0px 0px;
         position: absolute;
         bottom: 0px;
 }
-.categoryTable td{ 
-        padding:2px; border:#4e95f4 0px solid;
-}
-/* provide some minimal visual accomodation for IE8 and below */
-.categoryTable tr{
-        background: #F3F9F9;
-}
-/*  Define the background color for all the ODD background rows  */
-.categoryTable tr:nth-child(odd){ 
-        background: #F3F9F9;
-}
-/*  Define the background color for all the EVEN background rows  */
-.categoryTable tr:nth-child(even){
-        background: #FFFFFF;
-}
 
-.productImage {
-    height: 72px;
-    width: 130px;
-    margin: 10px 10px;
+.productQuantityWidget {
+    width: 20px;
+    margin: 20px 0px;
     float: left;
-    /*background: #CCCCCC;*/
-}
-
-.productNameWidget {
-    width: 160px;
-    margin: 20px 0px;
-    font-size: large;
-    float: top;
-    /*line-height: 25px;*/
-    /*background: #CCCCCC;*/
-}
-
-.productDescriptionWidget {
-    width: 160px;
-    margin: 5px 0px;
-    font-size: small;
-    float: top;
-    /*line-height: 25px;*/
-    /*background: #CCCCCC;*/
-}
-
-.productPriceWidget {
-    width: 150px;
-    margin: 20px 0px;
-    font-size: large;
-    float: top;
-    /*line-height: 25px;*/
-    /*background: #CCCCCC;*/
-}
-
-.productPurchaseWidget {
-    width: 150px;
-    margin: 20px 0px;
-    font-size: large;
-    float: top;
-    /*line-height: 25px;*/
-    /*background: #CCCCCC;*/
 }
 
 .productUpdateWidget {
-    width: 150px;
+    width: 80px;
     margin: 20px 0px;
     font-size: large;
-    float: top;
-    /*line-height: 25px;*/
-    background: #CCCCCC;
+    float: left;
 }
 
+/* checkout page styles */
+/* confirmation page styles */
