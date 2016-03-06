@@ -43,30 +43,27 @@
             <div id="categoryLeftColumn">
                 <div class="categoryButton">
                     <a href="#">
-                        <span class="categoryLabelText">dairy</span>
+                        <span class="categoryText">dairy</span>
                     </a>
                 </div>
                 <div class="categoryButton">
                     <a href="#">
-                        <span class="categoryLabelText">meats</span>
+                        <span class="categoryText">meats</span>
                     </a>
                 </div>
                 <div class="categoryButton">
                     <a href="#">
-                        <span class="categoryLabelText">bakery</span>
+                        <span class="categoryText">bakery</span>
                     </a>
                 </div>
                 <div class="categoryButton">
                     <a href="#">
-                        <span class="categoryLabelText">fruti & veg</span>
+                        <span class="categoryText">fruit & veg</span>
                     </a>
                 </div>
             </div>
             <div id="categoryRightColumn">
-                <div class="categorySelectedWidget">
-                    [ selected category ]
-                </div>
-                <!--<div id="tableRightColumn">-->
+                <p id="categorySelectedWidget">[ selected category ]</p>
                     <table class="categoryTable">
                         <tr>
                             <td>
@@ -169,7 +166,6 @@
                             </td>
                         </tr>
                    </table>
-                <!--</div>-->
             </div>
             <div id="footer">
                 <hr>

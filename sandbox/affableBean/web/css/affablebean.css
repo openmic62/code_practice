@@ -140,20 +140,24 @@ tr:nth-child(even){
 }
 
 .categoryButton {
-    height: 40px;
-    width: 120px;
-    margin: 21px 40px 20px;
-    float: inherit;
+    margin: 15px 40px 15px;
+    padding: 13px;
+    display: block;
     background: #E0F0ED;
 }
 
-.categorySelectedWidget {
+#categorySelectedWidget {
     width: 260px;
     margin: -20px 0px -10px 200px;
     font-size: x-large;
     float: bottom;
     /*line-height: 25px;*/
     background: #F7EDC9;
+}
+
+.categoryText {
+    line-height: 25px;
+    font-size: x-large;
 }
 
 /*http://www.textfixer.com/tutorials/css-table-alternating-rows.php*/
