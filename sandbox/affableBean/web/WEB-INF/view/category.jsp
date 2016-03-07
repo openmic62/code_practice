@@ -1,6 +1,6 @@
             <div id="categoryLeftColumn">
                 <div id="selectedCategory">
-                    <a href="#">
+                    <a href="category">
                         <span class="categoryText">dairy</span>
                     </a>
                 </div>
@@ -37,7 +37,7 @@
                             [ price ]
                         </td>
                         <td>
-                            <form action="#" method="post">
+                            <form action="checkout" method="post">
                                 <input type="submit" value="purchase button">
                             </form>
                         </td>
@@ -55,7 +55,7 @@
                             [ price ]
                         </td>
                         <td>
-                            <form action="#" method="post">
+                            <form action="checkout" method="post">
                                 <input type="submit" value="purchase button">
                             </form>
                         </td>
@@ -73,7 +73,7 @@
                             [ price ]
                         </td>
                         <td>
-                            <form action="#" method="post">
+                            <form action="checkout" method="post">
                                 <input type="submit" value="purchase button">
                             </form>
                         </td>
@@ -91,7 +91,7 @@
                             [ price ]
                         </td>
                         <td>
-                            <form action="#" method="post">
+                            <form action="checkout" method="post">
                                 <input type="submit" value="purchase button">
                             </form>
                         </td>

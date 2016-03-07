@@ -1,7 +1,7 @@
             <div id="singleColumn">
                 <h2>checkout</h2>
                 <p>[ text ]</p>
-                <form action="confirmation.jsp" method="post">
+                <form action="purchase" method="post">
                     <table id="checkoutTable">
                         <tr>
                             <td>[ form containing fields to

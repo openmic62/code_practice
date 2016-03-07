@@ -4,7 +4,7 @@
                 <div id="actionBar">
 
                     <div class="cartWidget">
-                        <a href="checkout.jsp">
+                        <a href="checkout">
                             [ proceed to checkout ]
                         </a>
                     </div>

@@ -23,14 +23,14 @@
                     </div>
 
                     <div class="headerWidget">
-                        <a href="cart.jsp">
+                        <a href="viewCart">
                             [ shopping cart widget ]
                         </a>
                     </div>
 
                 </div>
 
-                <a href="#">
+                <a href="/affableBean">
                     <img src="#" id="logo" alt="Affable Bean logo">
                 </a>
 

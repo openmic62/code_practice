@@ -6,7 +6,7 @@
 
             <div id="indexRightColumn">
                 <div class="categoryBox">
-                    <a href="category.jsp">
+                    <a href="category">
                         <span class="categoryLabelText">dairy</span>
                     </a>
                 </div>
