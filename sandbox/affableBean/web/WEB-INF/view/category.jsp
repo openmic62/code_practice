@@ -6,7 +6,11 @@
 <sql:query var="selectedCategory" dataSource="jdbc/affablebean">
     SELECT name FROM category WHERE id = ?
     <sql:param value="${pageContext.request.queryString}"/>
-</sql:query>   
+</sql:query>
+<sql:query var="categoryProducts" dataSource="jdbc/affablebean">
+    SELECT * FROM product WHERE category_id = ?
+    <sql:param value="${pageContext.request.queryString}"/>
+</sql:query>
             <div id="categoryLeftColumn">
                 <c:forEach var="category" items="${categories.rows}">
                     <c:choose>
@@ -27,77 +31,26 @@
                 <p id="categoryTitle">${selectedCategory.rows[0].name}</p>
                 <!--<table class="categoryTable">-->
                 <table id="productTable">
-                    <tr>
+                    <c:forEach var="product" items="${categoryProducts.rows}" varStatus="iter">
+                     <tr>
                         <td>
-                            <img src="#" alt="product image">
+                            <img src="${initParam.productImagePath}${product.name}.png" alt="${product.name}">
                         </td>
                         <td>
-                            [ product name ]
+                            ${product.name}
                             <br>
-                            <span class="smallText">[ product description ]</span>
+                            <span class="smallText">${product.description}</span>
                         </td>
                         <td>
-                            [ price ]
+                            &euro; ${product.price} / unit
                         </td>
                         <td>
-                            <form action="checkout" method="post">
-                                <input type="submit" value="purchase button">
+                            <form action="addToCart" method="post">
+                                <input type="hidden" name="productId" value="${product.id}">
+                                <input type="submit" value="add to cart">
                             </form>
                         </td>
                     </tr>
-                    <tr>
-                        <td>
-                            <img src="#" alt="product image"
-                        </td>
-                        <td>
-                            [ product name ]
-                            <br>
-                            <span class="smallText">[ product description ]</span>
-                        </td>
-                        <td>
-                            [ price ]
-                        </td>
-                        <td>
-                            <form action="checkout" method="post">
-                                <input type="submit" value="purchase button">
-                            </form>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img src="#" alt="product image"
-                        </td>
-                        <td>
-                            [ product name ]
-                            <br>
-                            <span class="smallText">[ product description ]</span>
-                        </td>
-                        <td>
-                            [ price ]
-                        </td>
-                        <td>
-                            <form action="checkout" method="post">
-                                <input type="submit" value="purchase button">
-                            </form>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img src="#" alt="product image"
-                        </td>
-                        <td>
-                            [ product name ]
-                            <br>
-                            <span class="smallText">[ product description ]</span>
-                        </td>
-                        <td>
-                            [ price ]
-                        </td>
-                        <td>
-                            <form action="checkout" method="post">
-                                <input type="submit" value="purchase button">
-                            </form>
-                        </td>
-                    </tr>
+                    </c:forEach>
                 </table>
             </div>
