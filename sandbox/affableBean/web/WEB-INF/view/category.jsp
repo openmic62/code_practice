@@ -3,7 +3,10 @@
 <sql:query var="categories" dataSource="jdbc/affablebean">
     SELECT * FROM category
 </sql:query>
-    
+<sql:query var="selectedCategory" dataSource="jdbc/affablebean">
+    SELECT name FROM category WHERE id = ?
+    <sql:param value="${pageContext.request.queryString}"/>
+</sql:query>   
             <div id="categoryLeftColumn">
                 <c:forEach var="category" items="${categories.rows}">
                     <c:choose>
@@ -21,7 +24,7 @@
                 </c:forEach>
             </div>
             <div id="categoryRightColumn">
-                <p id="categoryTitle">[ selected category ]</p>
+                <p id="categoryTitle">${selectedCategory.rows[0].name}</p>
                 <!--<table class="categoryTable">-->
                 <table id="productTable">
                     <tr>
