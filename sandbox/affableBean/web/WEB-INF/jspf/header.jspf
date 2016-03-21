@@ -31,8 +31,10 @@
                 </div>
 
                 <a href="/affableBean">
-                    <img src="#" id="logo" alt="Affable Bean logo">
+                    <!--<img src="#" id="logo" alt="Affable Bean logo">-->
+                    <img src="img/logo.png" id="logo" alt="Affable Bean logo">
                 </a>
 
-                <img src="#" id="logoText" alt="the affable bean">
+                <!--<img src="#" id="logoText" alt="the affable bean">-->
+                <img src="img/logoText.png" id="logoText" alt="the affable bean">
             </div>
