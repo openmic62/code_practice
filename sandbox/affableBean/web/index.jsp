@@ -5,11 +5,17 @@
 </sql:query>--%>
             <div id="indexLeftColumn">
                 <div id="welcomeText">
-                    <p>[ welcome text ]</p>
+                    <p style="font-size: larger">Welcome to the online home of the Affable Bean Green Grocer.</p>
                     
+                    <p>Enjoy browsing and learning more about our unique home delivery
+                        service bringing you fresh organic produce, dairy, meats, breads
+                        and other delicious and healthy items to your doorstep.</p>
+
                     <!--test to access context parameters-->
+                    <!--
                     categoryImagePath: ${initParam.categoryImagePath}
                     productImagePath: ${initParam.productImagePath}
+                    -->
                 </div>
             </div>
 
