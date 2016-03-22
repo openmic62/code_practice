@@ -5,6 +5,7 @@
  */
 package controller;
 
+import entity.Category;
 import java.io.IOException;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -51,10 +52,23 @@ public class ControllerServlet extends HttpServlet {
             throws ServletException, IOException {
         
         String userPath = request.getServletPath();
+        Category selectedCategory;
         
         // if category page is requested
         if (userPath.equals("/category")) {
-            // todo: Implement category request
+            
+            // get categoryId from request
+            String categoryId = request.getQueryString();
+
+            if (categoryId != null) {
+
+                // get selectedCategory
+                selectedCategory = categoryFacade.find(Short.parseShort(categoryId));
+                
+                // place selectedCategory in request context
+                request.setAttribute("selectedCategory", selectedCategory);
+                
+            }
             
         // if cart page is requested
         } else if (userPath.equals("/viewCart")) {

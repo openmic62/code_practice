@@ -12,7 +12,6 @@
     <sql:param value="${pageContext.request.queryString}"/>
 </sql:query>--%>
             <div id="categoryLeftColumn">
-                <%--<c:forEach var="category" items="${categories.rows}">--%>
                 <c:forEach var="category" items="${categories}">
                     <c:choose>
                         <c:when test="${category.id == pageContext.request.queryString}">
@@ -29,8 +28,7 @@
                 </c:forEach>
             </div>
             <div id="categoryRightColumn">
-                <p id="categoryTitle">${selectedCategory.rows[0].name}</p>
-                <!--<table class="categoryTable">-->
+                <p id="categoryTitle">${selectedCategory.name}</p>
                 <table id="productTable">
                     <c:forEach var="product" items="${categoryProducts.rows}" varStatus="iter">
                      <tr>
