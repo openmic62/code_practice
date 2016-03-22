@@ -30,7 +30,7 @@
             <div id="categoryRightColumn">
                 <p id="categoryTitle">${selectedCategory.name}</p>
                 <table id="productTable">
-                    <c:forEach var="product" items="${categoryProducts.rows}" varStatus="iter">
+                    <c:forEach var="product" items="${categoryProducts}" varStatus="iter">
                      <tr>
                         <td>
                             <img src="${initParam.productImagePath}${product.name}.png" alt="${product.name}">

@@ -6,7 +6,9 @@
 package controller;
 
 import entity.Category;
+import entity.Product;
 import java.io.IOException;
+import java.util.Collection;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -67,6 +69,12 @@ public class ControllerServlet extends HttpServlet {
                 
                 // place selectedCategory in request context
                 request.setAttribute("selectedCategory", selectedCategory);
+                
+                // get all the products for selectedCategory
+                Collection<Product> categoryProducts = selectedCategory.getProductCollection();
+                
+                // place products in request context
+                request.setAttribute("categoryProducts", categoryProducts);
                 
             }
             
