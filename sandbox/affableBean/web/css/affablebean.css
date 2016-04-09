@@ -61,9 +61,24 @@ tr:nth-child(even){
     text-align: left;
 }
 
+.bubble {
+    font-weight: bold;
+    background-color: #f5eabe;
+    padding: 5px;
+    color: inherit;
+}
+
+.hMargin { margin: 0 30px }
+
 .smallText { font-size: small }
 
 .reallySmallText { font-size: xx-small }
+
+.header {
+    background-color: #c3e3e0;
+    height: 30px;
+}
+
 
 /* styles for elements contained in the header, i.e.,
    shopping cart widget, language toggle, and logo */
@@ -97,12 +112,22 @@ tr:nth-child(even){
     /*background: #CCCCCC;*/
 }
 
+.horizontalMargin {
+    margin-left: 28px;
+    margin-right: 5px
+}
+
+#viewCart {
+    text-align: left;
+    width: 210px;
+}
+
 .headerWidget {
     width: 194px;
     margin: 20px 2px;
     font-size: small;
     float: right;
-    /*line-height: 25px;*/
+    line-height: 25px;
     /*background: #AAAAAA;*/
 }
 

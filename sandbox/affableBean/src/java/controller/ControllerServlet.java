@@ -5,6 +5,7 @@
  */
 package controller;
 
+import cart.ShoppingCart;
 import entity.Category;
 import entity.Product;
 import java.io.IOException;
@@ -15,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import session.CategoryFacade;
 
 /**
@@ -117,10 +119,23 @@ public class ControllerServlet extends HttpServlet {
             throws ServletException, IOException {
         
         String userPath = request.getServletPath();
+        HttpSession session = request.getSession();
         
         // if addToCart action is called
         if (userPath.equals("/addToCart")) {
-            // todo: Implement add product to cart action
+            
+            String sessionID = session.getId();
+            ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
+            
+            if ( cart == null ) {
+                cart = new ShoppingCart(sessionID);
+            } else {
+                int productId = Integer.parseInt(request.getParameter("productId"));
+                cart.addItem(sessionID, productId);
+                session.setAttribute("cart", cart);
+            }
+            
+            userPath = "/cart";
             
         // if updateCart action is called
         } else if (userPath.equals("/updateCart")) {

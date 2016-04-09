@@ -4,6 +4,7 @@
     Author     : Mike
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -21,16 +22,41 @@
                     <div class="headerWidget">
                         [ language toggle ]
                     </div>
-
+ 
                     <div class="headerWidget">
+                        <a href="checkout">
+                            proceed to checkout &#x279f;
+                        </a>
+                    </div>
+
+                    <div class="headerWidget" id="viewCart">
+                        <img src="img/cart.gif" id="cart" alt="shopping cart icon">
+                        <span class="horizontalMargin">
+                            <c:choose>
+                                <c:when test="${cart.numberOfItems == null}">
+                                    0
+                                </c:when>
+                                <c:otherwise>
+                                    ${cart.numberOfItems}
+                                </c:otherwise>
+                            </c:choose>
+                            <c:choose>
+                                <c:when test="${cart.numberOfItems == 1}">
+                                    item
+                                </c:when>
+                                <c:otherwise>
+                                    items
+                                </c:otherwise>
+                            </c:choose>
+                        </span>
                         <a href="viewCart">
-                            [ shopping cart widget ]
+                            view cart
                         </a>
                     </div>
 
                 </div>
 
-                <a href="/affableBean">
+                <a href="index.jsp">
                     <!--<img src="#" id="logo" alt="Affable Bean logo">-->
                     <img src="img/logo.png" id="logo" alt="Affable Bean logo">
                 </a>
