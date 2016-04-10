@@ -5,33 +5,46 @@
  */
 package cart;
 
+import entity.Product;
+
 /**
  *
  * @author mikerocha
  */
 public class ShoppingCartItem {
 
-    private String sessionId;
-    private int productId;
+    private Product product;
+    private int quantity;
 
-    public ShoppingCartItem(String sessionId, int productId) {
-        this.sessionId = sessionId;
-        this.productId = productId;
+    public ShoppingCartItem(Product product) {
+        this.product = product;
+        this.quantity = 1;
     }
-
-    public String getSessionId() {
-        return sessionId;
+    
+    private Product getProduct() {
+        return this.product;
     }
 
     public int getProductId() {
-        return productId;
+        return product.getId();
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+    
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+    
+    public void increment() {
+        this.quantity++;
     }
 
     @Override
     public boolean equals(Object obj) {
         if ((obj instanceof ShoppingCartItem) && 
-                (((ShoppingCartItem) obj).sessionId == this.sessionId) && 
-                (((ShoppingCartItem) obj).productId == this.productId)) {
+                (((ShoppingCartItem) obj).getProductId() == this.getProductId())) {
             return true;
         } else {
             return false;
@@ -41,8 +54,7 @@ public class ShoppingCartItem {
     @Override
     public int hashCode() {
         int result = 7877;
-        result += (int) (Integer.parseInt(this.sessionId) / 11);
-        result += (int) (this.productId / 11);
+        result += (int) (this.getProductId() / 11);
         return result;
     }
 }

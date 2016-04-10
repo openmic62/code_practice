@@ -7,6 +7,7 @@ package controller;
 
 import cart.ShoppingCart;
 import entity.Category;
+import static entity.OrderedProduct_.product;
 import entity.Product;
 import java.io.IOException;
 import java.util.Collection;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import session.CategoryFacade;
+import session.ProductFacade;
 
 /**
  *
@@ -36,6 +38,8 @@ public class ControllerServlet extends HttpServlet {
 
     @EJB
     private CategoryFacade categoryFacade;
+    @EJB
+    private ProductFacade productFacade;
     
     public void init() throws ServletException {
         // store category list in servlet context
@@ -128,12 +132,12 @@ public class ControllerServlet extends HttpServlet {
             ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
             
             if ( cart == null ) {
-                cart = new ShoppingCart(sessionID);
-            } else {
-                int productId = Integer.parseInt(request.getParameter("productId"));
-                cart.addItem(sessionID, productId);
+                cart = new ShoppingCart();
                 session.setAttribute("cart", cart);
-            }
+            } 
+            
+            int productId = Integer.parseInt(request.getParameter("productId"));
+            cart.addItem(productFacade.find(productId));
             
             userPath = "/cart";
             

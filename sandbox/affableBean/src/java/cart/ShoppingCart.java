@@ -5,6 +5,7 @@
  */
 package cart;
 
+import entity.Product;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -15,26 +16,44 @@ import java.util.List;
  */
 public class ShoppingCart {
 
-    private String sessionId;
-    private List<ShoppingCartItem> cartContents;
+    private List<ShoppingCartItem> items;
+    int numberOfItems;
+    double total;
 
     public ShoppingCart() {
-        this("-1");
-    }
-
-    public ShoppingCart(String sessionId) {
         super();
-        this.sessionId = sessionId;
-        cartContents = makeCart();
+        items = makeCart();
+        numberOfItems = 0;
+        total = 0;
     }
 
-    public void addItem(String sessionId, int productID) {
-        ShoppingCartItem item = makeItem(sessionId, productID);
-        cartContents.add(item);
+    public int getNumberOfItems() {
+        numberOfItems = 0;
+        for (ShoppingCartItem item : items) {
+            numberOfItems += item.getQuantity();
+        }
+        return numberOfItems;
+    }
+
+    public void addItem(Product product) {
+        boolean itemExistsInCart = false;
+        ShoppingCartItem item = null;
+        for (ShoppingCartItem scItem : items) {
+            if (scItem.getProductId() == product.getId()) {
+                itemExistsInCart = true;
+                item = scItem;
+            }
+        }
+        if (itemExistsInCart) {
+            item.increment();
+        } else {
+            ShoppingCartItem newItem = makeItem(product);
+            items.add(newItem);
+        }
     }
 
     public void removeItem(ShoppingCartItem itemToRemove) {
-        Iterator<ShoppingCartItem> iterator = cartContents.iterator();
+        Iterator<ShoppingCartItem> iterator = items.iterator();
         while (iterator.hasNext()) {
             ShoppingCartItem item = iterator.next();
             if (item.equals(itemToRemove)) {
@@ -43,19 +62,11 @@ public class ShoppingCart {
         }
     }
 
-    public int getNumberOfItems() {
-        return cartContents.size();
-    }
-    
-    public String getSessionId() {
-        return this.sessionId;
-    }
-
     private List<ShoppingCartItem> makeCart() {
         return new ArrayList<ShoppingCartItem>(0);
     }
 
-    private ShoppingCartItem makeItem(String sessionId, int productId) {
-        return new ShoppingCartItem(sessionId, productId);
+    private ShoppingCartItem makeItem(Product product) {
+        return new ShoppingCartItem(product);
     }
 }
