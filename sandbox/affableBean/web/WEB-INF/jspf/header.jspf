@@ -5,6 +5,8 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -22,7 +24,12 @@
                     <div class="headerWidget">
                         [ language toggle ]
                     </div>
- 
+                    <c:if test="${'true' eq 'false'}">                  
+                        <div class="headerWidget">
+                            ${pageContext.request.servletPath}
+                            ${requestScope['javax.servlet.forward.servlet_path']}
+                        </div>
+                    </c:if> 
                     <div class="headerWidget">
                         <a href="checkout">
                             proceed to checkout &#x279f;
@@ -49,9 +56,13 @@
                                 </c:otherwise>
                             </c:choose>
                         </span>
-                        <a href="viewCart">
-                            view cart
-                        </a>
+                        <c:if test="${!empty cart && $cart.numberOfItems > 0 &&
+                                      !fn:contains(pageContext.request.servletPath, '/cart') &&
+                                      requestScope['javax.servlet.forward.servlet_path'] ne '/cart'}">
+                            <a href="/viewCart">
+                                view cart
+                            </a>
+                        </c:if>
                     </div>
 
                 </div>

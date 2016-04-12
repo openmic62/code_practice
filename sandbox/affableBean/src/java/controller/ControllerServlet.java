@@ -60,6 +60,7 @@ public class ControllerServlet extends HttpServlet {
             throws ServletException, IOException {
         
         String userPath = request.getServletPath();
+        HttpSession session = request.getSession();
         Category selectedCategory;
         
         // if category page is requested
@@ -74,13 +75,13 @@ public class ControllerServlet extends HttpServlet {
                 selectedCategory = categoryFacade.find(Short.parseShort(categoryId));
                 
                 // place selectedCategory in request context
-                request.setAttribute("selectedCategory", selectedCategory);
+                session.setAttribute("selectedCategory", selectedCategory);
                 
                 // get all the products for selectedCategory
                 Collection<Product> categoryProducts = selectedCategory.getProductCollection();
                 
                 // place products in request context
-                request.setAttribute("categoryProducts", categoryProducts);
+                session.setAttribute("categoryProducts", categoryProducts);
                 
             }
             
@@ -128,7 +129,6 @@ public class ControllerServlet extends HttpServlet {
         // if addToCart action is called
         if (userPath.equals("/addToCart")) {
             
-            String sessionID = session.getId();
             ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
             
             if ( cart == null ) {
@@ -139,7 +139,7 @@ public class ControllerServlet extends HttpServlet {
             int productId = Integer.parseInt(request.getParameter("productId"));
             cart.addItem(productFacade.find(productId));
             
-            userPath = "/cart";
+            userPath = "/category";
             
         // if updateCart action is called
         } else if (userPath.equals("/updateCart")) {
