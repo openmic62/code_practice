@@ -7,7 +7,6 @@ package controller;
 
 import cart.ShoppingCart;
 import entity.Category;
-import static entity.OrderedProduct_.product;
 import entity.Product;
 import java.io.IOException;
 import java.util.Collection;
@@ -87,7 +86,9 @@ public class ControllerServlet extends HttpServlet {
             
         // if cart page is requested
         } else if (userPath.equals("/viewCart")) {
-            // todo: Implement cart page request
+            ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
+            System.out.println("cart-->" + cart + "<--");
+            
             
             userPath = "/cart";
                     

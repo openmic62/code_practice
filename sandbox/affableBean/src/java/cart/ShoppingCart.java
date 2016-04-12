@@ -6,6 +6,7 @@
 package cart;
 
 import entity.Product;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -35,6 +36,18 @@ public class ShoppingCart {
         return numberOfItems;
     }
 
+    public List<ShoppingCartItem> getItems() {
+        return items;
+    }
+    
+    public BigDecimal getSubtotal() {
+        BigDecimal subtotal = new BigDecimal(0);
+        for (ShoppingCartItem item : items) {
+            subtotal.add(item.getPrice().multiply(new BigDecimal(item.getQuantity())));
+        }
+        return subtotal;
+    }
+    
     public void addItem(Product product) {
         boolean itemExistsInCart = false;
         ShoppingCartItem item = null;

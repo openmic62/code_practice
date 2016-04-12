@@ -6,6 +6,7 @@
 package cart;
 
 import entity.Product;
+import java.math.BigDecimal;
 
 /**
  *
@@ -27,6 +28,14 @@ public class ShoppingCartItem {
 
     public int getProductId() {
         return product.getId();
+    }
+    
+    public String getName() {
+        return product.getName();
+    }
+    
+    public BigDecimal getPrice() {
+        return product.getPrice();
     }
 
     public int getQuantity() {

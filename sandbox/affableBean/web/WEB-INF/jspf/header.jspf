@@ -56,10 +56,11 @@
                                 </c:otherwise>
                             </c:choose>
                         </span>
-                        <c:if test="${!empty cart && $cart.numberOfItems > 0 &&
+                        <c:if test="${!empty cart && cart.numberOfItems > 0 &&
+                                      
                                       !fn:contains(pageContext.request.servletPath, '/cart') &&
                                       requestScope['javax.servlet.forward.servlet_path'] ne '/cart'}">
-                            <a href="/viewCart">
+                            <a href="viewCart">
                                 view cart
                             </a>
                         </c:if>

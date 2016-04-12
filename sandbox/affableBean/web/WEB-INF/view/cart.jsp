@@ -1,6 +1,7 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
             <div id="singleColumn">
-                <p>Your shopping cart contains x items</p>
-                <!--<div id="cartBar">-->
+                <p>Your shopping cart contains ${cart.numberOfItems} items</p>
+                
                 <div id="actionBar">
 
                     <div class="cartWidget">
@@ -19,7 +20,7 @@
 
                 </div>
 
-                <h4 id="subtotal">[ subtotal: xxx ]</h4>
+                <h4 id="subtotal">[ subtotal: ${cart.subtotal} ]</h4>
 
                 <table id="cartTable">
                     <tr>
@@ -36,55 +37,32 @@
                             quantity
                         </th>
                     <tr>
-                    <tr>
-                        <td>
-                            <a href="#">
-                                <img src="#" class="productImage" alt="product image"
-                            </a>
-                        </td>
-                        <td>
-                            [ product name ]
-                        </td>
-                        <td>
-                            [ price ]
-                        </td>
-                        <td>
-                            <form action="updateCart" method="post">
-                                <input type="text"
-                                       maxlength="2"
-                                       size="2"
-                                       value="1"
-                                       name="quantity">
-                                <input type="submit"
-                                       name="submit"
-                                       value="update button">
-                            </form>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="#">
-                                <img src="#" class="productImage" alt="product image"
-                            </a>
-                        </td>
-                        <td>
-                            [ product name ]
-                        </td>
-                        <td>
-                            [ price ]
-                        </td>
-                        <td>
-                            <form action="updateCart" method="post">
-                                <input type="text"
-                                       maxlength="2"
-                                       size="2"
-                                       value="1"
-                                       name="quantity">
-                                <input type="submit"
-                                       name="submit"
-                                       value="update button">
-                            </form>
-                        </td>
-                    </tr>
+                    <c:forEach var="product" items="${cart.items}">
+                        <tr>
+                            <td>
+                                <a href="#">
+                                    <img src="${initParam.productImagePath}${product.name}.png" class="productImage" alt="product image"
+                                </a>
+                            </td>
+                            <td>
+                                ${product.name}
+                            </td>
+                            <td>
+                                ${product.price}
+                            </td>
+                            <td>
+                                <form action="updateCart" method="post">
+                                    <input type="text"
+                                           maxlength="2"
+                                           size="2"
+                                           value="${product.quantity}"
+                                           name="quantity">
+                                    <input type="submit"
+                                           name="submit"
+                                           value="update button">
+                                </form>
+                            </td>
+                        </tr>
+                    </c:forEach>
                 </table>
             </div>
