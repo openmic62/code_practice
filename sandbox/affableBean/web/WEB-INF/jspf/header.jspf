@@ -31,9 +31,14 @@
                         </div>
                     </c:if> 
                     <div class="headerWidget">
-                        <a href="checkout">
-                            proceed to checkout &#x279f;
-                        </a>
+                        <c:if test="${!empty cart && cart.numberOfItems > 0 &&
+                                      
+                                      !fn:contains(pageContext.request.servletPath, '/checkout') &&
+                                      requestScope['javax.servlet.forward.servlet_path'] ne '/checkout'}">
+                            <a href="checkout">
+                                proceed to checkout &#x279f;
+                            </a>
+                        </c:if>
                     </div>
 
                     <div class="headerWidget" id="viewCart">
@@ -69,10 +74,8 @@
                 </div>
 
                 <a href="index.jsp">
-                    <!--<img src="#" id="logo" alt="Affable Bean logo">-->
                     <img src="img/logo.png" id="logo" alt="Affable Bean logo">
                 </a>
 
-                <!--<img src="#" id="logoText" alt="the affable bean">-->
                 <img src="img/logoText.png" id="logoText" alt="the affable bean">
             </div>

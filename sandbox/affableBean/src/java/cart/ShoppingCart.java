@@ -27,6 +27,11 @@ public class ShoppingCart {
         numberOfItems = 0;
         total = 0;
     }
+    
+    public void clear() {
+        items = makeCart();
+        numberOfItems = 0;
+    }
 
     public int getNumberOfItems() {
         numberOfItems = 0;
@@ -43,7 +48,7 @@ public class ShoppingCart {
     public BigDecimal getSubtotal() {
         BigDecimal subtotal = new BigDecimal(0);
         for (ShoppingCartItem item : items) {
-            subtotal.add(item.getPrice().multiply(new BigDecimal(item.getQuantity())));
+            subtotal = subtotal.add(item.getPrice().multiply(new BigDecimal(item.getQuantity())));
         }
         return subtotal;
     }

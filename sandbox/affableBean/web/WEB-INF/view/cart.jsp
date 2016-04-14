@@ -5,22 +5,28 @@
                 <div id="actionBar">
 
                     <div class="cartWidget">
-                        <a href="checkout">
-                            [ proceed to checkout ]
+                        <c:if test="${!empty cart && cart.numberOfItems > 0}">
+                            <a href="checkout">
+                                [ proceed to checkout ]
+                            </a>
+                        </c:if>
+                    </div>
+
+                    <div class="cartWidget">
+                        <a href="category">
+                            continue shopping
                         </a>
                     </div>
 
                     <div class="cartWidget">
-                        [ continue shopping ]
-                    </div>
-
-                    <div class="cartWidget">
-                        [ clear cart ]
+                        <a href="viewCart?clear">
+                            clear cart
+                        </a>
                     </div>
 
                 </div>
 
-                <h4 id="subtotal">[ subtotal: ${cart.subtotal} ]</h4>
+                <h4 id="subtotal">subtotal: &euro; ${cart.subtotal}</h4>
 
                 <table id="cartTable">
                     <tr>
@@ -48,7 +54,7 @@
                                 ${product.name}
                             </td>
                             <td>
-                                ${product.price}
+                                 &euro; ${product.price}
                             </td>
                             <td>
                                 <form action="updateCart" method="post">

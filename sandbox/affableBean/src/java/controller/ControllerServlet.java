@@ -86,9 +86,12 @@ public class ControllerServlet extends HttpServlet {
             
         // if cart page is requested
         } else if (userPath.equals("/viewCart")) {
+            String updateParam = request.getQueryString();
             ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
-            System.out.println("cart-->" + cart + "<--");
             
+            if (updateParam != null && updateParam.equals("clear")) {
+                cart.clear();
+            }
             
             userPath = "/cart";
                     
@@ -126,7 +129,7 @@ public class ControllerServlet extends HttpServlet {
         
         String userPath = request.getServletPath();
         HttpSession session = request.getSession();
-        
+
         // if addToCart action is called
         if (userPath.equals("/addToCart")) {
             
@@ -144,7 +147,6 @@ public class ControllerServlet extends HttpServlet {
             
         // if updateCart action is called
         } else if (userPath.equals("/updateCart")) {
-            // todo: implement update cart action
             
             userPath = "/cart";
         // if purchse action is called
