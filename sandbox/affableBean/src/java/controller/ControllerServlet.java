@@ -151,12 +151,7 @@ public class ControllerServlet extends HttpServlet {
             
             int productId = Integer.parseInt(request.getParameter("productId"));
             int quantity = Integer.parseInt(request.getParameter("quantity"));
-            List<ShoppingCartItem> items = cart.getItems();
-            for (ShoppingCartItem item : items) {
-                if (item.getProductId() == productId) {
-                    item.setQuantity(quantity);
-                }
-            }
+            cart.update(productId, quantity);
             
             userPath = "/cart";
         // if purchse action is called
@@ -176,7 +171,7 @@ public class ControllerServlet extends HttpServlet {
         }
     }
 
-    /**
+     /**
      * Returns a short description of the servlet.
      *
      * @return a String containing servlet description

@@ -27,7 +27,7 @@ public class ShoppingCart {
         numberOfItems = 0;
         total = 0;
     }
-    
+
     public void clear() {
         items = makeCart();
         numberOfItems = 0;
@@ -44,7 +44,7 @@ public class ShoppingCart {
     public List<ShoppingCartItem> getItems() {
         return items;
     }
-    
+
     public BigDecimal getSubtotal() {
         BigDecimal subtotal = new BigDecimal(0);
         for (ShoppingCartItem item : items) {
@@ -52,7 +52,7 @@ public class ShoppingCart {
         }
         return subtotal;
     }
-    
+
     public void addItem(Product product) {
         boolean itemExistsInCart = false;
         ShoppingCartItem item = null;
@@ -70,16 +70,30 @@ public class ShoppingCart {
         }
     }
 
-    public void removeItem(ShoppingCartItem itemToRemove) {
+    public void update(int productId, int quantity) {
+
         Iterator<ShoppingCartItem> iterator = items.iterator();
         while (iterator.hasNext()) {
             ShoppingCartItem item = iterator.next();
-            if (item.equals(itemToRemove)) {
-                iterator.remove();
+            if (item.getProductId() == productId) {
+                if (quantity == 0) {
+                    iterator.remove();
+                } else {
+                    item.setQuantity(quantity);
+                }
             }
         }
     }
 
+//    public void removeItem(ShoppingCartItem itemToRemove) {
+//        Iterator<ShoppingCartItem> iterator = items.iterator();
+//        while (iterator.hasNext()) {
+//            ShoppingCartItem item = iterator.next();
+//            if (item.equals(itemToRemove)) {
+//                iterator.remove();
+//            }
+//        }
+//    }
     private List<ShoppingCartItem> makeCart() {
         return new ArrayList<ShoppingCartItem>(0);
     }

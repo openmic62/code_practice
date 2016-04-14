@@ -71,7 +71,7 @@
                                            name="quantity">
                                     <input type="submit"
                                            name="submit"
-                                           value="update button">
+                                           value="update quantity">
                                 </form>
                             </td>
                         </tr>
