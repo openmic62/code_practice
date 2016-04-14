@@ -57,7 +57,11 @@
                                 ${cartItem.name}
                             </td>
                             <td>
-                                 &euro; ${cartItem.price}
+                                &euro; ${cartItem.price * cartItem.quantity}
+                                <br/>
+                                <span class="smallText">
+                                    ( &euro; ${cartItem.price} / unit)
+                                </span>
                             </td>
                             <td>
                                 <form action="updateCart" method="post">
