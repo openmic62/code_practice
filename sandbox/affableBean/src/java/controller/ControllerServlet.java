@@ -6,10 +6,12 @@
 package controller;
 
 import cart.ShoppingCart;
+import cart.ShoppingCartItem;
 import entity.Category;
 import entity.Product;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -129,11 +131,10 @@ public class ControllerServlet extends HttpServlet {
         
         String userPath = request.getServletPath();
         HttpSession session = request.getSession();
-
+        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
+     
         // if addToCart action is called
         if (userPath.equals("/addToCart")) {
-            
-            ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
             
             if ( cart == null ) {
                 cart = new ShoppingCart();
@@ -147,6 +148,15 @@ public class ControllerServlet extends HttpServlet {
             
         // if updateCart action is called
         } else if (userPath.equals("/updateCart")) {
+            
+            int productId = Integer.parseInt(request.getParameter("productId"));
+            int quantity = Integer.parseInt(request.getParameter("quantity"));
+            List<ShoppingCartItem> items = cart.getItems();
+            for (ShoppingCartItem item : items) {
+                if (item.getProductId() == productId) {
+                    item.setQuantity(quantity);
+                }
+            }
             
             userPath = "/cart";
         // if purchse action is called

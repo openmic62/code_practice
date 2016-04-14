@@ -43,25 +43,31 @@
                             quantity
                         </th>
                     <tr>
-                    <c:forEach var="product" items="${cart.items}">
+                    <c:forEach var="cartItem" items="${cart.items}">
+                        
+                        <c:set var="product" value="${cartItem.product}"/>
+                        
                         <tr>
                             <td>
                                 <a href="#">
-                                    <img src="${initParam.productImagePath}${product.name}.png" class="productImage" alt="product image"
+                                    <img src="${initParam.productImagePath}${cartItem.name}.png" class="productImage" alt="product image"
                                 </a>
                             </td>
                             <td>
-                                ${product.name}
+                                ${cartItem.name}
                             </td>
                             <td>
-                                 &euro; ${product.price}
+                                 &euro; ${cartItem.price}
                             </td>
                             <td>
                                 <form action="updateCart" method="post">
+                                    <input type="hidden"
+                                           name="productId"
+                                           value="${product.id}">
                                     <input type="text"
                                            maxlength="2"
                                            size="2"
-                                           value="${product.quantity}"
+                                           value="${cartItem.quantity}"
                                            name="quantity">
                                     <input type="submit"
                                            name="submit"

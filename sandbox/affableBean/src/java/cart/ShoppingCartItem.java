@@ -22,7 +22,7 @@ public class ShoppingCartItem {
         this.quantity = 1;
     }
     
-    private Product getProduct() {
+    public Product getProduct() {
         return this.product;
     }
 
