@@ -21,7 +21,10 @@
                         </tr>
                         <tr>
                             <td align="right" colspan="2">
-                                prague: <input type="button" name="prague">
+                                prague: <select name="cityRegion">
+                                    <option>FL</option>
+                                    <option>NC</option>
+                                </select>
                             </td>
                         </tr>
                         <tr>
