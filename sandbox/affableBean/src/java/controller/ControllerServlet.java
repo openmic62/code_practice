@@ -63,6 +63,7 @@ public class ControllerServlet extends HttpServlet {
         String userPath = request.getServletPath();
         HttpSession session = request.getSession();
         Category selectedCategory;
+        Collection<Product> categoryProducts;
         
         // if category page is requested
         if (userPath.equals("/category")) {
@@ -72,31 +73,34 @@ public class ControllerServlet extends HttpServlet {
 
             if (categoryId != null) {
 
-                // get selectedCategory
+                // get selected category
                 selectedCategory = categoryFacade.find(Short.parseShort(categoryId));
                 
-                // place selectedCategory in request context
+                // place selected category in session scope
                 session.setAttribute("selectedCategory", selectedCategory);
                 
-                // get all the products for selectedCategory
-                Collection<Product> categoryProducts = selectedCategory.getProductCollection();
+                // get all products for selected category
+                categoryProducts = selectedCategory.getProductCollection();
                 
-                // place products in request context
+                // place category products in session scope
                 session.setAttribute("categoryProducts", categoryProducts);
-                
             }
             
+
         // if cart page is requested
         } else if (userPath.equals("/viewCart")) {
-            String updateParam = request.getQueryString();
-            ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
             
-            if (updateParam != null && updateParam.equals("clear")) {
+            String clear = request.getParameter("clear");
+            
+            if ((clear != null) && clear.equals("true")) {
+
+                ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
                 cart.clear();
             }
             
             userPath = "/cart";
                     
+
         // if checkout page is requested
         } else if (userPath.equals("/checkout")) {
             // todo: Implement checkout page request

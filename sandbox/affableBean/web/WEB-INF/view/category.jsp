@@ -15,9 +15,9 @@
                         </c:when>
                         <c:otherwise>
                             <a class="categoryButton" href="category?${category.id}">
-                                <div class="categoryText">
+                                <span class="categoryText">
                                     ${category.name}
-                                </div>
+                                </span>
                             </a>
                         </c:otherwise>
                     </c:choose>

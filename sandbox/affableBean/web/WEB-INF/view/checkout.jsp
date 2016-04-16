@@ -48,11 +48,9 @@
                                        id="address"
                                        name="address"
                                        value="${param.address}">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                prague: 
+
+                                <br>
+                                prague
                                 <select name="cityRegion">
                                     <c:forEach begin="1" end="10" var="regionNumber">
                                       <option value="${regionNumber}"
@@ -62,7 +60,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td><label for="name">credit card:</label></td>
+                            <td><label for="creditcard">credit card number:</label></td>
                             <td class="inputField">
                                 <input type="text"
                                        size="31"

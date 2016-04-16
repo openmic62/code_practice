@@ -3,8 +3,8 @@
                 <p>Your shopping cart contains ${cart.numberOfItems} items</p>
                 
                 <div id="actionBar">
-
-                    <a href="viewCart?clear" class="bubble hMargin">
+                    <%-- clear cart widget --%>
+                    <a href="viewCart?clear=true" class="bubble hMargin">
                         clear cart
                     </a>
 
@@ -17,7 +17,6 @@
                             proceed to checkout &#x279f
                         </a>
                     </c:if>
-
                 </div>
 
                 <h4 id="subtotal">subtotal: &euro; ${cart.subtotal}</h4>
@@ -73,6 +72,8 @@
                                 </form>
                             </td>
                         </tr>
+
                     </c:forEach>
+
                 </table>
             </div>
