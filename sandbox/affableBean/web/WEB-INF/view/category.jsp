@@ -1,18 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
-<sql:query var="categories" dataSource="jdbc/affablebean">
-    SELECT * FROM category
-</sql:query>
-<sql:query var="selectedCategory" dataSource="jdbc/affablebean">
-    SELECT name FROM category WHERE id = ?
-    <sql:param value="${pageContext.request.queryString}"/>
-</sql:query>
-<sql:query var="categoryProducts" dataSource="jdbc/affablebean">
-    SELECT * FROM product WHERE category_id = ?
-    <sql:param value="${pageContext.request.queryString}"/>
-</sql:query>
---%>
+
+
             <div id="categoryLeftColumn">
                 
                 <c:forEach var="category" items="${categories}">

@@ -4,25 +4,19 @@
                 
                 <div id="actionBar">
 
-                    <div class="cartWidget">
-                        <c:if test="${!empty cart && cart.numberOfItems > 0}">
-                            <a href="checkout">
-                                [ proceed to checkout ]
-                            </a>
-                        </c:if>
-                    </div>
+                    <a href="viewCart?clear" class="bubble hMargin">
+                        clear cart
+                    </a>
 
-                    <div class="cartWidget">
-                        <a href="category">
-                            continue shopping
-                        </a>
-                    </div>
+                    <a href="category" class="bubble hMargin">
+                        continue shopping
+                    </a>
 
-                    <div class="cartWidget">
-                        <a href="viewCart?clear">
-                            clear cart
+                    <c:if test="${!empty cart && cart.numberOfItems > 0}">
+                        <a href="checkout" class="bubble hMargin">
+                            proceed to checkout &#x279f
                         </a>
-                    </div>
+                    </c:if>
 
                 </div>
 

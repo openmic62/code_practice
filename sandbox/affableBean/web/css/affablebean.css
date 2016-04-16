@@ -22,8 +22,6 @@ hr {
     border: 0;
     background-color: #333;
     height: 1px;
-    margin: 0 25px;
-    width: 300px;
 }
 
 table {
@@ -217,39 +215,37 @@ label { line-height: 30px }
 
 /* category page styles */
 #categoryLeftColumn {
-    height: 400px;
-    width: 200px;
+    width: 185px;
     float: left;
+    margin-top: 25px;
+    padding-left: 15px;
 }
 
 #categoryRightColumn {
-    height: 400px;
+    margin-top: 10px;
     width: 650px;
     float: left;
-    position: relative;
 }
 
 .categoryButton {
-    margin: 15px 40px 15px;
+    margin: 15px 22px;
     padding: 13px;
     display: block;
-    background: #d3ede8;
-    /*background: #E0F0ED;*/
+    background-color: #d3ede8;
 }
 
 #selectedCategory {
-    margin: 15px 20px 15px;
-    padding: 13px;
-    display: block;
     background-color: #b2d2d2;
+    margin-left: 10px;
+    width: 139px;
 }
 
 #categoryTitle {
-    width: 260px;
-    margin: -20px 0px -10px 200px;
+    margin: -34px 180px 0 0;
     font-size: x-large;
-    float: bottom;
-    background: #f5eabe;
+    float: right;
+    background-color: #f5eabe;
+    padding: 7px;
 }
 
 .categoryText {
@@ -257,89 +253,66 @@ label { line-height: 30px }
     font-size: x-large;
 }
 
-#productTable { 
-    width: 600px;
-    margin: 20px 20px;       
-}
+#productTable { width: 600px }
 
 #productTable tr { height: 90px }
 
 #productTable td { width: 145px }
 
-/* cart page styles */
-#cartLeftColumn {
-    height: 400px;
-    width: 850;
-    float: left;
-    background: #F1F3F2;
-    position: relative;
-}
 
+/* cart page styles */
 #actionBar {
     margin: 30px;
-    width: 650px;
+    width: 750px;
     text-align: center;
-    background: #F6EEC9;
 }
 
 #subtotal { margin: 40px 0 20px 430px }
 
-#cartSubTotal {
-    margin: 40px 0 20px 430px
-}
-
-.cartWidget {
-    width: 194px;
-    margin: 20px 2px;
-    font-size: small;
-    float: right;
-    /*line-height: 25px;*/
-    background: #F6EEC9;
-}
-
-#cartTable { 
-    width: 790px;
-    margin: 10px;
-}
+#cartTable { width: 750px }
 
 #cartTable td {
     width: 145px;
     height: 90px;
 }
 
+
 /* checkout page styles */
 #checkoutTable {
-    width: 360px;
-    margin: 0px 0px 10px 30px;
+    width: 405px;
+    padding: 10px;
     background-color: #f5eabe;
     float: left;
-    height: 280px;
+}
+
+#checkoutTable td {
+    vertical-align: top;
+    text-align: right;
+    margin: 5px;
 }
 
 .inputField { width: 190px }
 
-#checkoutTable tr {
-    background: #F6EEC9;
-}
-
-#infoBox {
-    width: 300px;
-    padding-left: 30px;
-    float: left;
-}
-
-#purchaseConditions {
-    border: black solid 1px;
-    height:100px; 
-    padding: 10px
-}
+#infoBox { padding: 10px 25px 0 460px }
 
 #priceBox {
     padding: 10px;
-    margin: 10px 0;
-    height: 128px;
+    border: 1px solid #c3e3e0;
     background-color: #c3e3e0;
 }
+
+#priceBox td {
+    text-align: right;
+    padding: 5px;
+}
+
+.checkoutPriceColumn {
+    width: 80px;
+    font-weight: bold;
+}
+
+.total { border-top: 1px solid #444 }
+
 
 /* confirmation page styles */
 #confirmationText {
