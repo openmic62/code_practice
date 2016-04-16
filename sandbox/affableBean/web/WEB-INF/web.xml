@@ -18,7 +18,7 @@
         <description>The delivery surcharge applied to all orders</description>
         <param-name>deliverySurcharge</param-name>
         <param-value>3.00</param-value>
-    </context-param>c
+    </context-param>
 
     <session-config>
         <session-timeout>

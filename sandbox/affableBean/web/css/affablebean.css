@@ -8,6 +8,7 @@ and open the template in the editor.
     Author     : Mike
 */
 
+
 /* html tags */
 body {
     font-family: Arial, Helvetica, sans-serif;
@@ -52,8 +53,25 @@ tr:nth-child(even){
     background: #FFFFFF;
 }
 
+a {
+    color: inherit;
+    text-decoration: underline;
+}
+
+a:hover { text-decoration: none }
+
+a:visited { color: inherit }
+
+img { border: none }
+
+input, select { margin: 5px }
+
+li { margin: 10px 0 }
+
+label { line-height: 30px }
+
+
 /* general styles */
-/*#main { background: #F1F3F2 }*/
 #main { background: #f7f7e9 }
 
 #singleColumn {
@@ -83,14 +101,12 @@ tr:nth-child(even){
 /* styles for elements contained in the header, i.e.,
    shopping cart widget, language toggle, and logo */
 #header {
+    width: 850px;
     height: 250px;
-    /*background: #AAAAAA;*/
     background: url(../img/stalk.png) no-repeat 28px 28px;
 }
 
 #logo {
-    height: 155px;
-    width: 155px;
     float: left;
     margin-left: 30px;
     margin-top: -20px;
@@ -99,7 +115,7 @@ tr:nth-child(even){
 #logoText {
     float: left;
     margin: 20px 0 0 70px;
-    /* font styles apply to text within alt tags */
+    /* font styles apply to text within img alt attribute */
     font-family: 'American Typewriter', Courier, monospace;
     font-size: 50px;
     color: #333;
@@ -109,7 +125,11 @@ tr:nth-child(even){
     height: 50px;
     width: 850px;
     float: right;
-    /*background: #CCCCCC;*/
+}
+
+#cart {
+    position: absolute;
+    margin: 5px 0 0 2px;
 }
 
 .horizontalMargin {
@@ -124,34 +144,46 @@ tr:nth-child(even){
 
 .headerWidget {
     width: 194px;
-    margin: 20px 2px;
+    margin: 20px 0;
     font-size: small;
     float: right;
     line-height: 25px;
-    /*background: #AAAAAA;*/
 }
+
 
 /* footer styles */
 #footer {
     height: 60px;
     width: 350px;
     clear: left;
-    /*background: #AAAAAA;*/
 }
+
+#footerText { margin-top: 5px }
+
+#footerDivider {
+    margin: 0 25px;
+    width: 300px;
+}
+
 
 /* index page styles */
 #indexLeftColumn {
+    text-align: left;
     height: 400px;
     width: 350px;
     float: left;
-    /*background: #CCCCCC;*/
 }
 
 #indexRightColumn {
+    text-align: left;
     height: 400px;
     width: 500px;
     float: left;
-    /*background: #F1F3F2;*/
+}
+
+#welcomeText {
+    margin: 30px 5px 0 30px;
+    line-height: 1.4em;
 }
 
 .categoryBox {
@@ -159,20 +191,35 @@ tr:nth-child(even){
     width: 212px;
     margin: 21px 14px 6px;
     float: inherit;
-    background: #CCCCCC;
+}
+
+.categoryLabel {
+    position: absolute;
+    background-color: #fff;
+    opacity: 0.7;
+    height: 40px;
+    width: 210px;
+    margin: 2px;
 }
 
 .categoryLabelText {
+    position: absolute;
     line-height: 150%;
     font-size: x-large;
+    margin: 3px 10px;
 }
+
+.categoryImage {
+    padding: 1px;
+    border:solid 1px #555;
+}
+
 
 /* category page styles */
 #categoryLeftColumn {
     height: 400px;
     width: 200px;
     float: left;
-    /*background: #F1F3F2;*/
 }
 
 #categoryRightColumn {
@@ -180,7 +227,6 @@ tr:nth-child(even){
     width: 650px;
     float: left;
     position: relative;
-    /*background: #F1F3F2;*/
 }
 
 .categoryButton {
@@ -204,7 +250,6 @@ tr:nth-child(even){
     font-size: x-large;
     float: bottom;
     background: #f5eabe;
-    /*background: #F6EEC9;*/
 }
 
 .categoryText {
