@@ -28,11 +28,11 @@
                         <c:choose>
                             <%-- if 'selectedCategory' session object exists, send user to previously viewed category --%>
                             <c:when test="${!empty selectedCategory}">
-                                <c:url value="category"/>
+                    <c:url value="category"/>
                             </c:when>
                             <%-- otherwise send user to welcome page --%>
                             <c:otherwise>
-                                <c:url value="index.jsp"/>
+                    <c:url value="index.jsp"/>
                             </c:otherwise>
                         </c:choose>
                     </c:set>
@@ -40,9 +40,9 @@
                     <a href="${value}" class="bubble hMargin">continue shopping</a>
 
                     <%--checkout widget--%>
-        <c:if test="${!empty cart && cart.numberOfItems != 0}">
-            <c:url var="url" value="checkout"/>
-            <a href="${url}" class="bubble hMargin">proceed to checkout &#x279f;</a>
+                    <c:if test="${!empty cart && cart.numberOfItems != 0}">
+                        <c:url var="url" value="checkout"/>
+                        <a href="${url}" class="bubble hMargin">proceed to checkout &#x279f;</a>
                     </c:if>
                 </div>
 

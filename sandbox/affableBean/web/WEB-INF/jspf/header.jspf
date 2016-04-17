@@ -71,8 +71,8 @@
                               
                                       !fn:contains(pageContext.request.servletPath, '/cart') &&
                                       requestScope['javax.servlet.forward.servlet_path'] ne '/cart'}">
-                              
-                            <a href="checkout" class="bubble">
+                                                        
+                            <a href=<c:url value="checkout"/> class="bubble">
                                 proceed to checkout &#x279f;
                             </a>
                         </c:if>
@@ -109,15 +109,16 @@
                                       
                                       !fn:contains(pageContext.request.servletPath, '/cart') &&
                                       requestScope['javax.servlet.forward.servlet_path'] ne '/cart'}">
-                              
-                            <a href="viewCart" class="bubble">
+                            
+                        <c:url var="url" value="viewCart"/>
+                        <a href="${url}" class="bubble">
                                 view cart
                             </a>
                         </c:if>
                     </div>
                 </div>
 
-                <a href="index.jsp">
+                  <a href=<c:url value="index.jsp"/>
                     <img src="img/logo.png" id="logo" alt="Affable Bean logo">
                 </a>
 

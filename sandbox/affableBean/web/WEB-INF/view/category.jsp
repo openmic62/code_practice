@@ -14,12 +14,12 @@
                            </div>
                         </c:when>
                         <c:otherwise>
-                            <a class="categoryButton" href="category?${category.id}">
+                            <a href="<c:url value="category"/>?${category.id}" class="categoryButton">
                                 <span class="categoryText">
                                     ${category.name}
                                 </span>
                             </a>
-                        </c:otherwise>
+                    </c:otherwise>
                     </c:choose>
                     
                 </c:forEach>
@@ -34,31 +34,31 @@
                     
                     <c:forEach var="product" items="${categoryProducts}" varStatus="iter">
                         
-                     <tr>
-                        <td>
-                            <img src="${initParam.productImagePath}${product.name}.png" 
-                                 alt="${product.name}">
-                        </td>
-                        
-                        <td>
-                            ${product.name}
-                            <br>
-                            <span class="smallText">${product.description}</span>
-                        </td>
-                        
-                        <td>&euro; ${product.price}</td>
-                        
-                        <td>
-                            <form action="addToCart" method="post">
-                                <input type="hidden" 
-                                       name="productId" 
-                                       value="${product.id}">
-                                <input type="submit"
-                                       name="submit"
-                                       value="add to cart">
-                            </form>
-                        </td>
-                    </tr>
+                        <tr>
+                           <td>
+                               <img src="${initParam.productImagePath}${product.name}.png" 
+                                    alt="${product.name}">
+                           </td>
+
+                           <td>
+                               ${product.name}
+                               <br>
+                               <span class="smallText">${product.description}</span>
+                           </td>
+
+                           <td>&euro; ${product.price}</td>
+
+                           <td>
+                    <form action="<c:url value='addToCart'/>" method="post">
+                                   <input type="hidden" 
+                                          name="productId" 
+                                          value="${product.id}">
+                                   <input type="submit"
+                                          name="submit"
+                                          value="add to cart">
+                               </form>
+                           </td>
+                       </tr>
                     
                     </c:forEach>
                     
