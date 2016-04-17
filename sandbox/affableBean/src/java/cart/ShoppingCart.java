@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package cart;
 
 import entity.Product;
@@ -26,40 +27,6 @@ public class ShoppingCart {
         items = makeCart();
         numberOfItems = 0;
         total = 0;
-    }
-
-    public synchronized void clear() {
-        items = makeCart();
-        numberOfItems = 0;
-    }
-
-    public synchronized int getNumberOfItems() {
-        numberOfItems = 0;
-        for (ShoppingCartItem item : items) {
-            numberOfItems += item.getQuantity();
-        }
-        return numberOfItems;
-    }
-
-    public synchronized List<ShoppingCartItem> getItems() {
-        return items;
-    }
-
-    public synchronized double getSubtotal() {
-        BigDecimal subtotal = new BigDecimal(0);
-        for (ShoppingCartItem item : items) {
-            subtotal = subtotal.add(item.getPrice().multiply(new BigDecimal(item.getQuantity())));
-        }
-        return subtotal.doubleValue();
-    }
-    
-    public synchronized double getTotal() {
-        return total;
-    }
-    
-    public synchronized void calculateTotal(double surcharge) {
-        double subtotal = getSubtotal();
-        total = subtotal + surcharge; 
     }
 
     public synchronized void addItem(Product product) {
@@ -92,6 +59,45 @@ public class ShoppingCart {
                 }
             }
         }
+    }
+
+    public synchronized List<ShoppingCartItem> getItems() {
+
+        return items;
+    }
+
+    public synchronized int getNumberOfItems() {
+
+        numberOfItems = 0;
+        for (ShoppingCartItem item : items) {
+            numberOfItems += item.getQuantity();
+        }
+
+        return numberOfItems;
+    }
+
+    public synchronized double getSubtotal() {
+        BigDecimal subtotal = new BigDecimal(0);
+        for (ShoppingCartItem item : items) {
+            subtotal = subtotal.add(item.getPrice().multiply(new BigDecimal(item.getQuantity())));
+        }
+        return subtotal.doubleValue();
+    }
+    
+    public synchronized void calculateTotal(double surcharge) {
+        double subtotal = getSubtotal();
+        total = subtotal + surcharge; 
+    }
+
+    public synchronized double getTotal() {
+
+        return total;
+    }
+    
+    public synchronized void clear() {
+        items = makeCart();
+        numberOfItems = 0;
+        total = 0;
     }
 
     private List<ShoppingCartItem> makeCart() {

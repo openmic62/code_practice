@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package cart;
 
 import entity.Product;
@@ -26,18 +27,6 @@ public class ShoppingCartItem {
         return this.product;
     }
 
-    public int getProductId() {
-        return product.getId();
-    }
-    
-    public String getName() {
-        return product.getName();
-    }
-    
-    public BigDecimal getPrice() {
-        return product.getPrice();
-    }
-
     public int getQuantity() {
         return quantity;
     }
@@ -48,6 +37,18 @@ public class ShoppingCartItem {
     
     public void increment() {
         this.quantity++;
+    }
+
+    public int getProductId() {
+        return product.getId();
+    }
+    
+    public String getName() {
+        return product.getName();
+    }
+    
+    public BigDecimal getPrice() {
+        return product.getPrice();
     }
 
     @Override
