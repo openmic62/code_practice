@@ -6,13 +6,12 @@
 package controller;
 
 import cart.ShoppingCart;
-import cart.ShoppingCartItem;
 import entity.Category;
 import entity.Product;
 import java.io.IOException;
 import java.util.Collection;
-import java.util.List;
 import javax.ejb.EJB;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,12 +36,19 @@ import session.ProductFacade;
             "/chooseLanguage"})
 public class ControllerServlet extends HttpServlet {
 
+    private String surcharge;
+    
     @EJB
     private CategoryFacade categoryFacade;
     @EJB
     private ProductFacade productFacade;
     
-    public void init() throws ServletException {
+    public void init(ServletConfig servletConfig) throws ServletException {
+        
+        super.init(servletConfig);
+        
+        surcharge = servletConfig.getServletContext().getInitParameter("deliverySurcharge");
+        
         // store category list in servlet context
         getServletContext().setAttribute("categories", categoryFacade.findAll());
     }
@@ -50,7 +56,6 @@ public class ControllerServlet extends HttpServlet {
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -103,11 +108,15 @@ public class ControllerServlet extends HttpServlet {
 
         // if checkout page is requested
         } else if (userPath.equals("/checkout")) {
-            // todo: Implement checkout page request
+            ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
+            
+            cart.calculateTotal(Double.parseDouble(surcharge));
+            
+            userPath = "/checkout";
             
         // if user switches language
-        } else if (userPath.equals("chooseLanguage")) {
-            // todo: Implement language request
+        } else if (userPath.equals("/chooseLanguage")) {
+            // TODO: Implement language request
             
         }
         
@@ -121,9 +130,9 @@ public class ControllerServlet extends HttpServlet {
         }
     }
 
+
     /**
      * Handles the HTTP <code>POST</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -140,7 +149,10 @@ public class ControllerServlet extends HttpServlet {
         // if addToCart action is called
         if (userPath.equals("/addToCart")) {
             
+            // if user is adding item to cart for first time
+            // create cart object and attach it to user session
             if ( cart == null ) {
+
                 cart = new ShoppingCart();
                 session.setAttribute("cart", cart);
             } 
@@ -150,6 +162,7 @@ public class ControllerServlet extends HttpServlet {
             
             userPath = "/category";
             
+
         // if updateCart action is called
         } else if (userPath.equals("/updateCart")) {
             
@@ -158,9 +171,11 @@ public class ControllerServlet extends HttpServlet {
             cart.update(productId, quantity);
             
             userPath = "/cart";
-        // if purchse action is called
+
+
+        // if purchase action is called
         } else if (userPath.equals("/purchase")) {
-            // todo: Implement purchase action
+            // TODO: Implement purchase action
             
             userPath = "/confirmation";
         }

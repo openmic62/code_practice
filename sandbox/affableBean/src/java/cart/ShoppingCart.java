@@ -28,12 +28,12 @@ public class ShoppingCart {
         total = 0;
     }
 
-    public void clear() {
+    public synchronized void clear() {
         items = makeCart();
         numberOfItems = 0;
     }
 
-    public int getNumberOfItems() {
+    public synchronized int getNumberOfItems() {
         numberOfItems = 0;
         for (ShoppingCartItem item : items) {
             numberOfItems += item.getQuantity();
@@ -41,19 +41,28 @@ public class ShoppingCart {
         return numberOfItems;
     }
 
-    public List<ShoppingCartItem> getItems() {
+    public synchronized List<ShoppingCartItem> getItems() {
         return items;
     }
 
-    public BigDecimal getSubtotal() {
+    public synchronized double getSubtotal() {
         BigDecimal subtotal = new BigDecimal(0);
         for (ShoppingCartItem item : items) {
             subtotal = subtotal.add(item.getPrice().multiply(new BigDecimal(item.getQuantity())));
         }
-        return subtotal;
+        return subtotal.doubleValue();
+    }
+    
+    public synchronized double getTotal() {
+        return total;
+    }
+    
+    public synchronized void calculateTotal(double surcharge) {
+        double subtotal = getSubtotal();
+        total = subtotal + surcharge; 
     }
 
-    public void addItem(Product product) {
+    public synchronized void addItem(Product product) {
         boolean itemExistsInCart = false;
         ShoppingCartItem item = null;
         for (ShoppingCartItem scItem : items) {
@@ -70,7 +79,7 @@ public class ShoppingCart {
         }
     }
 
-    public void update(int productId, int quantity) {
+    public synchronized void update(int productId, int quantity) {
 
         Iterator<ShoppingCartItem> iterator = items.iterator();
         while (iterator.hasNext()) {
@@ -85,15 +94,6 @@ public class ShoppingCart {
         }
     }
 
-//    public void removeItem(ShoppingCartItem itemToRemove) {
-//        Iterator<ShoppingCartItem> iterator = items.iterator();
-//        while (iterator.hasNext()) {
-//            ShoppingCartItem item = iterator.next();
-//            if (item.equals(itemToRemove)) {
-//                iterator.remove();
-//            }
-//        }
-//    }
     private List<ShoppingCartItem> makeCart() {
         return new ArrayList<ShoppingCartItem>(0);
     }
