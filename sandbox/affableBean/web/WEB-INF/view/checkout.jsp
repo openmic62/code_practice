@@ -1,3 +1,4 @@
+            <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
             <div id="singleColumn">
                 
                 <h2>checkout</h2>
@@ -82,7 +83,7 @@
                     
                     <ul>
                         <li>Next-day delivery is guaranteed</li>
-                        <li>A &euro; ${initParam.deliverySurcharge}
+                        <li>A &euro;${initParam.deliverySurcharge}
                             delivery surcharge is applied to all purchase orders</li>
                     </ul>
                             
@@ -90,17 +91,25 @@
                         <tr>
                             <td>subtotal:</td>
                             <td class="checkoutPriceColumn">
-                                &euro; ${cart.subtotal}</td>
+                                &euro; 
+                                <fmt:formatNumber type="number"
+                                                  minFractionDigits="2"
+                                                  value="${cart.subtotal}"/></td>
                         </tr>
                         <tr>
                             <td>delivery surcharge:</td>
                             <td class="checkoutPriceColumn">
-                                &euro; ${initParam.deliverySurcharge}</td>
+                                <fmt:formatNumber type="number"
+                                                  minFractionDigits="2"
+                                                  value="${initParam.deliverySurcharge}"/></td>
                         </tr>
                         <tr>
                             <td class="total">total:</td>
                             <td class="total checkoutPriceColumn">
-                                &euro; ${cart.subtotal + initParam.deliverySurcharg}</td>
+                                &euro; 
+                                <fmt:formatNumber type="number"
+                                                  minFractionDigits="2"
+                                                  value="${cart.total}"/></td>
                         </tr>
                     </table>
                 </div>

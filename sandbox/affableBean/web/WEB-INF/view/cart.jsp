@@ -1,79 +1,106 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+            <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+            <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
             <div id="singleColumn">
-                <p>Your shopping cart contains ${cart.numberOfItems} items</p>
                 
+                <c:choose>
+                    <c:when test="${cart.numberOfItems > 1}">
+                        <p>Your shopping cart contains ${cart.numberOfItems} items.</p>
+                    </c:when>
+                    <c:when test="${cart.numberOfItems == 1}">
+                        <p>Your shopping cart contains ${cart.numberOfItems} item.</p>
+                    </c:when>
+                    <c:otherwise>
+                        <p>Your shopping cart is empty.</p>
+                    </c:otherwise>
+                </c:choose>
+
                 <div id="actionBar">
                     <%-- clear cart widget --%>
-                    <a href="viewCart?clear=true" class="bubble hMargin">
-                        clear cart
-                    </a>
-
-                    <a href="category" class="bubble hMargin">
-                        continue shopping
-                    </a>
-
                     <c:if test="${!empty cart && cart.numberOfItems > 0}">
-                        <a href="checkout" class="bubble hMargin">
-                            proceed to checkout &#x279f
+                        <a href="viewCart?clear=true" class="bubble hMargin">
+                            clear cart
                         </a>
+                    </c:if>
+
+                    <%--continue shopping widget--%>
+                    <c:set var="value">
+                        <c:choose>
+                            <%-- if 'selectedCategory' session object exists, send user to previously viewed category --%>
+                            <c:when test="${!empty selectedCategory}">
+                                <c:url value="category"/>
+                            </c:when>
+                            <%-- otherwise send user to welcome page --%>
+                            <c:otherwise>
+                                <c:url value="index.jsp"/>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:set>
+                    
+                    <a href="${value}" class="bubble hMargin">continue shopping</a>
+
+                    <%--checkout widget--%>
+                    <c:if test="${!empty cart && cart.numberOfItems > 0}">
+                        <a href="checkout" class="bubble hMargin">proceed to checkout &#x279f</a>
                     </c:if>
                 </div>
 
-                <h4 id="subtotal">subtotal: &euro; ${cart.subtotal}</h4>
+                <c:if test="${!empty cart && cart.numberOfItems !=0}">
+                    
+                    <h4 id="subtotal">subtotal: &euro; 
+                        <fmt:formatNumber type="number"
+                                          minFractionDigits="2"
+                                          value="${cart.subtotal}"/></h4>
 
-                <table id="cartTable">
-                    <tr>
-                        <th>
-                            product
-                        </th>
-                        <th>
-                            name
-                        </th>
-                        <th>
-                            price
-                        </th>
-                        <th>
-                            quantity
-                        </th>
-                    <tr>
-                    <c:forEach var="cartItem" items="${cart.items}">
-                        
-                        <c:set var="product" value="${cartItem.product}"/>
-                        
-                        <tr>
-                            <td>
-                                <a href="#">
-                                    <img src="${initParam.productImagePath}${cartItem.name}.png" class="productImage" alt="product image"
-                                </a>
-                            </td>
-                            <td>
-                                ${cartItem.name}
-                            </td>
-                            <td>
-                                &euro; ${cartItem.price * cartItem.quantity}
-                                <br/>
-                                <span class="smallText">
-                                    ( &euro; ${cartItem.price} / unit)
-                                </span>
-                            </td>
-                            <td>
-                                <form action="updateCart" method="post">
-                                    <input type="hidden"
-                                           name="productId"
-                                           value="${product.id}">
-                                    <input type="text"
-                                           maxlength="2"
-                                           size="2"
-                                           value="${cartItem.quantity}"
-                                           name="quantity">
-                                    <input type="submit"
-                                           name="submit"
-                                           value="update quantity">
-                                </form>
-                            </td>
+                    <table id="cartTable">
+
+                        <tr class="header">
+                            <th>product</th>
+                            <th>name</th>
+                            <th>price</th>
+                            <th>quantity</th>
                         </tr>
 
-                    </c:forEach>
+                        <c:forEach var="cartItem" items="${cart.items}" varStatus="iter">
 
-                </table>
+                            <c:set var="product" value="${cartItem.product}"/>
+
+                            <tr>
+                                <td>
+                                    <img src="${initParam.productImagePath}${cartItem.name}.png"
+                                         alt="product image">
+                                </td>
+
+                                <td>${cartItem.name}</td>
+
+                                <td>
+                                    &euro; ${cartItem.price * cartItem.quantity}
+                                    <br/>
+                                    <span class="smallText">
+                                        ( &euro; ${cartItem.price} / unit)
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <form action="updateCart" method="post">
+                                        <input type="hidden"
+                                               name="productId"
+                                               value="${product.id}">
+                                        <input type="text"
+                                               maxlength="2"
+                                               size="2"
+                                               value="${cartItem.quantity}"
+                                               name="quantity"
+                                               style="margin:5px">
+                                        <input type="submit"
+                                               name="submit"
+                                               value="update quantity">
+                                    </form>
+                                </td>
+                            </tr>
+
+                        </c:forEach>
+
+                    </table>
+
+                </c:if>
             </div>
