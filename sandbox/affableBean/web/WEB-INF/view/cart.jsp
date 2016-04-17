@@ -17,9 +17,10 @@
                 <div id="actionBar">
                     <%-- clear cart widget --%>
                     <c:if test="${!empty cart && cart.numberOfItems > 0}">
-                        <a href="viewCart?clear=true" class="bubble hMargin">
-                            clear cart
-                        </a>
+                        <c:url var="url" value="viewCart">
+                            <c:param name="clear" value="true"/>
+                        </c:url>
+                        <a href="${url}" class="bubble hMargin">clear cart</a>
                     </c:if>
 
                     <%--continue shopping widget--%>
@@ -39,8 +40,9 @@
                     <a href="${value}" class="bubble hMargin">continue shopping</a>
 
                     <%--checkout widget--%>
-                    <c:if test="${!empty cart && cart.numberOfItems > 0}">
-                        <a href="checkout" class="bubble hMargin">proceed to checkout &#x279f</a>
+        <c:if test="${!empty cart && cart.numberOfItems != 0}">
+            <c:url var="url" value="checkout"/>
+            <a href="${url}" class="bubble hMargin">proceed to checkout &#x279f;</a>
                     </c:if>
                 </div>
 
@@ -66,18 +68,16 @@
 
                             <tr>
                                 <td>
-                                    <img src="${initParam.productImagePath}${cartItem.name}.png"
-                                         alt="product image">
+                                    <img src="${initParam.productImagePath}${product.name}.png"
+                                         alt="${product.name}">
                                 </td>
 
-                                <td>${cartItem.name}</td>
+                                <td>${product.name}</td>
 
                                 <td>
-                                    &euro; ${cartItem.price * cartItem.quantity}
+                                    &euro; ${product.price * cartItem.quantity}
                                     <br/>
-                                    <span class="smallText">
-                                        ( &euro; ${cartItem.price} / unit)
-                                    </span>
+                                    <span class="smallText">( &euro; ${product.price} / unit)</span>
                                 </td>
 
                                 <td>
