@@ -22,7 +22,7 @@
 
     <session-config>
         <session-timeout>
-            1
+            10
         </session-timeout>
     </session-config>
 
