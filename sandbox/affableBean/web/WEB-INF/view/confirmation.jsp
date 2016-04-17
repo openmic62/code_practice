@@ -1,27 +1,28 @@
             <div id="singleColumn">
-                <div id="confirmationText">
+
+                <p id="confirmationText">
                     [ text ]
                     <br><br>
-                    
-                    
                     [ order reference number ]
-                </div>
+                </p>
+                
                 <div class="summaryColumn">
-                    <table id="orderSummaryTable">
-                        <tr>
-                            <th>
-                                [ order summary table ]
-                            </th>
+                    
+                    <table id="orderSummaryTable" class="detailsTable">
+                        <tr class="header">
+                            <th style="padding: 10px">[ order summary table ]</th>
                         </tr>
                     </table>
+
                 </div>
+
                 <div class="summaryColumn">
-                    <table id="deliveryAddressTable">
-                        <tr>
-                            <th>
-                                [ customer details ]
-                            </th>
+                    
+                    <table id="deliveryAddressTable" class="detailsTable">
+                        <tr class="header">
+                            <th style="padding: 10px">[ customer details ]</th>
                         </tr>
                     </table>
+
                 </div>
             </div>
