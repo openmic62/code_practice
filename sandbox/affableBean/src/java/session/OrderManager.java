@@ -8,6 +8,8 @@ package session;
 import cart.ShoppingCart;
 import entity.Customer;
 import entity.CustomerOrder;
+import java.math.BigDecimal;
+import java.util.Random;
 import javax.ejb.Stateless;
 
 /**
@@ -41,7 +43,17 @@ public class OrderManager {
     }
 
     private CustomerOrder addOrder(Customer customer, ShoppingCart cart) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        CustomerOrder order = new CustomerOrder();
+        order.setCustomerId(customer);
+        order.setAmount(BigDecimal.valueOf(cart.getTotal()));
+        
+        // create i number
+        Random random = new Random();
+        int i = random.nextInt(999999999);
+        order.setConfirmationNumber(i);
+        
+        return order;
     }
 
     private void addOrderedItems(CustomerOrder order, ShoppingCart cart) {
