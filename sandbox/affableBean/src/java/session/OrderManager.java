@@ -27,7 +27,17 @@ public class OrderManager {
     }
 
     private Customer addCustomer(String name, String email, String phone, String address, String cityRegion, String ccNumber) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        Customer customer = new Customer();
+        customer.setName(name);
+        customer.setEmail(email);
+        customer.setPhone(phone);
+        customer.setAddress(address);
+        customer.setCityRegion(cityRegion);
+        customer.setCcNumber(ccNumber);
+        
+        return customer;
+
     }
 
     private CustomerOrder addOrder(Customer customer, ShoppingCart cart) {
