@@ -5,6 +5,9 @@
  */
 package session;
 
+import cart.ShoppingCart;
+import entity.Customer;
+import entity.CustomerOrder;
 import javax.ejb.Stateless;
 
 /**
@@ -14,6 +17,24 @@ import javax.ejb.Stateless;
 @Stateless
 public class OrderManager {
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    public int placeOrder(String name, String email, String phone, String address, String cityRegion, String ccNumber, ShoppingCart cart) {
+
+        Customer customer = addCustomer(name, email, phone, address, cityRegion, ccNumber);
+        CustomerOrder order = addOrder(customer, cart);
+        addOrderedItems(order, cart);
+        
+        return order.getId();
+    }
+
+    private Customer addCustomer(String name, String email, String phone, String address, String cityRegion, String ccNumber) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private CustomerOrder addOrder(Customer customer, ShoppingCart cart) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void addOrderedItems(CustomerOrder order, ShoppingCart cart) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
