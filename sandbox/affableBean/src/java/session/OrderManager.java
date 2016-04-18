@@ -6,9 +6,13 @@
 package session;
 
 import cart.ShoppingCart;
+import cart.ShoppingCartItem;
 import entity.Customer;
 import entity.CustomerOrder;
+import entity.OrderedProduct;
+import entity.OrderedProductPK;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Random;
 import javax.ejb.Stateless;
 
@@ -57,6 +61,22 @@ public class OrderManager {
     }
 
     private void addOrderedItems(CustomerOrder order, ShoppingCart cart) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        List<ShoppingCartItem> items = cart.getItems();
+        
+        // iterate through shopping cart and create OrderedProducts
+        for (ShoppingCartItem item : items) {
+            
+            // set up primary key object
+            OrderedProductPK orderedProductPK = new OrderedProductPK();
+            orderedProductPK.setCustomerOrderId(order.getId());
+            orderedProductPK.setProductId(item.getProductId());
+            
+            // create ordered item using PK object
+            short quantity = (short)item.getQuantity();
+            OrderedProduct orderedProduct = new OrderedProduct(orderedProductPK, quantity);
+            
+        }
+
     }
 }
