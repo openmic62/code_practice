@@ -25,7 +25,7 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class OrderManager {
     
-    @PersistenceContext(unitName = "affablebeanPU")
+//    @PersistenceContext(unitName = "affablebeanPU")
     private EntityManager em;
 
     public int placeOrder(String name, String email, String phone, String address, String cityRegion, String ccNumber, ShoppingCart cart) {
@@ -33,7 +33,6 @@ public class OrderManager {
         Customer customer = addCustomer(name, email, phone, address, cityRegion, ccNumber);
         CustomerOrder order = addOrder(customer, cart);
         addOrderedItems(order, cart);
-        
         return order.getId();
     }
 
@@ -48,24 +47,22 @@ public class OrderManager {
         customer.setCcNumber(ccNumber);
         
         em.persist(customer);
-        
         return customer;
-
     }
 
     private CustomerOrder addOrder(Customer customer, ShoppingCart cart) {
 
+        // set up customer order
         CustomerOrder order = new CustomerOrder();
         order.setCustomerId(customer);
         order.setAmount(BigDecimal.valueOf(cart.getTotal()));
         
-        // create i number
+        // create confirmation number
         Random random = new Random();
         int i = random.nextInt(999999999);
         order.setConfirmationNumber(i);
         
         em.persist(order);
-        
         return order;
     }
 
@@ -74,18 +71,22 @@ public class OrderManager {
         List<ShoppingCartItem> items = cart.getItems();
         
         // iterate through shopping cart and create OrderedProducts
-        for (ShoppingCartItem item : items) {
+        for (ShoppingCartItem scItem : items) {
             
+            int productId = scItem.getProduct().getId();
+
             // set up primary key object
             OrderedProductPK orderedProductPK = new OrderedProductPK();
             orderedProductPK.setCustomerOrderId(order.getId());
-            orderedProductPK.setProductId(item.getProductId());
+            orderedProductPK.setProductId(productId);
             
             // create ordered item using PK object
-            short quantity = (short)item.getQuantity();
-            OrderedProduct orderedProduct = new OrderedProduct(orderedProductPK, quantity);
+            OrderedProduct orderedItem = new OrderedProduct(orderedProductPK);
             
-            em.persist(orderedProduct);
+            // set quantity
+            orderedItem.setQuantity(scItem.getQuantity());
+            
+            em.persist(orderedItem);
             
         }
 

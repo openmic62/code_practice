@@ -171,7 +171,7 @@ public class ControllerServlet extends HttpServlet {
         } else if (userPath.equals("/updateCart")) {
             
             int productId = Integer.parseInt(request.getParameter("productId"));
-            int quantity = Integer.parseInt(request.getParameter("quantity"));
+            short quantity = Short.parseShort(request.getParameter("quantity"));
             cart.update(productId, quantity);
             
             userPath = "/cart";

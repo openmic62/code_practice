@@ -33,7 +33,7 @@ public class ShoppingCart {
         boolean itemExistsInCart = false;
         ShoppingCartItem item = null;
         for (ShoppingCartItem scItem : items) {
-            if (scItem.getProductId() == product.getId()) {
+            if (scItem.getProduct().getId() == product.getId()) {
                 itemExistsInCart = true;
                 item = scItem;
             }
@@ -46,12 +46,12 @@ public class ShoppingCart {
         }
     }
 
-    public synchronized void update(int productId, int quantity) {
+    public synchronized void update(int productId, short quantity) {
 
         Iterator<ShoppingCartItem> iterator = items.iterator();
         while (iterator.hasNext()) {
             ShoppingCartItem item = iterator.next();
-            if (item.getProductId() == productId) {
+            if (item.getProduct().getId() == productId) {
                 if (quantity == 0) {
                     iterator.remove();
                 } else {

@@ -16,7 +16,7 @@ import java.math.BigDecimal;
 public class ShoppingCartItem {
 
     private Product product;
-    private int quantity;
+    private short quantity;
 
     public ShoppingCartItem(Product product) {
         this.product = product;
@@ -27,11 +27,11 @@ public class ShoppingCartItem {
         return this.product;
     }
 
-    public int getQuantity() {
+    public short getQuantity() {
         return quantity;
     }
     
-    public void setQuantity(int quantity) {
+    public void setQuantity(short quantity) {
         this.quantity = quantity;
     }
     
@@ -39,10 +39,6 @@ public class ShoppingCartItem {
         this.quantity++;
     }
 
-    public int getProductId() {
-        return product.getId();
-    }
-    
     public String getName() {
         return product.getName();
     }
@@ -54,7 +50,7 @@ public class ShoppingCartItem {
     @Override
     public boolean equals(Object obj) {
         if ((obj instanceof ShoppingCartItem) && 
-                (((ShoppingCartItem) obj).getProductId() == this.getProductId())) {
+                (((ShoppingCartItem) obj).getProduct().getId() == this.getProduct().getId())) {
             return true;
         } else {
             return false;
@@ -64,7 +60,7 @@ public class ShoppingCartItem {
     @Override
     public int hashCode() {
         int result = 7877;
-        result += (int) (this.getProductId() / 11);
+        result += (int) (this.getProduct().getId() / 11);
         return result;
     }
 }
