@@ -25,7 +25,7 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class OrderManager {
     
-//    @PersistenceContext(unitName = "affablebeanPU")
+    @PersistenceContext(unitName = "affablebeanPU")
     private EntityManager em;
 
     public int placeOrder(String name, String email, String phone, String address, String cityRegion, String ccNumber, ShoppingCart cart) {
@@ -68,6 +68,8 @@ public class OrderManager {
 
     private void addOrderedItems(CustomerOrder order, ShoppingCart cart) {
 
+        em.flush();
+        
         List<ShoppingCartItem> items = cart.getItems();
         
         // iterate through shopping cart and create OrderedProducts

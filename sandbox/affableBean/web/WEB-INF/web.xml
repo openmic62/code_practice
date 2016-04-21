@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <!--mlr 160421 - begin -->
+    <!--
+    https://vaadin.com/web/matti/blog/-/blogs/using-jpacontainer-in-jee6-server-is-now-much-simpler
+        See section "Publish persistence context to JNDI"
+        Adding the <persistence-context-ref> element below solved the deployment error
+        "Severe:   Exception while preparing the app : Could not resolve a persistence unit corresponding to the persistence-context-ref-name [session.OrderManager/em] in the scope of the module called [affableBean]. Please verify your application."
+        Caused by adding to OrderManager.java ->"@PersistenceContext(unitName = "affablebeanPU")<-
+    -->
+    <persistence-context-ref>
+        <description>Persistence context for JndiProviders. 
+                    Unit name should be same as in your persistence.xml</description>
+        <persistence-context-ref-name>session.OrderManager/em</persistence-context-ref-name>
+        <persistence-unit-name>affableBeanPU</persistence-unit-name>
+    </persistence-context-ref>
+    <!--mlr 160421 - end-->
 
     <context-param>
         <description>The relative path to product images</description>
