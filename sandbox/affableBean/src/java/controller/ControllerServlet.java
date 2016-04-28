@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package controller;
 
 import cart.ShoppingCart;
 import entity.Category;
-import entity.Customer_;
 import entity.Product;
 import java.io.IOException;
 import java.util.Collection;
@@ -47,10 +47,12 @@ public class ControllerServlet extends HttpServlet {
     @EJB
     private OrderManager orderManager;
     
+    @Override
     public void init(ServletConfig servletConfig) throws ServletException {
         
         super.init(servletConfig);
         
+        // initialize servlet with configuration information
         surcharge = servletConfig.getServletContext().getInitParameter("deliverySurcharge");
         
         // store category list in servlet context
@@ -112,12 +114,15 @@ public class ControllerServlet extends HttpServlet {
 
         // if checkout page is requested
         } else if (userPath.equals("/checkout")) {
+
             ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
             
-            cart.calculateTotal(Double.parseDouble(surcharge));
+            // calculate total
+            cart.calculateTotal(surcharge);
             
-            userPath = "/checkout";
+            // forward to checkout page and switch to a secure channel
             
+
         // if user switches language
         } else if (userPath.equals("/chooseLanguage")) {
             // TODO: Implement language request

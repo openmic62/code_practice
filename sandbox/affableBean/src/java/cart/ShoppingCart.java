@@ -84,9 +84,12 @@ public class ShoppingCart {
         return subtotal.doubleValue();
     }
     
-    public synchronized void calculateTotal(double surcharge) {
+    public synchronized void calculateTotal(String surcharge) {
+        
+        double amount = Double.parseDouble(surcharge);
+        
         double subtotal = getSubtotal();
-        total = subtotal + surcharge; 
+        total = subtotal + amount; 
     }
 
     public synchronized double getTotal() {
