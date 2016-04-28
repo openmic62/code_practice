@@ -14,7 +14,13 @@ import entity.OrderedProductPK;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Random;
+import javax.annotation.Resource;
+import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -23,17 +29,27 @@ import javax.persistence.PersistenceContext;
  * @author mikerocha
  */
 @Stateless
+@TransactionManagement(TransactionManagementType.CONTAINER) 
 public class OrderManager {
     
     @PersistenceContext(unitName = "affablebeanPU")
     private EntityManager em;
+    
+    @Resource
+    private SessionContext context;
 
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public int placeOrder(String name, String email, String phone, String address, String cityRegion, String ccNumber, ShoppingCart cart) {
 
-        Customer customer = addCustomer(name, email, phone, address, cityRegion, ccNumber);
-        CustomerOrder order = addOrder(customer, cart);
-        addOrderedItems(order, cart);
-        return order.getId();
+        try {
+            Customer customer = addCustomer(name, email, phone, address, cityRegion, ccNumber);
+            CustomerOrder order = addOrder(customer, cart);
+            addOrderedItems(order, cart);
+            return order.getId();
+        } catch (Exception e) {
+            context.setRollbackOnly();
+            return 0;
+        }
     }
 
     private Customer addCustomer(String name, String email, String phone, String address, String cityRegion, String ccNumber) {
