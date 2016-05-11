@@ -20,6 +20,8 @@
         <link rel="stylesheet" type="text/css" href="css/affablebean.css">
         <link rel="shortcut icon" href="img/favicon.ico">
         
+        <script src="js/libs/jquery/jquery.js" type="text/javascript"></script>
+        
         <title>The Affable Bean Green Grocer</title>
     </head>
     <body>

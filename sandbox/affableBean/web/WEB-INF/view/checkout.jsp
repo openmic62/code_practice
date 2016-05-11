@@ -1,11 +1,43 @@
             <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
+            <script src="js/libs/jquery-validate/additional-methods.js" type="text/javascript"></script>
+            <script src="js/libs/jquery-validate/jquery.validate.js" type="text/javascript"></script>
+
+            <script type="text/javascript">
+
+                $(document).ready(function(){
+                    $("#checkoutForm").validate({
+                        rules:{
+                            name: "required",
+                            email: {
+                                required:true,
+                                email:true
+                            },
+                            phone: {
+                                required:true,
+                                number:true,
+                                minlength:9
+                            },
+                            address: {
+                                required:true
+                            },
+                            creditcard: {
+                                required:true,
+                                creditcard:true
+                            }
+                        }
+                    });
+                });
+            </script>
+
             <div id="singleColumn">
                 
                 <h2>checkout</h2>
                 
                 <p>In order to purchase the items in your shopping cart, please provide us with the following information:</p>
                 
-                <form action="purchase" method="post">
+                <form id="checkoutForm" action="purchase" method="post">
                     <table id="checkoutTable">
                         <tr>
                             <td><label for="name">name:</label></td>

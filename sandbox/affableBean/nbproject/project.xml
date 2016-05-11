@@ -14,6 +14,22 @@
                 <root id="test.src.dir"/>
             </test-roots>
         </data>
+        <libraries xmlns="http://www.netbeans.org/ns/cdnjs-libraries/1">
+            <library name="jquery" version="2.2.3">
+                <file localPath="web/js/libs/jquery/jquery.js" path="jquery.js"/>
+                <file localPath="web/js/libs/jquery/jquery.min.js" path="jquery.min.js"/>
+                <file localPath="web/js/libs/jquery/jquery.min.map" path="jquery.min.map"/>
+                <file localPath="web/js/libs/jquery/jquery.slim.js" path="jquery.slim.js"/>
+                <file localPath="web/js/libs/jquery/jquery.slim.min.js" path="jquery.slim.min.js"/>
+                <file localPath="web/js/libs/jquery/jquery.slim.min.map" path="jquery.slim.min.map"/>
+            </library>
+            <library name="jquery-validate" version="1.15.0">
+                <file localPath="web/js/libs/jquery-validate/additional-methods.js" path="additional-methods.js"/>
+                <file localPath="web/js/libs/jquery-validate/additional-methods.min.js" path="additional-methods.min.js"/>
+                <file localPath="web/js/libs/jquery-validate/jquery.validate.js" path="jquery.validate.js"/>
+                <file localPath="web/js/libs/jquery-validate/jquery.validate.min.js" path="jquery.validate.min.js"/>
+            </library>
+        </libraries>
         <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
             <word>servlet</word>
         </spellchecker-wordlist>
