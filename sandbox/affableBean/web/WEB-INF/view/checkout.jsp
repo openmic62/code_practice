@@ -1,8 +1,8 @@
             <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
-            <script src="js/libs/jquery-validate/additional-methods.js" type="text/javascript"></script>
             <script src="js/libs/jquery-validate/jquery.validate.js" type="text/javascript"></script>
+            <script src="js/libs/jquery-validate/additional-methods.js" type="text/javascript"></script>
 
             <script type="text/javascript">
 
@@ -17,7 +17,7 @@
                             phone: {
                                 required:true,
                                 number:true,
-                                minlength:9
+                                minlength:10
                             },
                             address: {
                                 required:true
