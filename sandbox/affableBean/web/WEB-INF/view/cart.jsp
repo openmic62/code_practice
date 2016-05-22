@@ -28,11 +28,11 @@
                         <c:choose>
                             <%-- if 'selectedCategory' session object exists, send user to previously viewed category --%>
                             <c:when test="${!empty selectedCategory}">
-                    <c:url value="category"/>
+                    	    	<c:url value="category"/>
                             </c:when>
                             <%-- otherwise send user to welcome page --%>
                             <c:otherwise>
-                    <c:url value="index.jsp"/>
+                    	    	<c:url value="index.jsp"/>
                             </c:otherwise>
                         </c:choose>
                     </c:set>

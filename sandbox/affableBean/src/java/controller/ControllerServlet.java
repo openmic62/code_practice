@@ -22,6 +22,7 @@ import javax.servlet.http.HttpSession;
 import session.CategoryFacade;
 import session.OrderManager;
 import session.ProductFacade;
+import validate.Validator;
 
 /**
  *
@@ -154,6 +155,7 @@ public class ControllerServlet extends HttpServlet {
         String userPath = request.getServletPath();
         HttpSession session = request.getSession();
         ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
+        Validator validator = new Validator();
      
         // if addToCart action is called
         if (userPath.equals("/addToCart")) {
@@ -195,7 +197,7 @@ public class ControllerServlet extends HttpServlet {
                 String cityRegion = request.getParameter("cityRegion");
                 String ccNumber = request.getParameter("creditcard");
             
-               int orderId = orderManager.placeOrder(name, email, phone, address, cityRegion, ccNumber, cart);
+                int orderId = orderManager.placeOrder(name, email, phone, address, cityRegion, ccNumber, cart);
             }
             
             userPath = "/confirmation";
