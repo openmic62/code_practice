@@ -158,7 +158,7 @@
                     </div>
                 </div>
 
-                <a href="<c:url value='index.jsp'/>">
+                <a href="<c:url value='/'/>">
                     <img src="img/logo.png" id="logo" alt="Affable Bean logo">
                 </a>
 

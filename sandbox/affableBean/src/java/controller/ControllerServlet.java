@@ -207,7 +207,7 @@ public class ControllerServlet extends HttpServlet {
             
                 // if validation error found, return user to checkout
                 if (validationErrorFlag == true) {
-                    request.setAttribute("validationError", validationErrorFlag);
+                    request.setAttribute("validationErrorFlag", validationErrorFlag);
                     userPath = "/checkout";
                     
                     // otherwise, save order to database
