@@ -172,8 +172,14 @@ public class ControllerServlet extends HttpServlet {
                 session.setAttribute("cart", cart);
             } 
             
-            int productId = Integer.parseInt(request.getParameter("productId"));
-            cart.addItem(productFacade.find(productId));
+            // get user input from request
+            String productId = request.getParameter("productId");
+            
+            if (!productId.isEmpty()) {
+                
+                Product product = productFacade.find(Integer.parseInt(productId));
+                cart.addItem(product);
+            }
             
             userPath = "/category";
             
@@ -181,9 +187,16 @@ public class ControllerServlet extends HttpServlet {
         // if updateCart action is called
         } else if (userPath.equals("/updateCart")) {
             
-            int productId = Integer.parseInt(request.getParameter("productId"));
-            short quantity = Short.parseShort(request.getParameter("quantity"));
-            cart.update(productId, quantity);
+            // get input from request
+            String productId = request.getParameter("productId");
+            String quantity = request.getParameter("quantity");
+            
+            boolean invalidEntry = validator.validateQuantity(productId, quantity);
+            
+            if (!invalidEntry) {
+                
+                cart.update(Integer.parseInt(productId), Short.parseShort(quantity));
+            }
             
             userPath = "/cart";
 
