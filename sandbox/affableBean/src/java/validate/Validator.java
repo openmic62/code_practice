@@ -60,48 +60,48 @@ public class Validator {
         boolean ccNumberError;
 
         if (name == null
-            || name.equals("")
-            || name.length() == 0 ) {
+                || name.equals("")
+                || name.length() > 45) {
             errorFlag = true;
             nameError = true;
             request.setAttribute("nameError", nameError);
         }
         if (email == null
-            || email.equals("")
-            || !email.contains("@")) {
+                || email.equals("")
+                || !email.contains("@")) {
             errorFlag = true;
             emailError = true;
             request.setAttribute("emailError", emailError);
         }
         if (phone == null
-            || phone.equals("")
-            || phone.length() < 9) {
+                || phone.equals("")
+                || phone.length() < 9) {
             errorFlag = true;
             phoneError = true;
             request.setAttribute("phoneError", phoneError);
         }
         if (address == null
-            || address.equals("")
-            || address.length() > 45) {
+                || address.equals("")
+                || address.length() > 45) {
             errorFlag = true;
             addressError = true;
             request.setAttribute("addressError", addressError);
         }
         if (cityRegion == null
-            || cityRegion.equals("")
-            || cityRegion.length() > 2) {
+                || cityRegion.equals("")
+                || cityRegion.length() > 2) {
             errorFlag = true;
             cityRegionError = true;
             request.setAttribute("cityRegionError", cityRegionError);
         }
         if (ccNumber == null
-            || ccNumber.equals("")
-            || ccNumber.length() > 19) {
+                || ccNumber.equals("")
+                || ccNumber.length() > 19) {
             errorFlag = true;
             ccNumberError = true;
             request.setAttribute("ccNumberError", ccNumberError);
         }
-        
+
         return errorFlag;
     }
 
