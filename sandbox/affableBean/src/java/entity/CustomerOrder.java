@@ -7,6 +7,7 @@ package entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -70,6 +71,9 @@ public class CustomerOrder implements Serializable {
     private Collection<OrderedProduct> orderedProductCollection;
 
     public CustomerOrder() {
+        // set dateCreated to timestamp ...
+        java.util.Date date = new java.util.Date();
+        dateCreated = new Timestamp(date.getTime());
     }
 
     public CustomerOrder(Integer id) {
