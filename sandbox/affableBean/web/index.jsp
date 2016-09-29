@@ -7,7 +7,7 @@
                 <div id="welcomeText">
                     <p style="font-size: larger"><fmt:message key="greeting"/></p>
                     
-                    <p><fmt:message key="intro"/></p>
+                    <p><fmt:message key="introText"/></p>
                 </div>
             </div>
 
