@@ -54,7 +54,9 @@
                 <div id="widgetBar">
 
                     <div class="headerWidget">
-                        [ language toggle ]
+                        
+                        <%-- language selection widget --%>
+                        english | <div class="bubble"><a href="chooseLanguage?language=cs">česky</a></div>
                     </div>
 
                     <c:if test="${'true' eq 'falses'}">                  
