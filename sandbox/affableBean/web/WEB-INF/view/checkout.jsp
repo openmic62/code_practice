@@ -1,5 +1,9 @@
             <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+            <%-- Set session-scoped variable to track the view user is coming from.
+                 This is used by the language mechanism in the Controller so that
+                 users view the same page when switching between English and Czech. --%>
+            <c:set var='view' value='/checkout' scope='session' />
 
             <script src="js/libs/jquery-validate/jquery.validate.js" type="text/javascript"></script>
             <script src="js/libs/jquery-validate/additional-methods.js" type="text/javascript"></script>

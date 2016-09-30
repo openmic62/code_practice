@@ -134,13 +134,23 @@ public class ControllerServlet extends HttpServlet {
             // place in request scope
             request.setAttribute("language", language);
 
-            // forward request to welcome page
-            try {
-                request.getRequestDispatcher("/index.jsp").forward(request, response);
-            } catch (Exception ex) {
-                ex.printStackTrace();
+            String userView = (String) session.getAttribute("view");
+
+            if ((userView != null) &&
+                (!userView.equals("/index"))) {     // index.jsp exists outside 'view' folder
+                                                    // so must be forwarded separately
+                userPath = userView;
+            } else {
+
+                // if previous view is index or cannot be determined, send user to welcome page
+                // forward request to welcome page
+                try {
+                    request.getRequestDispatcher("/index.jsp").forward(request, response);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+                return;
             }
-            return;
         }
         
         // use RequestDispatcher to forward request internally
