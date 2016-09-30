@@ -127,8 +127,20 @@ public class ControllerServlet extends HttpServlet {
 
         // if user switches language
         } else if (userPath.equals("/chooseLanguage")) {
-            // TODO: Implement language request
-            
+
+            // get language choice
+            String language = request.getParameter("language");
+
+            // place in request scope
+            request.setAttribute("language", language);
+
+            // forward request to welcome page
+            try {
+                request.getRequestDispatcher("/index.jsp").forward(request, response);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            return;
         }
         
         // use RequestDispatcher to forward request internally
