@@ -54,13 +54,6 @@
         <title>The Affable Bean Green Grocer</title>
     </head>
     <body>
-        <%-- Language test --%>
-        <p style="text-align: left;"><strong>tests:</strong>
-            <br>
-            <code>\${pageContext.request.locale.language}</code>: ${pageContext.request.locale.language}
-            <br>
-            <code>\${sessionScope['javax.servlet.jsp.jstl.fmt.locale.session']}</code>: ${sessionScope['javax.servlet.jsp.jstl.fmt.locale.session']}
-        </p>
         <div id="main">
             <div id="header">
                 <div id="widgetBar">
