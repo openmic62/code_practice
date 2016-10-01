@@ -8,6 +8,30 @@
         "Severe:   Exception while preparing the app : Could not resolve a persistence unit corresponding to the persistence-context-ref-name [session.OrderManager/em] in the scope of the module called [affableBean]. Please verify your application."
         Caused by adding to OrderManager.java ->"@PersistenceContext(unitName = "affablebeanPU")<-
     -->
+    <security-constraint>
+        <display-name>affableBeanAdmin</display-name>
+        <web-resource-collection>
+            <web-resource-name>Affable Bean Administration</web-resource-name>
+            <description/>
+            <url-pattern>/admin/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>affableBeanAdmin</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>file</realm-name>
+        <form-login-config>
+            <form-login-page>/admin/login.jsp</form-login-page>
+            <form-error-page>/admin/error.jsp</form-error-page>
+        </form-login-config>
+    </login-config>
+    <security-role>
+        <description/>
+        <role-name>affableBeanAdmin</role-name>
+    </security-role>
     <persistence-context-ref>
         <description>Persistence context for JndiProviders. 
                     Unit name should be same as in your persistence.xml</description>
@@ -20,30 +44,25 @@
         <param-name>productImagePath</param-name>
         <param-value>img/products/</param-value>
     </context-param>
-
     <context-param>
         <description>The relative path to category images</description>
         <param-name>categoryImagePath</param-name>
         <param-value>img/categories/</param-value>
     </context-param>
-
     <context-param>
         <description>The delivery surcharge applied to all orders</description>
         <param-name>deliverySurcharge</param-name>
         <param-value>3.00</param-value>
     </context-param>
-
     <context-param>
         <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
         <param-value>resources.messages</param-value>
     </context-param>
-
     <session-config>
         <session-timeout>
             10
         </session-timeout>
     </session-config>
-
     <jsp-config>
         <jsp-property-group>
             <description>JSP configuration for the store front</description>
@@ -52,7 +71,6 @@
             <include-prelude>/WEB-INF/jspf/header.jspf</include-prelude>
             <include-coda>/WEB-INF/jspf/footer.jspf</include-coda>
         </jsp-property-group>
-
         <jsp-property-group>
             <description>JSP configuration for the admin console</description>
             <url-pattern>/admin/index.jsp</url-pattern>
