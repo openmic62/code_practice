@@ -8,7 +8,7 @@
         "Severe:   Exception while preparing the app : Could not resolve a persistence unit corresponding to the persistence-context-ref-name [session.OrderManager/em] in the scope of the module called [affableBean]. Please verify your application."
         Caused by adding to OrderManager.java ->"@PersistenceContext(unitName = "affablebeanPU")<-
     -->
-    <security-constraint>
+<!--    <security-constraint>
         <display-name>affableBeanAdmin</display-name>
         <web-resource-collection>
             <web-resource-name>Affable Bean Administration</web-resource-name>
@@ -19,7 +19,7 @@
             <description/>
             <role-name>affableBeanAdmin</role-name>
         </auth-constraint>
-    </security-constraint>
+    </security-constraint>-->
     <login-config>
         <auth-method>FORM</auth-method>
         <realm-name>file</realm-name>
@@ -28,10 +28,10 @@
             <form-error-page>/admin/error.jsp</form-error-page>
         </form-login-config>
     </login-config>
-    <security-role>
+<!--    <security-role>
         <description/>
         <role-name>affableBeanAdmin</role-name>
-    </security-role>
+    </security-role>-->
     <persistence-context-ref>
         <description>Persistence context for JndiProviders. 
                     Unit name should be same as in your persistence.xml</description>
