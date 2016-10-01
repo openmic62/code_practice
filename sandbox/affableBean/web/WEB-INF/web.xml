@@ -81,6 +81,7 @@
             <description>JSP configuration for the store front</description>
             <url-pattern>/index.jsp</url-pattern>
             <url-pattern>/WEB-INF/view/*</url-pattern>
+            <url-pattern>/WEB-INF/jspf/error/*</url-pattern>
             <include-prelude>/WEB-INF/jspf/header.jspf</include-prelude>
             <include-coda>/WEB-INF/jspf/footer.jspf</include-coda>
         </jsp-property-group>
@@ -93,4 +94,8 @@
             <include-coda>/admin/jspf/footer.jspf</include-coda>
         </jsp-property-group>
     </jsp-config>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/WEB-INF/jspf/error/403.jspf</location>
+    </error-page>
 </web-app>
