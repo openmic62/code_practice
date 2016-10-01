@@ -11,6 +11,7 @@ import entity.Category;
 import entity.Product;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Locale;
 import java.util.Map;
 import javax.ejb.EJB;
 import javax.servlet.ServletConfig;
@@ -252,6 +253,15 @@ public class ControllerServlet extends HttpServlet {
                     
                     // if order processed successfully send user to confirmation page
                     if (orderId != 0) {
+
+                        // in case language was set using toggle, get language choice before destroying session
+                        Locale locale = (Locale) session.getAttribute("javax.servlet.jsp.jstl.fmt.locale.session");
+                        String language = "";
+
+                        if (locale != null) {
+
+                            language = (String) locale.getLanguage();
+                        }
                         
                         // dissociate shopping cart from session
                         cart = null;
@@ -259,6 +269,11 @@ public class ControllerServlet extends HttpServlet {
                         // end session
                         session.invalidate();
                         
+                        if (!language.isEmpty()) {                       // if user changed language using the toggle,
+                                                                         // reset the language attribute - otherwise
+                            request.setAttribute("language", language);  // language will be switched on confirmation page!
+                        }
+
                         // get order details
                         Map orderMap = orderManager.getOrderDetails(orderId);
                         
