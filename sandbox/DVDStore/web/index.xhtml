@@ -22,7 +22,9 @@
                         </f:facet>
                         <h:outputText value="#{item.description}"/>
                     </h:column>
-                    <h:commandLink action="#{filmController.prepareView()}" value="View"/>
+                    <h:column>
+                        <h:commandLink action="#{filmController.prepareView}" value="View"/>                        
+                    </h:column>
                 </h:dataTable> 
             </h:form>
         </ui:define>
