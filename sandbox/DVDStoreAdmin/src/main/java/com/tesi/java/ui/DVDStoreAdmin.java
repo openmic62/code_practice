@@ -5,12 +5,67 @@
  */
 package com.tesi.java.ui;
 
+import com.tesi.java.entity.Actor;
+import com.tesi.java.util.HibernateUtil;
+import java.util.List;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
+
 /**
  *
  * @author mikerocha
  */
 public class DVDStoreAdmin extends javax.swing.JFrame {
 
+    private static String QUERY_BASED_ON_FIRST_NAME = "from Actor a where a.firstName like '";
+    private static String QUERY_BASED_ON_LAST_NAME = "from Actor a where a.lastName like '";
+
+    private void runQueryBasedOnFirstName() {
+        executeHQLQuery(QUERY_BASED_ON_FIRST_NAME + firstNameTextField.getText() + "%'");
+    }
+
+    private void runQueryBasedOnLastName() {
+        executeHQLQuery(QUERY_BASED_ON_LAST_NAME + lastNameTextField.getText() + "%'");
+    }
+
+    private void executeHQLQuery(String hql) {
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            Query q = session.createQuery(hql);
+            List resultList = q.list();
+            displayResult(resultList);
+            session.getTransaction().commit();
+        } catch (HibernateException he) {
+            he.printStackTrace();
+        }
+    }
+    
+    private void displayResult(List resultList) {
+        Vector<String> tableHeaders = new Vector<String>();
+        Vector tableData = new Vector();
+       
+        tableHeaders.add("ActorId");
+        tableHeaders.add("FirstName");
+        tableHeaders.add("LastName");
+        tableHeaders.add("LastUpdate");
+        
+        for (Object o : resultList) {
+            Actor actor = (Actor)o;
+            Vector<Object> oneRow = new Vector<Object>();
+            oneRow.add(actor.getActorId());
+            oneRow.add(actor.getFirstName());
+            oneRow.add(actor.getLastName());
+            oneRow.add(actor.getLastUpdate());
+            tableData.add(oneRow);
+        }
+        
+        resultTable.setModel(new DefaultTableModel(tableData, tableHeaders));
+    }
+    
     /**
      * Creates new form DVDStoreAdmin
      */
@@ -129,7 +184,11 @@ public class DVDStoreAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_lastNameTextFieldActionPerformed
 
     private void queryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_queryButtonActionPerformed
-        // TODO add your handling code here:
+        if (!firstNameTextField.getText().trim().equals("")) {
+            runQueryBasedOnFirstName();
+        } else if (!lastNameTextField.getText().trim().equals("")) {
+            runQueryBasedOnLastName();
+        }
     }//GEN-LAST:event_queryButtonActionPerformed
 
     /**
