@@ -9,5 +9,6 @@
     <property name="hibernate.connection.password">roc00mik</property>
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.query.factory_class">org.hibernate.hql.internal.classic.ClassicQueryTranslatorFactory</property>
+    <mapping resource="com/tesi/java/entity/Actor.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
