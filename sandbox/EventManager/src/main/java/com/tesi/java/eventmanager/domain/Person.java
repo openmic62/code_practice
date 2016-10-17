@@ -5,6 +5,9 @@
  */
 package com.tesi.java.eventmanager.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  *
  * @author mikerocha
@@ -15,8 +18,18 @@ public class Person {
     private String firstname;
     private String lastname;
     
+    private Set events = new HashSet();
+
     public Person() {}
 
+    public Set getEvents() {
+        return events;
+    }
+
+    public void setEvents(Set events) {
+        this.events = events;
+    }
+    
     public Long getId() {
         return id;
     }
