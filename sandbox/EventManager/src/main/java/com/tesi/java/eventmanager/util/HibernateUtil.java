@@ -8,7 +8,6 @@ package com.tesi.java.eventmanager.util;
 ///import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.cfg.Configuration;
 
 /**
@@ -26,8 +25,11 @@ public class HibernateUtil {
             // Create the SessionFactory from standard (hibernate.cfg.xml) 
             // config file.
             ///sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
-            sessionFactory = new Configuration().configure().buildSessionFactory(
-                    new StandardServiceRegistryBuilder().build());
+            Configuration configuration = new Configuration();
+            configuration.configure("hibernate.cfg.xml");
+            StandardServiceRegistryBuilder ssrb = new StandardServiceRegistryBuilder();
+            ssrb.applySettings(configuration.getProperties());
+            sessionFactory = configuration.buildSessionFactory(ssrb.build());
         } catch (Throwable ex) {
             // Log the exception. 
             System.err.println("Initial SessionFactory creation failed." + ex);
