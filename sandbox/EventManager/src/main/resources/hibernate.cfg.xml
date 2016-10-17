@@ -6,7 +6,6 @@
     <property name="hibernate.connection.url">jdbc:hsqldb:hsql://localhost</property>
     <property name="hibernate.connection.username">sa</property>
     <property name="hibernate.connection.password"/>
-    
     <!-- JDBC connection pool (use the built-in) -->
     <property name="hibernate.connection.pool_size">1</property>
     <!-- SQL dialect -->
@@ -19,5 +18,6 @@
     <!-- Drop and re-create the database schema on startup -->
     <property name="hibernate.hbm2ddl.auto">update</property>
     <mapping resource="com/tesi/java/eventmanager/domain/Event.hbm.xml"/>
+    <mapping resource="com/tesi/java/eventmanager/domain/Person.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
