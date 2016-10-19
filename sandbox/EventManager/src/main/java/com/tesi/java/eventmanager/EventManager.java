@@ -6,6 +6,7 @@
 package com.tesi.java.eventmanager;
 
 import com.tesi.java.eventmanager.domain.Event;
+import com.tesi.java.eventmanager.domain.Person;
 import com.tesi.java.eventmanager.util.HibernateUtil;
 import java.util.Date;
 import java.util.List;
@@ -56,6 +57,17 @@ public class EventManager {
         List result = session.createQuery("from Event").list();
         session.getTransaction().commit();
         return result;
+    }
+    
+    public void addPersonToEvent(Long eventId, Long personId) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        
+        Person aPerson = (Person) session.load(Person.class, personId);
+        Event anEvent = (Event) session.load(Event.class, eventId);
+        aPerson.getEvents().add(anEvent);                
+        
+        session.getTransaction().commit();
     }
     
 }
