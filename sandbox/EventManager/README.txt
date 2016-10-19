@@ -10,7 +10,7 @@ $ mvn exec:java -Dexec.mainClass="com.tesi.java.eventmanager.EventManager" -Dexe
 
 To create a new Person
 mikerocha@Mikes-MBP:~/NetBeansProjects/code_practice/sandbox/EventManager
-$ mvn exec:java -Dexec.mainClass="com.tesi.java.eventmanager.EventManager" -Dexec.args="storperson"
+$ mvn exec:java -Dexec.mainClass="com.tesi.java.eventmanager.EventManager" -Dexec.args="storeperson"
 
 To list all the events
 mikerocha@Mikes-MBP:~/NetBeansProjects/code_practice/sandbox/EventManager
@@ -20,6 +20,10 @@ To list all the persons
 mikerocha@Mikes-MBP:~/NetBeansProjects/code_practice/sandbox/EventManager
 $ mvn exec:java -Dexec.mainClass="com.tesi.java.eventmanager.EventManager" -Dexec.args="listpersons"
 
-To add person to event
+To add person to event: version 1
 mikerocha@Mikes-MBP:~/NetBeansProjects/code_practice/sandbox/EventManager
 $ mvn exec:java -Dexec.mainClass="com.tesi.java.eventmanager.EventManager" -Dexec.args="addpersontoevent"
+
+To add person to event: version 2, detached
+mikerocha@Mikes-MBP:~/NetBeansProjects/code_practice/sandbox/EventManager
+$ mvn exec:java -Dexec.mainClass="com.tesi.java.eventmanager.EventManager" -Dexec.args="addpersontoevent2"
