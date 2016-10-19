@@ -27,14 +27,25 @@ public class EventManager {
             mgr.createAndStoreEvent("My Event", new Date());
         } else if (args[0].equals("storeperson")) {
             mgr.createAndStorePerson("Mike", "Rocha", 54);
-        } else if (args[0].equals("list")) {
+        } else if (args[0].equals("listevents")) {
             List events = mgr.listEvents();
             for (Object e : events) {
                 Event event = (Event) e;
                 System.out.println("Event: "
                     + event.getTitle()
-                    + " Time: "
+                    + ", Time: "
                     + event.getDate());
+            }
+        } else if (args[0].equals("listpersons")) {
+            List persons = mgr.listPersons();
+            for (Object p : persons) {
+                Person person = (Person) p;
+                System.out.println("First: "
+                    + person.getFirstname()
+                    + ", Last: "
+                    + person.getLastname()
+                    + ", Age: "
+                    + person.getAge());
             }
         } else if (args[0].equals("addpersontoevent")) {
             Long eventId = mgr.createAndStoreEvent("Stevie Nicks", new Date());
@@ -79,6 +90,14 @@ public class EventManager {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         List result = session.createQuery("from Event").list();
+        session.getTransaction().commit();
+        return result;
+    }
+    
+    public List listPersons() {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        List result = session.createQuery("from Person").list();
         session.getTransaction().commit();
         return result;
     }
