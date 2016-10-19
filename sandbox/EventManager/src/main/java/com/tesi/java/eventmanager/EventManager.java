@@ -23,8 +23,10 @@ public class EventManager {
         
         EventManager mgr = new EventManager();
         
-        if (args[0].equals("store")) {
+        if (args[0].equals("storeevent")) {
             mgr.createAndStoreEvent("My Event", new Date());
+        } else if (args[0].equals("storeperson")) {
+            mgr.createAndStorePerson("Mike", "Rocha", 54);
         } else if (args[0].equals("list")) {
             List events = mgr.listEvents();
             for (Object e : events) {
@@ -34,12 +36,17 @@ public class EventManager {
                     + " Time: "
                     + event.getDate());
             }
+        } else if (args[0].equals("addpersontoevent")) {
+            Long eventId = mgr.createAndStoreEvent("Stevie Nicks", new Date());
+            Long personId = mgr.createAndStorePerson("Conrad", "Rocha", 18);
+            mgr.addPersonToEvent(eventId, personId);
+            System.out.println("Added person " + personId + " to event " + eventId);
         }
         
         HibernateUtil.getSessionFactory().close();
     }
     
-    public void createAndStoreEvent(String title, Date theDate) {
+    public Long createAndStoreEvent(String title, Date theDate) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();     
         session.beginTransaction();
         
@@ -48,7 +55,24 @@ public class EventManager {
         theEvent.setDate(theDate);
         session.save(theEvent);
         
-        session.getTransaction().commit();        
+        session.getTransaction().commit();
+        
+        return theEvent.getId();
+    }
+    
+    public Long createAndStorePerson(String firstname, String lastname, int age) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();     
+        session.beginTransaction();
+        
+        Person aPerson = new Person();
+        aPerson.setAge(age);
+        aPerson.setLastname(lastname);
+        aPerson.setFirstname(firstname);
+        session.save(aPerson);
+        
+        session.getTransaction().commit();
+        
+        return aPerson.getId();
     }
     
     public List listEvents() {
