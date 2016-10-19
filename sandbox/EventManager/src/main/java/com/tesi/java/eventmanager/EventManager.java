@@ -65,6 +65,11 @@ public class EventManager {
             Long personId = mgr.createAndStorePerson("Katherine", "Zeta-Jones", 29);
             mgr.addPersonToEvent(eventId, personId);
             System.out.println("Added person " + personId + " to event " + eventId);
+        } else if (args[0].equals("addemailtoperson")) {
+            Long personId = mgr.createAndStorePerson("Sean", "Connery", 67);
+            String emailaddress = "openmic62@gmail.com";
+            mgr.addEmailToPerson(personId, emailaddress);
+            System.out.println("Added email " + emailaddress + " to person " + personId);
         }
 
         HibernateUtil.getSessionFactory().close();
@@ -131,7 +136,7 @@ public class EventManager {
         session.beginTransaction();
 
         Person aPerson = (Person) session
-                .createQuery("select p from Person p left join p.events where p.id = :pid")
+                .createQuery("select p from Person p left join fetch p.events where p.id = :pid")
                 .setParameter("pid", personId)
                 .uniqueResult(); // Eager fetch the collection so we can use it detached
         Event anEvent = (Event) session.load(Event.class, eventId);
@@ -146,6 +151,17 @@ public class EventManager {
         session2.beginTransaction();
         session2.update(aPerson); // Reattachment of aPerson
 
+        session.getTransaction().commit();
+    }
+    
+    public void addEmailToPerson(Long personId, String emailaddress) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        
+        Person aPerson = (Person) session.load(Person.class, personId);
+        // adding to the emailAddress collection might trigger a lazy load of the collection
+        aPerson.getEmailAddresses().add(emailaddress);
+        
         session.getTransaction().commit();
     }
 

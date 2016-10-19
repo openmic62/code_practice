@@ -27,3 +27,7 @@ $ mvn exec:java -Dexec.mainClass="com.tesi.java.eventmanager.EventManager" -Dexe
 To add person to event: version 2, detached
 mikerocha@Mikes-MBP:~/NetBeansProjects/code_practice/sandbox/EventManager
 $ mvn exec:java -Dexec.mainClass="com.tesi.java.eventmanager.EventManager" -Dexec.args="addpersontoevent2"
+
+To add and email to a person
+mikerocha@Mikes-MBP:~/NetBeansProjects/code_practice/sandbox/EventManager
+$ mvn exec:java -Dexec.mainClass="com.tesi.java.eventmanager.EventManager" -Dexec.args="addemailtoperson"

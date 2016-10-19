@@ -19,8 +19,17 @@ public class Person {
     private String lastname;
     
     private Set events = new HashSet();
+    private Set emailAddresses = new HashSet();
 
     public Person() {}
+
+    public Set getEmailAddresses() {
+        return emailAddresses;
+    }
+
+    public void setEmailAddresses(Set emailaddresses) {
+        this.emailAddresses = emailaddresses;
+    }
 
     public Set getEvents() {
         return events;
