@@ -6,6 +6,7 @@
 package com.tesi.java.eventmanager.domain;
 
 import java.util.Date;
+import java.util.Set;
 
 /**
  *
@@ -16,8 +17,18 @@ public class Event {
     
     private String title;
     private Date date;
+    
+    private Set participants;
 
     public Event() {}
+
+    public Set getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(Set participants) {
+        this.participants = participants;
+    }
     
     public long getId() {
         return id;
