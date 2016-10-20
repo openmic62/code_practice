@@ -30,6 +30,16 @@ public class Event {
         this.participants = participants;
     }
     
+    public void addParticipant(Person person) {
+        this.getParticipants().add(person);
+        person.getEvents().add(this);
+    }
+    
+    public void removeParticipant(Person person) {
+        this.getParticipants().remove(person);
+        person.getEvents().remove(this);
+    }
+    
     public long getId() {
         return id;
     }

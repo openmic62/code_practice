@@ -126,7 +126,7 @@ public class EventManager {
 
         Person aPerson = (Person) session.load(Person.class, personId);
         Event anEvent = (Event) session.load(Event.class, eventId);
-        aPerson.getEvents().add(anEvent);
+        aPerson.addToEvent(anEvent);
 
         session.getTransaction().commit();
     }
@@ -144,7 +144,7 @@ public class EventManager {
         session.getTransaction().commit();
 
         // End first session of work
-        aPerson.getEvents().add(anEvent); // aPerson (and its collection) is detached
+        aPerson.addToEvent(anEvent); // aPerson (and its collection) is detached
 
         // Begin second unit of work
         Session session2 = HibernateUtil.getSessionFactory().getCurrentSession();
