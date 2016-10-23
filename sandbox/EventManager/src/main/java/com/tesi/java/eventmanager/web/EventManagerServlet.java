@@ -78,9 +78,8 @@ public class EventManagerServlet extends HttpServlet {
             
             // Write HTML header
             PrintWriter out = response.getWriter();
-            out.println("\"<html><head><title>Event Manager</title></head><body>\"");
-            
-            if ("store".equals(request.getAttribute("action"))) {
+            out.println("<html><head><title>Event Manager</title></head><body>");
+            if ("store".equals(request.getParameter("action"))) {
                 String eventTitle = request.getParameter("eventTitle");
                 String eventDate = request.getParameter("eventDate");
                 
