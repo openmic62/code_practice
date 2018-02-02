@@ -47,7 +47,7 @@
 ; See respective data sheet for additional information on configuration word.
 
 ;***** VARIABLE DEFINITIONS *****************************************************
-	UDATA
+	UDATA_SHR
 sGPIO   res 1                     ; shadow copy of GPIO
 	
 ;***** RC CALIBRATION **********************************************************
