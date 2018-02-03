@@ -14,7 +14,7 @@
 ;                                                                       *
 ;************************************************************************
 ;                                                                       *
-;   Files required: N/A                                                 *
+;   Files required: delay10xW-12F509.asm                                *
 ;                                                                       *
 ;************************************************************************
 ;                                                                       *
@@ -34,7 +34,9 @@
 ;	list     p=12F509             ; list directive to define processor
 	#include <p12F509.inc>        ; processor specific variable definitions
 	
-;***** CONFIGURATION
+	EXTERN   delay10xW_R          ; W x 10 mS delay
+
+	;***** CONFIGURATION
 	; ext reset, no code protect, no watchdog, int RC clock
 	__CONFIG   _MCLRE_OFF & _CP_OFF & _WDT_OFF & _IntRC_OSC
 
@@ -73,8 +75,20 @@ wait_dn btfsc   GPIO,3
 	movwf   sGPIO             ; write to shadow
 	movwf   GPIO              ; write to port
 	
+	; wait 20 ms debounce delay
+	movlw   .2
+	pagesel delay10xW_R       
+	call    delay10xW_R       ; delay 2 x 10 ms = 20 ms
+	pagesel $
+	
 wait_up btfss   GPIO,3            ; if button is up (GP3 high)
 	goto    wait_up
+	
+	; wait 20 ms debounce delay
+	movlw   .2
+	pagesel delay10xW_R       
+	call    delay10xW_R       ; delay 2 x 10 ms = 20 ms
+	pagesel $
 	
 	; repeat forever
 	goto    main_loop         ; repeat forever

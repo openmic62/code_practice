@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=BA_L4-PB_LED_debounced-12F509.asm
+SOURCEFILES_QUOTED_IF_SPACED=BA_L4-PB_LED_debounced-12F509.asm delay10xW-12F509.asm
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/BA_L4-PB_LED_debounced-12F509.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/BA_L4-PB_LED_debounced-12F509.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/BA_L4-PB_LED_debounced-12F509.o ${OBJECTDIR}/delay10xW-12F509.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/BA_L4-PB_LED_debounced-12F509.o.d ${OBJECTDIR}/delay10xW-12F509.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/BA_L4-PB_LED_debounced-12F509.o
+OBJECTFILES=${OBJECTDIR}/BA_L4-PB_LED_debounced-12F509.o ${OBJECTDIR}/delay10xW-12F509.o
 
 # Source Files
-SOURCEFILES=BA_L4-PB_LED_debounced-12F509.asm
+SOURCEFILES=BA_L4-PB_LED_debounced-12F509.asm delay10xW-12F509.asm
 
 
 CFLAGS=
@@ -102,6 +102,14 @@ ${OBJECTDIR}/BA_L4-PB_LED_debounced-12F509.o: BA_L4-PB_LED_debounced-12F509.asm 
 	@${DEP_GEN} -d "${OBJECTDIR}/BA_L4-PB_LED_debounced-12F509.o"
 	@${FIXDEPS} "${OBJECTDIR}/BA_L4-PB_LED_debounced-12F509.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
 	
+${OBJECTDIR}/delay10xW-12F509.o: delay10xW-12F509.asm  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/delay10xW-12F509.o.d 
+	@${RM} ${OBJECTDIR}/delay10xW-12F509.o 
+	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/delay10xW-12F509.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG -d__MPLAB_DEBUGGER_PK3=1 -q -p$(MP_PROCESSOR_OPTION) -u  -l\\\"${OBJECTDIR}/delay10xW-12F509.lst\\\" -e\\\"${OBJECTDIR}/delay10xW-12F509.err\\\" $(ASM_OPTIONS)    -o\\\"${OBJECTDIR}/delay10xW-12F509.o\\\" \\\"delay10xW-12F509.asm\\\" 
+	@${DEP_GEN} -d "${OBJECTDIR}/delay10xW-12F509.o"
+	@${FIXDEPS} "${OBJECTDIR}/delay10xW-12F509.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
+	
 else
 ${OBJECTDIR}/BA_L4-PB_LED_debounced-12F509.o: BA_L4-PB_LED_debounced-12F509.asm  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
@@ -110,6 +118,14 @@ ${OBJECTDIR}/BA_L4-PB_LED_debounced-12F509.o: BA_L4-PB_LED_debounced-12F509.asm 
 	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/BA_L4-PB_LED_debounced-12F509.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION) -u  -l\\\"${OBJECTDIR}/BA_L4-PB_LED_debounced-12F509.lst\\\" -e\\\"${OBJECTDIR}/BA_L4-PB_LED_debounced-12F509.err\\\" $(ASM_OPTIONS)    -o\\\"${OBJECTDIR}/BA_L4-PB_LED_debounced-12F509.o\\\" \\\"BA_L4-PB_LED_debounced-12F509.asm\\\" 
 	@${DEP_GEN} -d "${OBJECTDIR}/BA_L4-PB_LED_debounced-12F509.o"
 	@${FIXDEPS} "${OBJECTDIR}/BA_L4-PB_LED_debounced-12F509.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
+	
+${OBJECTDIR}/delay10xW-12F509.o: delay10xW-12F509.asm  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/delay10xW-12F509.o.d 
+	@${RM} ${OBJECTDIR}/delay10xW-12F509.o 
+	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/delay10xW-12F509.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION) -u  -l\\\"${OBJECTDIR}/delay10xW-12F509.lst\\\" -e\\\"${OBJECTDIR}/delay10xW-12F509.err\\\" $(ASM_OPTIONS)    -o\\\"${OBJECTDIR}/delay10xW-12F509.o\\\" \\\"delay10xW-12F509.asm\\\" 
+	@${DEP_GEN} -d "${OBJECTDIR}/delay10xW-12F509.o"
+	@${FIXDEPS} "${OBJECTDIR}/delay10xW-12F509.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
 	
 endif
 
