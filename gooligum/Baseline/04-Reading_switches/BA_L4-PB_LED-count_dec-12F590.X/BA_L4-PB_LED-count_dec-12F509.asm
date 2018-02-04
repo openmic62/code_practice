@@ -66,6 +66,8 @@ RESET	CODE    0x000             ; effective reset vector
 	
 ;***** Initialization
 start	
+	clrf    sGPIO
+	clrf    GPIO
 	movlw   b'111101'         ; configure GP1 (only) as an output
 	tris    GPIO
 	
