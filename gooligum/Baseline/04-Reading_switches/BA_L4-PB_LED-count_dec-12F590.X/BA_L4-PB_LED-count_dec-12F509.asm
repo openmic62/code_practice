@@ -83,7 +83,7 @@ dn_dly  incfsz  dc1,F             ; delay 256 x 3 uS = 768 uS
 	incf	db_cnt,F          ; increment sample count
 	movlw   .13               ; 13 samples x 768 uS/sample = 9.98 mS
 	xorwf   db_cnt,W          ; calc if we've had 13 consecutive same samples
-	btfsc	STATUS,Z          ; check if we've had 13 consecutive same samples
+	btfss	STATUS,Z          ; check if we've had 13 consecutive same samples
 	goto    dn_dly            ; go to next sample
 	
 	; toggle the LED
@@ -103,7 +103,7 @@ up_dly  incfsz  dc1,F             ; delay 256 x 3 uS = 768 uS
 	incf	db_cnt,F          ; increment sample count
 	movlw   .13               ; 13 samples x 768 uS/sample = 9.98 mS
 	xorwf   db_cnt,W          ; calc if we've had 13 consecutive same samples
-	btfsc	STATUS,Z          ; check if we've had 13 consecutive same samples
+	btfss	STATUS,Z          ; check if we've had 13 consecutive same samples
 	goto    up_dly            ; go to next sample
 	
 	; repeat forever
