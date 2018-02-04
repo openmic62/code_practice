@@ -96,7 +96,7 @@ dn_dly  incfsz  dc1,F             ; delay 256 x 3 uS = 768 uS
 db_up   clrf    dc1               ; zero the delay counter
 	clrf    db_cnt            ; zero the bounce counter
 up_dly  incfsz  dc1,F             ; delay 256 x 3 uS = 768 uS
-	goto    dn_dly
+	goto    up_dly
 	btfss   GPIO,3            ; sample GP3; (closed -> 0V, down)
 	goto    db_up             ; button bounced; restart debounce
 	
