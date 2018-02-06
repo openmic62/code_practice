@@ -75,7 +75,7 @@ MAIN    CODE
 ;***** Initialization
 start	
         ; configure ports
-	movlw   b'111011'         ; configure GP1 and GP1 (only) as outputs
+	movlw   b'111001'         ; configure GP1 and GP1 (only) as outputs
 	tris    GPIO
 	; configure timer
         movlw   b'11010100'       ; configure Timer0
@@ -85,6 +85,7 @@ start
 	option                    ;   -> increment ever 32 uS
 	
 	; turn off both LEDs
+	clrf    sGPIO
 	clrf    GPIO
 	
 ;***** Main loop
@@ -93,7 +94,19 @@ main_loop
 	banksel cnt_4ms
 	movwf   cnt_4ms           ; set the 4 mS counter
 dly_500	; delay 500 mS seconds    
-w_tmr0	movfw   TMR0              
+w_tmr0		
+	; turn on GP1 LED if button is pressed
+	; a few cycles stolen here will not risk missing the condition
+	; TMR0 = 125 since TMR0 increments once every 32 uS
+	bcf     sGPIO,1           ; 1 uS
+	btfss   GPIO,3            ; 1 uS normally; 2 uS if true
+	bsf     sGPIO,1           ; 1 uS normally not executed
+	movfw   sGPIO             ; 1 uS
+	movwf   GPIO              ; 1 uS
+	                          ; 5 uS total every time through the loop
+	
+	; now do the flashing GP2 LED timing
+	movfw   TMR0
 	xorlw   .125              ; 125 x 32 uS = 4 mS
 	btfss   STATUS,Z
 	goto    w_tmr0
