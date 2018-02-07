@@ -49,7 +49,6 @@
 ;***** VARIABLE DEFINITIONS *****************************************************
         UDATA
 sGPIO   res 1                     ; GPIO shadow register
-db_cnt  res 1                     ; counter: counts consecutive bounce samples
 	
 ;***** RC CALIBRATION **********************************************************
 RCCAL   CODE    0x3FF             ; processor reset vector
