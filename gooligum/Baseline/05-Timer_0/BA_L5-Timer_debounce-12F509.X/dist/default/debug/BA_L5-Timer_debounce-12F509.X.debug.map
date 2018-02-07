@@ -1,0 +1,52 @@
+MPLINK 5.08, LINKER
+Linker Map File - Created Tue Feb  6 19:13:08 2018
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                    RESET       code   0x000000    program   0x000006
+                   .cinit    romdata   0x000003    program   0x000004
+                     MAIN       code   0x000005    program   0x000036
+                    RCCAL       code   0x0003ff    program   0x000002
+.config_0FFF_BUILD/DEFAULT/DEBUG/BA_L5-TIMER_       code   0x000fff    program   0x000002
+                   .udata      udata   0x000010       data   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x00001f      
+                            0x0003ff    0x0003ff      
+                            0x000fff    0x000fff      
+            34 out of 1029 program addresses used, program memory utilization is 3%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                  dn_dbnc   0x00000d    program     static /Users/mikerocha/Google Drive/MicroChip/MPLABXProjects/code_practice/gooligum/Baseline/05-Timer_0/BA_L5-Timer_debounce-12F509.X/BA_L5-Timer_debounce-12F509.asm
+                  dn_tmr0   0x00000e    program     static /Users/mikerocha/Google Drive/MicroChip/MPLABXProjects/code_practice/gooligum/Baseline/05-Timer_0/BA_L5-Timer_debounce-12F509.X/BA_L5-Timer_debounce-12F509.asm
+                main_loop   0x00000d    program     static /Users/mikerocha/Google Drive/MicroChip/MPLABXProjects/code_practice/gooligum/Baseline/05-Timer_0/BA_L5-Timer_debounce-12F509.X/BA_L5-Timer_debounce-12F509.asm
+                    start   0x000005    program     static /Users/mikerocha/Google Drive/MicroChip/MPLABXProjects/code_practice/gooligum/Baseline/05-Timer_0/BA_L5-Timer_debounce-12F509.X/BA_L5-Timer_debounce-12F509.asm
+                  up_dbnc   0x000018    program     static /Users/mikerocha/Google Drive/MicroChip/MPLABXProjects/code_practice/gooligum/Baseline/05-Timer_0/BA_L5-Timer_debounce-12F509.X/BA_L5-Timer_debounce-12F509.asm
+                  up_tmr0   0x000019    program     static /Users/mikerocha/Google Drive/MicroChip/MPLABXProjects/code_practice/gooligum/Baseline/05-Timer_0/BA_L5-Timer_debounce-12F509.X/BA_L5-Timer_debounce-12F509.asm
+                   db_cnt   0x000011       data     static /Users/mikerocha/Google Drive/MicroChip/MPLABXProjects/code_practice/gooligum/Baseline/05-Timer_0/BA_L5-Timer_debounce-12F509.X/BA_L5-Timer_debounce-12F509.asm
+                    sGPIO   0x000010       data     static /Users/mikerocha/Google Drive/MicroChip/MPLABXProjects/code_practice/gooligum/Baseline/05-Timer_0/BA_L5-Timer_debounce-12F509.X/BA_L5-Timer_debounce-12F509.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                    start   0x000005    program     static /Users/mikerocha/Google Drive/MicroChip/MPLABXProjects/code_practice/gooligum/Baseline/05-Timer_0/BA_L5-Timer_debounce-12F509.X/BA_L5-Timer_debounce-12F509.asm
+                  dn_dbnc   0x00000d    program     static /Users/mikerocha/Google Drive/MicroChip/MPLABXProjects/code_practice/gooligum/Baseline/05-Timer_0/BA_L5-Timer_debounce-12F509.X/BA_L5-Timer_debounce-12F509.asm
+                main_loop   0x00000d    program     static /Users/mikerocha/Google Drive/MicroChip/MPLABXProjects/code_practice/gooligum/Baseline/05-Timer_0/BA_L5-Timer_debounce-12F509.X/BA_L5-Timer_debounce-12F509.asm
+                  dn_tmr0   0x00000e    program     static /Users/mikerocha/Google Drive/MicroChip/MPLABXProjects/code_practice/gooligum/Baseline/05-Timer_0/BA_L5-Timer_debounce-12F509.X/BA_L5-Timer_debounce-12F509.asm
+                  up_dbnc   0x000018    program     static /Users/mikerocha/Google Drive/MicroChip/MPLABXProjects/code_practice/gooligum/Baseline/05-Timer_0/BA_L5-Timer_debounce-12F509.X/BA_L5-Timer_debounce-12F509.asm
+                  up_tmr0   0x000019    program     static /Users/mikerocha/Google Drive/MicroChip/MPLABXProjects/code_practice/gooligum/Baseline/05-Timer_0/BA_L5-Timer_debounce-12F509.X/BA_L5-Timer_debounce-12F509.asm
+                    sGPIO   0x000010       data     static /Users/mikerocha/Google Drive/MicroChip/MPLABXProjects/code_practice/gooligum/Baseline/05-Timer_0/BA_L5-Timer_debounce-12F509.X/BA_L5-Timer_debounce-12F509.asm
+                   db_cnt   0x000011       data     static /Users/mikerocha/Google Drive/MicroChip/MPLABXProjects/code_practice/gooligum/Baseline/05-Timer_0/BA_L5-Timer_debounce-12F509.X/BA_L5-Timer_debounce-12F509.asm
+
+
