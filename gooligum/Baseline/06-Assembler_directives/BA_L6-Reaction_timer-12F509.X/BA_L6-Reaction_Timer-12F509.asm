@@ -18,12 +18,14 @@
 ;                                                                       *
 ;************************************************************************
 ;                                                                       *
-;   Description:    Lesson 6, p. 2b-3b                                  *
+;   Description:    Lesson 6, p. 2b-3b; 3b-4b                           *
 ;                                                                       *
 ;   Demonstrates use of Timer0 to time real-world events. Same as       *
 ;   L5 reaction timer, but illustrates directives to define constants.  *
 ;       EQU      - define an assembler constant                         *
 ;       constant - declare symbol constant                              *
+;   Also, illustrates #define used for text substituion                 *
+;       #define BUTTON GPIO,3 -> substitiutes GPIO,3 for BUTTON         *
 ;                                                                       *
 ;   User must attempt to press button within 200 ms of "start" LED      *
 ;   lighting. If and only if successful, "success" LED is lit.          *
@@ -48,17 +50,24 @@
 	#include <p12F509.inc>        ; processor specific variable definitions
 	
 	EXTERN   delay10xW_R          ; W x 10 mS delay
-	constant MAXRT=.200           ; maximum reaction time in mS
-	constant GAMELOOP=.2000       ; game duration in mS
 
-	;***** CONFIGURATION
+;***** CONFIGURATION ************************************************************
 	; ext reset, no code protect, no watchdog, int RC clock
 	__CONFIG   _MCLRE_OFF & _CP_OFF & _WDT_OFF & _IntRC_OSC
 
 ; '__CONFIG' directive is used to embed configuration word within .asm file.
 ; The lables following the directive are located in the respective .inc file. 
 ; See respective data sheet for additional information on configuration word.
+	
+;***** PIN ASSIGNMENTS
+	#define  START_LED    GPIO,2
+	#define  SUCCESS_LED  GPIO,1
+	#define  BUTTON       GPIO,3
 
+;***** CONSTANTS ****************************************************************
+	constant MAXRT=.200           ; maximum reaction time in mS
+	constant GAMELOOP=.2000       ; game duration in mS
+	
 ;***** VARIABLE DEFINITIONS *****************************************************
 	UDATA
 cnt_8ms res 1                     ; counter: increments ever 8 mS
@@ -107,7 +116,7 @@ main_loop
 	pagesel $
 	
 	; indicate start
-	bsf     GPIO,2            ; turn on start LED
+	bsf     START_LED         ; turn on start LED
 	
 	; wait 1 second for button press
 	banksel cnt_8ms           
@@ -115,7 +124,7 @@ main_loop
 wait1s                            ; repeat for 1 sec:
 	clrf    TMR0              ;   clear Timer0
 w_tmr0                            ;   repeat for 8 mS:
-	btfss   GPIO,3            ;     if button pressed (GP3 low)
+	btfss   BUTTON            ;     if button pressed (GP3 low)
 	goto    btn_dn            ;       finish delay loop immediately
 	
 	movf    TMR0,W            ;     read Timer0 snapshot
@@ -136,7 +145,7 @@ w_tmr0                            ;   repeat for 8 mS:
 btn_dn  movlw   MAXRT/8           ; if time < 200 mS (25 x 8 mS = (MAXRT/8) x 8 mS)
 	subwf   cnt_8ms,W
 	btfss   STATUS,C
-	bsf     GPIO,1            ; turn on success LED
+	bsf     SUCCESS_LED       ; turn on success LED
 	
 	; wait 1 sec
 	movlw   .100              ; 100 x 10 mS = 1 sec
