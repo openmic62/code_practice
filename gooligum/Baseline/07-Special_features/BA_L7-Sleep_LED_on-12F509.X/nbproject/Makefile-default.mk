@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=
+SOURCEFILES_QUOTED_IF_SPACED=BA_L7-Sleep_LED_on-12F509.asm
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=
-POSSIBLE_DEPFILES=
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/BA_L7-Sleep_LED_on-12F509.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/BA_L7-Sleep_LED_on-12F509.o.d
 
 # Object Files
-OBJECTFILES=
+OBJECTFILES=${OBJECTDIR}/BA_L7-Sleep_LED_on-12F509.o
 
 # Source Files
-SOURCEFILES=
+SOURCEFILES=BA_L7-Sleep_LED_on-12F509.asm
 
 
 CFLAGS=
@@ -94,7 +94,23 @@ MP_LINKER_DEBUG_OPTION=
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: assemble
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
+${OBJECTDIR}/BA_L7-Sleep_LED_on-12F509.o: BA_L7-Sleep_LED_on-12F509.asm  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/BA_L7-Sleep_LED_on-12F509.o.d 
+	@${RM} ${OBJECTDIR}/BA_L7-Sleep_LED_on-12F509.o 
+	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/BA_L7-Sleep_LED_on-12F509.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG -d__MPLAB_DEBUGGER_PK3=1 -q -p$(MP_PROCESSOR_OPTION) -u  -l\\\"${OBJECTDIR}/BA_L7-Sleep_LED_on-12F509.lst\\\" -e\\\"${OBJECTDIR}/BA_L7-Sleep_LED_on-12F509.err\\\" $(ASM_OPTIONS)    -o\\\"${OBJECTDIR}/BA_L7-Sleep_LED_on-12F509.o\\\" \\\"BA_L7-Sleep_LED_on-12F509.asm\\\" 
+	@${DEP_GEN} -d "${OBJECTDIR}/BA_L7-Sleep_LED_on-12F509.o"
+	@${FIXDEPS} "${OBJECTDIR}/BA_L7-Sleep_LED_on-12F509.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
+	
 else
+${OBJECTDIR}/BA_L7-Sleep_LED_on-12F509.o: BA_L7-Sleep_LED_on-12F509.asm  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/BA_L7-Sleep_LED_on-12F509.o.d 
+	@${RM} ${OBJECTDIR}/BA_L7-Sleep_LED_on-12F509.o 
+	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/BA_L7-Sleep_LED_on-12F509.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION) -u  -l\\\"${OBJECTDIR}/BA_L7-Sleep_LED_on-12F509.lst\\\" -e\\\"${OBJECTDIR}/BA_L7-Sleep_LED_on-12F509.err\\\" $(ASM_OPTIONS)    -o\\\"${OBJECTDIR}/BA_L7-Sleep_LED_on-12F509.o\\\" \\\"BA_L7-Sleep_LED_on-12F509.asm\\\" 
+	@${DEP_GEN} -d "${OBJECTDIR}/BA_L7-Sleep_LED_on-12F509.o"
+	@${FIXDEPS} "${OBJECTDIR}/BA_L7-Sleep_LED_on-12F509.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
+	
 endif
 
 # ------------------------------------------------------------------------------------
