@@ -129,7 +129,7 @@ wait_lo btfsc   BUTTON
 	goto    wait_lo
 	
 	; toggle the the GP1 LED
-	;bcf     LED
+	bcf     LED
 	sleep                     ; enter sleep mode
 	
 	; repeat forever
